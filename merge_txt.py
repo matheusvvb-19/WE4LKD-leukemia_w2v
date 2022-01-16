@@ -28,6 +28,7 @@ for y in years:
 
     os.makedirs(os.path.dirname('./results_aggregated'), exist_ok=True)
 
+    Path('./results_aggregated/results_file_{}_{}.txt'.format(initial_year, y-1)).touch()
     with open('results_aggregated/results_file_{}_{}.txt'.format(initial_year, y-1),'w+', encoding='utf-8') as f:
         for row in abstract_list:
             f.write(repr(row)+'\n')
