@@ -27,9 +27,9 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
     
     if words == None:
         if sample > 0:
-            words = np.random.choice(list(model.wv.vocab.keys()), sample)
+            words = np.random.choice(list(model.vocab.keys()), sample)
         else:
-            words = [ word for word in model.wv.vocab ]
+            words = [ word for word in model.vocab ]
     
     word_vectors = np.array([model[w] for w in words])
     
@@ -43,9 +43,9 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
         x = [0,0,0], 
         y = [0,0,0],
         z = [0,0,0],
-        u = [0.5,0,0],
-        v = [0,0.5,0],
-        w = [0,0,0.5],
+        u = [1.5,0,0],
+        v = [0,1.5,0],
+        w = [0,0,1.5],
         anchor = "tail",
         colorscale = [[0, color] , [1, color]],
         showscale = False,
@@ -146,9 +146,9 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     
     if words == None:
         if sample > 0:
-            words = np.random.choice(list(model.wv.vocab.keys()), sample)
+            words = np.random.choice(list(model.vocab.keys()), sample)
         else:
-            words = [ word for word in model.wv.vocab ]
+            words = [ word for word in model.vocab ]
     
     word_vectors = np.array([model[w] for w in words])
     
@@ -227,30 +227,33 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
     st.plotly_chart(plot_figure)
 
-#uploaded_file = st.sidebar.file_uploader("Enviar modelo", type="bin")
-
 dim_red = st.sidebar.selectbox(
- 'Selecione o método de redução de dimensionalidade',
+ 'Select dimension reduction method',
  ('PCA','TSNE'))
 dimension = st.sidebar.selectbox(
-     "Selecione a quantidade de dimensões",
+     "Select the dimension of the visualization",
      ('2D', '3D'))
-user_input = st.sidebar.text_input("Escreva a(s) palavra(s) que deseja buscar. Para pesquisar mais de uma, separe as palavras por vírgula.",'')
-top_n = st.sidebar.slider('Selecione o tamanho da vizinhança desejada ',
-    5, 30, (5))
+user_input = st.sidebar.text_input("Type the word that you want to investigate. You can type more than one word by separating one word with other with comma (,)",'')
+top_n = st.sidebar.slider('Select the amount of words associated with the input words you want to visualize ',
+    5, 100, (5))
 annotation = st.sidebar.radio(
-     "Habilitar ou desabilitar rótulos ",
+     "Enable or disable the annotation on the visualization",
      ('On', 'Off'))  
 
 if dim_red == 'TSNE':
-    perplexity = 0
-    learning_rate = 0
-    iteration = 250
+    perplexity = st.sidebar.slider('Adjust the perplexity. The perplexity is related to the number of nearest neighbors that is used in other manifold learning algorithms. Larger datasets usually require a larger perplexity',
+    5, 50, (30))
+    
+    learning_rate = st.sidebar.slider('Adjust the learning rate',
+    10, 1000, (200))
+    
+    iteration = st.sidebar.slider('Adjust the number of iteration',
+    250, 100000, (1000))
     
 else:
     perplexity = 0
     learning_rate = 0
-    iteration = 0
+    iteration = 0    
 
 if user_input == '':
     
@@ -278,29 +281,30 @@ else:
     color_map = [label_dict[x] for x in labels]
     
 
-st.title('Visualizar Word Embedding por Similaridade Cosseno')
+st.title('Word Embedding Visualization Based on Cosine Similarity')
 
-st.markdown('Primeiramente, escolha a quantidade de dimensões do gráfico: 2D ou 3D.')
+st.header('This is a web app to visualize the word embedding.')
+st.markdown('First, choose which dimension of visualization that you want to see. There are two options: 2D and 3D.')
            
-st.markdown('Depois, digite a palavra que deseja visualizar. Você pode digitar mais de uma palavra, basta separá-las por vírgulas (,).')
+st.markdown('Next, type the word that you want to investigate. You can type more than one word by separating one word with other with comma (,).')
 
-st.markdown('Com o slider, defina o tamanho da vizinhança da palavra buscada que você deseja ver no gráfico.')
-st.markdown('Por fim, você pode habilitar ou desbilitar a visibilidade dos rótulos de cada ponto.')
+st.markdown('With the slider in the sidebar, you can pick the amount of words associated with the input word you want to visualize. This is done by computing the cosine similarity between vectors of words in embedding space.')
+st.markdown('Lastly, you have an option to enable or disable the text annotation in the visualization.')
 
 if dimension == '2D':
-    st.header('Visualização 2D')
-    st.write('Para mais detalhes sobre cada ponto, você pode manter o cursor sobre ele, para visualizar a palavra e suas coordenadas. Você também pode expandir a visualização clicando no botão de expansão localizado no canto superior direito do gráfico.')
-    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+    st.header('2D Visualization')
+    st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
+    display_pca_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 else:
-    st.header('Visualização 3D')
-    st.write('Para mais detalhes sobre cada ponto, você pode manter o cursor sobre ele, para visualizar a palavra e suas coordenadas. Você também pode rotacionar e expandir o gráfico, de forma a visualizar melhor cada um de seus pontos.')
-    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+    st.header('3D Visualization')
+    st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
+    display_pca_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
-st.header('5 palavras mais similares a cada um do(s) termo(s) de entrada ')
+st.header('The Top 5 Most Similar Words for Each Input')
 count=0
 for i in range (len(user_input)):
     
-    st.write('As palavras mais similaes a '+str(user_input[i])+' são:')
+    st.write('The most similar words from '+str(user_input[i])+' are:')
     horizontal_bar(similar_word[count:count+5], similarity[count:count+5])
     
     count = count+top_n
