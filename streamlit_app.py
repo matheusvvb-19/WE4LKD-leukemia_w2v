@@ -278,9 +278,8 @@ else:
     color_map = [label_dict[x] for x in labels]
     
 
-st.title('Word Embedding Visualization Based on Cosine Similarity')
+st.title('Visualizar Word Embedding Visualization a partir de Similaridade Cosseno')
 
-st.header('This is a web app to visualize the word embedding.')
 st.markdown('First, choose which dimension of visualization that you want to see. There are two options: 2D and 3D.')
            
 st.markdown('Next, type the word that you want to investigate. You can type more than one word by separating one word with other with comma (,).')
@@ -297,11 +296,11 @@ else:
     st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
     display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
-st.header('The Top 5 Most Similar Words for Each Input')
+st.header('5 palavras mais similares a cada um do(s) termo(s) de entrada ')
 count=0
 for i in range (len(user_input)):
     
-    st.write('The most similar words from '+str(user_input[i])+' are:')
+    st.write('As palavras mais similaes a '+str(user_input[i])+' são:')
     horizontal_bar(similar_word[count:count+5], similarity[count:count+5])
     
     count = count+top_n
