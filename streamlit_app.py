@@ -240,7 +240,7 @@ top_n = st.sidebar.slider('Selecione o tamanho da vizinhança desejada ',
     5, 30, (5))
 annotation = st.sidebar.radio(
      "Habilitar ou desabilitar rótulos ",
-     ('Ligado', 'Desligado'))  
+     ('On', 'Off'))  
 
 if dim_red == 'TSNE':
     perplexity = 0
