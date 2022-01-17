@@ -155,7 +155,7 @@ def clean_file(file_path):
     write_file(res, file_path)
 
 
-filenames = [str(x) for x in Path('./results_aggregated/').glob('*.txt')]
+filenames = sorted([str(x) for x in Path('./results_aggregated/').glob('*.txt')])
 
 for f in filenames:
     print('cleaning {}'.format(f))
