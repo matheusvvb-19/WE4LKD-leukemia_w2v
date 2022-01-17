@@ -252,7 +252,7 @@ if dim_red == 'TSNE':
 else:"""
 perplexity = 0
 learning_rate = 0
-iteration = 0    
+iteration = 250
 
 if user_input == '':
     
