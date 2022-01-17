@@ -38,22 +38,20 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
     else:
         three_dim = TSNE(n_components = 3, random_state=0, perplexity = perplexity, learning_rate = learning_rate, n_iter = iteration).fit_transform(word_vectors)[:,:3]
 
-    """
     color = 'blue'
     quiver = go.Cone(
         x = [0,0,0], 
         y = [0,0,0],
         z = [0,0,0],
-        u = [1.5,0,0],
-        v = [0,1.5,0],
-        w = [0,0,1.5],
+        u = [0.5,0,0],
+        v = [0,0.5,0],
+        w = [0,0,0.5],
         anchor = "tail",
         colorscale = [[0, color] , [1, color]],
         showscale = False
         )
-     """
     
-    data = [1]
+    data = [quiver]
 
     count = 0
     for i in range (len(user_input)):
