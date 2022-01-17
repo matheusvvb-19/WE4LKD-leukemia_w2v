@@ -1,4 +1,4 @@
-# Word embeddings capture latent knowledge discovery
+# Word Embeddings For Latent Knowledge Discovery
 Inspired by [this application](https://github.com/materialsintelligence/mat2vec)
 
 ## Setup
@@ -22,6 +22,7 @@ python3 crawler.py
 ## Merge abstract files
 This will generate `results_file.txt` from abstracts on results folder
 ```
+mkdir results_aggregated
 python3 merge_txt.py
 ```
 
@@ -33,7 +34,7 @@ python3 clean_text.py
 ## Word embeddings
 
 ### Word2Vec
-Training the model
+Training the models
 ```
 cd word2vec
 python3 train.py
