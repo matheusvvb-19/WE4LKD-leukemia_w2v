@@ -6,7 +6,7 @@ import streamlit as st
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 
-filename = './results_aggregated/model_results_file_1900_1967_clean.bin'
+filename = './word2vec/model_results_file_1900_1967_clean.bin'
 model = pickle.load(open(filename, 'rb'))
 
 def append_list(sim_words, words):
