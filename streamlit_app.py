@@ -48,7 +48,8 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
         w = [0,0,0.5],
         anchor = "tail",
         colorscale = [[0, color] , [1, color]],
-        showscale = False
+        showscale = False,
+        opacity = 0
         )
     
     data = [quiver]
