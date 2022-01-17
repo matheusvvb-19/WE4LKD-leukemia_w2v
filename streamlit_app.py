@@ -27,9 +27,9 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
     
     if words == None:
         if sample > 0:
-            words = np.random.choice(list(model.vocab.keys()), sample)
+            words = np.random.choice(list(model.wv.vocab.keys()), sample)
         else:
-            words = [ word for word in model.vocab ]
+            words = [ word for word in model.wv.vocab ]
     
     word_vectors = np.array([model[w] for w in words])
     
@@ -146,9 +146,9 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     
     if words == None:
         if sample > 0:
-            words = np.random.choice(list(model.vocab.keys()), sample)
+            words = np.random.choice(list(model.wv.vocab.keys()), sample)
         else:
-            words = [ word for word in model.vocab ]
+            words = [ word for word in model.wv.vocab ]
     
     word_vectors = np.array([model[w] for w in words])
     
