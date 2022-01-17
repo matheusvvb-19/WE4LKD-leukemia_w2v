@@ -38,6 +38,7 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
     else:
         three_dim = TSNE(n_components = 3, random_state=0, perplexity = perplexity, learning_rate = learning_rate, n_iter = iteration).fit_transform(word_vectors)[:,:3]
 
+    """
     color = 'blue'
     quiver = go.Cone(
         x = [0,0,0], 
@@ -50,8 +51,9 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
         colorscale = [[0, color] , [1, color]],
         showscale = False
         )
+     """
     
-    data = [quiver]
+    data = [1]
 
     count = 0
     for i in range (len(user_input)):
