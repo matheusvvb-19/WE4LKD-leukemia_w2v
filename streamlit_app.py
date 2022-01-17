@@ -227,7 +227,7 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
     st.plotly_chart(plot_figure)
 
-uploaded_file = st.sidebar.file_uploader("Enviar modelo", type="bin")
+#uploaded_file = st.sidebar.file_uploader("Enviar modelo", type="bin")
 
 dim_red = st.sidebar.selectbox(
  'Select dimension reduction method',
