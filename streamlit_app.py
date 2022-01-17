@@ -235,20 +235,15 @@ dimension = st.sidebar.selectbox(
      ('2D', '3D'))
 user_input = st.sidebar.text_input("Type the word that you want to investigate. You can type more than one word by separating one word with other with comma (,)",'')
 top_n = st.sidebar.slider('Select the amount of words associated with the input words you want to visualize ',
-    5, 100, (5))
+    5, 30, (5))
 annotation = st.sidebar.radio(
      "Enable or disable the annotation on the visualization",
      ('On', 'Off'))  
 
 if dim_red == 'TSNE':
-    perplexity = st.sidebar.slider('Adjust the perplexity. The perplexity is related to the number of nearest neighbors that is used in other manifold learning algorithms. Larger datasets usually require a larger perplexity',
-    5, 50, (30))
-    
-    learning_rate = st.sidebar.slider('Adjust the learning rate',
-    10, 1000, (200))
-    
-    iteration = st.sidebar.slider('Adjust the number of iteration',
-    250, 100000, (1000))
+    perplexity = 0
+    learning_rate = 0
+    iteration = 250
     
 else:
     perplexity = 0
