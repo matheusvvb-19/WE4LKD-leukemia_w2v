@@ -24,7 +24,6 @@ def append_list(sim_words, words):
 
 
 def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'PCA', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
-    
     if words == None:
         if sample > 0:
             words = np.random.choice(list(model.wv.vocab.keys()), sample)
@@ -38,22 +37,7 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
     else:
         three_dim = TSNE(n_components = 3, random_state=0, perplexity = perplexity, learning_rate = learning_rate, n_iter = iteration).fit_transform(word_vectors)[:,:3]
 
-    color = 'blue'
-    quiver = go.Cone(
-        x = [0,0,0], 
-        y = [0,0,0],
-        z = [0,0,0],
-        u = [1.5,0,0],
-        v = [0,1.5,0],
-        w = [0,0,1.5],
-        anchor = "tail",
-        colorscale = [[0, color] , [1, color]],
-        showscale = False,
-        opacity = 0
-        )
-    
-    data = [quiver]
-
+    data = []
     count = 0
     for i in range (len(user_input)):
 
@@ -117,8 +101,8 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
 
 
     plot_figure = go.Figure(data = data, layout = layout)
-
-    st.plotly_chart(plot_figure)
+    plot_figure.show()
+    #st.plotly_chart(plot_figure)
 
 def horizontal_bar(word, similarity):
     
