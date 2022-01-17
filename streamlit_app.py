@@ -101,8 +101,7 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
 
 
     plot_figure = go.Figure(data = data, layout = layout)
-    plot_figure.show()
-    #st.plotly_chart(plot_figure)
+    st.plotly_chart(plot_figure)
 
 def horizontal_bar(word, similarity):
     
