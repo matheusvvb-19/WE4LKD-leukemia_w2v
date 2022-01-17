@@ -110,7 +110,7 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
         font = dict(
             family = " Courier New ",
             size = 15),
-        autosize = False,
+        autosize = True,
         width = 1000,
         height = 1000
         )
@@ -217,7 +217,7 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
         font = dict(
             family = " Courier New ",
             size = 15),
-        autosize = False,
+        autosize = True,
         width = 1000,
         height = 1000
         )
