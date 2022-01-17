@@ -230,23 +230,21 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 #uploaded_file = st.sidebar.file_uploader("Enviar modelo", type="bin")
 
 dim_red = st.sidebar.selectbox(
- 'Select dimension reduction method',
+ 'Selecione o método de redução de dimensionalidade',
  ('PCA','TSNE'))
 dimension = st.sidebar.selectbox(
-     "Select the dimension of the visualization",
+     "Selecione a quantidade de dimensões",
      ('2D', '3D'))
 user_input = st.sidebar.text_input("Escreva a(s) palavra(s) que deseja buscar. Para pesquisar mais de uma, separe as palavras por vírgula.",'')
 top_n = st.sidebar.slider('Selecione o tamanho da vizinhança desejada ',
     5, 30, (5))
 annotation = st.sidebar.radio(
-     "Enable or disable the annotation on the visualization",
-     ('On', 'Off'))  
+     "Habilitar ou desabilitar rótulos ",
+     ('Ligado', 'Desligado'))  
 
 if dim_red == 'TSNE':
     perplexity = 0
-    
     learning_rate = 0
-    
     iteration = 250
     
 else:
@@ -280,22 +278,22 @@ else:
     color_map = [label_dict[x] for x in labels]
     
 
-st.title('Visualizar Word Embedding Visualization a partir de Similaridade Cosseno')
+st.title('Visualizar Word Embedding por Similaridade Cosseno')
 
-st.markdown('First, choose which dimension of visualization that you want to see. There are two options: 2D and 3D.')
+st.markdown('Primeiramente, escolha a quantidade de dimensões do gráfico: 2D ou 3D.')
            
-st.markdown('Next, type the word that you want to investigate. You can type more than one word by separating one word with other with comma (,).')
+st.markdown('Depois, digite a palavra que deseja visualizar. Você pode digitar mais de uma palavra, basta separá-las por vírgulas (,).')
 
-st.markdown('With the slider in the sidebar, you can pick the amount of words associated with the input word you want to visualize. This is done by computing the cosine similarity between vectors of words in embedding space.')
-st.markdown('Lastly, you have an option to enable or disable the text annotation in the visualization.')
+st.markdown('Com o slider, defina o tamanho da vizinhança da palavra buscada que você deseja ver no gráfico.')
+st.markdown('Por fim, você pode habilitar ou desbilitar a visibilidade dos rótulos de cada ponto.')
 
 if dimension == '2D':
-    st.header('2D Visualization')
-    st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
+    st.header('Visualização 2D')
+    st.write('Para mais detalhes sobre cada ponto, você pode manter o cursor sobre ele, para visualizar a palavra e suas coordenadas. Você também pode expandir a visualização clicando no botão de expansão localizado no canto superior direito do gráfico.')
     display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 else:
-    st.header('3D Visualization')
-    st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
+    st.header('Visualização 3D')
+    st.write('Para mais detalhes sobre cada ponto, você pode manter o cursor sobre ele, para visualizar a palavra e suas coordenadas. Você também pode rotacionar e expandir o gráfico, de forma a visualizar melhor cada um de seus pontos.')
     display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 st.header('5 palavras mais similares a cada um do(s) termo(s) de entrada ')
