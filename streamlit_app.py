@@ -238,7 +238,7 @@ top_n = st.sidebar.slider('Select the amount of words associated with the input 
 annotation = st.sidebar.radio(
      "Enable or disable the annotation on the visualization",
      ('On', 'Off'))  
-
+"""
 if dim_red == 'TSNE':
     perplexity = st.sidebar.slider('Adjust the perplexity. The perplexity is related to the number of nearest neighbors that is used in other manifold learning algorithms. Larger datasets usually require a larger perplexity',
     5, 50, (30))
@@ -249,10 +249,10 @@ if dim_red == 'TSNE':
     iteration = st.sidebar.slider('Adjust the number of iteration',
     250, 100000, (1000))
     
-else:
-    perplexity = 0
-    learning_rate = 0
-    iteration = 0    
+else:"""
+perplexity = 0
+learning_rate = 0
+iteration = 0    
 
 if user_input == '':
     
