@@ -1,8 +1,19 @@
 import nltk, sys, string, re
 from os import listdir
 from os.path import join
-from crawler import list_from_txt
 from pathlib import Path
+from nltk.tokenize import PunktSentenceTokenizer
+from nltk.stem import PorterStemmer
+from nltk.corpus import wordnet, stopwords
+
+nltk.download('wordnet', quiet=True)
+nltk.download('stopwords', quiet=True)
+nltk.download('punkt', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+
+lemmatizer = nltk.wordnet.WordNetLemmatizer()
+stemmer = PorterStemmer()
+stop_words = set(stopwords.words('english'))
 
 def contains(str, seq):
     '''Verify if a string (str) contains any of the characaters in a list.
@@ -38,10 +49,6 @@ def clean_file(file_path):
     Args:
       file_path: the path of the original .txt file. 
     '''
-    nltk.download('stopwords', quiet=True)
-    from nltk.corpus import stopwords 
-
-    stop_words = set(stopwords.words('english'))
 
     fix_typos_dict = {'remarkablely': 'remarkably',
                       'leukaemia': 'leukemia',
@@ -56,9 +63,9 @@ def clean_file(file_path):
                          'weeks', 'years', 'mg', 'mm', '®', 'µl'
     ]
     
-        synonyms_cytarabine = ['ara c', 'ara-c', 'arac', 'cytosar', 'cytosar-u',
+    synonyms_cytarabine = ['ara c', 'ara-c', 'arac', 'cytosar', 'cytosar-u',
                        'arabinofuranosyl cytosine', 'arabinoside cytosine', 
-                       'cytosine arabinoside',
+                       'cytosine arabinoside', 'beta-arac',
                        'arabinosylcytosine', 'aracytidine', 'aracytine',
                        'beta ara c', 'beta-ara c', 'beta-ara-c', 'beta arac',
                        'beta ara-c', 'arabinofuranosyl', '1-beta-d-cytarabinecytosine', 'cytosine-arabinoside'
@@ -122,8 +129,6 @@ def clean_file(file_path):
 
     # define training data
     summaries = [s.strip() for s in open(file_path, encoding="utf-8")]
-    remove_chars = list(string.punctuation)
-    remove_chars.remove('-')
 
     word_list = []
     for s in summaries:
@@ -131,7 +136,6 @@ def clean_file(file_path):
         s = re.sub('\\s+', ' ', s)
         s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
         s = re.sub('\d+\W+\d+', '', s)
-        s = s.lower()
         s = re.sub("|".join(sorted(synonyms_cytarabine, key = len, reverse = True)), 'cytarabine', s)
         s = re.sub("|".join(sorted(synonyms_daunorubicin, key = len, reverse = True)), 'daunorubicin', s)
         s = re.sub("|".join(sorted(synonyms_azacitidine, key = len, reverse = True)), 'azacitidine', s)
@@ -143,13 +147,19 @@ def clean_file(file_path):
         s = re.sub("|".join(sorted(synonyms_enasidenib, key = len, reverse = True)), 'enasidenib', s)
         s = re.sub("|".join(sorted(synonyms_gilteritinib, key = len, reverse = True)), 'gilteritnib', s)
         s = re.sub("|".join(sorted(synonyms_glasdegib, key = len, reverse = True)), 'glasdegib', s)
-        s = s.split(' ')
-        s = [w.translate({ord(x): '' for x in remove_chars}) for w in s]
-        s = [w for w in s if not w.isdigit()]
-        s = [w for w in s if contains(w, units_and_symbols)==0]
-        s = [w for w in s if not w in stop_words]
-        s = [w if w not in fix_typos_dict else fix_typos_dict[w] for w in s]
-        word_list.append(s)
+        s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
+        s = nltk.sent_tokenize(s)
+        for sent in s:
+            words = nltk.word_tokenize(sent)
+            words = [w for w in words if not w.isdigit()]
+            words = [w for w in words if contains(w, units_and_symbols)==0]
+            words = [w if w not in fix_typos_dict else fix_typos_dict[w] for w in words]
+            #words = [stemmer.stem(word) for (word, pos) in nltk.pos_tag(words) if (is_verb(pos)==1) or word if (is_verb(pos)==0)]
+            words = [lemmatizer.lemmatize(word, wordnet.VERB) for (word, pos) in nltk.pos_tag(words)]
+
+        words = [each_string.lower() for each_string in words]
+        words = [word for word in words if not word in stop_words]
+        word_list.append(words)
 
     res = list(map(' '.join, word_list))
     write_file(res, file_path)
