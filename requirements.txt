@@ -30,7 +30,7 @@ numpy==1.19.5
 packaging==20.9
 protobuf==3.15.5
 pyparsing==2.4.7
-regex==2020.11.13
+regex==2021.8.3
 requests==2.25.1
 sacremoses==0.0.43
 scipy==1.5.4
