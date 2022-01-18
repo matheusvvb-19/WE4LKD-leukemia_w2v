@@ -210,7 +210,7 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
     st.plotly_chart(plot_figure)
 
-uploaded_file = st.sidebar.file_uploader("Choose a file", type="bin", help="Selecione o arquivo de extensão .bin do modelo que deseja explorar.")
+uploaded_file = st.sidebar.file_uploader("Choose a file", type="bin")
 if uploaded_file is not None:
     model = pickle.load(uploaded_file)
 
