@@ -209,7 +209,7 @@ if uploaded_file is not None:
 
 dim_red = st.sidebar.selectbox(
  'Select dimension reduction method',
- ('PCA','TSNE'))
+ ('TSNE','PCA'))
 dimension = st.sidebar.selectbox(
      "Select the dimension of the visualization",
      ('2D', '3D'))
@@ -275,11 +275,12 @@ else:
     st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
     display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
-st.header('The Top 5 Most Similar Words for Each Input')
-count=0
-for i in range (len(user_input)):
-    
-    st.write('The most similar words from '+str(user_input[i])+' are:')
-    horizontal_bar(similar_word[count:count+5], similarity[count:count+5])
-    
-    count = count+top_n
+if user_input != '':
+    st.header('The Top 5 Most Similar Words for Each Input')
+    count=0
+    for i in range (len(user_input)):
+
+        st.write('The most similar words from '+str(user_input[i])+' are:')
+        horizontal_bar(similar_word[count:count+5], similarity[count:count+5])
+
+        count = count+top_n
