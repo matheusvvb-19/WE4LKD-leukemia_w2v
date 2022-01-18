@@ -10,11 +10,8 @@ filename = 'sample_model.bin'
 model = pickle.load(open(filename, 'rb'))
 
 def append_list(sim_words, words):
-    
     list_of_words = []
-    
     for i in range(len(sim_words)):
-        
         sim_words_list = list(sim_words[i])
         sim_words_list.append(words)
         sim_words_tuple = tuple(sim_words_list)
@@ -23,12 +20,12 @@ def append_list(sim_words, words):
     return list_of_words
 
 
-def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'PCA', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
+def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
     if words == None:
         if sample > 0:
             words = np.random.choice(list(model.wv.vocab.keys()), sample)
         else:
-            words = [ word for word in model.wv.vocab ]
+            words = [word for word in model.wv.vocab]
     
     word_vectors = np.array([model[w] for w in words])
     
@@ -55,7 +52,6 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
                         'opacity': 0.8,
                         'color': 2
                     }
-       
                 )
                
                 data.append(trace)
@@ -125,7 +121,7 @@ def horizontal_bar(word, similarity):
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
-def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'PCA', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
+def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
     if words == None:
         if sample > 0:
             words = np.random.choice(list(model.wv.vocab.keys()), sample)
@@ -157,7 +153,6 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
                         'opacity': 0.8,
                         'color': 2
                     }
-       
                 )
                
                 data.append(trace)
@@ -206,7 +201,6 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
 
     plot_figure = go.Figure(data = data, layout = layout)
-
     st.plotly_chart(plot_figure)
 
 uploaded_file = st.sidebar.file_uploader("Choose a file", type="bin")
