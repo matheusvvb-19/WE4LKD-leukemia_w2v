@@ -112,6 +112,7 @@ Após fazer a inicialização e instalação, chegou a hora de executar o projet
   ```
 3. Execute o arquivo `merge_txt.py`
   ```sh
+  mkdir results_aggregated
   python3 merge_txt.py
   ```
 4. Execute o arquivo `clean_text.py`
