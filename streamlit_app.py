@@ -101,11 +101,13 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
 
 
     plot_figure = go.Figure(data = data, layout = layout)
+    plot_figure.update_xaxes(showspikes=False)
+    plot_figure.update_yaxes(showspikes=False)
+    plot_figure.update_zaxes(showspikes=False)
     st.plotly_chart(plot_figure)
 
 def horizontal_bar(word, similarity):
-    
-    similarity = [ round(elem, 2) for elem in similarity ]
+    similarity = [round(elem, 2) for elem in similarity]
     
     data = go.Bar(
             x= similarity,
@@ -126,7 +128,6 @@ def horizontal_bar(word, similarity):
     st.plotly_chart(plot_figure)
 
 def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'PCA', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
-    
     if words == None:
         if sample > 0:
             words = np.random.choice(list(model.wv.vocab.keys()), sample)
