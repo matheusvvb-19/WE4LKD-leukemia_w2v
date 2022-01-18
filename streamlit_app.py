@@ -210,7 +210,9 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
     st.plotly_chart(plot_figure)
 
-uploaded_file = st.sidebar.file_uploader("Choose a file", type="bin")
+uploaded_file = st.sidebar.file_uploader("Choose a file", type="bin", help="Selecione o arquivo de extensão .bin do modelo que deseja explorar.")
+if uploaded_file is not None:
+    model = pickle.load(uploaded_file)
 
 dim_red = st.sidebar.selectbox(
  'Select dimension reduction method',
@@ -248,7 +250,7 @@ else:
     
     for words in user_input:
     
-        sim_words = model.most_similar(words, topn = top_n)
+        sim_words = model.wv.most_similar(words, topn = top_n)
         sim_words = append_list(sim_words, words)
             
         result_word.extend(sim_words)
