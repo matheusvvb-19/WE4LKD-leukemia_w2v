@@ -230,28 +230,28 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
-uploaded_file = st.sidebar.file_uploader("Choose a file")
+uploaded_file = st.sidebar.file_uploader("Faça upload do modelo:", type='model')
 if uploaded_file is not None:
     model = pickle.load(uploaded_file)
     #model = KeyedVectors.load_word2vec_format(open(uploaded_file))
     model.init_sims()
-    common_words_number = st.sidebar.selectbox('Select the amount of english common words that you want to remove from visualization ',
+    common_words_number = st.sidebar.selectbox('Selecione a quantidade de palavras mais comuns da língua inglesa que deseja remover da visualização ',
     ('None', '5000', '10000', '15000', '20000'))
     if common_words_number != 'None':
         common_words = get_most_common(int(common_words_number))
         restrict_w2v(model, set(common_words))
 
 dim_red = st.sidebar.selectbox(
- 'Select dimension reduction method',
+ 'Selecione o método de redução de dimensionalidade',
  ('TSNE','PCA'))
 dimension = st.sidebar.selectbox(
-     "Select the dimension of the visualization",
+     "Selecione a dimensão de visualização",
      ('2D', '3D'))
-user_input = st.sidebar.text_input("Type the word that you want to investigate. You can type more than one word by separating one word with other with comma (,)",'')
-top_n = st.sidebar.slider('Select the amount of words associated with the input words you want to visualize ',
+user_input = st.sidebar.text_input("Escreva as palavras que deseja buscar. Para mais de uma palavra, as separe por vírgula (,)",'')
+top_n = st.sidebar.slider('Selecione o tamanho da vizinhança a ser visualizada ',
     5, 30, (5))
 annotation = st.sidebar.radio(
-     "Enable or disable the annotation on the visualization",
+     "Habilite ou desabilite os rótulos",
      ('On', 'Off'))  
 
 if dim_red == 'TSNE':
@@ -287,31 +287,31 @@ else:
     color_map = [label_dict[x] for x in labels]
     
 
-st.title('Word Embedding Visualization Based on Cosine Similarity')
+st.title('Visualizador Word Embedding por Similaridade Cosseno')
 
-st.header('This is a web app to visualize the word embedding.')
-st.markdown('First, choose which dimension of visualization that you want to see. There are two options: 2D and 3D.')
+#st.header('This is a web app to visualize the word embedding.')
+st.markdown('Primeiramente, faça upload do modelo de representação distribuída comextensão ".model". Depois, escolha a quantidade de palavras comuns da língua inglesa que deseja remover da visualização, a remoção dessas palavras pode melhorar sua investigação, visto que muitas vezes são palavras fora do contexto médico.')
            
-st.markdown('Next, type the word that you want to investigate. You can type more than one word by separating one word with other with comma (,).')
+st.markdown('Depois, selecione o método de redução de dimensionalidade. Se você não sabe o que significa, deixe o valor padrão "TSNE". Abaixo dessa opção, defina a quantidade de dimensões do gráfico (2D ou 3D).')
 
-st.markdown('With the slider in the sidebar, you can pick the amount of words associated with the input word you want to visualize. This is done by computing the cosine similarity between vectors of words in embedding space.')
-st.markdown('Lastly, you have an option to enable or disable the text annotation in the visualization.')
+st.markdown('É possível também buscar por palavras específicas, digitando elas no campo. Para mais de uma palavra, as separe por vírgulas. Tome cuidado, caso você decida remover muitas palavras comuns, talvez a palavra que você busque não esteja mais disponível.')
+st.markdown('Por fim, é possível habiitar e desabilitar os rótulos de cada ponto no gráfico.')
 
 if dimension == '2D':
-    st.header('2D Visualization')
-    st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
+    st.header('Visualização 2D')
+    #st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
     display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 else:
-    st.header('3D Visualization')
-    st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
+    st.header('Visualizção 3D')
+    #st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
     display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
-    st.header('Most Similar Words for Each Input')
+    st.header('Palavras mais similares a cada termo buscado')
     count=0
     for i in range (len(user_input)):
 
-        st.write('The most similar words from '+str(user_input[i])+' are:')
+        st.write('As palavras mais similares a '+str(user_input[i])+' são:')
         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n])
 
         count = count+top_n
