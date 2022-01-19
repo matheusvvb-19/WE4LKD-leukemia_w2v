@@ -263,7 +263,7 @@ if uploaded_file is not None:
     ('None', '5000', '10000', '15000', '20000'))
     if common_words_number != 'None':
         common_words = get_most_common(int(common_words_number))
-        restrict_w2v(model, set(common_words))
+        wv_restrict_w2v(model, set(common_words))
 
 dim_red = st.sidebar.selectbox(
  'Selecione o método de redução de dimensionalidade',
