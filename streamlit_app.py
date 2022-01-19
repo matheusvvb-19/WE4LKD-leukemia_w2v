@@ -230,8 +230,8 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
 uploaded_file = st.sidebar.file_uploader("Choose a file")
 if uploaded_file is not None:
-    #model = pickle.load(uploaded_file)
-    model = KeyedVectors.load_word2vec_format(open(uploaded_file))
+    model = pickle.load(uploaded_file)
+    #model = KeyedVectors.load_word2vec_format(open(uploaded_file))
     model.init_sims()
     common_words = get_most_common(5000)
     restrict_w2v(model, set(common_words))
