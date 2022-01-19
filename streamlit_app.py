@@ -236,9 +236,10 @@ if uploaded_file is not None:
     #model = KeyedVectors.load_word2vec_format(open(uploaded_file))
     model.init_sims()
     common_words_number = st.sidebar.selectbox('Select the amount of english common words that you want to remove from visualization ',
-    ('5000', '10000', '15000', '20000'))
-    common_words = get_most_common(int(common_words_number))
-    restrict_w2v(model, set(common_words))
+    ('None', '5000', '10000', '15000', '20000'))
+    if common_words_number != 'None':
+        common_words = get_most_common(int(common_words_number))
+        restrict_w2v(model, set(common_words))
 
 dim_red = st.sidebar.selectbox(
  'Select dimension reduction method',
