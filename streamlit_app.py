@@ -230,9 +230,9 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
-uploaded_file = st.sidebar.file_uploader("Faça upload do modelo:", type='model')
+uploaded_file = st.sidebar.file_uploader("Faça upload do modelo:")
 if uploaded_file is not None:
-    model = pickle.load(uploaded_file)
+    model = pickle.load(open(uploaded_file.name, 'rb'))
     #model = KeyedVectors.load_word2vec_format(open(uploaded_file))
     model.init_sims()
     common_words_number = st.sidebar.selectbox('Selecione a quantidade de palavras mais comuns da língua inglesa que deseja remover da visualização ',
