@@ -1,3 +1,5 @@
+#based on https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
+
 import plotly, pickle
 import plotly.graph_objs as go
 import numpy as np
@@ -304,11 +306,11 @@ else:
     display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
-    st.header('The Top 5 Most Similar Words for Each Input')
+    st.header('Most Similar Words for Each Input')
     count=0
     for i in range (len(user_input)):
 
         st.write('The most similar words from '+str(user_input[i])+' are:')
-        horizontal_bar(similar_word[count:count+5], similarity[count:count+5])
+        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n])
 
         count = count+top_n
