@@ -18,4 +18,4 @@ for f in filenames:
 
     # save model
     file_name = f.split('/')[2]
-    model.save('model_{}.bin'.format(file_name[:-4]))
+    model.save('model_{}.model'.format(file_name[:-4]))
