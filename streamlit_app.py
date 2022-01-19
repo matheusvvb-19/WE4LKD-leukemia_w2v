@@ -232,7 +232,7 @@ uploaded_file = st.sidebar.file_uploader("Choose a file", type="bin")
 if uploaded_file is not None:
     model = pickle.load(uploaded_file)
     common_words = get_most_common(5000)
-    restrict_w2v(model, common_words)
+    restrict_w2v(model, set(common_words))
 
 dim_red = st.sidebar.selectbox(
  'Select dimension reduction method',
