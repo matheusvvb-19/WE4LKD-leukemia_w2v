@@ -26,22 +26,22 @@
   <summary>Sumário</summary>
   <ol>
     <li>
-      <a href="#sobre">Sobre o projeto</a>
+      <a href="#sobre-o-projeto">Sobre o projeto</a>
       <ul>
-        <li><a href="#construido">Construído com</a></li>
+        <li><a href="#bibliotecas">Bibliotecas</a></li>
       </ul>
     </li>
     <li>
-      <a href="#inicializacao">Inicialização</a>
+      <a href="#inicialização">Inicialização</a>
       <ul>
-        <li><a href="#prerequisitos">Pré-requisitos</a></li>
-        <li><a href="#instalacao">Instalção</a></li>
+        <li><a href="#pré-requisitos">Pré-requisitos</a></li>
+        <li><a href="#instalação">Instalação</a></li>
       </ul>
     </li>
     <li><a href="#uso">Uso</a></li>
     <li><a href="#futuras-melhorias">Futuras Melhorias</a></li>
     <li><a href="#contato">Contato</a></li>
-    <li><a href="#inspiracao">Inspiração</a></li>
+    <li><a href="#inspiração">Inspiração</a></li>
   </ol>
 </details>
 
@@ -51,12 +51,12 @@
 
 Este projeto tem por objetivo estudar e analisar a possível existência de conhecimento latente em artigos médicos sobre Leucemia Mielóide Aguda (AML), um tipo de câncer agressivo e sem tratamentos muito eficazes. Para isso, são gerados modelos de representação distribuída Word2Vec a partir de prefácios de artigos disponíveis no [PubMed](https://pubmed.ncbi.nlm.nih.gov/).
 
-_descição mais detalhada em breve_
+_descrição mais detalhada em breve_
 
 <p align="right">(<a href="#topo">voltar ao topo</a>)</p>
 
 
-### Construído com
+### Bibliotecas
 
 * [Gensim](https://radimrehurek.com/gensim/)
 * [NLTK](https://www.nltk.org/)
@@ -69,7 +69,7 @@ _descição mais detalhada em breve_
 <p align="right">(<a href="#topo">voltar ao topo</a>)</p>
 
 
-### Pré-rquisitos
+### Pré-requisitos
 
 Para utilizar este projeto, você precisa ter o Pyhton instalado em sua máquina. Este projeto se utilizou da [versão 3.6 do Python](https://www.python.org/downloads/release/python-360/).
 * Baixe e instale o Python [aqui](https://www.python.org/downloads/).
@@ -126,8 +126,14 @@ Após fazer a inicialização e instalação, chegou a hora de executar o projet
 ```
 6. Visualize e explore seus modelos de representação distribuída gerados, utilizando o [Visualizador de Embeddings](https://share.streamlit.io/matheusvvb-19/we4lkd-leukemia_w2v/main) construído com o Streamlit.<br> Caso o visualizador não esteja disponível, execute-o localmente em sua máquina com o comando:
 ```sh
+  cd ..
   streamlit run streamlit_app.py
 ```
+7. Para gerar relatórios de análise de conhecimento latente, execute o comando:
+```sh
+  python3 analyze.py <palavras_comuns_eliminadas>
+```
+O último argumnento da linha de comando indica a quantidade de palavras em inglês mais comuns - segundo [Beautiful Soup](https://norvig.com/ngrams/count_1w.txt) -  que se deseja remover do modelo no momento da visualização de vizinhança. O valor desse arguento pode ser nenhum (vazio), para quando não se deseja remover nenhuma palavra, ou um número inteiro. No Visualizador de Embeddings, as opções são 5, 10, 15 ou 20 mil palavras.
 
 <p align="right">(<a href="#topo">voltar ao topo</a>)</p>
 
@@ -136,7 +142,10 @@ Após fazer a inicialização e instalação, chegou a hora de executar o projet
 <!-- FUTURAS MELHORIAS -->
 ## Futuras Melhorias
 
-_ainda em construção_
+- [x] Manter o Visualizador de Embeddings online com o Streamlit
+- [x] Excluir palavras omuns na visualização das embeddings
+- [x] Gerar relatórios em .pdf, também com exclusão de palavras comuns
+- [ ] _ainda em construção_...
 
 <p align="right">(<a href="#topo">voltar ao topo</a>)</p>
 
