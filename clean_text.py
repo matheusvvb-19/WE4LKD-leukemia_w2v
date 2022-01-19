@@ -136,6 +136,7 @@ def clean_file(file_path):
         s = re.sub('\\s+', ' ', s)
         s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
         s = re.sub('\d+\W+\d+', '', s)
+        s = s.lower()
         s = re.sub("|".join(sorted(synonyms_cytarabine, key = len, reverse = True)), 'cytarabine', s)
         s = re.sub("|".join(sorted(synonyms_daunorubicin, key = len, reverse = True)), 'daunorubicin', s)
         s = re.sub("|".join(sorted(synonyms_azacitidine, key = len, reverse = True)), 'azacitidine', s)
@@ -157,7 +158,6 @@ def clean_file(file_path):
             #words = [stemmer.stem(word) for (word, pos) in nltk.pos_tag(words) if (is_verb(pos)==1) or word if (is_verb(pos)==0)]
             words = [lemmatizer.lemmatize(word, wordnet.VERB) for (word, pos) in nltk.pos_tag(words)]
 
-        words = [each_string.lower() for each_string in words]
         words = [word for word in words if not word in stop_words]
         word_list.append(words)
 
