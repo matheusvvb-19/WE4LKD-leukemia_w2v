@@ -6,7 +6,7 @@ filenames = [str(x) for x in Path('./results/').glob('**/*.txt')]
 
 initial_year = 1900
 
-years = [1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020, 2025]
+years = [1968, 1978, 2000, 2002, 2010, 2012, 2014, 2015, 2017]
 
 for y in years:
     print(y)
