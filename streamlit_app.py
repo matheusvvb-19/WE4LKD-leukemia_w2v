@@ -314,7 +314,7 @@ else:
 st.title('Visualizador Word Embedding por Similaridade Cosseno')
 
 #st.header('This is a web app to visualize the word embedding.')
-st.markdown('Primeiramente, faça upload do modelo de representação distribuída comextensão ".model". Depois, escolha a quantidade de palavras comuns da língua inglesa que deseja remover da visualização, a remoção dessas palavras pode melhorar sua investigação, visto que muitas vezes são palavras fora do contexto médico.')
+st.markdown('Primeiramente, faça upload do modelo de representação distribuída com extensão ".model". Depois, escolha a quantidade de palavras comuns da língua inglesa que deseja remover da visualização, a remoção dessas palavras pode melhorar sua investigação, visto que muitas vezes são palavras fora do contexto médico.')
            
 st.markdown('Depois, selecione o método de redução de dimensionalidade. Se você não sabe o que significa, deixe o valor padrão "TSNE". Abaixo dessa opção, defina a quantidade de dimensões do gráfico (2D ou 3D).')
 
