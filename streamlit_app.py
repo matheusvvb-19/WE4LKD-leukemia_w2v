@@ -73,10 +73,13 @@ def append_list(sim_words, words):
 
 def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
     if words == None:
+        """
         if sample > 0:
             words = np.random.choice(list(model.wv.vocab.keys()), sample)
         else:
             words = [word for word in model.wv.vocab]
+        """
+        words = [word for word in model.wv.vocab]
     
     word_vectors = np.array([model[w] for w in words])
     
