@@ -1,5 +1,4 @@
 import nltk, sys, string, re
-import pubchempy as pcp
 from os import listdir
 from os.path import join
 from pathlib import Path
