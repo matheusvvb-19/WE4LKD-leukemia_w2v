@@ -313,9 +313,8 @@ if uploaded_file is not None:
         common_words = get_most_common(int(common_words_number))
         wv_restrict_w2v(model, set(common_words))
     
-    restrict_domain = st.sidebar.selectbox("Restringir domínio do vocabulário:",
-     ('geral', 'câncer'))
-
+restrict_domain = st.sidebar.selectbox("Restringir domínio do vocabulário:",
+ ('geral', 'câncer'))
 dim_red = st.sidebar.selectbox(
  'Selecione o método de redução de dimensionalidade',
  ('TSNE','PCA'))
