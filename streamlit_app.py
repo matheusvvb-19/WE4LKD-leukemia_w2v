@@ -106,7 +106,7 @@ def append_list(sim_words, words):
 def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, restrict='geral', sample=10):
     if restrict != 'geral':
         if restrict == 'câncer':
-            specific_domain = sorted(list(dict.fromkeys(domains_table['name'])))
+            specific_domain = list(dict.fromkeys(domains_table['name']))
             domain_w2v(model, specific_domain)
     
     if words == None:
@@ -212,7 +212,7 @@ def horizontal_bar(word, similarity):
 def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, restrict='geral', sample=10):
     if restrict != 'geral':
         if restrict == 'câncer':
-            specific_domain = sorted(list(dict.fromkeys(domains_table['name'])))
+            specific_domain = list(dict.fromkeys(domains_table['name']))
             domain_w2v(model, specific_domain)
     
     if words == None:
