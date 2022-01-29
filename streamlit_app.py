@@ -103,7 +103,7 @@ def append_list(sim_words, words):
     return list_of_words
 
 
-def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10, restrict='geral'):
+def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, restrict='geral', sample=10):
     if restrict != 'geral':
         if restrict == 'câncer':
             specific_domain = sorted(list(dict.fromkeys(domains_table['name'])))
@@ -209,7 +209,7 @@ def horizontal_bar(word, similarity):
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
-def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10, restrict='geral'):
+def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, restrict='geral', sample=10):
     if restrict != 'geral':
         if restrict == 'câncer':
             specific_domain = sorted(list(dict.fromkeys(domains_table['name'])))
@@ -369,11 +369,11 @@ st.markdown('Por fim, é possível habiitar e desabilitar os rótulos de cada po
 if dimension == '2D':
     st.header('Visualização 2D')
     #st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
-    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n, 10, restrict_domain)
+    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n, restrict_domain)
 else:
     st.header('Visualizção 3D')
     #st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
-    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n, 10, restrict_domain)
+    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n, restrict_domain)
 
 if user_input != '':
     st.header('Palavras mais similares a cada termo buscado')
