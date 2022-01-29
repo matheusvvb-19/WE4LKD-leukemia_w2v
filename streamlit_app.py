@@ -302,7 +302,7 @@ if uploaded_file is not None:
     ('geral', 'câncer'))
     if restrict_domain != 'geral':
         if restrict_domain == 'câncer':
-            specific_domain = list(dict.fromkeys(domains_table['name']))
+            specific_domain = domains_table['name'].tolist()
             wv_restrict_w2v(model, set(specific_domain), True)
     else:
         common_words_number = st.sidebar.selectbox('Selecione a quantidade de palavras mais comuns da língua inglesa que deseja remover da visualização ',
