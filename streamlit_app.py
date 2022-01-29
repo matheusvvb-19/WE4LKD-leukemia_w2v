@@ -11,7 +11,7 @@ from get_n_common_words_english import get_most_common
 from gensim.models import Word2Vec, KeyedVectors
 
 specific_domain = []
-filename = 'sample_model.bin'
+filename = 'sample_model.model'
 model = pickle.load(open(filename, 'rb'))
 
 # domains table:
