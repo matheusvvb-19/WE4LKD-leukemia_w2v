@@ -209,7 +209,7 @@ def horizontal_bar(word, similarity):
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
-def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10, restric='geral'):
+def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10, restrict='geral'):
     if restrict != 'geral':
         if restrict == 'câncer':
             specific_domain = sorted(list(dict.fromkeys(domains_table['name'])))
