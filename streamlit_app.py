@@ -76,12 +76,12 @@ def wv_restrict_w2v(w2v, restricted_word_set, domain=False):
               new_vectors.append(vec)
               new_vectors_norm.append(vec_norm)
     else:
-      for i in range(len(w2v.vocab)):
-          word = w2v.index2entity[i]
-          vec = w2v.vectors[i]
-          vocab = w2v.vocab[word]
-          vec_norm = w2v.vectors_norm[i]
-          if word in restricted_word_set:
+      for i in range(len(w2v.wv.vocab)):
+          word = w2v.wv.index2entity[i]
+          vec = w2v.wv.vectors[i]
+          vocab = w2v.wv.vocab[word]
+          vec_norm = w2v.wv.vectors_norm[i]
+          if word not in restricted_word_set:
               vocab.index = len(new_index2entity)
               new_index2entity.append(word)
               new_vocab[word] = vocab
