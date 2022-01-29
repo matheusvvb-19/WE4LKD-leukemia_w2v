@@ -4,13 +4,21 @@ import plotly, pickle
 import plotly.graph_objs as go
 import numpy as np
 import streamlit as st
+import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from get_n_common_words_english import get_most_common
 from gensim.models import Word2Vec, KeyedVectors
 
+specific_domain = []
 filename = 'sample_model.bin'
 model = pickle.load(open(filename, 'rb'))
+
+# domains table:
+domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
+                   '1SgYG4gZuL3grEHHAZt49dAUw_jFAc4LADajFeGAf2-w' +
+                   '/export?gid=0&format=csv',
+                  )
 
 def restrict_w2v(w2v, restricted_word_set):
     new_vectors = []
@@ -59,6 +67,30 @@ def wv_restrict_w2v(w2v, restricted_word_set):
     w2v.wv.index2entity = np.array(new_index2entity)
     w2v.wv.index2word = np.array(new_index2entity)
     w2v.wv.vectors_norm = np.array(new_vectors_norm)
+    
+ def domain_w2v(w2v, restricted_word_set):
+    new_vectors = []
+    new_vocab = {}
+    new_index2entity = []
+    new_vectors_norm = []
+
+    for i in range(len(w2v.wv.vocab)):
+        word = w2v.wv.index2entity[i]
+        vec = w2v.wv.vectors[i]
+        vocab = w2v.wv.vocab[word]
+        vec_norm = w2v.wv.vectors_norm[i]
+        if word in restricted_word_set:
+            vocab.index = len(new_index2entity)
+            new_index2entity.append(word)
+            new_vocab[word] = vocab
+            new_vectors.append(vec)
+            new_vectors_norm.append(vec_norm)
+
+    w2v.wv.vocab = new_vocab
+    w2v.wv.vectors = np.array(new_vectors)
+    w2v.wv.index2entity = np.array(new_index2entity)
+    w2v.wv.index2word = np.array(new_index2entity)
+    w2v.wv.vectors_norm = np.array(new_vectors_norm)
 
 def append_list(sim_words, words):
     list_of_words = []
@@ -71,7 +103,12 @@ def append_list(sim_words, words):
     return list_of_words
 
 
-def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
+def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10, restrict='geral'):
+    if restrict != 'geral':
+        if restrict == 'câncer':
+            specific_domain = sorted(list(dict.fromkeys(domains_table['name'])))
+            domain_w2v(model, specific_domain)
+    
     if words == None:
         if sample > 0:
             words = np.random.choice(list(model.wv.vocab.keys()), sample)
@@ -172,7 +209,12 @@ def horizontal_bar(word, similarity):
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
-def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
+def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10, restric='geral'):
+    if restrict != 'geral':
+        if restrict == 'câncer':
+            specific_domain = sorted(list(dict.fromkeys(domains_table['name'])))
+            domain_w2v(model, specific_domain)
+    
     if words == None:
         if sample > 0:
             words = np.random.choice(list(model.wv.vocab.keys()), sample)
@@ -271,6 +313,9 @@ dim_red = st.sidebar.selectbox(
 dimension = st.sidebar.selectbox(
      "Selecione a dimensão de visualização",
      ('2D', '3D'))
+restrict_domain = st.sidebar.selectbox(
+     "Restringir domínio do vocabulário:",
+     ('geral', 'câncer'))  
 user_input = st.sidebar.text_input("Escreva as palavras que deseja buscar. Para mais de uma palavra, as separe por vírgula (,)",'')
 top_n = st.sidebar.slider('Selecione o tamanho da vizinhança a ser visualizada ',
     5, 30, (5))
