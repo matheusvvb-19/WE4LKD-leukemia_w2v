@@ -68,7 +68,7 @@ def wv_restrict_w2v(w2v, restricted_word_set):
     w2v.wv.index2word = np.array(new_index2entity)
     w2v.wv.vectors_norm = np.array(new_vectors_norm)
     
- def domain_w2v(w2v, restricted_word_set):
+def domain_w2v(w2v, restricted_word_set):
     new_vectors = []
     new_vocab = {}
     new_index2entity = []
