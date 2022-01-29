@@ -312,6 +312,9 @@ if uploaded_file is not None:
     if common_words_number != 'None':
         common_words = get_most_common(int(common_words_number))
         wv_restrict_w2v(model, set(common_words))
+    
+    restrict_domain = st.sidebar.selectbox("Restringir domínio do vocabulário:",
+     ('geral', 'câncer'))
 
 dim_red = st.sidebar.selectbox(
  'Selecione o método de redução de dimensionalidade',
@@ -319,9 +322,6 @@ dim_red = st.sidebar.selectbox(
 dimension = st.sidebar.selectbox(
      "Selecione a dimensão de visualização",
      ('2D', '3D'))
-restrict_domain = st.sidebar.selectbox(
-     "Restringir domínio do vocabulário:",
-     ('geral', 'câncer'))  
 user_input = st.sidebar.text_input("Escreva as palavras que deseja buscar. Para mais de uma palavra, as separe por vírgula (,)",'')
 top_n = st.sidebar.slider('Selecione o tamanho da vizinhança a ser visualizada ',
     5, 30, (5))
