@@ -348,12 +348,13 @@ else:
     for words in user_input:
         try:
             sim_words = model.wv.most_similar(words, topn = top_n)
+            sim_words = append_list(sim_words, words)
+            result_word.extend(sim_words)
         except KeyError:
             st.error("A palavra {} não está presente no vocabulário deste modelo.".format(words))
             user_input = None
-        sim_words = append_list(sim_words, words)
-            
-        result_word.extend(sim_words)
+        except TypeError:
+            pass      
     
     similar_word = [word[0] for word in result_word]
     similarity = [word[1] for word in result_word] 
