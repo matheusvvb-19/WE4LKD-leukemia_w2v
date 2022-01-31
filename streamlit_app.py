@@ -122,70 +122,69 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
 
         data = []
         count = 0
-        if user_input:
-            for i in range (len(user_input)):
+        for i in range (len(user_input)):
 
-                        trace = go.Scatter3d(
-                            x = three_dim[count:count+topn,0], 
-                            y = three_dim[count:count+topn,1],  
-                            z = three_dim[count:count+topn,2],
-                            text = words[count:count+topn] if annotation == 'On' else '',
-                            name = user_input[i],
-                            textposition = "top center",
-                            textfont_size = 30,
-                            mode = 'markers+text',
-                            marker = {
-                                'size': 10,
-                                'opacity': 0.8,
-                                'color': 2
-                            }
+                    trace = go.Scatter3d(
+                        x = three_dim[count:count+topn,0], 
+                        y = three_dim[count:count+topn,1],  
+                        z = three_dim[count:count+topn,2],
+                        text = words[count:count+topn] if annotation == 'On' else '',
+                        name = user_input[i],
+                        textposition = "top center",
+                        textfont_size = 30,
+                        mode = 'markers+text',
+                        marker = {
+                            'size': 10,
+                            'opacity': 0.8,
+                            'color': 2
+                        }
+                    )
+
+                    data.append(trace)
+                    count = count+topn
+
+        trace_input = go.Scatter3d(
+                        x = three_dim[count:,0], 
+                        y = three_dim[count:,1],  
+                        z = three_dim[count:,2],
+                        text = words[count:],
+                        name = 'input words',
+                        textposition = "top center",
+                        textfont_size = 30,
+                        mode = 'markers+text',
+                        marker = {
+                            'size': 10,
+                            'opacity': 1,
+                            'color': 'black'
+                        }
                         )
 
-                        data.append(trace)
-                        count = count+topn
+        data.append(trace_input)
 
-            trace_input = go.Scatter3d(
-                            x = three_dim[count:,0], 
-                            y = three_dim[count:,1],  
-                            z = three_dim[count:,2],
-                            text = words[count:],
-                            name = 'input words',
-                            textposition = "top center",
-                            textfont_size = 30,
-                            mode = 'markers+text',
-                            marker = {
-                                'size': 10,
-                                'opacity': 1,
-                                'color': 'black'
-                            }
-                            )
-
-            data.append(trace_input)
-
-        # Configure the layout.
-            layout = go.Layout(
-                margin = {'l': 0, 'r': 0, 'b': 0, 't': 0},
-                showlegend=True,
-                legend=dict(
-                x=1,
-                y=0.5,
-                font=dict(
-                    family="Courier New",
-                    size=25,
-                    color="black"
-                )),
-                font = dict(
-                    family = " Courier New ",
-                    size = 15),
-                autosize = False,
-                width = 1000,
-                height = 1000
-                )
+    # Configure the layout.
+        layout = go.Layout(
+            margin = {'l': 0, 'r': 0, 'b': 0, 't': 0},
+            showlegend=True,
+            legend=dict(
+            x=1,
+            y=0.5,
+            font=dict(
+                family="Courier New",
+                size=25,
+                color="black"
+            )),
+            font = dict(
+                family = " Courier New ",
+                size = 15),
+            autosize = False,
+            width = 1000,
+            height = 1000
+            )
 
 
-            plot_figure = go.Figure(data = data, layout = layout)
-            plot_figure.update_layout(scene=dict(xaxis_showspikes=False, yaxis_showspikes=False, zaxis_showspikes=False))
-            st.plotly_chart(plot_figure)
+        plot_figure = go.Figure(data = data, layout = layout)
+        plot_figure.update_layout(scene=dict(xaxis_showspikes=False, yaxis_showspikes=False, zaxis_showspikes=False))
+        st.plotly_chart(plot_figure)
 
 def horizontal_bar(word, similarity):
     similarity = [round(elem, 2) for elem in similarity]
