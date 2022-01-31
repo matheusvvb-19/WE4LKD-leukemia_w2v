@@ -221,78 +221,80 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     except:
       pass
     
-    if dim_red == 'PCA':
-        two_dim = PCA(random_state=0).fit_transform(word_vectors)[:,:2]
-    else:
-        two_dim = TSNE(random_state=0, perplexity = perplexity, learning_rate = learning_rate, n_iter = iteration).fit_transform(word_vectors)[:,:2]
+    if len(word_vectors) > 0:
+        if dim_red == 'PCA':
+            two_dim = PCA(random_state=0).fit_transform(word_vectors)[:,:2]
+        else:
+            two_dim = TSNE(random_state=0, perplexity = perplexity, learning_rate = learning_rate, n_iter = iteration).fit_transform(word_vectors)[:,:2]
 
-    
-    data = []
-    count = 0
-    for i in range (len(user_input)):
 
-                trace = go.Scatter(
-                    x = two_dim[count:count+topn,0], 
-                    y = two_dim[count:count+topn,1],  
-                    text = words[count:count+topn] if annotation == 'On' else '',
-                    name = user_input[i],
-                    textposition = "top center",
-                    textfont_size = 20,
-                    mode = 'markers+text',
-                    marker = {
-                        'size': 15,
-                        'opacity': 0.8,
-                        'color': 2
-                    }
+        data = []
+        count = 0
+        if user_input:
+            for i in range (len(user_input)):
+
+                        trace = go.Scatter(
+                            x = two_dim[count:count+topn,0], 
+                            y = two_dim[count:count+topn,1],  
+                            text = words[count:count+topn] if annotation == 'On' else '',
+                            name = user_input[i],
+                            textposition = "top center",
+                            textfont_size = 20,
+                            mode = 'markers+text',
+                            marker = {
+                                'size': 15,
+                                'opacity': 0.8,
+                                'color': 2
+                            }
+                        )
+
+                        data.append(trace)
+                        count = count+topn
+
+            trace_input = go.Scatter(
+                            x = two_dim[count:,0], 
+                            y = two_dim[count:,1],  
+                            text = words[count:],
+                            name = 'input words',
+                            textposition = "top center",
+                            textfont_size = 20,
+                            mode = 'markers+text',
+                            marker = {
+                                'size': 25,
+                                'opacity': 1,
+                                'color': 'black'
+                            }
+                            )
+
+            data.append(trace_input)
+
+        # Configure the layout.
+            layout = go.Layout(
+                margin = {'l': 0, 'r': 0, 'b': 0, 't': 0},
+                showlegend=True,
+                hoverlabel=dict(
+                    bgcolor="white", 
+                    font_size=20, 
+                    font_family="Courier New"),
+                legend=dict(
+                x=1,
+                y=0.5,
+                font=dict(
+                    family="Courier New",
+                    size=25,
+                    color="black"
+                )),
+                font = dict(
+                    family = " Courier New ",
+                    size = 15),
+                autosize = False,
+                width = 1000,
+                height = 1000
                 )
-               
-                data.append(trace)
-                count = count+topn
-
-    trace_input = go.Scatter(
-                    x = two_dim[count:,0], 
-                    y = two_dim[count:,1],  
-                    text = words[count:],
-                    name = 'input words',
-                    textposition = "top center",
-                    textfont_size = 20,
-                    mode = 'markers+text',
-                    marker = {
-                        'size': 25,
-                        'opacity': 1,
-                        'color': 'black'
-                    }
-                    )
-
-    data.append(trace_input)
-    
-# Configure the layout.
-    layout = go.Layout(
-        margin = {'l': 0, 'r': 0, 'b': 0, 't': 0},
-        showlegend=True,
-        hoverlabel=dict(
-            bgcolor="white", 
-            font_size=20, 
-            font_family="Courier New"),
-        legend=dict(
-        x=1,
-        y=0.5,
-        font=dict(
-            family="Courier New",
-            size=25,
-            color="black"
-        )),
-        font = dict(
-            family = " Courier New ",
-            size = 15),
-        autosize = False,
-        width = 1000,
-        height = 1000
-        )
 
 
-    plot_figure = go.Figure(data = data, layout = layout)
-    st.plotly_chart(plot_figure)
+            plot_figure = go.Figure(data = data, layout = layout)
+            st.plotly_chart(plot_figure)
 
 uploaded_file = st.sidebar.file_uploader("Faça upload do modelo:")
 if uploaded_file is not None:
@@ -380,11 +382,11 @@ st.markdown('É possível também buscar por palavras específicas, digitando el
 st.markdown('Por fim, é possível habiitar e desabilitar os rótulos de cada ponto no gráfico.')
 
 if dimension == '2D':
-    st.header('Visualização 2D')
+    #st.header('Visualização 2D')
     #st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
     display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 else:
-    st.header('Visualização 3D')
+    #st.header('Visualização 3D')
     #st.write('For more detail about each point (just in case it is difficult to read the annotation), you can hover around each points to see the words. You can expand the visualization by clicking expand symbol in the top right corner of the visualization.')
     display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
@@ -392,8 +394,6 @@ if user_input != '' and user_input:
     #st.header('Palavras mais similares a cada termo buscado')
     count=0
     for i in range (len(user_input)):
-
         st.write('As palavras mais similares a '+str(user_input[i])+' são:')
         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n])
-
         count = count+top_n
