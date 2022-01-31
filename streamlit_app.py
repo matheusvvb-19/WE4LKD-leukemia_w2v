@@ -114,7 +114,7 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
     
     word_vectors = np.array([model[w] for w in words])
     
-    if len(word_vector) > 0:
+    if len(word_vectors) > 0:
         if dim_red == 'PCA':
             three_dim = PCA(random_state=0).fit_transform(word_vectors)[:,:3]
         else:
