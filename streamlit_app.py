@@ -350,7 +350,7 @@ else:
             sim_words = model.wv.most_similar(words, topn = top_n)
         except KeyError:
             st.error("A palavra {} não está presente no vocabulário deste modelo.".format(words))
-            #user_input = []
+            user_input = None
         sim_words = append_list(sim_words, words)
             
         result_word.extend(sim_words)
