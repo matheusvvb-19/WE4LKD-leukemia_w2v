@@ -343,6 +343,7 @@ if user_input == '':
 else:
     user_input = [x.strip() for x in user_input.split(',')]
     result_word = []
+    sim_words = []
     
     for words in user_input:
         try:
