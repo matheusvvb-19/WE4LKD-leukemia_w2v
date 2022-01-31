@@ -357,8 +357,11 @@ else:
             pass      
     
     similar_word = [word[0] for word in result_word]
-    similarity = [word[1] for word in result_word] 
-    similar_word.extend(user_input)
+    similarity = [word[1] for word in result_word]
+    try:
+        similar_word.extend(user_input)
+    except TypeError:
+        pass
     labels = [word[2] for word in result_word]
     label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
     color_map = [label_dict[x] for x in labels]
