@@ -215,11 +215,7 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
         else:
             words = [word for word in model.wv.vocab]
     
-    word_vectors = []
-    try:
-      word_vectors = np.array([model[w] for w in words])
-    except:
-      pass
+    word_vectors = np.array([model[w] for w in words])
     
     if len(word_vectors) > 0:
         if dim_red == 'PCA':
