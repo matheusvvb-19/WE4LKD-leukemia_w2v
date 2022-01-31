@@ -35,10 +35,10 @@ sacremoses==0.0.43
 scipy==1.5.4
 six==1.15.0
 smart-open==4.2.0
-tensorboard==1.14.0
-tensorboardX==2.2
-tensorflow==1.14.0
-tensorflow-estimator==1.14.0
+#tensorboard==1.14.0
+#tensorboardX==2.2
+#tensorflow==1.14.0
+#tensorflow-estimator==1.14.0
 termcolor==1.1.0
 tokenizers==0.10.1
 torch==1.8.0
