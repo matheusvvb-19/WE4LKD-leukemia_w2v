@@ -9,6 +9,7 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from get_n_common_words_english import get_most_common
 from gensim.models import Word2Vec, KeyedVectors
+from clean_text import replace_synonyms
 
 specific_domain = []
 filename = 'sample_model.model'
