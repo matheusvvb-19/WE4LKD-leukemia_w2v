@@ -295,10 +295,28 @@ if uploaded_file is not None:
     model.init_sims()
 
     restrict_domain = st.sidebar.selectbox("Restringir domínio do vocabulário:",
-    ('geral', 'câncer'))
+    ('geral', 'câncer', 'remédios FDA'))
     if restrict_domain != 'geral':
         if restrict_domain == 'câncer':
             specific_domain = domains_table['name'].tolist()
+            wv_restrict_w2v(model, set(specific_domain), True)
+        elif restrict_domain == 'remédios FDA':
+            with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
+                file_line = csv.reader(file_txt, delimiter='\t')
+                for e in file_line:
+                    if len(e) == 8:
+                        s = e[5]
+                        s = re.sub('<[^>]+>', '', s)
+                        s = re.sub('\\s+', ' ', s)
+                        s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
+                        s = re.sub('\d+\W+\d+', '', s)
+                        s = s.lower()
+                        s = replace_synonyms(s)
+                        s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
+                        specific_domain.append(s)
+        
+            specific_domain.pop(0)
+            specific_domain = list(dict.fromkeys(specific_domain))
             wv_restrict_w2v(model, set(specific_domain), True)
     else:
         common_words_number = st.sidebar.selectbox('Selecione a quantidade de palavras mais comuns da língua inglesa que deseja remover da visualização ',
