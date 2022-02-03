@@ -1,6 +1,6 @@
 #based on https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
 
-import plotly, pickle
+import plotly, pickle, csv
 import plotly.graph_objs as go
 import numpy as np
 import streamlit as st
