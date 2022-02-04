@@ -290,41 +290,66 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
-uploaded_file = st.sidebar.file_uploader("Faça upload do modelo:")
+uploaded_file = st.sidebar.file_uploader("Faça upload de um novo modelo:")
 if uploaded_file is not None:
     model = pickle.load(uploaded_file)
     model.init_sims()
 
-    restrict_domain = st.sidebar.selectbox("Restringir domínio do vocabulário:",
-    ('geral', 'câncer', 'remédios FDA'))
-    if restrict_domain != 'geral':
-        if restrict_domain == 'câncer':
-            specific_domain = domains_table['name'].tolist()
-            wv_restrict_w2v(model, set(specific_domain), True)
-        elif restrict_domain == 'remédios FDA':
-            with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
-                file_line = csv.reader(file_txt, delimiter='\t')
-                for e in file_line:
-                    if len(e) == 8:
-                        s = e[5]
-                        s = re.sub('<[^>]+>', '', s)
-                        s = re.sub('\\s+', ' ', s)
-                        s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
-                        s = re.sub('\d+\W+\d+', '', s)
-                        s = s.lower()
-                        s = replace_synonyms(s)
-                        s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
-                        specific_domain.append(s)
-        
-            specific_domain.pop(0)
-            specific_domain = list(dict.fromkeys(specific_domain))
-            wv_restrict_w2v(model, set(specific_domain), True)
-    else:
-        common_words_number = st.sidebar.selectbox('Selecione a quantidade de palavras mais comuns da língua inglesa que deseja remover da visualização ',
-        ('None', '5000', '10000', '15000', '20000'))
-        if common_words_number != 'None':
-            common_words = get_most_common(int(common_words_number))
-            wv_restrict_w2v(model, set(common_words))
+loaded_model = st.sidebar.selectbox(
+ 'Ou escolha os modelos pré-carregados:',
+ ('nenhum', '1: 1900 - 1967','2: 1900 - 1977', '3: 1900 - 1999', '4: 1900 - 2001', '5: 1900 - 2009', '6: 1900 - 2011', '7: 1900 - 2013', '8: 1900 - 2014', '9: 1900 - 2016'))
+
+if loaded_model != 'nenhum':
+    if loaded_model == '1: 1900 - 1967':
+        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+    elif loaded_model == '2: 1900 - 1977':
+        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+    elif loaded_model == '3: 1900 - 1999':
+        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+    elif loaded_model == '4: 1900 - 2001':
+        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+    elif loaded_model == '5: 1900 - 2009':
+        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+    elif loaded_model == '6: 1900 - 2011':
+        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+    elif loaded_model == '7: 1900 - 2013':
+        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+    elif loaded_model == '8: 1900 - 2014':
+        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+    elif loaded_model == '9: 1900 - 2016':
+        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+    model.init_sims()
+    
+restrict_domain = st.sidebar.selectbox("Restringir domínio do vocabulário:",
+('geral', 'câncer', 'remédios FDA'))
+if restrict_domain != 'geral':
+    if restrict_domain == 'câncer':
+        specific_domain = domains_table['name'].tolist()
+        wv_restrict_w2v(model, set(specific_domain), True)
+    elif restrict_domain == 'remédios FDA':
+        with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
+            file_line = csv.reader(file_txt, delimiter='\t')
+            for e in file_line:
+                if len(e) == 8:
+                    s = e[5]
+                    s = re.sub('<[^>]+>', '', s)
+                    s = re.sub('\\s+', ' ', s)
+                    s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
+                    s = re.sub('\d+\W+\d+', '', s)
+                    s = s.lower()
+                    s = replace_synonyms(s)
+                    s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
+                    specific_domain.append(s)
+
+        specific_domain.pop(0)
+        specific_domain = list(dict.fromkeys(specific_domain))
+        wv_restrict_w2v(model, set(specific_domain), True)
+else:
+    common_words_number = st.sidebar.selectbox('Selecione a quantidade de palavras mais comuns da língua inglesa que deseja remover da visualização ',
+    ('None', '5000', '10000', '15000', '20000'))
+    if common_words_number != 'None':
+        common_words = get_most_common(int(common_words_number))
+        wv_restrict_w2v(model, set(common_words))
     
     
 dim_red = st.sidebar.selectbox(
