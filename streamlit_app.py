@@ -12,7 +12,7 @@ from gensim.models import Word2Vec, KeyedVectors
 from clean_text import replace_synonyms
 
 specific_domain = []
-filename = 'sample_model.model'
+filename = './models_streamlit_app/model_results_file_1900_1967_clean.model'
 model = pickle.load(open(filename, 'rb'))
 
 # domains table:
