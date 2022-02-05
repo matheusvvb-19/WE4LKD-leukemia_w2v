@@ -12,7 +12,7 @@ from gensim.models import Word2Vec, KeyedVectors
 from clean_text import replace_synonyms
 
 specific_domain = []
-filename = './models_streamlit_app/model_results_file_1900_1967_clean.model'
+filename = './models_streamlit_app/model_results_file_1900_2021_clean.model'
 model = pickle.load(open(filename, 'rb'))
 
 # domains table:
@@ -297,7 +297,7 @@ if uploaded_file is not None:
 
 loaded_model = st.sidebar.selectbox(
  'Ou escolha os modelos pré-carregados:',
- ('nenhum', '1: 1900 - 1967','2: 1900 - 1977', '3: 1900 - 1999', '4: 1900 - 2001', '5: 1900 - 2009', '6: 1900 - 2011', '7: 1900 - 2013', '8: 1900 - 2014', '9: 1900 - 2016'))
+ ('nenhum', '1: 1900 - 1967','2: 1900 - 1977', '3: 1900 - 1999', '4: 1900 - 2001', '5: 1900 - 2009', '6: 1900 - 2011', '7: 1900 - 2013', '8: 1900 - 2014', '9: 1900 - 2016', '10: 1900 - 2021'))
 
 if loaded_model != 'nenhum':
     if loaded_model == '1: 1900 - 1967':
@@ -318,6 +318,8 @@ if loaded_model != 'nenhum':
         model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2014_clean.model', 'rb'))
     elif loaded_model == '9: 1900 - 2016':
         model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2016_clean.model', 'rb'))
+    elif loaded_model == '10: 1900 - 2021':
+        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
     model.init_sims()
     
 restrict_domain = st.sidebar.selectbox("Restringir domínio do vocabulário:",
