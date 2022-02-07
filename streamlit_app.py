@@ -409,7 +409,7 @@ else:
     
 
 st.title('Visualizador Word Embedding por Similaridade Cosseno')
-st.markdown('Primeiramente, faça upload do modelo de representação distribuída com extensão ".model". Depois, escolha a quantidade de palavras comuns da língua inglesa que deseja remover da visualização, a remoção dessas palavras pode melhorar sua investigação, visto que muitas vezes são palavras fora do contexto médico.')    
+st.markdown('Primeiramente, faça upload do seu modelo de representação distribuída com extensão ".model" ou escolha um dos modelos pré-carregados. Depois, escolha se deseja restringir os termos do modelo a um domínio específico. Caso não haja restrição de domínio, escolha a quantidade de palavras comuns da língua inglesa que deseja remover da visualização, a remoção dessas palavras pode melhorar sua investigação, visto que muitas vezes são palavras fora do contexto médico.')    
 st.markdown('Depois, selecione o método de redução de dimensionalidade. Se você não sabe o que significa, deixe o valor padrão "TSNE". Abaixo dessa opção, defina a quantidade de dimensões do gráfico (2D ou 3D).')
 st.markdown('É possível também buscar por palavras específicas, digitando elas no campo. Para mais de uma palavra, as separe por vírgulas. Tome cuidado, caso você decida remover muitas palavras comuns, talvez a palavra que você busque não esteja mais disponível.')
 st.markdown('Por fim, é possível habiitar e desabilitar os rótulos de cada ponto no gráfico.')

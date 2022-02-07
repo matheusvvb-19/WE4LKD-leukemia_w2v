@@ -30,7 +30,7 @@ units_and_symbols = ['μ', 'Ω', 'ω', 'μm', 'mol', '°c', '≥', '≤', '±',
 ]
 
 def replace_synonyms(s):
-    synonyms_cytarabine = ['ara c', 'ara-c', 'arac', 'cytosar', 'cytosar-u',
+    synonyms_cytarabine = ['ara c', 'ara-c', 'cytosar', 'cytosar-u',
                     'arabinofuranosyl cytosine', 'arabinoside cytosine', 
                     'cytosine arabinoside', 'beta-arac',
                     'arabinosylcytosine', 'aracytidine', 'aracytine',
@@ -57,7 +57,7 @@ def replace_synonyms(s):
                         'cma 676',
     ]
 
-    synonyms_midostaurin = ['pkc412', '120685-11-2', 'benzoylstaurosporine',
+    synonyms_midostaurin = ['pkc412', '120685-11-2', 'benzoylstaurosporine', 'cgp 41251-a',
                         'cgp 41251', 'pkc-412', 'pkc 412', '4-n-benzoylstaurosporine', 'cgp-41251',
                         'rydapt', 'n-benzoylstaurosporine', 'id912s5von', 'chembl608533',
                         'chebi:63452', 'cgp 41 251',
@@ -119,6 +119,10 @@ def replace_synonyms(s):
     s = re.sub("|".join(sorted(synonyms_teniposide, key = len, reverse = True)), 'teniposide', s)
     s = re.sub("|".join(sorted(synonyms_mercaptopurine, key = len, reverse = True)), 'mercaptopurine', s)
     
+    s = re.sub("|".join(sorted([' arac '], key = len, reverse = True)), ' cytarabine ', s)
+    s = re.sub("|".join(sorted(['1-beta-d-cytarabinecytosine'], key = len, reverse = True)), 'cytarabine', s)
+    s = re.sub("|".join(sorted(['cytarabinedaunorubicin'], key = len, reverse = True)), 'cytarabine daunorubicin', s)
+    
     return s
 
 def contains(str, seq):
@@ -164,8 +168,8 @@ def clean_file(file_path):
         s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
         s = re.sub('\d+\W+\d+', '', s)
         s = s.lower()
-        s = replace_synonyms(s)
         s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
+        s = replace_synonyms(s)
         s = nltk.sent_tokenize(s)
         for sent in s:
             words = nltk.word_tokenize(sent)
@@ -181,8 +185,9 @@ def clean_file(file_path):
     res = list(map(' '.join, word_list))
     write_file(res, file_path)
 
-filenames = sorted([str(x) for x in Path('./results_aggregated/').glob('*.txt')])
+if __name__ == '__main__':
+    filenames = sorted([str(x) for x in Path('./results_aggregated/').glob('*.txt')])
 
-for f in filenames:
-    print('cleaning {}'.format(f))
-    clean_file(f)
+    for f in filenames:
+        print('cleaning {}'.format(f))
+        clean_file(f)

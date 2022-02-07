@@ -29,6 +29,7 @@ def convert_bytes(size, unit=None):
 def create_pdf_header(command, filenames, n = 15):
     pdf = FPDF('P', 'mm', 'A4')   
     pdf.add_page()
+    pdf.add_font('Arial', '', './font/arial.ttf', uni=True)
     pdf.set_font("Arial", size = 12)
     pdf.set_margins(3,10,3)
 
@@ -648,8 +649,8 @@ for f in filenames:
                     s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
                     s = re.sub('\d+\W+\d+', '', s)
                     s = s.lower()
-                    s = replace_synonyms(s)
                     s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
+                    s = replace_synonyms(s)
                     specific_domain.append(s)
         
         specific_domain.pop(0)
