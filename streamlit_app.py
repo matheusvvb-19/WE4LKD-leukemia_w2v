@@ -10,10 +10,10 @@ from sklearn.manifold import TSNE
 from get_n_common_words_english import get_most_common
 from gensim.models import Word2Vec, KeyedVectors
 from clean_text import replace_synonyms
+from analyze import similarities_table
 
 specific_domain = []
-#filename = './models_streamlit_app/model_results_file_1900_2021_clean.model'
-#model = pickle.load(open(filename, 'rb'))
+base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # domains table:
 domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
