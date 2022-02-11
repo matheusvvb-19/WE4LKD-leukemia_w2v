@@ -12,8 +12,8 @@ from gensim.models import Word2Vec, KeyedVectors
 from clean_text import replace_synonyms
 
 specific_domain = []
-filename = './models_streamlit_app/model_results_file_1900_2021_clean.model'
-model = pickle.load(open(filename, 'rb'))
+#filename = './models_streamlit_app/model_results_file_1900_2021_clean.model'
+#model = pickle.load(open(filename, 'rb'))
 
 # domains table:
 domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
@@ -297,30 +297,29 @@ if uploaded_file is not None:
 
 loaded_model = st.sidebar.selectbox(
  'Ou escolha os modelos pré-carregados:',
- ('nenhum', '1: 1900 - 1967','2: 1900 - 1977', '3: 1900 - 1999', '4: 1900 - 2001', '5: 1900 - 2009', '6: 1900 - 2011', '7: 1900 - 2013', '8: 1900 - 2014', '9: 1900 - 2016', '10: 1900 - 2021'))
+ ('10: 1900 - 2021', '9: 1900 - 2016', '8: 1900 - 2014', '7: 1900 - 2013', '6: 1900 - 2011', '5: 1900 - 2009', '4: 1900 - 2001', '3: 1900 - 1999', '2: 1900 - 1977', '1: 1900 - 1967'))
 
-if loaded_model != 'nenhum':
-    if loaded_model == '1: 1900 - 1967':
-        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
-    elif loaded_model == '2: 1900 - 1977':
-        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1977_clean.model', 'rb'))
-    elif loaded_model == '3: 1900 - 1999':
-        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1999_clean.model', 'rb'))
-    elif loaded_model == '4: 1900 - 2001':
-        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2001_clean.model', 'rb'))
-    elif loaded_model == '5: 1900 - 2009':
-        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2009_clean.model', 'rb'))
-    elif loaded_model == '6: 1900 - 2011':
-        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2011_clean.model', 'rb'))
-    elif loaded_model == '7: 1900 - 2013':
-        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2013_clean.model', 'rb'))
-    elif loaded_model == '8: 1900 - 2014':
-        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2014_clean.model', 'rb'))
-    elif loaded_model == '9: 1900 - 2016':
-        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2016_clean.model', 'rb'))
-    elif loaded_model == '10: 1900 - 2021':
-        model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
-    model.init_sims()
+if loaded_model == '1: 1900 - 1967':
+  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+elif loaded_model == '2: 1900 - 1977':
+  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1977_clean.model', 'rb'))
+elif loaded_model == '3: 1900 - 1999':
+  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1999_clean.model', 'rb'))
+elif loaded_model == '4: 1900 - 2001':
+  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2001_clean.model', 'rb'))
+elif loaded_model == '5: 1900 - 2009':
+  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2009_clean.model', 'rb'))
+elif loaded_model == '6: 1900 - 2011':
+  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2011_clean.model', 'rb'))
+elif loaded_model == '7: 1900 - 2013':
+  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2013_clean.model', 'rb'))
+elif loaded_model == '8: 1900 - 2014':
+  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2014_clean.model', 'rb'))
+elif loaded_model == '9: 1900 - 2016':
+  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2016_clean.model', 'rb'))
+elif loaded_model == '10: 1900 - 2021':
+  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
+model.init_sims()
     
 restrict_domain = st.sidebar.selectbox("Restringir domínio do vocabulário:",
 ('geral', 'câncer', 'remédios FDA'))
