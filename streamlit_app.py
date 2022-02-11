@@ -383,7 +383,7 @@ if user_input == '':
     color_map = None
     
 else:
-    user_input = [x.strip() for x in user_input.split(',')]
+    user_input = [x.strip().lower() for x in user_input.split(',')]
     result_word = []
     sim_words = []
     
