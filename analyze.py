@@ -607,59 +607,60 @@ def search_targets_2017(pdf, model, flag, n = 15):
     pdf.set_font("Arial", size = 12)
     return flag
 
-try:
-    command_arg = int(sys.argv[1])
-    os.mkdir("./relatorios/")
-except IndexError:
-    command_arg = 0
-except ValueError:
-    command_arg = sys.argv[1]
-except OSError:
-    pass
+if __name__ == '__main__':
+    try:
+        command_arg = int(sys.argv[1])
+        os.mkdir("./relatorios/")
+    except IndexError:
+        command_arg = 0
+    except ValueError:
+        command_arg = sys.argv[1]
+    except OSError:
+        pass
 
-filenames = sorted([str(x) for x in Path('./word2vec/').glob('*.model')])
-n = 15
-i = 1
-pdf, data_hora = create_pdf_header(command_arg, filenames, n)
+    filenames = sorted([str(x) for x in Path('./word2vec/').glob('*.model')])
+    n = 15
+    i = 1
+    pdf, data_hora = create_pdf_header(command_arg, filenames, n)
 
-for f in filenames:
-    model = pickle.load(open(f, 'rb'))
-    model.init_sims()
-    if isinstance(command_arg, int):
-        common_words = get_most_common(command_arg)
-        wv_restrict_w2v(model, set(common_words))
-    elif command_arg == 'nci_cancer_drugs':
-        specific_domain = []
-        domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
-                        '1SgYG4gZuL3grEHHAZt49dAUw_jFAc4LADajFeGAf2-w' +
-                        '/export?gid=0&format=csv',
-                        )
-        specific_domain = domains_table['name'].tolist()
-        specific_domain = list(dict.fromkeys(specific_domain))
-        wv_restrict_w2v(model, set(specific_domain), True)
-    elif command_arg == 'fda_drugs':
-        specific_domain = []
-        with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
-            file_line = csv.reader(file_txt, delimiter='\t')
-            for e in file_line:
-                if len(e) == 8:
-                    s = e[5]
-                    s = re.sub('<[^>]+>', '', s)
-                    s = re.sub('\\s+', ' ', s)
-                    s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
-                    s = re.sub('\d+\W+\d+', '', s)
-                    s = s.lower()
-                    s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
-                    s = replace_synonyms(s)
-                    specific_domain.append(s)
-        
-        specific_domain.pop(0)
-        specific_domain = list(dict.fromkeys(specific_domain))
-        wv_restrict_w2v(model, set(specific_domain), True)
+    for f in filenames:
+        model = pickle.load(open(f, 'rb'))
+        model.init_sims()
+        if isinstance(command_arg, int):
+            common_words = get_most_common(command_arg)
+            wv_restrict_w2v(model, set(common_words))
+        elif command_arg == 'nci_cancer_drugs':
+            specific_domain = []
+            domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
+                            '1SgYG4gZuL3grEHHAZt49dAUw_jFAc4LADajFeGAf2-w' +
+                            '/export?gid=0&format=csv',
+                            )
+            specific_domain = domains_table['name'].tolist()
+            specific_domain = list(dict.fromkeys(specific_domain))
+            wv_restrict_w2v(model, set(specific_domain), True)
+        elif command_arg == 'fda_drugs':
+            specific_domain = []
+            with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
+                file_line = csv.reader(file_txt, delimiter='\t')
+                for e in file_line:
+                    if len(e) == 8:
+                        s = e[5]
+                        s = re.sub('<[^>]+>', '', s)
+                        s = re.sub('\\s+', ' ', s)
+                        s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
+                        s = re.sub('\d+\W+\d+', '', s)
+                        s = s.lower()
+                        s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
+                        s = replace_synonyms(s)
+                        specific_domain.append(s)
 
-    print(f)            
-    model_year = int(f[33:37])
-    investigate_models(pdf, model, model_year, i, n)
-    i += 1
+            specific_domain.pop(0)
+            specific_domain = list(dict.fromkeys(specific_domain))
+            wv_restrict_w2v(model, set(specific_domain), True)
 
-pdf.output("relatorio_{}.{}.{}_{}-{}_{}.pdf".format(data_hora[0:2], data_hora[3:5], data_hora[6:11], data_hora[11:13], data_hora[14:16], command_arg))
+        print(f)            
+        model_year = int(f[33:37])
+        investigate_models(pdf, model, model_year, i, n)
+        i += 1
+
+    pdf.output("relatorio_{}.{}.{}_{}-{}_{}.pdf".format(data_hora[0:2], data_hora[3:5], data_hora[6:11], data_hora[11:13], data_hora[14:16], command_arg))
