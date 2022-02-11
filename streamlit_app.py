@@ -408,21 +408,18 @@ else:
     color_map = [label_dict[x] for x in labels]
     
 
-st.title('Visualizador Word Embedding por Similaridade Cosseno')
-st.markdown('Primeiramente, faça upload do seu modelo de representação distribuída com extensão ".model" ou escolha um dos modelos pré-carregados. Depois, escolha se deseja restringir os termos do modelo a um domínio específico. Caso não haja restrição de domínio, escolha a quantidade de palavras comuns da língua inglesa que deseja remover da visualização, a remoção dessas palavras pode melhorar sua investigação, visto que muitas vezes são palavras fora do contexto médico.')    
-st.markdown('Depois, selecione o método de redução de dimensionalidade. Se você não sabe o que significa, deixe o valor padrão "TSNE". Abaixo dessa opção, defina a quantidade de dimensões do gráfico (2D ou 3D).')
-st.markdown('É possível também buscar por palavras específicas, digitando elas no campo. Para mais de uma palavra, as separe por vírgulas. Tome cuidado, caso você decida remover muitas palavras comuns, talvez a palavra que você busque não esteja mais disponível.')
-st.markdown('Por fim, é possível habiitar e desabilitar os rótulos de cada ponto no gráfico.')
+st.title('Word Embedding Visualization Based on Cosine Similarity')
+st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation, since they are often words outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
+st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D).')
+st.markdown('You can also search for specific words by typing them into the field. For more than one word, separate them with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
+st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider. You can also enable or disable the labels of each point on the plot.')
 
 if dimension == '2D':
-    #st.header('Visualização 2D')
     display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 else:
-    #st.header('Visualização 3D')
     display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
-    #st.header('Palavras mais similares a cada termo buscado')
     count=0
     for i in range (len(user_input)):
         st.write('As palavras mais similares a '+str(user_input[i])+' são:')
