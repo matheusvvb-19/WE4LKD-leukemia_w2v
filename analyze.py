@@ -173,7 +173,7 @@ def investigate_models(pdf, model, model_year, i, n):
             elif model_year < 2017:
                 similarities_table(base_compounds[:9], model, pdf)
 
-def similarities_table(words_list, model, pdf):
+def similarities_table(words_list, model, pdf=None):
     pdf.set_font("Arial", size = 10)
     table = [['Palavra']]
     for w in base_compounds:
