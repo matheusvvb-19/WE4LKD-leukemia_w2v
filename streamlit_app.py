@@ -10,7 +10,7 @@ from sklearn.manifold import TSNE
 from get_n_common_words_english import get_most_common
 from gensim.models import Word2Vec, KeyedVectors
 from clean_text import replace_synonyms
-from analyze import similarities_table
+#from analyze import similarities_table
 
 specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
