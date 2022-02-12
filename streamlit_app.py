@@ -13,13 +13,6 @@ from clean_text import replace_synonyms
 import plotly.graph_objects as go
 import plotly.figure_factory as ff
 
-st.set_page_config(
-     page_title="Embedding Visualizer",
-     page_icon="🔍",
-     layout="wide",
-     initial_sidebar_state="expanded",
- )
-
 specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
