@@ -222,7 +222,8 @@ def horizontal_bar(word, similarity):
             font = dict(size=20),
             xaxis = dict(showticklabels=False, automargin=True),
             yaxis = dict(showticklabels=True, automargin=True,autorange="reversed"),
-            margin = dict(t=20, b= 20, r=10)
+            margin = dict(t=20, b= 20, r=10),
+            title = 'Words similar to {}'.format(word)
             )
 
     plot_figure = go.Figure(data = data, layout = layout)
@@ -448,10 +449,9 @@ else:
 
 if user_input != '':
     st.header('Similarity between the search terms and the base compounds.')
+    st.markdown("Size of model's vocabulary: {}".format(len(model.wv.vocab)))
     table = similarities_table_streamlit(user_input, model)
     df = pd.DataFrame(table)
-    #style = df.style.hide_index()
-    #st.write(style.to_html(), unsafe_allow_html=True)
     st.table(df)
     
     st.header('{} most similar words for each input.'.format(top_n))
