@@ -454,9 +454,9 @@ if user_input != '':
     columns_width = []
     for i in range(number_columns):
         if i == 0:
-            columns_width.append(1)
-        else:
             columns_width.append(2)
+        else:
+            columns_width.append(4)
             
     fig = go.Figure(
         data=[go.Table(
