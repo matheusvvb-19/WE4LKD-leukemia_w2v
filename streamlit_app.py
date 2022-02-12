@@ -207,7 +207,7 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
         plot_figure.update_layout(scene=dict(xaxis_showspikes=False, yaxis_showspikes=False, zaxis_showspikes=False))
         st.plotly_chart(plot_figure)
 
-def horizontal_bar(word, similarity):
+def horizontal_bar(word, similarity, input_word=''):
     similarity = [round(elem, 2) for elem in similarity]
     
     data = go.Bar(
@@ -223,7 +223,7 @@ def horizontal_bar(word, similarity):
             xaxis = dict(showticklabels=False, automargin=True),
             yaxis = dict(showticklabels=True, automargin=True,autorange="reversed"),
             margin = dict(t=20, b= 20, r=10),
-            title = 'Words similar to {}'.format(word)
+            title = 'Words similar to {}'.format(input_word)
             )
 
     plot_figure = go.Figure(data = data, layout = layout)
@@ -458,5 +458,5 @@ if user_input != '':
     count=0
     for i in range (len(user_input)):
         st.write('As palavras mais similares a '+str(user_input[i])+' são:')
-        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n])
+        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
         count = count+top_n
