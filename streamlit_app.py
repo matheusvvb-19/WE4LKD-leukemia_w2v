@@ -445,7 +445,7 @@ if user_input != '':
     style = df.style.hide_index()
     st.write(style.to_html(), unsafe_allow_html=True)
     '''
-    fig = go.Figure(data=[go.Table(header=table[0]),
+    fig = go.Figure(data=[go.Table(header=dict(values=table[0]),
                  cells=dict(values=table[1:0]))
                      ])
     fig.show()
