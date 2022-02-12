@@ -312,7 +312,7 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
     
 st.set_page_config(
-    page_title="Embedding Visualizer",
+    page_title="Embedding Viewer",
     page_icon="🖥️",
     layout="wide",
     initial_sidebar_state="expanded"
