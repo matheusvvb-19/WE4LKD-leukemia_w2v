@@ -310,18 +310,6 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
-st.set_page_config(
-     page_title="Ex-stream-ly Cool App",
-     page_icon="🧊",
-     layout="wide",
-     initial_sidebar_state="expanded",
-     menu_items={
-         'Get Help': 'https://www.extremelycoolapp.com/help',
-         'Report a bug': "https://www.extremelycoolapp.com/bug",
-         'About': "# This is a header. This is an *extremely* cool app!"
-     }
- )
-
 uploaded_file = st.sidebar.file_uploader("Faça upload de um novo modelo:")
 if uploaded_file is not None:
     model = pickle.load(uploaded_file)
