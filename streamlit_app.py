@@ -440,22 +440,8 @@ if user_input != '':
     st.header('Similarity between the search terms and the base compounds.')
     table = similarities_table_streamlit(user_input, model)
     df = pd.DataFrame(table)
-    '''
-    st.table(df)
     style = df.style.hide_index()
     st.write(style.to_html(), unsafe_allow_html=True)
-    '''
-    # CSS to inject contained in a string
-    hide_dataframe_row_index = """
-                <style>
-                .row_heading.level0 {display:none}
-                .blank {display:none}
-                </style>
-                """
-    # Inject CSS with Markdown
-    st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
-    # Display an interactive table
-    st.dataframe(df)
     
     st.header('{} most similar words for each input.'.format(top_n))
     count=0
