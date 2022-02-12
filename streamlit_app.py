@@ -451,7 +451,7 @@ if user_input != '':
                      ])
     '''
     fig = ff.create_table(table)
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
     
     st.header('{} most similar words for each input.'.format(top_n))
     count=0
