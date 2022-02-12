@@ -444,7 +444,7 @@ if user_input != '':
     df = pd.DataFrame(table)
     #style = df.style.hide_index()
     #st.write(style.to_html(), unsafe_allow_html=True)
-    st.dataframe(df, height=300)
+    st.dataframe(df)
     
     st.header('{} most similar words for each input.'.format(top_n))
     count=0
