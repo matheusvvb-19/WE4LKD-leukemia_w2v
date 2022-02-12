@@ -11,6 +11,7 @@ from get_n_common_words_english import get_most_common
 from gensim.models import Word2Vec, KeyedVectors
 from clean_text import replace_synonyms
 import plotly.graph_objects as go
+import plotly.figure_factory as ff
 
 specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
@@ -444,10 +445,12 @@ if user_input != '':
     df = pd.DataFrame(table)
     style = df.style.hide_index()
     st.write(style.to_html(), unsafe_allow_html=True)
-    '''
+    
     fig = go.Figure(data=[go.Table(header=dict(values=table[0]),
                  cells=dict(values=table[1:0]))
                      ])
+    '''
+    fig = ff.create_table(table)
     st.plotly_chart(fig)
     
     st.header('{} most similar words for each input.'.format(top_n))
