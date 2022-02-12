@@ -462,31 +462,10 @@ if user_input != '':
         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
         count = count+top_n
 
-footer="""<style>
-    a:link , a:visited{
-    color: blue;
-    background-color: transparent;
-    text-decoration: underline;
-    }
-
-    a:hover,  a:active {
-    color: red;
-    background-color: transparent;
-    text-decoration: underline;
-    }
-
-    .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: white;
-    color: black;
-    text-align: center;
-    }
-    </style>
-    <div class="footer">
-    <p>Developed with ❤ by <a style='display: block; text-align: center;' href="https://www.heflin.dev/" target="_blank">WE4LKD Team</a></p>
-    </div>
-    """
-st.markdown(footer,unsafe_allow_html=True)
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
