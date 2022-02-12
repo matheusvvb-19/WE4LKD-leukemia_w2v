@@ -310,7 +310,12 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
     
-st.set_page_config(page_title=’Embedding Visualizer’, page_icon=”🔍”)
+st.set_page_config(
+     page_title="Embedding Visualizer",
+     page_icon="🔍",
+     layout="wide",
+     initial_sidebar_state="expanded",
+ )
 
 uploaded_file = st.sidebar.file_uploader("Faça upload de um novo modelo:")
 if uploaded_file is not None:
