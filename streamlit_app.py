@@ -450,11 +450,21 @@ if user_input != '':
                  cells=dict(values=table[1:0]))
                      ])
     '''
-    fig = go.Figure(data=[go.Table(header=dict(values=list(table[0])),
-                 cells=dict(values=[table[1:]]))
-                     ])
+    number_columns = len(table[0])
+    columns_width = []
+    for i in range(nuber_columns):
+        if i == 0:
+            columns_width[i] = 1
+        else:
+            columns_width[i] = 2
+            
+    fig = go.Figure(
+        columnswidth = columns_width,
+        data=[go.Table(header=dict(values=list(table[0])),
+        cells=dict(values=[table[1:]]))
+    ])
     
-    fig.update_layout()
+    fig.update_layout(margin=dict(l=5, r=5, b=5, t=5))
     
     st.write(fig)
     
