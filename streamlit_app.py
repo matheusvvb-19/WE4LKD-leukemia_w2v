@@ -452,7 +452,7 @@ if user_input != '':
     '''
     number_columns = len(table[0])
     columns_width = []
-    for i in range(nuber_columns):
+    for i in range(number_columns):
         if i == 0:
             columns_width[i] = 1
         else:
