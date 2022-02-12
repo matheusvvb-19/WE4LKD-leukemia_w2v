@@ -222,7 +222,7 @@ def horizontal_bar(word, similarity, input_word=''):
             font = dict(size=20),
             xaxis = dict(showticklabels=False, automargin=True),
             yaxis = dict(showticklabels=True, automargin=True,autorange="reversed"),
-            margin = dict(t=20, b= 20, r=10),
+            #margin = dict(t=20, b= 20, r=10),
             title = 'Words similar to {}'.format(input_word)
             )
 
@@ -457,6 +457,6 @@ if user_input != '':
     st.header('{} most similar words for each input.'.format(top_n))
     count=0
     for i in range (len(user_input)):
-        st.write('As palavras mais similares a '+str(user_input[i])+' são:')
+        #st.write('As palavras mais similares a '+str(user_input[i])+' são:')
         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
         count = count+top_n
