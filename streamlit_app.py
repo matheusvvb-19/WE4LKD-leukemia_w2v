@@ -450,8 +450,13 @@ if user_input != '':
                  cells=dict(values=table[1:0]))
                      ])
     '''
-    fig = ff.create_table(table)
-    st.plotly_chart(fig, use_container_width=True)
+    fig = go.Figure(data=[go.Table(header=dict(values=list(table[0])),
+                 cells=dict(values=[table[1:]]))
+                     ])
+    
+    fig.update_layout()
+    
+    st.write(fig)
     
     st.header('{} most similar words for each input.'.format(top_n))
     count=0
