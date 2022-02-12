@@ -441,34 +441,9 @@ else:
 if user_input != '':
     st.header('Similarity between the search terms and the base compounds.')
     table = similarities_table_streamlit(user_input, model)
-    '''
     df = pd.DataFrame(table)
     style = df.style.hide_index()
     st.write(style.to_html(), unsafe_allow_html=True)
-    
-    fig = go.Figure(data=[go.Table(header=dict(values=table[0]),
-                 cells=dict(values=table[1:0]))
-                     ])
-    '''
-    number_columns = len(table[0])
-    columns_width = []
-    for i in range(number_columns):
-        if i == 0:
-            columns_width.append(2)
-        else:
-            columns_width.append(4)
-            
-    fig = go.Figure(
-        data=[go.Table(
-            columnwidth = columns_width,
-            header=dict(values=list(table[0])),
-            cells=dict(values=[table[1:]
-        ]))
-    ])
-    
-    #fig.update_layout(margin=dict(l=5, r=5, b=5, t=5))
-    
-    st.write(fig)
     
     st.header('{} most similar words for each input.'.format(top_n))
     count=0
