@@ -448,7 +448,7 @@ if user_input != '':
     fig = go.Figure(data=[go.Table(header=dict(values=table[0]),
                  cells=dict(values=table[1:0]))
                      ])
-    fig.show()
+    st.plotly_chart(fig)
     
     st.header('{} most similar words for each input.'.format(top_n))
     count=0
