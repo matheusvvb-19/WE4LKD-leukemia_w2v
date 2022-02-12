@@ -10,6 +10,7 @@ from sklearn.manifold import TSNE
 from get_n_common_words_english import get_most_common
 from gensim.models import Word2Vec, KeyedVectors
 from clean_text import replace_synonyms
+import plotly.graph_objects as go
 
 specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
@@ -439,12 +440,15 @@ else:
 if user_input != '':
     st.header('Similarity between the search terms and the base compounds.')
     table = similarities_table_streamlit(user_input, model)
-    df = pd.DataFrame(table)
     '''
+    df = pd.DataFrame(table)
     style = df.style.hide_index()
     st.write(style.to_html(), unsafe_allow_html=True)
     '''
-    st.dataframe(df)
+    fig = go.Figure(data=[go.Table(header=table[0]),
+                 cells=dict(values=table[1:0]))
+                     ])
+    fig.show()
     
     st.header('{} most similar words for each input.'.format(top_n))
     count=0
