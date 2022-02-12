@@ -459,7 +459,7 @@ if user_input != '':
             columns_width.append(2)
             
     fig = go.Figure(
-        columnswidth = columns_width,
+        columnwidth = columns_width,
         data=[go.Table(header=dict(values=list(table[0])),
         cells=dict(values=[table[1:]]))
     ])
