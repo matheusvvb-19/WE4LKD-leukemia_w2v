@@ -20,6 +20,25 @@ domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' +
                    '/export?gid=0&format=csv',
                   )
 
+def similarities_table_streamlit(words_list, model):
+    table = [['Word']]
+    for w in base_compounds:
+        if w in model.wv.vocab:
+            table[0].append(w)
+
+    for w in words_list:
+        if w in model.wv.vocab:
+            row = [w]
+            for y in table[0][1:]:
+                if w == y:
+                    row.append('---')
+                else:
+                    similarity = round(float(model.wv.similarity(y, w)), 2)
+                    rank = model.wv.rank(y, w)
+                    row.append('{}, {}°'.format(similarity, rank))
+            table.append(row)
+    return table
+    
 def restrict_w2v(w2v, restricted_word_set, domain=False):
     new_vectors = []
     new_vocab = {}
@@ -418,8 +437,13 @@ else:
     display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
+    table = similarities_table_streamlit(user_input, model)
+    df = pd.DataFrame(table)
+    st.table(df)
+    
     count=0
     for i in range (len(user_input)):
         st.write('As palavras mais similares a '+str(user_input[i])+' são:')
         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n])
         count = count+top_n
+    
