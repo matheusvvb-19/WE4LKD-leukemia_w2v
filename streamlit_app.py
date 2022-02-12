@@ -13,6 +13,13 @@ from clean_text import replace_synonyms
 import plotly.graph_objects as go
 import plotly.figure_factory as ff
 
+st.set_page_config(
+     page_title="Embedding Visualizer",
+     page_icon="🔍",
+     layout="wide",
+     initial_sidebar_state="expanded",
+ )
+
 specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
@@ -309,13 +316,6 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
-    
-st.set_page_config(
-     page_title="Embedding Visualizer",
-     page_icon="🔍",
-     layout="wide",
-     initial_sidebar_state="expanded",
- )
 
 uploaded_file = st.sidebar.file_uploader("Faça upload de um novo modelo:")
 if uploaded_file is not None:
