@@ -437,13 +437,14 @@ else:
     display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
+    st.header('Similarity between the search terms and the base compounds.')
     table = similarities_table_streamlit(user_input, model)
     df = pd.DataFrame(table)
     st.table(df)
     
+    st.header('{} most similar words for each input.'.format(top_n))
     count=0
     for i in range (len(user_input)):
         st.write('As palavras mais similares a '+str(user_input[i])+' são:')
         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n])
         count = count+top_n
-    
