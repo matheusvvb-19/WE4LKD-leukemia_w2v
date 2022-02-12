@@ -442,8 +442,9 @@ if user_input != '':
     st.header('Similarity between the search terms and the base compounds.')
     table = similarities_table_streamlit(user_input, model)
     df = pd.DataFrame(table)
-    style = df.style.hide_index()
-    st.write(style.to_html(), unsafe_allow_html=True)
+    #style = df.style.hide_index()
+    #st.write(style.to_html(), unsafe_allow_html=True)
+    st.dataframe(df)
     
     st.header('{} most similar words for each input.'.format(top_n))
     count=0
