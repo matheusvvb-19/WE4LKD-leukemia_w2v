@@ -486,15 +486,12 @@ if user_input != '':
             else:
                 with col2:
                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-            '''
-            with col2:
-                options = st.multiselect(label='Serach for others terms:', options=options_list[i], key=w)
-            '''
+                    
     forms_container = st.container()
     with forms_container:
         st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
         with st.form(key='columns_in_form'):
-            cols = st.beta_columns(number_terms)
+            cols = st.columns(number_terms)
             for i, col in enumerate(cols):
                 col.selectbox('Make a Selection', options_list[i], key=i)
             submitted = st.form_submit_button('Search')
