@@ -467,10 +467,3 @@ hide_streamlit_style = """
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
-footer="""
-    <div class='footer'>
-        <p><a style='display:block;text-align:center;' href='https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v' target='_blank'>GitHub repository</a></p>
-    </div>
-"""
-st.markdown(footer, unsafe_allow_html=True)
