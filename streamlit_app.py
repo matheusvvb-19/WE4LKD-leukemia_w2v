@@ -477,7 +477,7 @@ if user_input != '':
     
     options_list = list(split_list(similar_word[:-number_terms], number_terms))
     if number_terms % 2 == 0:
-        number_containers = number_terms/2
+        number_containers = int(number_terms/2)
     else:
         number_containers = int(number_terms/2) + 1
     
