@@ -476,17 +476,23 @@ if user_input != '':
     i=0
     
     options_list = list(split_list(similar_word[:-number_terms], number_terms))
-    st.write(similar_word)
-    for w in user_input:
+    if number_terms % 2 == 0:
+        number_containers = number_terms/2
+    else:
+        number_containers = number_terms/2 + 1
+    
+    for j in range(number_containers):
         container = st.container()
         with container:
             col1, col2 = st.columns(2)
-            
+        
+        for w in user_input:
             if i % 2 == 0:
                 with col1:
                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
             else:
                 with col2:
                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-        count = count+top_n
-        i = i + 1
+                    
+            count = count+top_n
+            i = i + 1
