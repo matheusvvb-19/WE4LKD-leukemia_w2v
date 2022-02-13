@@ -473,5 +473,5 @@ if user_input != '':
             count = count+top_n
     
     with col2:
-        options = st.multiselect(similar_word[:-1])
+        options = st.multiselect(label='Change serach terms:', options=similar_word[:-1])
         user_input = options
