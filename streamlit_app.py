@@ -458,13 +458,11 @@ if user_input != '':
     st.header('{} most similar words for each input.'.format(top_n))
     count=0
     for i in range (len(user_input)):
-        #st.write('As palavras mais similares a '+str(user_input[i])+' são:')
         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
         count = count+top_n
 
 hide_streamlit_style = """
             <style>
-            #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             </style>
             """
