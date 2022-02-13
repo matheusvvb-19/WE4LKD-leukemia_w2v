@@ -497,10 +497,14 @@ if user_input != '':
             i = i + 1
             
     form_container = st.container()
+    new_words_to_searh = []
     with form_container:
         st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
         with st.form(key='columns_in_form'):
             cols = st.columns(number_terms)
             for k, col in enumerate(cols):
-                col.selectbox(user_input[k], options_list[k], key=k)
+                selected_words = col.multiselect(user_input[k], options_list[k], key=k)
+                new_words_to_searh.append(selected_words)
+                
+            new_words_to_searh = list(dict.fromkeys(new_words_to_searh))
             submitted = st.form_submit_button('Search')  
