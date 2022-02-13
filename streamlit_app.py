@@ -311,21 +311,30 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
+def set_page_layout():
+    st.set_page_config(
+        page_title="Embedding Viewer",
+        page_icon="🖥️",
+        layout="wide",
+        initial_sidebar_state="expanded"
+     )
     
-st.set_page_config(
-    page_title="Embedding Viewer",
-    page_icon="🖥️",
-    layout="wide",
-    initial_sidebar_state="expanded"
- )
-    
-uploaded_file = st.sidebar.file_uploader("Faça upload de um novo modelo:")
+    hide_streamlit_style = """
+            <style>
+            footer {visibility: hidden;}
+            </style>
+            """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+set_page_layout()
+
+uploaded_file = st.sidebar.file_uploader("Upload a new model:")
 if uploaded_file is not None:
     model = pickle.load(uploaded_file)
     model.init_sims()
 
 loaded_model = st.sidebar.selectbox(
- 'Ou escolha os modelos pré-carregados:',
+ 'Or choose one of the preloaded models:',
  ('10: 1900 - 2021', '9: 1900 - 2016', '8: 1900 - 2014', '7: 1900 - 2013', '6: 1900 - 2011', '5: 1900 - 2009', '4: 1900 - 2001', '3: 1900 - 1999', '2: 1900 - 1977', '1: 1900 - 1967'))
 
 if loaded_model == '1: 1900 - 1967':
@@ -350,7 +359,7 @@ elif loaded_model == '10: 1900 - 2021':
   model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
 model.init_sims()
     
-restrict_domain = st.sidebar.selectbox("Restringir domínio do vocabulário:",
+restrict_domain = st.sidebar.selectbox("Restrict vocabulary domain:",
 ('geral', 'câncer', 'remédios FDA'))
 if restrict_domain != 'geral':
     if restrict_domain == 'câncer':
@@ -375,7 +384,7 @@ if restrict_domain != 'geral':
         specific_domain = list(dict.fromkeys(specific_domain))
         wv_restrict_w2v(model, set(specific_domain), True)
 else:
-    common_words_number = st.sidebar.selectbox('Selecione a quantidade de palavras mais comuns da língua inglesa que deseja remover da visualização ',
+    common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
     ('None', '5000', '10000', '15000', '20000'))
     if common_words_number != 'None':
         common_words = get_most_common(int(common_words_number))
@@ -383,13 +392,13 @@ else:
     
     
 dim_red = st.sidebar.selectbox(
- 'Selecione o método de redução de dimensionalidade',
+ 'Select the dimensionality reduction method',
  ('TSNE','PCA'))
 dimension = st.sidebar.selectbox(
-     "Selecione a dimensão de visualização",
+     "Select the display dimension",
      ('2D', '3D'))
-user_input = st.sidebar.text_input("Escreva as palavras que deseja buscar. Para mais de uma palavra, as separe por vírgula (,)",'')
-top_n = st.sidebar.slider('Selecione o tamanho da vizinhança a ser visualizada ',
+user_input = st.sidebar.text_input("Enter the words to be searched. For more than one word, separate them with a comma (,)",'')
+top_n = st.sidebar.slider('select the neighborhood size',
     5, 30, (5))
 annotation = st.sidebar.radio(
      "Habilite ou desabilite os rótulos",
@@ -421,7 +430,7 @@ else:
             sim_words = append_list(sim_words, words)
             result_word.extend(sim_words)
         except KeyError:
-            st.error("A palavra {} não está presente no vocabulário deste modelo.".format(words))
+            st.error("The word {} is not present in model's vocabulary.".format(words))
         except TypeError:
             pass      
     
@@ -460,10 +469,3 @@ if user_input != '':
     for i in range (len(user_input)):
         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
         count = count+top_n
-
-hide_streamlit_style = """
-            <style>
-            footer {visibility: hidden;}
-            </style>
-            """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
