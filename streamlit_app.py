@@ -474,6 +474,6 @@ if user_input != '':
     
     with col2:
         for w in similar_word:
-            st.button(label=w, hep='click to search for this word')
+            st.button(label=w)
             if st.button(w):
                 user_input = w
