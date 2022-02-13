@@ -478,9 +478,10 @@ if user_input != '':
             col1, col2 = st.columns(2)
             
             with col1:
-                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-                count = count+top_n
-                i = i + 1
+                for i in range(number_terms):
+                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+                    count = count+top_n
+            
             with col2:
                 options = st.multiselect(label='Serach for others terms:', options=similar_word[:-1])
                 
