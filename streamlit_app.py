@@ -316,6 +316,10 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
+def split_list(items_list, n):
+    k, m = divmod(len(items_list), n)
+    return (items_list[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
+    
 def set_page_layout():
     st.set_page_config(
         page_title="Embedding Viewer",
@@ -464,16 +468,16 @@ with top_container:
 
 if user_input != '':
     st.header('{} most similar words for each input.'.format(top_n))
+    number_terms = len(user_input)
     
-    number_terms = len(user_input)    
-    for i in range(number_terms):
+    for w in user_input:
         container = st.container()
         with container:
             col1, col2 = st.columns(2)
             
             with col1:
                 count=0
-                for i in range (len(user_input)):
+                for i in range (number_terms):
                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
                     count = count+top_n
             with col2:
