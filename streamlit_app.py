@@ -467,6 +467,9 @@ with top_container:
         display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
+    with top_container:
+        similarities_table_streamlit(user_input, model)
+    
     st.header('{} most similar words for each input.'.format(top_n))
     number_terms = len(user_input)
     count=0
