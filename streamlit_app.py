@@ -473,5 +473,11 @@ if user_input != '':
             count = count+top_n
     
     with col2:
-        options = st.multiselect(label='Change serach terms:', options=similar_word[:-1])
-        user_input = options
+        for w in user_input:
+            new_target = st.button(label=w, key = w)
+            if new_target:
+                user_input = w
+                if dimension == '2D':
+                    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+                else:
+                    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
