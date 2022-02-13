@@ -431,6 +431,7 @@ else:
             result_word.extend(sim_words)
         except KeyError:
             st.error("The word {} is not present in model's vocabulary.".format(words))
+            user_input.remove(words)
         except TypeError:
             pass      
     
