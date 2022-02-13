@@ -502,5 +502,5 @@ if user_input != '':
         with st.form(key='columns_in_form'):
             cols = st.columns(number_terms)
             for k, col in enumerate(cols):
-                col.selectbox(user_input[i], options_list[i], key=k)
+                col.selectbox(user_input[k], options_list[k], key=k)
             submitted = st.form_submit_button('Search')  
