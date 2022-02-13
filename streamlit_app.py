@@ -465,11 +465,7 @@ with top_container:
 if user_input != '':
     st.header('{} most similar words for each input.'.format(top_n))
     
-    number_terms = 0
-    for w in user_input:
-        if w in model.wv.vocab:
-            number_terms += 1
-    
+    number_terms = len(user_input)    
     for i in range(number_terms):
         container = st.container()
         with container:
