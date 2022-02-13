@@ -472,6 +472,7 @@ if user_input != '':
     count=0
     i=0
     
+    st.write(similar_word)
     for w in user_input:
         container = st.container()
         with container:
