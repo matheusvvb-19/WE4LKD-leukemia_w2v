@@ -326,6 +326,10 @@ def set_page_layout():
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+def split_list(word_list, number_sub_lists):
+    splitter = len(word_list)//number_sub_lists
+    return a_list[:splitter], a_list[splitter:]
+    
 set_page_layout()
 
 uploaded_file = st.sidebar.file_uploader("Upload a new model:")
@@ -464,20 +468,8 @@ if user_input != '':
     df = pd.DataFrame(table)
     st.table(df)
     st.header('{} most similar words for each input.'.format(top_n))
-    
-    col1, col2 = st.columns(2)
-    with col1:    
-        count=0
-        for i in range (len(user_input)):
-            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-            count = count+top_n
-    
-    with col2:
-        for w in similar_word[:-1]:
-            new_target = st.button(label=w, key = w)
-            if new_target:
-                user_input = w
-                if dimension == '2D':
-                    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-                else:
-                    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+     
+    count=0
+    for i in range (len(user_input)):
+        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+        count = count+top_n
