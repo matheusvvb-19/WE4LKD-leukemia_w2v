@@ -133,7 +133,10 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
         else:
             words = [word for word in model.wv.vocab]
     
-    word_vectors = np.array([model[w] for w in words])
+    try:
+        word_vectors = np.array([model[w] for w in words])
+    except:
+        pass
     
     if len(word_vectors) > 0:
         if dim_red == 'PCA':
@@ -236,7 +239,10 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
         else:
             words = [word for word in model.wv.vocab]
     
-    word_vectors = np.array([model[w] for w in words])
+    try:
+        word_vectors = np.array([model[w] for w in words])
+    except:
+        pass
     
     if dim_red == 'PCA':
         two_dim = PCA(random_state=0).fit_transform(word_vectors)[:,:2]
@@ -431,7 +437,6 @@ else:
             result_word.extend(sim_words)
         except KeyError:
             st.error("The word {} is not present in model's vocabulary.".format(words))
-            user_input.remove(words)
         except TypeError:
             pass      
     
