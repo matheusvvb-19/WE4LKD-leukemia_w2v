@@ -23,6 +23,9 @@ domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' +
                   )
 
 def similarities_table_streamlit(words_list, model):
+    st.header('Similarity between the search terms and the base compounds.')
+    st.markdown("Size of model's vocabulary: {}".format(len(model.wv.vocab)))
+    
     table = [['Word']]
     for w in base_compounds:
         if w in model.wv.vocab:
@@ -39,7 +42,9 @@ def similarities_table_streamlit(words_list, model):
                     rank = model.wv.rank(y, w)
                     row.append('{}, {}°'.format(similarity, rank))
             table.append(row)
-    return table
+            
+    df = pd.DataFrame(table)
+    st.table(df)
     
 def restrict_w2v(w2v, restricted_word_set, domain=False):
     new_vectors = []
@@ -325,10 +330,6 @@ def set_page_layout():
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
-def split_list(word_list, number_sub_lists):
-    splitter = len(word_list)//number_sub_lists
-    return a_list[:splitter], a_list[splitter:]
     
 set_page_layout()
 
@@ -394,7 +395,6 @@ else:
         common_words = get_most_common(int(common_words_number))
         wv_restrict_w2v(model, set(common_words))
     
-    
 dim_red = st.sidebar.selectbox(
  'Select the dimensionality reduction method',
  ('TSNE','PCA'))
@@ -448,28 +448,34 @@ else:
     label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
     color_map = [label_dict[x] for x in labels]
     
+top_container = st.container()
+with top_container:
+    st.title('Word Embedding Visualization Based on Cosine Similarity')
+    with st.expander('How to use this app'):
+        st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation, since they are often words outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
+        st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D).')
+        st.markdown('You can also search for specific words by typing them into the field. For more than one word, separate them with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
+        st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider. You can also enable or disable the labels of each point on the plot.')
 
-st.title('Word Embedding Visualization Based on Cosine Similarity')
-with st.expander('How to use this app'):
-    st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation, since they are often words outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
-    st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D).')
-    st.markdown('You can also search for specific words by typing them into the field. For more than one word, separate them with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
-    st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider. You can also enable or disable the labels of each point on the plot.')
-
-if dimension == '2D':
-    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-else:
-    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+    if dimension == '2D':
+        display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+    else:
+        display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
-    st.header('Similarity between the search terms and the base compounds.')
-    st.markdown("Size of model's vocabulary: {}".format(len(model.wv.vocab)))
-    table = similarities_table_streamlit(user_input, model)
-    df = pd.DataFrame(table)
-    st.table(df)
     st.header('{} most similar words for each input.'.format(top_n))
-     
-    count=0
-    for i in range (len(user_input)):
-        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-        count = count+top_n
+    
+    for w in user_input:
+        container = st.container()
+        with container:
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                count=0
+                for i in range (len(user_input)):
+                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+                    count = count+top_n
+            with col2:
+                options = st.multiselect(label='Serach for others terms:', options=similar_word[:-1])
+                
+                
