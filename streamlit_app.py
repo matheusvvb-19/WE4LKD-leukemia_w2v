@@ -473,7 +473,7 @@ if user_input != '':
             count = count+top_n
     
     with col2:
-        for w in user_input:
+        for w in similar_word[:-1]:
             new_target = st.button(label=w, key = w)
             if new_target:
                 user_input = w
