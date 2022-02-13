@@ -477,3 +477,4 @@ if user_input != '':
             st.button(label=w, key=w)
             if st.button(w):
                 user_input = w
+                break
