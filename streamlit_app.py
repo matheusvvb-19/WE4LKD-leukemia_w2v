@@ -360,12 +360,12 @@ elif loaded_model == '10: 1900 - 2021':
 model.init_sims()
     
 restrict_domain = st.sidebar.selectbox("Restrict vocabulary domain:",
-('geral', 'câncer', 'remédios FDA'))
-if restrict_domain != 'geral':
-    if restrict_domain == 'câncer':
+('general', 'NCI cancer drugs', 'FDA drugs'))
+if restrict_domain != 'general':
+    if restrict_domain == 'NCI cancer drugs':
         specific_domain = domains_table['name'].tolist()
         wv_restrict_w2v(model, set(specific_domain), True)
-    elif restrict_domain == 'remédios FDA':
+    elif restrict_domain == 'FDA drugs':
         with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
             file_line = csv.reader(file_txt, delimiter='\t')
             for e in file_line:
