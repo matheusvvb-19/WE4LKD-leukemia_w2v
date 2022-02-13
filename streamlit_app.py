@@ -480,15 +480,18 @@ if user_input != '':
 
         options_list = list(split_list(similar_word[:-number_terms], number_terms))
         for w in user_input:
-            with col1:
-                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-
+            if i % 2 == 0:
+                with col1:
+                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+            else:
+                with col2:
+                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
             '''
             with col2:
                 options = st.multiselect(label='Serach for others terms:', options=options_list[i], key=w)
             '''
-            
-    with col2:
+    forms_container = st.container()
+    with forms_container:
         st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
         with st.form(key='columns_in_form'):
             cols = st.beta_columns(number_terms)
