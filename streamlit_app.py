@@ -479,7 +479,7 @@ if user_input != '':
     if number_terms % 2 == 0:
         number_containers = number_terms/2
     else:
-        number_containers = number_terms/2 + 1
+        number_containers = int(number_terms/2) + 1
     
     for j in range(number_containers):
         container = st.container()
