@@ -488,6 +488,6 @@ if user_input != '':
                 i = i + 1
             
             with col2:
-                options = st.multiselect(label='Serach for others terms:', options=options_list)
+                options = st.multiselect(label='Serach for others terms:', options=options_list[i])
                 
                 
