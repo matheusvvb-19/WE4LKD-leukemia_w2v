@@ -473,4 +473,5 @@ if user_input != '':
             count = count+top_n
     
     with col2:
-        st.write(similar_word[:-1])
+        options = st.multiselect(similar_word[:-1])
+        user_input = options
