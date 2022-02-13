@@ -463,9 +463,17 @@ if user_input != '':
     table = similarities_table_streamlit(user_input, model)
     df = pd.DataFrame(table)
     st.table(df)
-    
     st.header('{} most similar words for each input.'.format(top_n))
-    count=0
-    for i in range (len(user_input)):
-        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-        count = count+top_n
+    
+    col1, col2 = st.columns(2)
+    with col1:    
+        count=0
+        for i in range (len(user_input)):
+            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+            count = count+top_n
+    
+    with col2:
+        for w in similar_word:
+            st.button(label=w, hep='click to search for this word')
+            if st.button(w):
+                user_input = w
