@@ -473,8 +473,4 @@ if user_input != '':
             count = count+top_n
     
     with col2:
-        for w in similar_word:
-            st.button(label=w, key=w)
-            if st.button(w):
-                user_input = w
-                break
+        st.write(similar_word)
