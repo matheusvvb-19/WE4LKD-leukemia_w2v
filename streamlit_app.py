@@ -469,18 +469,18 @@ with top_container:
 if user_input != '':
     st.header('{} most similar words for each input.'.format(top_n))
     number_terms = len(user_input)
+    count=0
+    i=0
     
     for w in user_input:
-        count=0
-        i=0
         container = st.container()
         with container:
             col1, col2 = st.columns(2)
             
             with col1:
-                for i in range(number_terms):
-                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-                    count = count+top_n
+                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+                count = count+top_n
+                i = i + 1
             
             with col2:
                 options = st.multiselect(label='Serach for others terms:', options=similar_word[:-1])
