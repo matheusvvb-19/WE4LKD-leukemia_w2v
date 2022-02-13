@@ -487,5 +487,14 @@ if user_input != '':
             with col2:
                 options = st.multiselect(label='Serach for others terms:', options=options_list[i], key=w)
             '''
-            count = count+top_n
-            i = i + 1
+            
+       with col2:
+            st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
+            with st.form(key='columns_in_form'):
+                cols = st.beta_columns(number_terms)
+                for i, col in enumerate(cols):
+                    col.selectbox('Make a Selection', options_list[i], key=i)
+                submitted = st.form_submit_button('Search')
+                
+        count = count+top_n
+        i = i + 1
