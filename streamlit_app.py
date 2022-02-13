@@ -483,6 +483,6 @@ if user_input != '':
                 i = i + 1
             
             with col2:
-                options = st.multiselect(label='Serach for others terms:', options=similar_word[:-1])
+                options = st.multiselect(label='Serach for others terms:', options=similar_word[:-1], key=w)
                 
                 
