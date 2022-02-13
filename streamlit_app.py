@@ -470,22 +470,20 @@ if user_input != '':
     with top_container:
         similarities_table_streamlit(user_input, model)
     
+    col1, col2 = st.columns(2)
     st.header('{} most similar words for each input.'.format(top_n))
     number_terms = len(user_input)
     count=0
     i=0
     
     options_list = list(split_list(similar_word[:-number_terms], number_terms))
-    st.write(similar_word)
     for w in user_input:
-        container = st.container()
-        with container:
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-            
-            with col2:
-                options = st.multiselect(label='Serach for others terms:', options=options_list[i], key=w)
+        with col1:
+            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+
+        '''
+        with col2:
+            options = st.multiselect(label='Serach for others terms:', options=options_list[i], key=w)
+        '''
         count = count+top_n
         i = i + 1
