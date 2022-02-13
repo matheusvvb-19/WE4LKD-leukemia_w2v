@@ -470,31 +470,23 @@ if user_input != '':
     with top_container:
         similarities_table_streamlit(user_input, model)
     
-    down_container = st.container()
-    with down_container:
-        st.header('{} most similar words for each input.'.format(top_n))
-        col1, col2 = st.columns(2)
-        number_terms = len(user_input)
-        count=0
-        i=0
-
-        options_list = list(split_list(similar_word[:-number_terms], number_terms))
-        for w in user_input:
+    st.header('{} most similar words for each input.'.format(top_n))
+    number_terms = len(user_input)
+    count=0
+    i=0
+    
+    options_list = list(split_list(similar_word[:-number_terms], number_terms))
+    st.write(similar_word)
+    for w in user_input:
+        container = st.container()
+        with container:
+            col1, col2 = st.columns(2)
+            
             if i % 2 == 0:
                 with col1:
                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
             else:
                 with col2:
                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-                    
-    forms_container = st.container()
-    with forms_container:
-        st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
-        with st.form(key='columns_in_form'):
-            cols = st.columns(number_terms)
-            for i, col in enumerate(cols):
-                col.selectbox('Make a Selection', options_list[i], key=i)
-            submitted = st.form_submit_button('Search')
-
-    count = count+top_n
-    i = i + 1
+        count = count+top_n
+        i = i + 1
