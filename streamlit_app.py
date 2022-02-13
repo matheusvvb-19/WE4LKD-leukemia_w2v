@@ -473,4 +473,4 @@ if user_input != '':
             count = count+top_n
     
     with col2:
-        st.write(similar_word)
+        st.write(similar_word[:-1])
