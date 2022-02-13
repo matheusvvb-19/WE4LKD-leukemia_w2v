@@ -475,7 +475,7 @@ if user_input != '':
     count=0
     i=0
     
-    options_list = list(split(similar_word[:number_terms], number_terms))
+    options_list = list(split_list(similar_word[:number_terms], number_terms))
     st.write(similar_word)
     for w in user_input:
         container = st.container()
