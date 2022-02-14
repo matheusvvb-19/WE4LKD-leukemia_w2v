@@ -486,6 +486,7 @@ if user_input != '':
         count=0
         i=0
         options_list = list(split_list(similar_word[:-number_terms], number_terms))
+        rows_containers_list = []
         
         if number_terms % 2 == 0:
             number_containers = int(number_terms/2)
@@ -512,6 +513,7 @@ if user_input != '':
                                 horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
                     count = count + top_n
                     i = i + 1
+                rows_containers_list.append(subplots_plots_div_row)
             
     form_section = st.container()
     new_words_to_search = []
@@ -573,15 +575,49 @@ if user_input != '':
                         number_containers = int(number_terms/2)
                     else:
                         number_containers = int(number_terms/2) + 1
+                    
+                    old_number_containers = len(rows_containers_list)
+                    # quantidade de containers (row) antigos é a mesma necessária para os novos termos de busca:
+                    if old_number_containers == number_containers:
+                        for ct in rows_containers_list:
+                            if i % 2 == 0:
+                                with col1_plot:
+                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                            else:
+                                with col2_plot:
+                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                            i = i + 1
+                            count = count + top_n
+                    # quantidade de containers (row) antigos é menor que a necessária para os novos termos de busca. Será preciso adicionar mais:
+                    elif old_number_containers < number_containers:
+                        for ct in rows_containers_list:
+                            if i % 2 == 0:
+                                with col1_plot:
+                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                            else:
+                                with col2_plot:
+                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                            i = i + 1
+                            count = count + top_n
                         
-                    for ct in range(number_containers):
-                        with subplots_plots_div_row:
-                            for w in user_input:
-                                if i % 2 == 0:
+                        new_containers = number_containers - old_number_containers
+                        count = 0
+                        i = 0
+                        for ct in range(new_containers):
+                            subplots_plots_div_row = st.container()
+                            with subplots_plots_div_row:
+                                col1, col2 = st.columns(2)
+
+                            if i % 2 == 0:
+                                with col1:
+                                    col1_plot = st.empty()
                                     with col1_plot:
-                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
-                                else:
+                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                            else:
+                                with col2:
+                                    col2_plot = st.empty()
                                     with col2_plot:
-                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
-                                i = i + 1
-                                count = count + top_n
+                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                            count = count + top_n
+                            i = i + 1
+                            rows_containers_list.append(subplots_plots_div_row)
