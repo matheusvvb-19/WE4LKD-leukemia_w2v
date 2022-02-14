@@ -522,12 +522,14 @@ if user_input != '':
         
         form_selection_div = st.empty()
         with form_selection_div:
-            with st.form(key='similar_words_form'):
+            form = st.form(key='similar_words_form')
+            with form:
                 cols = st.columns(number_terms)
                 for k, col in enumerate(cols):
                     selected_words = col.multiselect(user_input[k], options_list[k], key=k)
                     new_words_to_search.extend(selected_words)
 
+                st.write(selected_words)
                 new_words_to_search = list(dict.fromkeys(new_words_to_search))
                 submitted = st.form_submit_button('Search')
                 if submitted:
