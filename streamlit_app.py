@@ -507,4 +507,6 @@ if user_input != '':
                 new_words_to_searh.extend(selected_words)
                 
             new_words_to_searh = list(dict.fromkeys(new_words_to_searh))
-            submitted = st.form_submit_button('Search')  
+            submitted = st.form_submit_button('Search')
+            if submitted:
+                user_input = new_words_to_searh
