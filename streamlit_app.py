@@ -531,7 +531,7 @@ if user_input != '':
                 new_words_to_search = list(dict.fromkeys(new_words_to_search))
                 submitted = st.form_submit_button('Search')
                 if submitted:
-                    user_input = new_words_to_searh
+                    user_input = new_words_to_search
                     sim_words = []
                     result_word = []
                     for words in user_input:
