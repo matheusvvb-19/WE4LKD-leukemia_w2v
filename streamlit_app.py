@@ -577,8 +577,10 @@ if user_input != '':
                 else:
                     number_containers = int(number_terms/2) + 1
 
+                st.write(rows_containers_list)
                 for c in rows_containers_list:
                     c.empty()
+                st.write(rows_containers_list)
                     
                 number_terms = len(user_input)
                 count=0
