@@ -510,3 +510,28 @@ if user_input != '':
             submitted = st.form_submit_button('Search')
             if submitted:
                 user_input = new_words_to_searh
+                for words in user_input:
+                    try:
+                        sim_words = model.wv.most_similar(words, topn = top_n)
+                        sim_words = append_list(sim_words, words)
+                        result_word.extend(sim_words)
+                    except KeyError:
+                        st.error("The word {} is not present in model's vocabulary.".format(words))
+                    except TypeError:
+                        pass      
+
+                similar_word = [word[0] for word in result_word]
+                similarity = [word[1] for word in result_word]
+                try:
+                    similar_word.extend(user_input)
+                except TypeError:
+                    pass
+                labels = [word[2] for word in result_word]
+                label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
+                color_map = [label_dict[x] for x in labels]
+                
+                with top_container:
+                    if dimension == '2D':
+                        display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+                    else:
+                        display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
