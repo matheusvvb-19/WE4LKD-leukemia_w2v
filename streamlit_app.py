@@ -22,10 +22,7 @@ domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' +
                    '/export?gid=0&format=csv',
                   )
 
-def similarities_table_streamlit(words_list, model):
-    st.header('Similarity between the search terms and the base compounds.')
-    st.markdown("Size of model's vocabulary: {}".format(len(model.wv.vocab)))
-    
+def similarities_table_streamlit(words_list, model):  
     table = [['Word']]
     for w in base_compounds:
         if w in model.wv.vocab:
@@ -469,9 +466,13 @@ with plot_container:
         display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
-    table_container = st.empty()
-    with table_container:
-        similarities_table_streamlit(user_input, model)
+    table_title_container = st.container()
+    with table_title_container:
+        st.header('Similarity between the search terms and the base compounds.')
+        st.markdown("Size of model's vocabulary: {}".format(len(model.wv.vocab)))
+        table_cells_container = st.empty()
+        with table_cells_container:
+            similarities_table_streamlit(user_input, model)
     
     st.header('{} most similar words for each input.'.format(top_n))
     number_terms = len(user_input)
@@ -541,5 +542,5 @@ if user_input != '':
                     else:
                         display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
                 
-                with table_container:
+                with table_cells_container:
                     similarities_table_streamlit(user_input, model)
