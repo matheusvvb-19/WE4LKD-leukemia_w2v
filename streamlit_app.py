@@ -501,7 +501,6 @@ if user_input != '':
             
     form_container = st.empty()
     new_words_to_searh = []
-    key = 50
     with form_container:
         st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
         form = st.form(key=key)
@@ -514,49 +513,26 @@ if user_input != '':
             new_words_to_searh = list(dict.fromkeys(new_words_to_searh))
             submitted = st.form_submit_button('Search')
             
-        if submitted:
-            user_input = new_words_to_searh
-            sim_words = []
-            result_word = []
-            for words in user_input:
+            if submitted:
+                user_input = new_words_to_searh
+                sim_words = []
+                result_word = []
+                for words in user_input:
+                    try:
+                        sim_words = model.wv.most_similar(words, topn = top_n)
+                        sim_words = append_list(sim_words, words)
+                        result_word.extend(sim_words)
+                    except KeyError:
+                        st.error("The word {} is not present in model's vocabulary.".format(words))
+                    except TypeError:
+                        pass      
+
+                similar_word = [word[0] for word in result_word]
+                similarity = [word[1] for word in result_word]
                 try:
-                    sim_words = model.wv.most_similar(words, topn = top_n)
-                    sim_words = append_list(sim_words, words)
-                    result_word.extend(sim_words)
-                except KeyError:
-                    st.error("The word {} is not present in model's vocabulary.".format(words))
+                    similar_word.extend(user_input)
                 except TypeError:
-                    pass      
-
-            similar_word = [word[0] for word in result_word]
-            similarity = [word[1] for word in result_word]
-            try:
-                similar_word.extend(user_input)
-            except TypeError:
-                pass
-            labels = [word[2] for word in result_word]
-            label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
-            color_map = [label_dict[x] for x in labels]
-
-            with plot_container:
-                if dimension == '2D':
-                    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-                else:
-                    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-
-            with table_container:
-                similarities_table_streamlit(user_input, model)
-
-            with form_container:
-                st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
-                form = st.form(key=key)
-                with form:
-                    cols = st.columns(number_terms)
-                    for k, col in enumerate(cols):
-                        selected_words = col.multiselect(user_input[k], options_list[k], key=k)
-                        new_words_to_searh.extend(selected_words)
-
-                    new_words_to_searh = list(dict.fromkeys(new_words_to_searh))
-                    submitted = st.form_submit_button('Search')
-            
-            key = key + 1
+                    pass
+                labels = [word[2] for word in result_word]
+                label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
+                color_map = [label_dict[x] for x in labels]
