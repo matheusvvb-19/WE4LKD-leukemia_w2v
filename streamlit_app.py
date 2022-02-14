@@ -493,7 +493,6 @@ if user_input != '':
         else:
             number_containers = int(number_terms/2) + 1
         
-        st.write('NUMBER CONTAINERS: {}'.format(number_containers))
         subplots_plots_div = st.container()
         with subplots_plots_div:
             for j in range(number_containers):
@@ -581,23 +580,22 @@ if user_input != '':
                 else:
                     number_containers = int(number_terms/2) + 1
 
-                st.write('number_containers: {}'.format(number_containers))
                 with subplots_plots_div:
                     for j in range(number_containers):
-                        row = st.container()
-                        with row:
-                            row_col1, row_col2 = st.columns(2)
+                        subplots_plots_div_row = subplots_plots_div.container()
+                        col1, col2 = subplots_plots_div_row.columns(2)
+                        col1_plot = col1.empty()
+                        col2_plot = col2.empty()
 
-                        if i % 2 == 0:
-                            with row_col1:
-                                row_col1_plot = st.empty()
-                                with row_col1_plot:
-                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
-                        else:
-                            with row_col2:
-                                row_col2_plot = st.empty()
-                                with row_col2_plot:
-                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                        with col1_plot:
+                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+
+                        i = i + 1 
+                        try:
+                            with col2_plot:
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                        except:
+                            pass
+
                         count = count + top_n
-                        i = i + 1
-                        rows_containers_list.append(subplots_plots_div_row)
+                        i = i + 1     
