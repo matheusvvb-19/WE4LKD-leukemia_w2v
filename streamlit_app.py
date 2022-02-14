@@ -467,12 +467,14 @@ with plot_container:
 
 if user_input != '':
     table_section = st.container()
-    with table_title_div:
-        st.header('Similarity between the search terms and the base compounds.')
-        st.markdown("Size of model's vocabulary: {}".format(len(model.wv.vocab)))
-        table_cells_div = st.empty()
-        with table_cells_div:
-            similarities_table_streamlit(user_input, model)
+    with table_section:
+        table_title_div = st.container()
+        with table_title_div:
+            st.header('Similarity between the search terms and the base compounds.')
+            st.markdown("Size of model's vocabulary: {}".format(len(model.wv.vocab)))
+            table_cells_div = st.empty()
+            with table_cells_div:
+                similarities_table_streamlit(user_input, model)
     
     subplots_section = st.container()
     with subplots_section:
