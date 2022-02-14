@@ -573,7 +573,7 @@ if user_input != '':
                             with col1_plot:
                                 horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
                         else:
-                            with col2:
+                            with col2_plot:
                                 horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
                         i = 1 + 1
                         count = count + top_n
