@@ -603,21 +603,22 @@ if user_input != '':
                         new_containers = number_containers - old_number_containers
                         count = 0
                         i = 0
-                        for ct in range(new_containers):
-                            subplots_plots_div_row = st.container()
-                            with subplots_plots_div_row:
-                                col1, col2 = st.columns(2)
+                        with subplots_plots_div:
+                            for ct in range(new_containers):
+                                subplots_plots_div_row = st.container()
+                                with subplots_plots_div_row:
+                                    col1, col2 = st.columns(2)
 
-                            if i % 2 == 0:
-                                with col1:
-                                    col1_plot = st.empty()
-                                    with col1_plot:
-                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
-                            else:
-                                with col2:
-                                    col2_plot = st.empty()
-                                    with col2_plot:
-                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
-                            count = count + top_n
-                            i = i + 1
-                            rows_containers_list.append(subplots_plots_div_row)
+                                if i % 2 == 0:
+                                    with col1:
+                                        col1_plot = st.empty()
+                                        with col1_plot:
+                                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                                else:
+                                    with col2:
+                                        col2_plot = st.empty()
+                                        with col2_plot:
+                                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                                count = count + top_n
+                                i = i + 1
+                                rows_containers_list.append(subplots_plots_div_row)
