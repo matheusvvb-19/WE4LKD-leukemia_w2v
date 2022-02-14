@@ -581,10 +581,10 @@ if user_input != '':
                     if old_number_containers == number_containers:
                         for ct in rows_containers_list:
                             if i % 2 == 0:
-                                with col1_plot:
+                                with ct.col1.col1_plot:
                                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                             else:
-                                with col2_plot:
+                                with ct.col2.col2_plot:
                                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                             i = i + 1
                             count = count + top_n
@@ -592,10 +592,10 @@ if user_input != '':
                     elif old_number_containers < number_containers:
                         for ct in rows_containers_list:
                             if i % 2 == 0:
-                                with col1_plot:
+                                with ct.col1.col1_plot:
                                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                             else:
-                                with col2_plot:
+                                with ct.col2.col2_plot:
                                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                             i = i + 1
                             count = count + top_n
