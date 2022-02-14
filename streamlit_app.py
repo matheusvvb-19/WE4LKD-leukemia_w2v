@@ -573,9 +573,9 @@ if user_input != '':
                     for w in user_input:
                         if i % 2 == 0:
                             with col1_plot:
-                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
                         else:
                             with col2:
-                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
                         i = 1 + 1
                         count = count + top_n
