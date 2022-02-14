@@ -568,9 +568,6 @@ if user_input != '':
                 similarities_table_streamlit(user_input, model)
 
             with subplots_section:
-                with subplots_title_div:
-                    st.header('{} most similar words for each input.'.format(top_n))
-
                 number_terms = len(user_input)
                 count=0
                 i=0
