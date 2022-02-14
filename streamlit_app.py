@@ -581,22 +581,31 @@ if user_input != '':
                     if old_number_containers == number_containers:
                         for ct in rows_containers_list:
                             if i % 2 == 0:
-                                with ct.col1.col1_plot:
-                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                                with ct:
+                                    with col1:
+                                        with col1_plot:
+                                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                             else:
-                                with ct.col2.col2_plot:
-                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                                with ct:
+                                    with col2:
+                                        with col2_plot:
+                                            with col2_plot:
+                                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                             i = i + 1
                             count = count + top_n
                     # quantidade de containers (row) antigos é menor que a necessária para os novos termos de busca. Será preciso adicionar mais:
                     elif old_number_containers < number_containers:
                         for ct in rows_containers_list:
                             if i % 2 == 0:
-                                with ct.col1.col1_plot:
-                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                                with ct:
+                                    with col1:
+                                        with col1_plot:
+                                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                             else:
-                                with ct.col2.col2_plot:
-                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                                with ct:
+                                    with col2:
+                                        with col2_plot:
+                                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                             i = i + 1
                             count = count + top_n
                         
