@@ -567,25 +567,7 @@ if user_input != '':
             with table_cells_div:
                 similarities_table_streamlit(user_input, model)
 
-            number_terms = len(user_input)
-            count = 0
-            i = 0
-            options_list = list(split_list(similar_word[:-number_terms], number_terms))
-
-            if number_terms % 2 == 0:
-                number_containers = int(number_terms/2)
-            else:
-                number_containers = int(number_terms/2) + 1
-
-            for c in rows_containers_list:
-                c.empty()
-            subplots_title_div.empty()
-            subplots_plots_div.empty()
-            subplots_section.empty()
-
-            subplots_section = st.container()
             with subplots_section:
-                subplots_title_div = st.container()
                 with subplots_title_div:
                     st.header('{} most similar words for each input.'.format(top_n))
 
@@ -600,24 +582,20 @@ if user_input != '':
                 else:
                     number_containers = int(number_terms/2) + 1
 
-                subplots_plots_div = st.container()
                 with subplots_plots_div:
                     for j in range(number_containers):
-                        subplots_plots_div_row = st.container()
                         with subplots_plots_div_row:
-                            col1, col2 = st.columns(2)
-
-                        for w in user_input:
-                            if i % 2 == 0:
-                                with col1:
-                                    col1_plot = st.empty()
-                                    with col1_plot:
-                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
-                            else:
-                                with col2:
-                                    col2_plot = st.empty()
-                                    with col2_plot:
-                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
-                            count = count + top_n
-                            i = i + 1
-                        rows_containers_list.append(subplots_plots_div_row)
+                            for w in user_input:
+                                if i % 2 == 0:
+                                    with col1:
+                                        col1_plot = st.empty()
+                                        with col1_plot:
+                                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
+                                else:
+                                    with col2:
+                                        col2_plot = st.empty()
+                                        with col2_plot:
+                                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
+                                count = count + top_n
+                                i = i + 1
+                            rows_containers_list.append(subplots_plots_div_row)
