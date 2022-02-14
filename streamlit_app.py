@@ -486,7 +486,7 @@ if user_input != '':
         count=0
         i=0
         options_list = list(split_list(similar_word[:-number_terms], number_terms))
-        #rows_containers_list = []
+        rows_containers_list = []
         
         if number_terms % 2 == 0:
             number_containers = int(number_terms/2)
@@ -513,7 +513,7 @@ if user_input != '':
                                 horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
                     count = count + top_n
                     i = i + 1
-                #rows_containers_list.append(subplots_plots_div_row)
+                rows_containers_list.append(subplots_plots_div_row)
             
     form_section = st.container()
     new_words_to_search = []
@@ -577,7 +577,9 @@ if user_input != '':
                 else:
                     number_containers = int(number_terms/2) + 1
 
-                subplots_plots_div.empty()
+                for c in rows_containers_list:
+                    c.empty()
+                    
                 number_terms = len(user_input)
                 count=0
                 i=0
