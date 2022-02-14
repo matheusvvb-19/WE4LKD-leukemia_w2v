@@ -492,12 +492,17 @@ if user_input != '':
             number_containers = int(number_terms/2)
         else:
             number_containers = int(number_terms/2) + 1
-            
+        
+        st.write('NUMBER CONTAINERS: {}'.format(number_containers))
         subplots_plots_div = st.container()
         with subplots_plots_div:
             for j in range(number_containers):
                 subplots_plots_div_row = st.container()
-                subplots_plots_div_row.write('eu sou um container row!')
+                with subplots_plots_div_row:
+                    col1, col2 = subplots_plots_div_row.columns(2)
+                    
+                    col1.write('coluna 1')
+                    col2.write('coluna 2')
             
     form_section = st.container()
     new_words_to_search = []
