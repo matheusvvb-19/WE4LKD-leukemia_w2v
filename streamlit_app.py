@@ -504,12 +504,12 @@ if user_input != '':
                         with col1:
                             col1_plot = st.empty()
                             with col1_plot:
-                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
                     else:
                         with col2:
                             col2_plot = st.empty()
                             with col2_plot:
-                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
                     count = count + top_n
                     i = i + 1
             
@@ -530,12 +530,10 @@ if user_input != '':
                     new_words_to_search.extend(selected_words)
 
                 new_words_to_search = list(dict.fromkeys(new_words_to_search))
-                st.write('new_words_to_search:')
-                st.write(new_words_to_search)
                 submitted = st.form_submit_button('Search')
                 if submitted:
                     user_input = new_words_to_search
-                    st.write('user_input:')
+                    st.write('new user_input:')
                     st.write(user_input)
                     sim_words = []
                     result_word = []
