@@ -497,7 +497,7 @@ if user_input != '':
         subplots_plots_div = st.container()
         with subplots_plots_div:
             for w in user_input:
-                if number_container > 0:
+                if number_containers > 0:
                     subplots_plots_div_row = st.container()
                     with subplots_plots_div_row:
                         col1, col2 = subplots_plots_div_row.columns(2)
