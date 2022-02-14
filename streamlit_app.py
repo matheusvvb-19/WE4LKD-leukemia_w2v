@@ -334,7 +334,7 @@ def set_page_layout():
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-    
+            
 set_page_layout()
 
 uploaded_file = st.sidebar.file_uploader("Upload a new model:")
@@ -485,8 +485,8 @@ if user_input != '':
         number_containers = int(number_terms/2) + 1
     
     for j in range(number_containers):
-        container = st.container()
-        with container:
+        sub_plots = st.empty()
+        with sub_plots:
             col1, col2 = st.columns(2)
         
         for w in user_input:
@@ -499,7 +499,7 @@ if user_input != '':
             count = count+top_n
             i = i + 1
             
-    form_container = st.container()
+    form_container = st.empty()
     new_words_to_searh = []
     with form_container:
         st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
