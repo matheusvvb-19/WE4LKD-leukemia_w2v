@@ -476,7 +476,7 @@ if user_input != '':
     
     subplots_section = st.container():
     with subplots_section:
-        subplots_title_div = st.container():
+        subplots_title_div = st.container()
         with subplots_title_div:
             st.header('{} most similar words for each input.'.format(top_n))
         
