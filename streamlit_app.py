@@ -501,7 +501,7 @@ if user_input != '':
             
     form_container = st.empty()
     new_words_to_searh = []
-    key = -1
+    key = 50
     with form_container:
         st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
         form = st.form(key=key)
@@ -559,4 +559,4 @@ if user_input != '':
                     new_words_to_searh = list(dict.fromkeys(new_words_to_searh))
                     submitted = st.form_submit_button('Search')
             
-            key = key - 1
+            key = key + 1
