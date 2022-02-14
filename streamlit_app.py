@@ -478,7 +478,7 @@ if user_input != '':
     
     subplots_section = st.container()
     with subplots_section:
-        subplots_title_div = st.container()
+        subplots_title_div = subplots_section.container()
         with subplots_title_div:
             st.header('{} most similar words for each input.'.format(top_n))
         
@@ -493,7 +493,7 @@ if user_input != '':
         else:
             number_containers = int(number_terms/2) + 1
         
-        subplots_plots_div = st.container()
+        subplots_plots_div = subplots_section.container()
         with subplots_plots_div:
             for j in range(number_containers):
                 subplots_plots_div_row = subplots_plots_div.container()
@@ -568,18 +568,17 @@ if user_input != '':
 
             with subplots_section:
                 number_terms = len(user_input)
-                st.write('number_terms: {}'.format(number_terms))
                 count=0
                 i=0
                 options_list = list(split_list(similar_word[:-number_terms], number_terms))
-                st.write('option_list: {}'.format(options_list))
-                rows_containers_list = []
 
                 if number_terms % 2 == 0:
                     number_containers = int(number_terms/2)
                 else:
                     number_containers = int(number_terms/2) + 1
 
+                subplots_plots_div.empty()
+                subplots_plots_div = subplots_section.container()
                 with subplots_plots_div:
                     for j in range(number_containers):
                         subplots_plots_div_row = subplots_plots_div.container()
