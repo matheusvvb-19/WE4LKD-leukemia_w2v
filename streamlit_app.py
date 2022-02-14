@@ -518,7 +518,7 @@ if user_input != '':
     with form_section:
         form_title_div = st.container()
         with form_title_div:
-            st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
+            st.write("You can go deep and search specifically with the terms returned by this search. Choose the words and click on 'Submit' button to search:")
         
         form_selection_div = st.empty()
         with form_selection_div:
@@ -533,8 +533,6 @@ if user_input != '':
                 submitted = st.form_submit_button('Search')
                 if submitted:
                     user_input = new_words_to_search
-                    st.write('new user_input:')
-                    st.write(user_input)
                     sim_words = []
                     result_word = []
                     for words in user_input:
@@ -566,14 +564,24 @@ if user_input != '':
                     with table_cells_div:
                         similarities_table_streamlit(user_input, model)
                         
-                    i = 0
+                    number_terms = len(user_input)
                     count = 0
-                    for w in user_input:
-                        if i % 2 == 0:
-                            with col1_plot:
-                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
-                        else:
-                            with col2_plot:
-                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
-                        i = i + 1
-                        count = count + top_n
+                    i = 0
+                    options_list = list(split_list(similar_word[:-number_terms], number_terms))
+
+                    if number_terms % 2 == 0:
+                        number_containers = int(number_terms/2)
+                    else:
+                        number_containers = int(number_terms/2) + 1
+                        
+                    for ct in range(number_containers):
+                        with subplots_plots_div_row:
+                            for w in user_input:
+                                if i % 2 == 0:
+                                    with col1_plot:
+                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
+                                else:
+                                    with col2_plot:
+                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
+                                i = i + 1
+                                count = count + top_n
