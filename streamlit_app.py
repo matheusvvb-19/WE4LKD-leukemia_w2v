@@ -584,18 +584,21 @@ if user_input != '':
                 st.write('number_containers: {}'.format(number_containers))
                 with subplots_plots_div:
                     for j in range(number_containers):
+                        subplots_plots_div_row = st.container()
                         with subplots_plots_div_row:
-                            for w in user_input:
-                                if i % 2 == 0:
-                                    with col1:
-                                        col1_plot = st.empty()
-                                        with col1_plot:
-                                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
-                                else:
-                                    with col2:
-                                        col2_plot = st.empty()
-                                        with col2_plot:
-                                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
-                                count = count + top_n
-                                i = i + 1
-                            rows_containers_list.append(subplots_plots_div_row)
+                            col1, col2 = st.columns(2)
+
+                        for w in user_input:
+                            if i % 2 == 0:
+                                with col1:
+                                    col1_plot = st.empty()
+                                    with col1_plot:
+                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
+                            else:
+                                with col2:
+                                    col2_plot = st.empty()
+                                    with col2_plot:
+                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
+                            count = count + top_n
+                            i = i + 1
+                        rows_containers_list.append(subplots_plots_div_row)
