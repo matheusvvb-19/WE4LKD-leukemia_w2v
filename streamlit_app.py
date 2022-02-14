@@ -510,7 +510,7 @@ if user_input != '':
                             col2_plot = st.empty()
                             with col2_plot:
                                 horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-                    count = count+top_n
+                    count = count + top_n
                     i = i + 1
             
     form_section = st.container()
@@ -562,3 +562,15 @@ if user_input != '':
 
                     with table_cells_div:
                         similarities_table_streamlit(user_input, model)
+                        
+                    i = 0
+                    count = 0
+                    for w in user_input:
+                        if i % 2 == 0:
+                            with col1_plot:
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+                        else:
+                            with col2:
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+                        i = 1 + 1
+                        count = count + top_n
