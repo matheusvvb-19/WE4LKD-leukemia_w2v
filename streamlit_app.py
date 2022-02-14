@@ -452,8 +452,8 @@ else:
     label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
     color_map = [label_dict[x] for x in labels]
     
-top_container = st.container()
-with top_container:
+header_container = st.container()
+with header_container:
     st.title('Word Embedding Visualization Based on Cosine Similarity')
     with st.expander('How to use this app'):
         st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation, since they are often words outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
@@ -461,6 +461,8 @@ with top_container:
         st.markdown('You can also search for specific words by typing them into the field. For more than one word, separate them with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
         st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider. You can also enable or disable the labels of each point on the plot.')
 
+plot_container = st.empty()
+with plot_container:
     if dimension == '2D':
         display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
     else:
@@ -510,6 +512,8 @@ if user_input != '':
             submitted = st.form_submit_button('Search')
             if submitted:
                 user_input = new_words_to_searh
+                sim_words = []
+                result_word = []
                 for words in user_input:
                     try:
                         sim_words = model.wv.most_similar(words, topn = top_n)
@@ -530,7 +534,7 @@ if user_input != '':
                 label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
                 color_map = [label_dict[x] for x in labels]
                 
-                with top_container:
+                with plot_container:
                     if dimension == '2D':
                         display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
                     else:
