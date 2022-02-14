@@ -529,11 +529,14 @@ if user_input != '':
                     selected_words = col.multiselect(user_input[k], options_list[k], key=k)
                     new_words_to_search.extend(selected_words)
 
-                st.write(new_words_to_search)
                 new_words_to_search = list(dict.fromkeys(new_words_to_search))
+                st.write('new_words_to_search:')
+                st.write(new_words_to_search)
                 submitted = st.form_submit_button('Search')
                 if submitted:
                     user_input = new_words_to_search
+                    st.write('user_input:')
+                    st.write(user_input)
                     sim_words = []
                     result_word = []
                     for words in user_input:
