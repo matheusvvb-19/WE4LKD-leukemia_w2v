@@ -569,9 +569,11 @@ if user_input != '':
 
             with subplots_section:
                 number_terms = len(user_input)
+                st.write('number_terms: {}'.format(number_terms))
                 count=0
                 i=0
                 options_list = list(split_list(similar_word[:-number_terms], number_terms))
+                st.write('option_list: {}'.format(options_list))
                 rows_containers_list = []
 
                 if number_terms % 2 == 0:
@@ -579,6 +581,7 @@ if user_input != '':
                 else:
                     number_containers = int(number_terms/2) + 1
 
+                st.write('number_containers: {}'.format(number_containers))
                 with subplots_plots_div:
                     for j in range(number_containers):
                         with subplots_plots_div_row:
