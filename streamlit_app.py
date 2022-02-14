@@ -504,7 +504,7 @@ if user_input != '':
             cols = st.columns(number_terms)
             for k, col in enumerate(cols):
                 selected_words = col.multiselect(user_input[k], options_list[k], key=k)
-                new_words_to_searh.append(selected_words)
+                new_words_to_searh.extend(selected_words)
                 
             new_words_to_searh = list(dict.fromkeys(new_words_to_searh))
             submitted = st.form_submit_button('Search')  
