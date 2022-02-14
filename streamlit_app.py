@@ -560,5 +560,5 @@ if user_input != '':
                         else:
                             display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
-                    with table_cells_container:
+                    with table_cells_div:
                         similarities_table_streamlit(user_input, model)
