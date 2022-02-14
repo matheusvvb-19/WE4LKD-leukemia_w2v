@@ -497,22 +497,7 @@ if user_input != '':
         with subplots_plots_div:
             for j in range(number_containers):
                 subplots_plots_div_row = st.container()
-                with subplots_plots_div_row:
-                    col1, col2 = subplots_plots_div_row.columns(2)
-
-                    if i % 2 == 0:
-                        with col1:
-                            col1_plot = col1.empty()
-                            with col1_plot:
-                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
-                    else:
-                        with col2:
-                            col2_plot = col2.empty()
-                            with col2_plot:
-                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
-                    count = count + top_n
-                    i = i + 1
-                    rows_containers_list.append(subplots_plots_div_row)
+                subplots_plots_div_row.write('eu sou um container row!')
             
     form_section = st.container()
     new_words_to_search = []
