@@ -502,12 +502,12 @@ if user_input != '':
 
                     if i % 2 == 0:
                         with col1:
-                            col1_plot = st.empty()
+                            col1_plot = col1.empty()
                             with col1_plot:
                                 horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                     else:
                         with col2:
-                            col2_plot = st.empty()
+                            col2_plot = col2.empty()
                             with col2_plot:
                                 horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                     count = count + top_n
