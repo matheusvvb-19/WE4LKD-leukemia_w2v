@@ -507,7 +507,7 @@ if user_input != '':
                                 horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
                     else:
                         with col2:
-                            col2_plot = st.emtpy()
+                            col2_plot = st.empty()
                             with col2_plot:
                                 horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
                     count = count+top_n
