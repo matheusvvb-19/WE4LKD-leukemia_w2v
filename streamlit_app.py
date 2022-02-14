@@ -466,81 +466,97 @@ with plot_container:
         display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
-    table_title_container = st.container()
-    with table_title_container:
+    table_section = st.container()
+    with table_title_div:
         st.header('Similarity between the search terms and the base compounds.')
         st.markdown("Size of model's vocabulary: {}".format(len(model.wv.vocab)))
-        table_cells_container = st.empty()
-        with table_cells_container:
+        table_cells_div = st.empty()
+        with table_cells_div:
             similarities_table_streamlit(user_input, model)
     
-    st.header('{} most similar words for each input.'.format(top_n))
-    number_terms = len(user_input)
-    count=0
-    i=0
-    
-    options_list = list(split_list(similar_word[:-number_terms], number_terms))
-    if number_terms % 2 == 0:
-        number_containers = int(number_terms/2)
-    else:
-        number_containers = int(number_terms/2) + 1
-    
-    for j in range(number_containers):
-        sub_plots = st.empty()
-        with sub_plots:
-            col1, col2 = st.columns(2)
+    subplots_section = st.container():
+    with subplots_section:
+        subplots_title_div = st.container():
+        with subplots_title_div:
+            st.header('{} most similar words for each input.'.format(top_n))
         
-        for w in user_input:
-            if i % 2 == 0:
-                with col1:
-                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-            else:
-                with col2:
-                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
-            count = count+top_n
-            i = i + 1
+        number_terms = len(user_input)
+        count=0
+        i=0
+        options_list = list(split_list(similar_word[:-number_terms], number_terms))
+        
+        if number_terms % 2 == 0:
+            number_containers = int(number_terms/2)
+        else:
+            number_containers = int(number_terms/2) + 1
             
-    form_container = st.empty()
-    new_words_to_searh = []
-    with form_container:
-        st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
-        with st.form(key='columns_in_form'):
-            cols = st.columns(number_terms)
-            for k, col in enumerate(cols):
-                selected_words = col.multiselect(user_input[k], options_list[k], key=k)
-                new_words_to_searh.extend(selected_words)
-                
-            new_words_to_searh = list(dict.fromkeys(new_words_to_searh))
-            submitted = st.form_submit_button('Search')
-            if submitted:
-                user_input = new_words_to_searh
-                sim_words = []
-                result_word = []
-                for words in user_input:
-                    try:
-                        sim_words = model.wv.most_similar(words, topn = top_n)
-                        sim_words = append_list(sim_words, words)
-                        result_word.extend(sim_words)
-                    except KeyError:
-                        st.error("The word {} is not present in model's vocabulary.".format(words))
-                    except TypeError:
-                        pass      
+        subplots_plots_div = st.container()
+        with subplots_plots_div:
+            for j in range(number_containers):
+                subplots_plots_div_row = st.container()
+                with subplots_plots_div_row:
+                    col1, col2 = st.columns(2)
 
-                similar_word = [word[0] for word in result_word]
-                similarity = [word[1] for word in result_word]
-                try:
-                    similar_word.extend(user_input)
-                except TypeError:
-                    pass
-                labels = [word[2] for word in result_word]
-                label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
-                color_map = [label_dict[x] for x in labels]
-                
-                with plot_container:
-                    if dimension == '2D':
-                        display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+                for w in user_input:
+                    if i % 2 == 0:
+                        with col1:
+                            col1_plot = st.empty()
+                            with col1_plot:
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
                     else:
-                        display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-                
-                with table_cells_container:
-                    similarities_table_streamlit(user_input, model)
+                        with col2:
+                            col2_plot = st.emtpy()
+                            with col2_plot:
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], str(user_input[i]))
+                    count = count+top_n
+                    i = i + 1
+            
+    form_section = st.container()
+    new_words_to_search = []
+    with form_section:
+        form_title_div = st.container()
+        with form_title_div:
+            st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
+        
+        form_selection_div = st.empty()
+        with form_selection_div:
+            with st.form(key='similar_words_form'):
+                cols = st.columns(number_terms)
+                for k, col in enumerate(cols):
+                    selected_words = col.multiselect(user_input[k], options_list[k], key=k)
+                    new_words_to_search.extend(selected_words)
+
+                new_words_to_search = list(dict.fromkeys(new_words_to_search))
+                submitted = st.form_submit_button('Search')
+                if submitted:
+                    user_input = new_words_to_searh
+                    sim_words = []
+                    result_word = []
+                    for words in user_input:
+                        try:
+                            sim_words = model.wv.most_similar(words, topn = top_n)
+                            sim_words = append_list(sim_words, words)
+                            result_word.extend(sim_words)
+                        except KeyError:
+                            st.error("The word {} is not present in model's vocabulary.".format(words))
+                        except TypeError:
+                            pass      
+
+                    similar_word = [word[0] for word in result_word]
+                    similarity = [word[1] for word in result_word]
+                    try:
+                        similar_word.extend(user_input)
+                    except TypeError:
+                        pass
+                    labels = [word[2] for word in result_word]
+                    label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
+                    color_map = [label_dict[x] for x in labels]
+
+                    with plot_container:
+                        if dimension == '2D':
+                            display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+                        else:
+                            display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+
+                    with table_cells_container:
+                        similarities_table_streamlit(user_input, model)
