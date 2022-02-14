@@ -474,7 +474,7 @@ if user_input != '':
         with table_cells_div:
             similarities_table_streamlit(user_input, model)
     
-    subplots_section = st.container():
+    subplots_section = st.container()
     with subplots_section:
         subplots_title_div = st.container()
         with subplots_title_div:
