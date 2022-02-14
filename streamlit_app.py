@@ -588,17 +588,16 @@ if user_input != '':
                         with subplots_plots_div_row:
                             col1, col2 = st.columns(2)
 
-                        for w in user_input:
-                            if i % 2 == 0:
-                                with col1:
-                                    col1_plot = st.empty()
-                                    with col1_plot:
-                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
-                            else:
-                                with col2:
-                                    col2_plot = st.empty()
-                                    with col2_plot:
-                                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], w)
-                            count = count + top_n
-                            i = i + 1
+                        if i % 2 == 0:
+                            with col1:
+                                col1_plot = st.empty()
+                                with col1_plot:
+                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                        else:
+                            with col2:
+                                col2_plot = st.empty()
+                                with col2_plot:
+                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                        count = count + top_n
+                        i = i + 1
                         rows_containers_list.append(subplots_plots_div_row)
