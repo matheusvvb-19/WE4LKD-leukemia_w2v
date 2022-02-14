@@ -503,7 +503,7 @@ if user_input != '':
     new_words_to_searh = []
     with form_container:
         st.write("You can go deep and search specifically with the terms returned by this search. Click on 'Submit' button to search:")
-        form = st.form(key=key)
+        form = st.form(key='columns_in_form')
         with form:
             cols = st.columns(number_terms)
             for k, col in enumerate(cols):
