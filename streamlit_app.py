@@ -583,7 +583,7 @@ if user_input != '':
                 if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
                     with col2_plot:
                         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[0])
-                    user_input.pop(0)
+                    i = 1
                 
                 subplots_plots_div.empty()
                 subplots_plots_div = subplots_section.container()
