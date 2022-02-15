@@ -620,4 +620,5 @@ if user_input != '':
                         new_words_to_search.extend(selected_words)
 
                     new_words_to_search = list(dict.fromkeys(new_words_to_search))
-                    submitted = st.form_submit_button('Search')          
+                    submitted = st.form_submit_button('Search')
+                    st.write('new_words_to_search: {}'.format(new_words_to_search))
