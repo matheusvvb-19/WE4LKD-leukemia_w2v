@@ -483,6 +483,7 @@ if user_input != '':
             st.header('{} most similar words for each input.'.format(top_n))
         
         number_terms = len(user_input)
+        previous_number_terms = len(user_input)
         count=0
         i=0
         options_list = list(split_list(similar_word[:-number_terms], number_terms))
@@ -492,7 +493,8 @@ if user_input != '':
             number_containers = int(number_terms/2)
         else:
             number_containers = int(number_terms/2) + 1
-        
+         
+        previous_number_containers = number_containers        
         subplots_plots_div = subplots_section.container()
         with subplots_plots_div:
             for j in range(number_containers):
@@ -577,11 +579,12 @@ if user_input != '':
                     number_containers = int(number_terms/2)
                 else:
                     number_containers = int(number_terms/2) + 1
-
-                for c in rows_containers_list:
-                    c.col1.col1_plot.empty()
-                    c.col2.col2_plot.empty()
-                    
+                
+                if previous_number_terms % 2 != 0 and previous_number_containers % 2 == 0:
+                    with col2_plot:
+                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[0])
+                    user_input.pop(0)
+                
                 subplots_plots_div.empty()
                 subplots_plots_div = subplots_section.container()
                 with subplots_plots_div:
@@ -591,8 +594,11 @@ if user_input != '':
                         col1_plot = col1.empty()
                         col2_plot = col2.empty()
 
-                        with col1_plot:
-                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                        try:
+                            with col1_plot:
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                        except:
+                            pass
 
                         i = i + 1 
                         try:
