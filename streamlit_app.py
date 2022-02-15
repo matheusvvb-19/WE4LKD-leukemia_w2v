@@ -605,18 +605,3 @@ if __name__ == '__main__':
 
                             count = count + top_n
                             i = i + 1
-                
-                #result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)
-                options_list = list(split_list(similar_word[:-len(new_words_to_search)], len(new_words_to_search)))
-                st.write('option_list: {}'.format(options_list))
-                st.write('new_words_to_search: {}'.format(new_words_to_search))
-                new_words_to_search = []
-                form.empty()
-                with form:
-                    cols = st.columns(len(user_input))
-                    for k, col in enumerate(cols):
-                        selected_words = col.multiselect(new_words_to_search[k], options_list[k], key=k)
-                        new_words_to_search.extend(selected_words)
-
-                    new_words_to_search = list(dict.fromkeys(new_words_to_search))
-                    submitted = st.form_submit_button('Search')
