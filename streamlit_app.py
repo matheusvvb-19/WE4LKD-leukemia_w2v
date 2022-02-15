@@ -607,14 +607,11 @@ if __name__ == '__main__':
                             i = i + 1
                             
                 new_words_to_search = []
-                with form_selection_div:
-                    form = form_selection_div.form(key='form2', clear_on_submit=True)
-                    with form:
-                        cols = st.columns(len(user_input))
-                        for k, col in enumerate(cols):
-                            selected_words = col.multiselect(user_input[k], options_list[k], key=k)
-                            new_words_to_search.extend(selected_words)
+                with form:
+                    cols = st.columns(len(user_input))
+                    for k, col in enumerate(cols):
+                        selected_words = col.multiselect(user_input[k], options_list[k], key=k)
+                        new_words_to_search.extend(selected_words)
 
-                        new_words_to_search = list(dict.fromkeys(new_words_to_search))
-                        submitted = st.form_submit_button('Search')
-                            
+                    new_words_to_search = list(dict.fromkeys(new_words_to_search))
+                    submitted = st.form_submit_button('Search')
