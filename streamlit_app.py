@@ -567,7 +567,7 @@ if user_input != '':
                 
                 if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
                     with col2_plot:
-                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[0])
+                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], new_words_to_search[0])
                     i = 1
                 
                 subplots_plots_div.empty()
@@ -581,7 +581,7 @@ if user_input != '':
 
                         try:
                             with col1_plot:
-                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], new_words_to_search[i])
                         except:
                             pass
 
@@ -589,7 +589,7 @@ if user_input != '':
                         count = count + top_n
                         try:
                             with col2_plot:
-                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], new_words_to_search[i])
                         except:
                             pass
 
