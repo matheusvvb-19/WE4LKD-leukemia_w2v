@@ -604,12 +604,4 @@ if __name__ == '__main__':
                                 pass
 
                             count = count + top_n
-                            i = i + 1
-                with form:
-                    cols = st.columns(len(new_words_to_search))
-                    for k, col in enumerate(cols):
-                        selected_words = col.multiselect(new_words_to_search[k], options_list[k], key=k)
-                        new_words_to_search2.extend(selected_words)
-
-                    new_words_to_search2 = list(dict.fromkeys(new_words_to_search))
-                    submitted = st.form_submit_button('Search')                           
+                            i = i + 1                   
