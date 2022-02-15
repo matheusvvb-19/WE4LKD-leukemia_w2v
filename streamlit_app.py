@@ -554,6 +554,7 @@ if user_input != '':
             with table_cells_div:
                 similarities_table_streamlit(user_input, model)
 
+            result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(new_words_to_search, model)
             with subplots_section:
                 number_terms = len(user_input)
                 count=0
