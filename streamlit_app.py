@@ -333,6 +333,9 @@ def set_page_layout():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 def update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, previous_number_terms, previous_number_containers, col2_plot=None):
+    all_words = all_words.extend(new_words_to_search)
+    all_words = list(dict.fromkeys(all_words))
+    
     user_input = new_words_to_search
     sim_words = []
     result_word = []
@@ -358,12 +361,12 @@ def update_all_containers(plot_container, table_cells_div, subplots_section, sub
 
     with plot_container:
         if dimension == '2D':
-            display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+            display_scatterplot_2D(model, all_words, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
         else:
-            display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+            display_scatterplot_3D(model, all_words, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
     with table_cells_div:
-        similarities_table_streamlit(user_input, model)
+        similarities_table_streamlit(all_words, model)
 
     with subplots_section:
         number_terms = len(user_input)
@@ -419,6 +422,10 @@ def update_all_containers(plot_container, table_cells_div, subplots_section, sub
             new_words_to_search = list(dict.fromkeys(new_words_to_search))
             new_search_submitted = st.form_submit_button('Search')
             if new_search_submitted:
+                st.write('2° BUSCAAAAAA')
+                st.write('number_terms: {}'.format(number_terms))
+                st.write('number_terms: {}'.format(number_containers))
+                st.write('number_terms: {}'.format(new_words_to_search))
                 if (number_terms % 2 != 0 and (number_containers % 2 == 0 or number_containers == 1)):
                     update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, number_terms, number_containers, col2_plot)
                 else:
