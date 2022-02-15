@@ -626,6 +626,6 @@ if user_input != '':
                 
         if submitted:
             if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
-                update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, col2_plot)
+                update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, previous_number_terms, previous_number_containers, col2_plot)
             else:
-                update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model)
+                update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, previous_number_terms, previous_number_containers)
