@@ -331,105 +331,7 @@ def set_page_layout():
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
-def update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, previous_number_terms, previous_number_containers, old_search, col2_plot=None):   
-    user_input = new_words_to_search
-    all_words = list(dict.fromkeys(user_input.extend(old_search)))
-    sim_words = []
-    result_word = []
-    for words in user_input:
-        try:
-            sim_words = model.wv.most_similar(words, topn = top_n)
-            sim_words = append_list(sim_words, words)
-            result_word.extend(sim_words)
-        except KeyError:
-            st.error("The word {} is not present in model's vocabulary.".format(words))
-        except TypeError:
-            pass      
-
-    similar_word = [word[0] for word in result_word]
-    similarity = [word[1] for word in result_word]
-    try:
-        similar_word.extend(user_input)
-    except TypeError:
-        pass
-    labels = [word[2] for word in result_word]
-    label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
-    color_map = [label_dict[x] for x in labels]
-
-    with plot_container:
-        if dimension == '2D':
-            display_scatterplot_2D(model, all_words, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-        else:
-            display_scatterplot_3D(model, all_words, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-
-    with table_cells_div:
-        similarities_table_streamlit(all_words, model)
-
-    with subplots_section:
-        number_terms = len(user_input)
-        count=0
-        i=0
-        options_list = list(split_list(similar_word[:-number_terms], number_terms))
-
-        if number_terms % 2 == 0:
-            number_containers = int(number_terms/2)
-        else:
-            number_containers = int(number_terms/2) + 1
-
-        if col2_plot:
-            if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
-                with col2_plot:
-                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[0])
-                i = 1
-
-        subplots_plots_div.empty()
-        subplots_plots_div = subplots_section.container()
-        with subplots_plots_div:
-            for j in range(number_containers):
-                subplots_plots_div_row = subplots_plots_div.container()
-                col1, col2 = subplots_plots_div_row.columns(2)
-                col1_plot = col1.empty()
-                col2_plot = col2.empty()
-
-                try:
-                    with col1_plot:
-                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
-                except:
-                    pass
-
-                i = i + 1 
-                try:
-                    with col2_plot:
-                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
-                except:
-                    pass
-
-                count = count + top_n
-                i = i + 1
-
-    new_words_to_search = []
-    with form_selection_div:
-        form = form_selection_div.form(key='similar_words_form2', clear_on_submit=True)
-        with form:
-            cols = st.columns(number_terms)
-            for k, col in enumerate(cols):
-                selected_words = col.multiselect(user_input[k], options_list[k], key=k)
-                new_words_to_search.extend(selected_words)
-
-            new_words_to_search = list(dict.fromkeys(new_words_to_search))
-            new_search_submitted = st.form_submit_button('Search')
-            if new_search_submitted:
-                st.write('2° BUSCAAAAAA')
-                st.write('number_terms: {}'.format(number_terms))
-                st.write('number_terms: {}'.format(number_containers))
-                st.write('number_terms: {}'.format(new_words_to_search))
-                if (number_terms % 2 != 0 and (number_containers % 2 == 0 or number_containers == 1)):
-                    update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, number_terms, number_containers, new_words_to_search, col2_plot)
-                else:
-                    update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, number_terms, number_containers, new_words_to_search)
-
-
+            
 set_page_layout()
 
 uploaded_file = st.sidebar.file_uploader("Upload a new model:")
@@ -624,7 +526,7 @@ if user_input != '':
         
         form_selection_div = st.empty()
         with form_selection_div:
-            form = form_selection_div.form(key='similar_words_form', clear_on_submit=True)
+            form = form_selection_div.form(key='similar_words_form')
             with form:
                 cols = st.columns(number_terms)
                 for k, col in enumerate(cols):
@@ -633,9 +535,77 @@ if user_input != '':
 
                 new_words_to_search = list(dict.fromkeys(new_words_to_search))
                 submitted = st.form_submit_button('Search')
-               
+                
         if submitted:
-            if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
-                update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, previous_number_terms, previous_number_containers, user_input, col2_plot)
-            else:
-                update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, previous_number_terms, previous_number_containers, user_input)
+            user_input = new_words_to_search
+            sim_words = []
+            result_word = []
+            for words in user_input:
+                try:
+                    sim_words = model.wv.most_similar(words, topn = top_n)
+                    sim_words = append_list(sim_words, words)
+                    result_word.extend(sim_words)
+                except KeyError:
+                    st.error("The word {} is not present in model's vocabulary.".format(words))
+                except TypeError:
+                    pass      
+
+            similar_word = [word[0] for word in result_word]
+            similarity = [word[1] for word in result_word]
+            try:
+                similar_word.extend(user_input)
+            except TypeError:
+                pass
+            labels = [word[2] for word in result_word]
+            label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
+            color_map = [label_dict[x] for x in labels]
+
+            with plot_container:
+                if dimension == '2D':
+                    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+                else:
+                    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+
+            with table_cells_div:
+                similarities_table_streamlit(user_input, model)
+
+            with subplots_section:
+                number_terms = len(user_input)
+                count=0
+                i=0
+                options_list = list(split_list(similar_word[:-number_terms], number_terms))
+
+                if number_terms % 2 == 0:
+                    number_containers = int(number_terms/2)
+                else:
+                    number_containers = int(number_terms/2) + 1
+                
+                if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
+                    with col2_plot:
+                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[0])
+                    i = 1
+                
+                subplots_plots_div.empty()
+                subplots_plots_div = subplots_section.container()
+                with subplots_plots_div:
+                    for j in range(number_containers):
+                        subplots_plots_div_row = subplots_plots_div.container()
+                        col1, col2 = subplots_plots_div_row.columns(2)
+                        col1_plot = col1.empty()
+                        col2_plot = col2.empty()
+
+                        try:
+                            with col1_plot:
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                        except:
+                            pass
+
+                        i = i + 1 
+                        try:
+                            with col2_plot:
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                        except:
+                            pass
+
+                        count = count + top_n
+                        i = i + 1
