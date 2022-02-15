@@ -331,6 +331,32 @@ def set_page_layout():
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    
+def plot_data_config(user_input, model):
+    result_word = []
+    sim_words = []
+
+    for words in user_input:
+        try:
+            sim_words = model.wv.most_similar(words, topn = top_n)
+            sim_words = append_list(sim_words, words)
+            result_word.extend(sim_words)
+        except KeyError:
+            st.error("The word {} is not present in model's vocabulary.".format(words))
+        except TypeError:
+            pass      
+
+    similar_word = [word[0] for word in result_word]
+    similarity = [word[1] for word in result_word]
+    try:
+        similar_word.extend(user_input)
+    except TypeError:
+        pass
+    labels = [word[2] for word in result_word]
+    label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
+    color_map = [label_dict[x] for x in labels]
+    
+    return result_word, sim_words, similar_word, similarity, labels, label_dict, color_map
 
 if __name__ == '__main__':
     set_page_layout()
@@ -435,28 +461,7 @@ if __name__ == '__main__':
 
     else:
         user_input = [x.strip().lower() for x in user_input.split(',')]
-        result_word = []
-        sim_words = []
-
-        for words in user_input:
-            try:
-                sim_words = model.wv.most_similar(words, topn = top_n)
-                sim_words = append_list(sim_words, words)
-                result_word.extend(sim_words)
-            except KeyError:
-                st.error("The word {} is not present in model's vocabulary.".format(words))
-            except TypeError:
-                pass      
-
-        similar_word = [word[0] for word in result_word]
-        similarity = [word[1] for word in result_word]
-        try:
-            similar_word.extend(user_input)
-        except TypeError:
-            pass
-        labels = [word[2] for word in result_word]
-        label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
-        color_map = [label_dict[x] for x in labels]
+        result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model) 
 
     header_container = st.container()
     with header_container:
@@ -548,27 +553,7 @@ if __name__ == '__main__':
             if submitted:
                 user_input.extend(new_words_to_search)
                 user_input = list(dict.fromkeys(user_input))
-                sim_words = []
-                result_word = []
-                for words in user_input:
-                    try:
-                        sim_words = model.wv.most_similar(words, topn = top_n)
-                        sim_words = append_list(sim_words, words)
-                        result_word.extend(sim_words)
-                    except KeyError:
-                        st.error("The word {} is not present in model's vocabulary.".format(words))
-                    except TypeError:
-                        pass      
-
-                similar_word = [word[0] for word in result_word]
-                similarity = [word[1] for word in result_word]
-                try:
-                    similar_word.extend(user_input)
-                except TypeError:
-                    pass
-                labels = [word[2] for word in result_word]
-                label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
-                color_map = [label_dict[x] for x in labels]
+                result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model) 
 
                 with plot_container:
                     if dimension == '2D':
@@ -580,6 +565,7 @@ if __name__ == '__main__':
                     similarities_table_streamlit(user_input, model)
 
                 with subplots_section:
+                    result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(new_words_to_search, model)
                     number_terms = len(user_input)
                     count=0
                     i=0
