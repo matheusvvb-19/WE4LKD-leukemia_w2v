@@ -417,8 +417,13 @@ def update_all_containers(plot_container, table_cells_div, subplots_section, sub
                 new_words_to_search.extend(selected_words)
 
             new_words_to_search = list(dict.fromkeys(new_words_to_search))
-            if st.form_submit_button('Search'):
-                update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model)
+            new_search_submitted = st.form_submit_button('Search'):
+            if new_search_submitted:
+                if (number_terms % 2 != 0 and (number_containers % 2 == 0 or number_containers == 1)):
+                    update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, number_terms, number_containers, col2_plot)
+                else:
+                    update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, number_terms, number_containers)
+
 
 set_page_layout()
 
