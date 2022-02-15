@@ -334,6 +334,7 @@ def set_page_layout():
 
 def update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, previous_number_terms, previous_number_containers, old_search, col2_plot=None):   
     user_input = new_words_to_search
+    all_words = list(dict.fromkeys(user_input.extend(old_search)))
     sim_words = []
     result_word = []
     for words in user_input:
@@ -358,12 +359,12 @@ def update_all_containers(plot_container, table_cells_div, subplots_section, sub
 
     with plot_container:
         if dimension == '2D':
-            display_scatterplot_2D(model, list(dict.fromkeys(user_input.extend(old_search))), similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+            display_scatterplot_2D(model, all_words, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
         else:
-            display_scatterplot_3D(model, list(dict.fromkeys(user_input.extend(old_search))), similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+            display_scatterplot_3D(model, all_words, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
     with table_cells_div:
-        similarities_table_streamlit(list(dict.fromkeys(user_input.extend(old_search))), model)
+        similarities_table_streamlit(all_words, model)
 
     with subplots_section:
         number_terms = len(user_input)
