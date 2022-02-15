@@ -610,6 +610,7 @@ if user_input != '':
                         count = count + top_n
                         i = i + 1
                         
+            st.write('new_words_to_search: {}'.format(new_words_to_search))
             new_words_to_search = []
             with form_selection_div:
                 form = form_selection_div.form(key='similar_words_form2', clear_on_submit=True)
