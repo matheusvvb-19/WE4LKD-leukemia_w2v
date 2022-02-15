@@ -611,7 +611,6 @@ if user_input != '':
                         i = i + 1
                         
             new_words_to_search = []
-            form_selection_div = st.empty()
             with form_selection_div:
                 form = form_selection_div.form(key='similar_words_form2', clear_on_submit=True)
                 with form:
