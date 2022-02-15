@@ -610,15 +610,4 @@ if user_input != '':
                         count = count + top_n
                         i = i + 1
                         
-            new_words_to_search = []
-            form_selection_div = st.empty()
-            with form_selection_div:
-                form = form_selection_div.form(key='similar_words_form2', clear_on_submit=True)
-                with form:
-                    cols = st.columns(number_terms)
-                    for k, col in enumerate(cols):
-                        selected_words = col.multiselect(user_input[k], options_list[k], key=k)
-                        new_words_to_search.extend(selected_words)
-
-                    new_words_to_search = list(dict.fromkeys(new_words_to_search))
-                    submitted = st.form_submit_button('Search')
+            
