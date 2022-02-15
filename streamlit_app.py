@@ -331,7 +331,33 @@ def set_page_layout():
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-            
+
+def plot_data_config(user_input, model):
+    result_word = []
+    sim_words = []
+    
+    for words in user_input:
+        try:
+            sim_words = model.wv.most_similar(words, topn = top_n)
+            sim_words = append_list(sim_words, words)
+            result_word.extend(sim_words)
+        except KeyError:
+            st.error("The word {} is not present in model's vocabulary.".format(words))
+        except TypeError:
+            pass      
+    
+    similar_word = [word[0] for word in result_word]
+    similarity = [word[1] for word in result_word]
+    try:
+        similar_word.extend(user_input)
+    except TypeError:
+        pass
+    labels = [word[2] for word in result_word]
+    label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
+    color_map = [label_dict[x] for x in labels]
+    
+    return result_word, sim_words, similar_word, similarity, labels, label_dict, color_map
+    
 set_page_layout()
 
 uploaded_file = st.sidebar.file_uploader("Upload a new model:")
@@ -426,28 +452,7 @@ if user_input == '':
     
 else:
     user_input = [x.strip().lower() for x in user_input.split(',')]
-    result_word = []
-    sim_words = []
-    
-    for words in user_input:
-        try:
-            sim_words = model.wv.most_similar(words, topn = top_n)
-            sim_words = append_list(sim_words, words)
-            result_word.extend(sim_words)
-        except KeyError:
-            st.error("The word {} is not present in model's vocabulary.".format(words))
-        except TypeError:
-            pass      
-    
-    similar_word = [word[0] for word in result_word]
-    similarity = [word[1] for word in result_word]
-    try:
-        similar_word.extend(user_input)
-    except TypeError:
-        pass
-    labels = [word[2] for word in result_word]
-    label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
-    color_map = [label_dict[x] for x in labels]
+    result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)
     
 header_container = st.container()
 with header_container:
@@ -487,7 +492,6 @@ if user_input != '':
         count=0
         i=0
         options_list = list(split_list(similar_word[:-number_terms], number_terms))
-        rows_containers_list = []
         
         if number_terms % 2 == 0:
             number_containers = int(number_terms/2)
@@ -506,14 +510,14 @@ if user_input != '':
                 with col1_plot:
                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                 
-                i = i + 1 
+                i = i + 1
+                count = count + top_n
                 try:
                     with col2_plot:
                         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                 except:
                     pass
                 
-                rows_containers_list.append(subplots_plots_div_row)
                 count = count + top_n
                 i = i + 1     
             
@@ -537,28 +541,9 @@ if user_input != '':
                 submitted = st.form_submit_button('Search')
                 
         if submitted:
-            user_input = new_words_to_search
-            sim_words = []
-            result_word = []
-            for words in user_input:
-                try:
-                    sim_words = model.wv.most_similar(words, topn = top_n)
-                    sim_words = append_list(sim_words, words)
-                    result_word.extend(sim_words)
-                except KeyError:
-                    st.error("The word {} is not present in model's vocabulary.".format(words))
-                except TypeError:
-                    pass      
-
-            similar_word = [word[0] for word in result_word]
-            similarity = [word[1] for word in result_word]
-            try:
-                similar_word.extend(user_input)
-            except TypeError:
-                pass
-            labels = [word[2] for word in result_word]
-            label_dict = dict([(y,x+1) for x,y in enumerate(set(labels))])
-            color_map = [label_dict[x] for x in labels]
+            user_input.extend(new_words_to_search)
+            user_input = list(dict.fromkeys(user_input))
+            result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)
 
             with plot_container:
                 if dimension == '2D':
