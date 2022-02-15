@@ -566,7 +566,7 @@ if __name__ == '__main__':
 
                 with subplots_section:
                     result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(new_words_to_search, model)
-                    number_terms = len(user_input)
+                    number_terms = len(new_words_to_search)
                     count=0
                     i=0
                     options_list = list(split_list(similar_word[:-number_terms], number_terms))
@@ -578,7 +578,7 @@ if __name__ == '__main__':
 
                     if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
                         with col2_plot:
-                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[0])
+                            horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], new_words_to_search[0])
                         i = 1
 
                     subplots_plots_div.empty()
@@ -592,14 +592,14 @@ if __name__ == '__main__':
 
                             try:
                                 with col1_plot:
-                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], new_words_to_search[i])
                             except:
                                 pass
 
                             i = i + 1 
                             try:
                                 with col2_plot:
-                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], new_words_to_search[i])
                             except:
                                 pass
 
