@@ -537,8 +537,6 @@ if user_input != '':
                 submitted = st.form_submit_button('Search')
                 
         if submitted:
-            all_words = new_words_to_search.extend(user_input)
-            all_words = list(dict.fromkeys(all_words))
             user_input = new_words_to_search
             sim_words = []
             result_word = []
@@ -564,12 +562,12 @@ if user_input != '':
 
             with plot_container:
                 if dimension == '2D':
-                    display_scatterplot_2D(model, all_words, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+                    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
                 else:
-                    display_scatterplot_3D(model, all_words, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+                    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
             with table_cells_div:
-                similarities_table_streamlit(all_words, model)
+                similarities_table_streamlit(user_input, model)
 
             with subplots_section:
                 number_terms = len(user_input)
