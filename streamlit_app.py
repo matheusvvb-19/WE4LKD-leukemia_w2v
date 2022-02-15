@@ -510,7 +510,8 @@ if user_input != '':
                         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
                 except:
                     pass
-                    
+                
+                rows_containers_list.append(subplots_plots_div_row)
                 count = count + top_n
                 i = i + 1     
             
@@ -577,6 +578,10 @@ if user_input != '':
                 else:
                     number_containers = int(number_terms/2) + 1
 
+                for c in rows_containers_list:
+                    c.col1.col1_plot.empty()
+                    c.col2.col2_plot.empty()
+                    
                 subplots_plots_div.empty()
                 subplots_plots_div = subplots_section.container()
                 with subplots_plots_div:
