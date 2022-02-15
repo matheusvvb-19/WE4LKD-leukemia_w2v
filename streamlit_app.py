@@ -526,7 +526,7 @@ if user_input != '':
         
         form_selection_div = st.empty()
         with form_selection_div:
-            form = form_selection_div.form(key='similar_words_form')
+            form = form_selection_div.form(key='similar_words_form', clear_on_submit=True)
             with form:
                 cols = st.columns(number_terms)
                 for k, col in enumerate(cols):
@@ -613,7 +613,7 @@ if user_input != '':
             new_words_to_search = []
             form_selection_div = st.empty()
             with form_selection_div:
-                form = form_selection_div.form(key='similar_words_form2')
+                form = form_selection_div.form(key='similar_words_form2', clear_on_submit=True)
                 with form:
                     cols = st.columns(number_terms)
                     for k, col in enumerate(cols):
