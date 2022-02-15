@@ -332,7 +332,7 @@ def set_page_layout():
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-if '__name__' == __main__:
+if __name__ == '__main__':
     set_page_layout()
 
     uploaded_file = st.sidebar.file_uploader("Upload a new model:", key='uploaded_model')
