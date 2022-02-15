@@ -332,7 +332,7 @@ def set_page_layout():
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-def update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model):
+def update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, previous_number_terms, previous_number_containers, col2_plot=None):
     user_input = new_words_to_search
     sim_words = []
     result_word = []
@@ -376,10 +376,11 @@ def update_all_containers(plot_container, table_cells_div, subplots_section, sub
         else:
             number_containers = int(number_terms/2) + 1
 
-        if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
-            with col2_plot:
-                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[0])
-            i = 1
+        if col2_plot:
+            if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
+                with col2_plot:
+                    horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[0])
+                i = 1
 
         subplots_plots_div.empty()
         subplots_plots_div = subplots_section.container()
@@ -624,4 +625,7 @@ if user_input != '':
                 submitted = st.form_submit_button('Search')
                 
         if submitted:
-            update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model)
+            if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
+                update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, col2_plot)
+            else:
+                update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model)
