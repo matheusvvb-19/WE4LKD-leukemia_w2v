@@ -14,6 +14,7 @@ import plotly.graph_objects as go
 import plotly.figure_factory as ff
 
 specific_domain = []
+all_words = []
 base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # domains table:
