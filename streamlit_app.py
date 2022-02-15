@@ -14,7 +14,6 @@ import plotly.graph_objects as go
 import plotly.figure_factory as ff
 
 specific_domain = []
-all_words = []
 base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # domains table:
@@ -333,10 +332,7 @@ def set_page_layout():
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-def update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, previous_number_terms, previous_number_containers, col2_plot=None):
-    all_words = all_words.extend(new_words_to_search)
-    all_words = list(dict.fromkeys(all_words))
-    
+def update_all_containers(plot_container, table_cells_div, subplots_section, subplots_plots_div, new_words_to_search, model, previous_number_terms, previous_number_containers, col2_plot=None):   
     user_input = new_words_to_search
     sim_words = []
     result_word = []
