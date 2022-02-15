@@ -546,8 +546,8 @@ if __name__ == '__main__':
                     submitted = st.form_submit_button('Search')
 
             if submitted:
-                previous_search = user_input
-                user_input = new_words_to_search
+                user_input.extend(new_words_to_search)
+                user_input = list(dict.fromkeys(user_input))
                 sim_words = []
                 result_word = []
                 for words in user_input:
@@ -577,9 +577,7 @@ if __name__ == '__main__':
                         display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
                 with table_cells_div:
-                    previous_search.extend(new_words_to_search)
-                    previous_search = list(dict.fromkeys(previous_search))
-                    similarities_table_streamlit(previous_search, model)
+                    similarities_table_streamlit(user_input, model)
 
                 with subplots_section:
                     number_terms = len(user_input)
