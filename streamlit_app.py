@@ -611,9 +611,12 @@ if user_input != '':
                         i = i + 1
                        
             new_words_to_search = []
+            st.write('user_input: {}'.format(user_input))
+            st.write('options_list: {}'.format(options_list))
             with form:
                 cols = st.columns(number_terms)
                 for k, col in enumerate(cols):
+                    st.write('k: {}'.format(k))
                     selected_words = col.multiselect(user_input[k], options_list[k], key=k)
                     new_words_to_search.extend(selected_words)
 
