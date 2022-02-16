@@ -316,9 +316,6 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 def split_list(items_list, n):
     k, m = divmod(len(items_list), n)
     return (items_list[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
-    
-def image(src_as_string, **style):
-    return img(src=src_as_string, style=styles(**style))
 
 def link(link, text, **style):
     return a(_href=link, _target="_blank", style=styles(**style))(text)
@@ -359,16 +356,16 @@ def layout(*args):
 def footer():
     myargs = [
         "<b>Made with</b>: Python 3.8 ",
-        link("https://www.python.org/", image('https://i.imgur.com/ml09ccU.png',
+        link("https://www.python.org/",
         	width="18px", height="18px", margin= "0em")),
         ", Streamlit ",
-        link("https://streamlit.io/", image('https://docs.streamlit.io/en/stable/_static/favicon.png',
+        link("https://streamlit.io/",
         	width="24px", height="25px", margin= "0em")),
         ", Docker ",
-        link("https://www.docker.com/", image('https://www.docker.com/sites/default/files/d8/styles/role_icon/public/2019-07/Moby-logo.png?itok=sYH_JEaJ',
+        link("https://www.docker.com/",
               width="20px", height="18px", margin= "0em")),
         " and Google APP Engine ",
-        link("https://cloud.google.com/appengine", image('https://lh3.ggpht.com/_uP6bUdDOWGS6ICpMH7dBAy5LllYc_bBjjXI730L3FQ64uS1q4WltHnse7rgpKiInog2LYM1',
+        link("https://cloud.google.com/appengine",
               width="19px", height="19px", margin= "0em", align="top")),
         br(),
     ]
