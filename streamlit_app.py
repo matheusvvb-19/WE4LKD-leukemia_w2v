@@ -343,7 +343,6 @@ def set_page_layout():
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-    
     image = Image.open('./app_logo.jpg')
 	st.sidebar.image(image, use_column_width=True)
 
