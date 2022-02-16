@@ -369,27 +369,28 @@ loaded_model = st.sidebar.selectbox(
  'Or choose one of the preloaded models:',
  ('10: 1900 - 2021', '9: 1900 - 2016', '8: 1900 - 2014', '7: 1900 - 2013', '6: 1900 - 2011', '5: 1900 - 2009', '4: 1900 - 2001', '3: 1900 - 1999', '2: 1900 - 1977', '1: 1900 - 1967'))
 
-if loaded_model == '1: 1900 - 1967':
-  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
-elif loaded_model == '2: 1900 - 1977':
-  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1977_clean.model', 'rb'))
-elif loaded_model == '3: 1900 - 1999':
-  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1999_clean.model', 'rb'))
-elif loaded_model == '4: 1900 - 2001':
-  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2001_clean.model', 'rb'))
-elif loaded_model == '5: 1900 - 2009':
-  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2009_clean.model', 'rb'))
-elif loaded_model == '6: 1900 - 2011':
-  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2011_clean.model', 'rb'))
-elif loaded_model == '7: 1900 - 2013':
-  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2013_clean.model', 'rb'))
-elif loaded_model == '8: 1900 - 2014':
-  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2014_clean.model', 'rb'))
-elif loaded_model == '9: 1900 - 2016':
-  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2016_clean.model', 'rb'))
-elif loaded_model == '10: 1900 - 2021':
-  model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
-model.init_sims()
+if uploaded_file is None:
+    if loaded_model == '1: 1900 - 1967':
+      model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+    elif loaded_model == '2: 1900 - 1977':
+      model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1977_clean.model', 'rb'))
+    elif loaded_model == '3: 1900 - 1999':
+      model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1999_clean.model', 'rb'))
+    elif loaded_model == '4: 1900 - 2001':
+      model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2001_clean.model', 'rb'))
+    elif loaded_model == '5: 1900 - 2009':
+      model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2009_clean.model', 'rb'))
+    elif loaded_model == '6: 1900 - 2011':
+      model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2011_clean.model', 'rb'))
+    elif loaded_model == '7: 1900 - 2013':
+      model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2013_clean.model', 'rb'))
+    elif loaded_model == '8: 1900 - 2014':
+      model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2014_clean.model', 'rb'))
+    elif loaded_model == '9: 1900 - 2016':
+      model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2016_clean.model', 'rb'))
+    elif loaded_model == '10: 1900 - 2021':
+      model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
+    model.init_sims()
     
 restrict_domain = st.sidebar.selectbox("Restrict vocabulary domain:",
 ('general', 'NCI cancer drugs', 'FDA drugs'))
