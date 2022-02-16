@@ -317,6 +317,63 @@ def split_list(items_list, n):
     k, m = divmod(len(items_list), n)
     return (items_list[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
     
+def image(src_as_string, **style):
+    return img(src=src_as_string, style=styles(**style))
+
+def link(link, text, **style):
+    return a(_href=link, _target="_blank", style=styles(**style))(text)
+
+def layout(*args):
+    style = """
+    <style>
+      footer {visibility: hidden;}
+    </style>
+    """
+
+    style_div = styles(
+        left=0,
+        bottom=0,
+        margin=px(0, 0, 0, 0),
+        width=percent(100),
+        text_align="center",
+        height="60px",
+        opacity=0.6
+    )
+
+    style_hr = styles(
+    )
+
+    body = p()
+    foot = div(style=style_div)(hr(style=style_hr), body)
+
+    st.markdown(style, unsafe_allow_html=True)
+
+    for arg in args:
+        if isinstance(arg, str):
+            body(arg)
+        elif isinstance(arg, HtmlElement):
+            body(arg)
+
+    st.markdown(str(foot), unsafe_allow_html=True)
+
+def footer():
+    myargs = [
+        "<b>Made with</b>: Python 3.8 ",
+        link("https://www.python.org/", image('https://i.imgur.com/ml09ccU.png',
+        	width=px(18), height=px(18), margin= "0em")),
+        ", Streamlit ",
+        link("https://streamlit.io/", image('https://docs.streamlit.io/en/stable/_static/favicon.png',
+        	width=px(24), height=px(25), margin= "0em")),
+        ", Docker ",
+        link("https://www.docker.com/", image('https://www.docker.com/sites/default/files/d8/styles/role_icon/public/2019-07/Moby-logo.png?itok=sYH_JEaJ',
+              width=px(20), height=px(18), margin= "0em")),
+        " and Google APP Engine ",
+        link("https://cloud.google.com/appengine", image('https://lh3.ggpht.com/_uP6bUdDOWGS6ICpMH7dBAy5LllYc_bBjjXI730L3FQ64uS1q4WltHnse7rgpKiInog2LYM1',
+              width=px(19), height=px(19), margin= "0em", align="top")),
+        br(),
+    ]
+    layout(*myargs)
+
 def set_page_layout():
     st.set_page_config(
         page_title="Embedding Viewer",
@@ -325,35 +382,7 @@ def set_page_layout():
         initial_sidebar_state="expanded"
      )
     
-    footer="""<style>
-        a:link , a:visited{
-        color: blue;
-        background-color: transparent;
-        text-decoration: underline;
-        }
-
-        a:hover,  a:active {
-        color: red;
-        background-color: transparent;
-        text-decoration: underline;
-        }
-
-        .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: white;
-        color: black;
-        text-align: center;
-        }
-        </style>
-        <div class="footer">
-        <p>Developed with ❤ by <a style='display: block; text-align: center;' href="https://www.heflin.dev/" target="_blank">Heflin Stephen Raj S</a></p>
-        </div>
-        """
-    st.markdown(footer,unsafe_allow_html=True)
-    #st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    footer()
 
 def plot_data_config(user_input, model):
     result_word = []
