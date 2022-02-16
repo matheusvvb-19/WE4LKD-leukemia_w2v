@@ -344,7 +344,7 @@ def set_page_layout():
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     image = Image.open('./app_logo.jpg')
-	st.sidebar.image(image, use_column_width=True)
+    st.sidebar.image(image, use_column_width=True)
 
 def plot_data_config(user_input, model):
     result_word = []
