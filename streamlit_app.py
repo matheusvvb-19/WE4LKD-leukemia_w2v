@@ -12,7 +12,6 @@ from gensim.models import Word2Vec, KeyedVectors
 from clean_text import replace_synonyms
 import plotly.graph_objects as go
 import plotly.figure_factory as ff
-from PIL import Image
 
 specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
@@ -343,8 +342,6 @@ def set_page_layout():
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-    image = Image.open('./app_logo.jpg')
-    st.sidebar.image(image, use_column_width=True)
 
 def plot_data_config(user_input, model):
     result_word = []
