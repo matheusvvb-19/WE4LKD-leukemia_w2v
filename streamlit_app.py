@@ -360,16 +360,16 @@ def footer():
     myargs = [
         "<b>Made with</b>: Python 3.8 ",
         link("https://www.python.org/", image('https://i.imgur.com/ml09ccU.png',
-        	width=px(18), height=px(18), margin= "0em")),
+        	width="18px", height="18px", margin= "0em")),
         ", Streamlit ",
         link("https://streamlit.io/", image('https://docs.streamlit.io/en/stable/_static/favicon.png',
-        	width=px(24), height=px(25), margin= "0em")),
+        	width="24px", height="25px", margin= "0em")),
         ", Docker ",
         link("https://www.docker.com/", image('https://www.docker.com/sites/default/files/d8/styles/role_icon/public/2019-07/Moby-logo.png?itok=sYH_JEaJ',
-              width=px(20), height=px(18), margin= "0em")),
+              width="20px", height="18px", margin= "0em")),
         " and Google APP Engine ",
         link("https://cloud.google.com/appengine", image('https://lh3.ggpht.com/_uP6bUdDOWGS6ICpMH7dBAy5LllYc_bBjjXI730L3FQ64uS1q4WltHnse7rgpKiInog2LYM1',
-              width=px(19), height=px(19), margin= "0em", align="top")),
+              width="19px", height="19px", margin= "0em", align="top")),
         br(),
     ]
     layout(*myargs)
