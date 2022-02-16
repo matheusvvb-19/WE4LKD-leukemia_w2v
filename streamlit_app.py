@@ -316,61 +316,7 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 def split_list(items_list, n):
     k, m = divmod(len(items_list), n)
     return (items_list[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
-
-def link(link, text, **style):
-    return a(_href=link, _target="_blank", style=styles(**style))(text)
-
-def layout(*args):
-    style = """
-    <style>
-      footer {visibility: hidden;}
-    </style>
-    """
-
-    style_div = styles(
-        left=0,
-        bottom=0,
-        margin=px(0, 0, 0, 0),
-        width=percent(100),
-        text_align="center",
-        height="60px",
-        opacity=0.6
-    )
-
-    style_hr = styles(
-    )
-
-    body = p()
-    foot = div(style=style_div)(hr(style=style_hr), body)
-
-    st.markdown(style, unsafe_allow_html=True)
-
-    for arg in args:
-        if isinstance(arg, str):
-            body(arg)
-        elif isinstance(arg, HtmlElement):
-            body(arg)
-
-    st.markdown(str(foot), unsafe_allow_html=True)
-
-def footer():
-    myargs = [
-        "<b>Made with</b>: Python 3.8 ",
-        link("https://www.python.org/",
-        	width="18px", height="18px", margin= "0em")),
-        ", Streamlit ",
-        link("https://streamlit.io/",
-        	width="24px", height="25px", margin= "0em")),
-        ", Docker ",
-        link("https://www.docker.com/",
-              width="20px", height="18px", margin= "0em")),
-        " and Google APP Engine ",
-        link("https://cloud.google.com/appengine",
-              width="19px", height="19px", margin= "0em", align="top")),
-        br(),
-    ]
-    layout(*myargs)
-
+    
 def set_page_layout():
     st.set_page_config(
         page_title="Embedding Viewer",
@@ -379,7 +325,23 @@ def set_page_layout():
         initial_sidebar_state="expanded"
      )
     
-    footer()
+    hide_streamlit_style = """
+            <style>
+            footer {
+                visibility: hidden;
+            }
+            
+            footer:after {
+                content:'Developed by Matheus Volpon, WE4LKD Team.'; 
+                visibility: visible;
+                display: block;
+                position: relative;
+                padding: 5px;
+                top: 2px;
+            }
+            </style>
+            """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 def plot_data_config(user_input, model):
     result_word = []
