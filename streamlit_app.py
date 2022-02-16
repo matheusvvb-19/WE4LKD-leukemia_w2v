@@ -431,7 +431,7 @@ dimension = st.sidebar.selectbox(
      ('2D', '3D'))
 user_input = st.sidebar.text_input("Enter the words to be searched. For more than one word, separate them with a comma (,)",'')
 top_n = st.sidebar.slider('Select the neighborhood size',
-    5, 30, (5), 3)
+    5, 30, (5), 5)
 annotation = st.sidebar.radio(
      "Habilite ou desabilite os rótulos",
      ('On', 'Off'))  
