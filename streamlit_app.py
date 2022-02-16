@@ -472,6 +472,7 @@ with plot_container:
         display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
+    original_search = user_input
     table_section = st.container()
     with table_section:
         table_title_div = st.container()
@@ -571,6 +572,7 @@ if user_input != '':
                     with col2_plot:
                         horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], new_words_to_search[0])
                     i = 1
+                    count = count + top_n
                 
                 subplots_plots_div.empty()
                 subplots_plots_div = subplots_section.container()
