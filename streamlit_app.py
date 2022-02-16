@@ -325,12 +325,35 @@ def set_page_layout():
         initial_sidebar_state="expanded"
      )
     
-    hide_streamlit_style = """
-            <style>
-            footer {visibility: hidden;}
-            </style>
-            """
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    footer="""<style>
+        a:link , a:visited{
+        color: blue;
+        background-color: transparent;
+        text-decoration: underline;
+        }
+
+        a:hover,  a:active {
+        color: red;
+        background-color: transparent;
+        text-decoration: underline;
+        }
+
+        .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: white;
+        color: black;
+        text-align: center;
+        }
+        </style>
+        <div class="footer">
+        <p>Developed with ❤ by <a style='display: block; text-align: center;' href="https://www.heflin.dev/" target="_blank">Heflin Stephen Raj S</a></p>
+        </div>
+        """
+    st.markdown(footer,unsafe_allow_html=True)
+    #st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 def plot_data_config(user_input, model):
     result_word = []
