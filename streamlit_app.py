@@ -221,10 +221,10 @@ def horizontal_bar(word, similarity, input_word=''):
     
     data = go.Bar(
             x= similarity,
-            y= word,
-            customdata = reduced_words,
+            y= reduced_words,
+            customdata = word,
             hovertemplate =
-              "<b>Word</b>: %{customdata}<br>"+
+              "<b>Word</b>: %{word}<br>"+
               "Similarity: %{x:.2f}<extra></extra>",
             orientation='h',
             text = similarity,
