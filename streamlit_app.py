@@ -527,6 +527,7 @@ if user_input != '':
                 
                 with col1_plot:
                     horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                    st.write(similar_word)
                 
                 i = i + 1
                 count = count + top_n
