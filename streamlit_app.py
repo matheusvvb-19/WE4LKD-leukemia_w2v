@@ -226,7 +226,7 @@ def horizontal_bar(word, similarity, input_word=''):
     layout = go.Layout(
             font = dict(size=20),
             xaxis = dict(showticklabels=False, automargin=True),
-            yaxis = dict(showticklabels=True, automargin=True,autorange="reversed"),
+            yaxis = dict(showticklabels=True, automargin=False,autorange="reversed"),
             #margin = dict(t=20, b= 20, r=10),
             title = 'Words similar to {}'.format(input_word)
             )
