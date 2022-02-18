@@ -211,6 +211,7 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
 
 def horizontal_bar(word, similarity, input_word=''):
     similarity = [round(elem, 2) for elem in similarity]
+    st.write(word)
     
     for w in word:
         if len(w) > 15:
