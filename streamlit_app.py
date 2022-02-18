@@ -212,16 +212,10 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
 def horizontal_bar(word, similarity, input_word=''):
     similarity = [round(elem, 2) for elem in similarity]
     
-    reduced_words = []
-    for w in word:
-        if len(w) > 15:
-            reduced_words.append(w[0:14]+'...')
-        else:
-            reduced_words.append(w)
-    
     data = go.Bar(
             x= similarity,
-            y= reduced_words,
+            y= word,
+            width = 200,
             hovertemplate =
               "<b>Word</b>: %{y}<br>"+
               "Similarity: %{x:.2f}",
