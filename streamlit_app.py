@@ -217,7 +217,7 @@ def horizontal_bar(word, similarity, input_word=''):
             y= word,
             hovertemplate =
               "<b>Word</b>: %{y}<br>"+
-              "Similarity: %{x:.2f}",
+              "Similarity: %{x:.2f}<extra></extra>",
             orientation='h',
             text = similarity,
             marker_color= 4,
