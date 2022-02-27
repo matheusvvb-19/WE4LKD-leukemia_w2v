@@ -53,7 +53,7 @@ Este projeto tem por objetivo estudar e analisar a possível existência de conh
 
 _descrição mais detalhada em breve_
 
-<p align="right">(<a href="#topo">voltar ao topo</a>)</p>
+<p align="right"><a href="#topo">⬆️</a></p>
 
 
 ### Bibliotecas
@@ -66,7 +66,7 @@ _descrição mais detalhada em breve_
 * [Streamlit](https://streamlit.io/)
 * [TensorFlow](https://www.tensorflow.org/?hl=pt-br)
 
-<p align="right">(<a href="#topo">voltar ao topo</a>)</p>
+<p align="right"><a href="#topo">⬆️</a></p>
 
 
 ### Pré-requisitos
@@ -96,7 +96,7 @@ pip3 install --ignore-installed -r requirements.txt
    ```
 2. Crie o ambiente virtual Python e instale os pacotes necessários (veja a seção anterior)
 
-<p align="right">(<a href="#topo">voltar ao topo</a>)</p>
+<p align="right"><a href="#topo">⬆️</a></p>
 
 
 
@@ -135,7 +135,7 @@ Após fazer a inicialização e instalação, chegou a hora de executar o projet
 ```
 O último argumnento da linha de comando indica a quantidade de palavras em inglês mais comuns - segundo [Beautiful Soup](https://norvig.com/ngrams/count_1w.txt) -  que se deseja remover do modelo no momento da visualização de vizinhança. O valor desse arguento pode ser nenhum (vazio), para quando não se deseja remover nenhuma palavra, ou um número inteiro. No Visualizador de Embeddings, as opções são 5, 10, 15 ou 20 mil palavras.
 
-<p align="right">(<a href="#topo">voltar ao topo</a>)</p>
+<p align="right"><a href="#topo">⬆️</a></p>
 
 
 
@@ -145,9 +145,11 @@ O último argumnento da linha de comando indica a quantidade de palavras em ingl
 - [x] Manter o Visualizador de Embeddings online com o Streamlit
 - [x] Excluir palavras omuns na visualização das embeddings
 - [x] Gerar relatórios em .pdf, também com exclusão de palavras comuns
-- [ ] _ainda em construção_...
+- [x] Redução de palavras grandes nos gráficos
+- [ ] Uso de Named Entity Recognition para filtrar embeddings
+- [ ] Normalização de sinônimos a partir do PubChem
 
-<p align="right">(<a href="#topo">voltar ao topo</a>)</p>
+<p align="right"><a href="#topo">⬆️</a></p>
 
 
 <!-- CONTATO -->
@@ -157,7 +159,7 @@ Matheus Vargas Volpon Berto<br>
 matheusvvb@hotmail.com<br>
 [LinkedIn](https://www.linkedin.com/in/matheus-volpon/)
 
-<p align="right">(<a href="#topo">voltar ao topo</a>)</p>
+<p align="right"><a href="#topo">⬆️</a></p>
 
 
 <!-- INSPIRAÇÃO -->
@@ -165,4 +167,4 @@ matheusvvb@hotmail.com<br>
 
 * [Unsupervised word embeddings capture latent knowledge from materials science literature", Nature 571, 95–98 (2019)](https://github.com/materialsintelligence/mat2vec)
 
-<p align="right">(<a href="#topo">voltar ao topo</a>)</p>
+<p align="right"><a href="#topo">⬆️</a></p>
