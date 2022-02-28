@@ -18,7 +18,7 @@ def list_from_txt(file_path):
 
 def search(query):
     final_query = '{} AND English[Language]'.format(query) # especificando que os artigos devem ser apenas em inglês
-    Entrez.email = 'your@email.com' #change here
+    Entrez.email = 'matheus.berto@estudante.ufscar.br' #change here
     handle = Entrez.esearch(db='pubmed', 
                             sort='relevance', 
                             retmax='999999',
@@ -55,13 +55,13 @@ for s in search_strings:
     papers = fetch_details(id_list)
     s = s.lower().replace(' ', '_')
     Path('./results/{}'.format(s)).mkdir(parents=True, exist_ok=True)
-    print('{} papers for {} fetched'.format(len_id_list, s))
+    print('{} papers found for {}'.format(len_id_list, s))
     counter = 0
 
     for i, paper in enumerate(papers['PubmedArticle']):
         try:
             article_title = paper['MedlineCitation']['Article']['ArticleTitle']
-            article_abstract = paper['MedlineCitation']['Article']['Abstract']['AbstractText'][0]
+            article_abstract = ' '.join(paper['MedlineCitation']['Article']['Abstract']['AbstractText'])
 
             article_title = article_title.translate(str.maketrans('', '', string.punctuation))
             article_title = article_title.lower().replace(' ', '_')
@@ -74,14 +74,22 @@ for s in search_strings:
             elif 'Year' in e.args:          # caso o artigo não tenha a chave "Year" na data de publicação, pega os 4 primeiros caracteres da "MedlineDate"
                 article_year = paper['MedlineCitation']['Article']['Journal']['JournalIssue']['PubDate']['MedlineDate'][0:4]
         
-        path_name = './results/{}/{}.txt'.format(s, article_year+'_'+article_title)
-        path_name = path_name.encode('ascii', 'ignore').decode('ascii')
 
-        if len(path_name) > 256:
-            path_name = path_name[:256]
+        filename = '{}_{}'.format(article_year, article_title)
+        if len(filename) > 150:
+            filename = filename[0:146]
+
+        path_name = './results/{}/{}.txt'.format(s, filename)
+        path_name = path_name.encode('ascii', 'ignore').decode('ascii')
 
         if path_name.split('/')[3] not in txt_filenames:
             # depois de pegar o título, resumo e data (e pulando o loop, quando não é possível), escrever o arquivo
             with open(path_name, "a", encoding='utf-8') as myfile:
                 myfile.write(article_abstract)
             txt_filenames.append(path_name.split('/')[3])
+    
+    if counter > 0:
+        print('{} papers without title or abstract'.format(counter))
+        print('{} papers successfully read'.format(len_id_list - counter))
+    else:
+        print('all papers successfully read')
