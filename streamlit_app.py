@@ -555,7 +555,7 @@ if user_input != '':
         form_selection_div = st.empty()
         with form_selection_div:
             form = form_selection_div.form(key='similar_words_form')
-            while(true):
+            while(True):
                 with form:
                     cols = st.columns(number_terms)
                     for k, col in enumerate(cols):
