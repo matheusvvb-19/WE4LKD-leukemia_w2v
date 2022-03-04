@@ -1,5 +1,6 @@
-#based on https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
+# based on https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
 
+# IMPORTS:
 import plotly, pickle, csv, re, string
 import plotly.graph_objs as go
 import numpy as np
@@ -13,7 +14,9 @@ from clean_text import replace_synonyms
 import plotly.graph_objects as go
 import plotly.figure_factory as ff
 
+# GLOBAL VARIABLES:
 specific_domain = []
+widget_key = 100
 base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # domains table:
@@ -22,6 +25,7 @@ domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' +
                    '/export?gid=0&format=csv',
                   )
 
+# FUNCTIONS:
 def similarities_table_streamlit(words_list, model):  
     table = [['Word']]
     for w in base_compounds:
@@ -380,6 +384,7 @@ def plot_data_config(user_input, model):
     
     return result_word, sim_words, similar_word, similarity, labels, label_dict, color_map
     
+# MAIN PROGRAM:
 set_page_layout()
 
 uploaded_file = st.sidebar.file_uploader("Upload a new model:")
@@ -556,10 +561,11 @@ if user_input != '':
         with form_selection_div:
             form = form_selection_div.form(key='similar_words_form')
             while(True):
+                widget_key = widget_key + 1
                 with form:
                     cols = st.columns(number_terms)
                     for k, col in enumerate(cols):
-                        selected_words = col.multiselect(user_input[k], options_list[k])
+                        selected_words = col.multiselect(user_input[k], options_list[k], key = widget_key)
                         new_words_to_search.extend(selected_words)
 
                     new_words_to_search = list(dict.fromkeys(new_words_to_search))
