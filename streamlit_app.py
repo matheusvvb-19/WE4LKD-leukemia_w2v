@@ -563,8 +563,8 @@ if user_input != '':
             with form:
                 cols = st.columns(number_terms)
                 for k, col in enumerate(cols):
-                    selected_words = col.multiselect(user_input[k], options_list[k], key = widget_key)
-                    new_words_to_search.extend(selected_words)
+                    selected_words = col.selectbox(user_input[k], options_list[k], key = widget_key)
+                    new_words_to_search.append(selected_words)
 
                 new_words_to_search = list(dict.fromkeys(new_words_to_search))
                 submitted = st.form_submit_button('Search')
