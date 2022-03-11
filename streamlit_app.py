@@ -342,6 +342,14 @@ def set_page_layout():
     
     hide_streamlit_style = """
             <style>
+            a {
+                color: white;
+            }
+            
+            a:hover {
+                color: inherit;
+            }
+            
             footer {
                 visibility: hidden;
             }
