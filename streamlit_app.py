@@ -341,15 +341,7 @@ def set_page_layout():
      )
     
     hide_streamlit_style = """
-            <style>
-            a {
-                color: white;
-            }
-            
-            a:hover {
-                color: inherit;
-            }
-            
+            <style>            
             footer {
                 visibility: hidden;
             }
@@ -376,7 +368,7 @@ def set_page_layout():
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-            <a class="nav-link disabled" href="https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v" target="_blank">GitHub Repository <span class="sr-only">(current)</span></a>
+            <a style="color: white;" class="nav-link disabled" href="https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v" target="_blank">GitHub Repository <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         </div>
