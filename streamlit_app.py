@@ -361,21 +361,15 @@ def set_page_layout():
     st.markdown('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">', unsafe_allow_html=True)
 
     st.markdown("""
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #3498DB;">
-      <a class="navbar-brand" href="https://youtube.com/dataprofessor" target="_blank">Data Professor</a>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #8C8988;">
+      <a class="navbar-brand" href="https://share.streamlit.io/matheusvvb-19/we4lkd-leukemia_w2v/main" target="_blank">Embedding Viewer</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link disabled" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://youtube.com/dataprofessor" target="_blank">YouTube</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://twitter.com/thedataprof" target="_blank">Twitter</a>
+            <a class="nav-link disabled" href="https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v" target="_blank">GitHub Repository <span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>
