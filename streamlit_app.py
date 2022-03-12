@@ -131,7 +131,7 @@ def append_list(sim_words, words):
         
     return list_of_words
 
-@st.experimental_memo
+@st.cache
 def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
     if words == None:
         if sample > 0:
@@ -246,7 +246,7 @@ def horizontal_bar(word, similarity, input_word=''):
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
-@st.experimental_memo
+@st.cache
 def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
     if words == None:
         if sample > 0:
