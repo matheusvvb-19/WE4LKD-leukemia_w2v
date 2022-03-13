@@ -410,8 +410,11 @@ def plot_data_config(user_input, model):
     return result_word, sim_words, similar_word, similarity, labels, label_dict, color_map
 
 def deep_search(user_input, new_words_to_search, plot_container, dimension, model, annotation, dim_red, perplexity, learning_rate, iteration, top_n, table_cells_div, subplots_section, previous_number_terms, previous_number_containers, col2_plot, subplots_plots_div):
+    print('new_words_to_search inside funtion:', new_words_to_search)
+    print('user_input inside funtion:', user_input)
     user_input.extend(new_words_to_search)
     user_input = list(dict.fromkeys(user_input))
+    print('user_input inside funtion, after extend:', user_input)
     result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)
 
     with plot_container:
