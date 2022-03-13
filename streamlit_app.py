@@ -653,6 +653,6 @@ if user_input != '':
                 new_words_to_search = list(dict.fromkeys(new_words_to_search))
                 submitted = st.form_submit_button(
                     'Search', 
-                    on_click=deep_search(), 
+                    on_click=deep_search, 
                     args=(user_input, new_words_to_search, plot_container, dimension, model, annotation, dim_red, perplexity, learning_rate, iteration, top_n, table_cells_div, subplots_section)
                 )
