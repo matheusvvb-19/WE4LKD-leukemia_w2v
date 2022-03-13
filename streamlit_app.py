@@ -409,7 +409,7 @@ def plot_data_config(user_input, model):
     
     return result_word, sim_words, similar_word, similarity, labels, label_dict, color_map
 
-def deep_search(user_input, new_words_to_search, plot_container, dimension, model, annotation, dim_red, perplexity, learning_rate, iteration, top_n, table_cells_div, subplots_section, previous_number_terms, previous_number_containers, col2_plot):
+def deep_search(user_input, new_words_to_search, plot_container, dimension, model, annotation, dim_red, perplexity, learning_rate, iteration, top_n, table_cells_div, subplots_section, previous_number_terms, previous_number_containers, col2_plot, subplots_plots_div):
     user_input.extend(new_words_to_search)
     user_input = list(dict.fromkeys(user_input))
     result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)
@@ -654,5 +654,5 @@ if user_input != '':
                 submitted = st.form_submit_button(
                     'Search', 
                     on_click=deep_search, 
-                    args=(user_input, new_words_to_search, plot_container, dimension, model, annotation, dim_red, perplexity, learning_rate, iteration, top_n, table_cells_div, subplots_section, previous_number_terms, previous_number_containers, col2_plot)
+                    args=(user_input, new_words_to_search, plot_container, dimension, model, annotation, dim_red, perplexity, learning_rate, iteration, top_n, table_cells_div, subplots_section, previous_number_terms, previous_number_containers, col2_plot, subplots_plots_div)
                 )
