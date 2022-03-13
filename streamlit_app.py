@@ -424,7 +424,8 @@ def deep_search(user_input, new_words_to_search, plot_container, dimension, mode
             display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
     with table_section:
-        table_cells_div = st.empty()
+        table_cells_div.empty()
+        #table_cells_div = st.empty()
         with table_cells_div:
             similarities_table_streamlit(user_input, model)
 
