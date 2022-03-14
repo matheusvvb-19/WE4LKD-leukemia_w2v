@@ -588,6 +588,11 @@ with plot_container:
         display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
+    widget_key = widget_key + 1
+    for w in user_input:
+        if w not in user_input:
+            st.session_state[widget_key] = w
+            
     original_search = user_input
     table_section = st.container()
     with table_section:
