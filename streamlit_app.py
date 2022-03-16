@@ -1,22 +1,20 @@
 # based on https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
 
 # IMPORTS:
-import plotly, pickle, csv, re, string
+import plotly, pickle, csv, re, string, webbrowser
 import plotly.graph_objs as go
-import numpy as np
 import streamlit as st
 import pandas as pd
+import numpy as np
+from get_n_common_words_english import get_most_common
+from clean_text import replace_synonyms
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
-from get_n_common_words_english import get_most_common
-from gensim.models import Word2Vec, KeyedVectors
-from clean_text import replace_synonyms
-import plotly.graph_objects as go
-import plotly.figure_factory as ff
+from random import random
+from random import seed
 
 # GLOBAL VARIABLES:
 specific_domain = []
-widget_key = 100
 base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # domains table:
@@ -138,7 +136,7 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
         else:
             words = [word for word in model.wv.vocab]
     
-    word_vectors = np.array([model[w] for w in words])
+    word_vectors = np.array([model.wv[w] for w in words])
     
     if len(word_vectors) > 0:
         if dim_red == 'PCA':
@@ -252,7 +250,7 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
         else:
             words = [word for word in model.wv.vocab]
     
-    word_vectors = np.array([model[w] for w in words])
+    word_vectors = np.array([model.wv[w] for w in words])
     
     if dim_red == 'PCA':
         two_dim = PCA(random_state=0).fit_transform(word_vectors)[:,:2]
@@ -340,16 +338,15 @@ def set_page_layout():
      )
     
     hide_streamlit_style = """
-            <style>  
-            a {
-                color: white !important;
+            <style>
+            .css-zbg2rx {
+                padding-top: 2rem !important;
             }
-            
-            a:hover {
-                color: inherit !important;
-                text-decoration: none !important;
-            }            
-            
+
+            .css-18e3th9 {
+                padding-top: 2rem !important;
+            }
+
             footer {
                 visibility: hidden;
             }
@@ -366,22 +363,6 @@ def set_page_layout():
             </style>
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
-
-    st.markdown('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">', unsafe_allow_html=True)
-
-    st.markdown("""
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #8C8988;">
-        <a class="navbar-brand" href="#" target="_blank">Embedding Viewer</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-            <a class="nav-link disabled" href="https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v" target="_blank">GitHub Repository <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        </div>
-    </nav>
-    """, unsafe_allow_html=True)
 
 def plot_data_config(user_input, model):
     result_word = []
@@ -409,73 +390,21 @@ def plot_data_config(user_input, model):
     
     return result_word, sim_words, similar_word, similarity, labels, label_dict, color_map
 
-def deep_search(user_input, new_words_to_search, plot_container, dimension, model, annotation, dim_red, perplexity, learning_rate, iteration, top_n, table_cells_div, subplots_section, previous_number_terms, previous_number_containers, col2_plot, subplots_plots_div, table_section):
-    for item in st.session_state.items():
-        st.write(item)
-        
-    user_input.extend(new_words_to_search)
-    user_input = list(dict.fromkeys(user_input))
-    result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)
+def deep_search(words_session_state, new_word):
+    st.session_state['execution_counter'] += 1
+    aux = words_session_state
+    aux.append(new_word)
+    aux = list(dict.fromkeys(aux))
+    st.session_state['user_input'] = aux
 
-    with plot_container:
-        if dimension == '2D':
-            display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-        else:
-            display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-
-    with table_section:
-        table_cells_div.empty()
-        with table_cells_div:
-            similarities_table_streamlit(user_input, model)
-
-    result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(new_words_to_search, model)
-    with subplots_section:
-        number_terms = len(user_input)
-        count = 0
-        i = 0
-        #options_list = []
-        options_list = list(split_list(similar_word[:-number_terms], number_terms))
-
-        if number_terms % 2 == 0:
-            number_containers = int(number_terms/2)
-        else:
-            number_containers = int(number_terms/2) + 1
-
-        if (previous_number_terms % 2 != 0 and (previous_number_containers % 2 == 0 or previous_number_containers == 1)):
-            with col2_plot:
-                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], new_words_to_search[0])
-            i = 1
-            count = count + top_n
-
-        subplots_plots_div.empty()
-        subplots_plots_div = subplots_section.container()
-        with subplots_plots_div:
-            for j in range(number_containers):
-                subplots_plots_div_row = subplots_plots_div.container()
-                col1, col2 = subplots_plots_div_row.columns(2)
-                col1_plot = col1.empty()
-                col2_plot = col2.empty()
-
-                try:
-                    with col1_plot:
-                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], new_words_to_search[i])
-                except:
-                    pass
-
-                i = i + 1 
-                count = count + top_n
-                try:
-                    with col2_plot:
-                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], new_words_to_search[i])
-                except:
-                    pass
-
-                count = count + top_n
-                i = i + 1
+def clear_session_state():
+    for key in st.session_state.keys():
+        del st.session_state[key]
 
 # MAIN PROGRAM:
 set_page_layout()
 
+st.sidebar.header('Models exploration settings')
 uploaded_file = st.sidebar.file_uploader("Upload a new model:")
 if uploaded_file is not None:
     model = pickle.load(uploaded_file)
@@ -542,14 +471,18 @@ else:
 dim_red = st.sidebar.selectbox(
  'Select the dimensionality reduction method',
  ('TSNE','PCA'))
+
 dimension = st.sidebar.selectbox(
      "Select the display dimension",
      ('2D', '3D'))
-user_input = st.sidebar.text_input("Enter the words to be searched. For more than one word, separate them with a comma (,)",'')
+
+user_input = st.sidebar.text_input("Enter the words to be searched. For more than one word, separate it with a comma (,)", value='', key='words_search')
+
 top_n = st.sidebar.slider('Select the neighborhood size',
-    5, 30, (5), 5)
+    5, 20, (5), 5)
+
 annotation = st.sidebar.radio(
-     "Habilite ou desabilite os rótulos",
+     "Enable or disable dot plot labels",
      ('On', 'Off'))  
 
 if dim_red == 'TSNE':
@@ -568,17 +501,33 @@ if user_input == '':
     color_map = None
     
 else:
-    user_input = [x.strip().lower() for x in user_input.split(',')]
-    result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)
+    if 'user_input' not in st.session_state:
+        user_input = [x.strip().lower() for x in user_input.split(',')]
+        st.session_state['user_input'] = user_input
+
+    else:
+        user_input = st.session_state['user_input']
     
+    result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)
+
+reset_search = st.sidebar.button("Reset search", key='clear_session_button', on_click=clear_session_state, help='Delete all previous search record and start a new one')
+if reset_search:
+    st.session_state['words_search'] = ''
+    user_input = ''
+
 header_container = st.container()
 with header_container:
-    st.title('Word Embedding Visualization Based on Cosine Similarity')
+    st.title('Embedding Viewer')
+    st.header('Word Embedding Visualization Based on Cosine Similarity')
     with st.expander('How to use this app'):
-        st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation, since they are often words outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
-        st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D).')
-        st.markdown('You can also search for specific words by typing them into the field. For more than one word, separate them with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
-        st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider. You can also enable or disable the labels of each point on the plot.')
+        st.markdown('**Sidebar**')
+        st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation, since they are often outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
+        st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D). You can also search for specific words by typing it into the text field. For more than one word, separate it with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
+        st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider and enable or disable the labels of each point on the plot. If you want to restart your exploration, click on "Reset search" button and type the new word(s) in the text field.')
+
+        st.markdown('**Main window**')
+        st.markdown('_Hint: To see this window content better, you can minize the sidebar._')
+        st.markdown('The first dot plot shows the words similar to each input and their distribution in vectorial space. You can move the plot, crop an especific area or hide some points by clicking at the words in the right caption. Then, the table below the dot plot shows the cosine similarity and the rank (ordinal position) from the base compounds of this project - header of the table - and the words you chose to explore. Below the table, the app generates bar plots with the similar words for each term you explored. Also, you can search for word returned by your previous search, clicking on the button with the term. This way, you can explore the neighborhood of your original input and find out the context of them.')
 
 plot_container = st.empty()
 with plot_container:
@@ -588,12 +537,14 @@ with plot_container:
         display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
 if user_input != '':
-    widget_key = widget_key + 1
-    for w in user_input:
-        if w not in user_input:
-            st.session_state[widget_key] = w
-            
-    original_search = user_input
+    if 'widget' not in st.session_state:
+        st.session_state['widget'] = 0
+
+    if 'execution_counter' not in st.session_state:
+        st.session_state['execution_counter'] = 0
+
+    seed(st.session_state['widget'])
+
     table_section = st.container()
     with table_section:
         table_title_div = st.container()
@@ -643,26 +594,30 @@ if user_input != '':
                 
                 count = count + top_n
                 i = i + 1     
-            
+    
+    
+
     form_section = st.container()
-    new_words_to_search = []
     with form_section:
         form_title_div = st.container()
         with form_title_div:
-            st.write("You can go deep and search specifically with the terms returned by this search. Choose the words and click on 'Submit' button to search:")
+            st.write("You can go deep and search for one of the terms returned by your search. Click on the word that you want to add to the exploration - choose only one:")
         
-        form_selection_div = st.empty()
-        with form_selection_div:
-            form = form_selection_div.form(key='similar_words_form', clear_on_submit=True)
-            with form:
-                cols = st.columns(number_terms)
-                for k, col in enumerate(cols):
-                    selected_words = col.selectbox(user_input[k], options_list[k], key = widget_key)
-                    new_words_to_search.append(selected_words)
+        if (st.session_state['execution_counter'] > 0):
+            last_word_search = len(st.session_state['words_search'].split(',')) + st.session_state['execution_counter'] - 1
+            form_selection_div = st.container()
+            with form_selection_div:
+                st.markdown('**{}**'.format(user_input[last_word_search]))
+                for w in options_list[last_word_search]:
+                    st.session_state['widget'] += 1
+                    st.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
 
-                new_words_to_search = list(dict.fromkeys(new_words_to_search))
-                submitted = st.form_submit_button(
-                    'Search', 
-                    on_click=deep_search, 
-                    args=(user_input, new_words_to_search, plot_container, dimension, model, annotation, dim_red, perplexity, learning_rate, iteration, top_n, table_cells_div, subplots_section, previous_number_terms, previous_number_containers, col2_plot, subplots_plots_div, table_section)
-                )
+        else:
+            form_selection_div = st.empty()
+            with form_selection_div:
+                cols = form_selection_div.columns(number_terms)
+                for k, col in enumerate(cols):
+                    col.markdown('**{}**'.format(user_input[k]))
+                    for w in options_list[k]:
+                        st.session_state['widget'] += 1
+                        col.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
