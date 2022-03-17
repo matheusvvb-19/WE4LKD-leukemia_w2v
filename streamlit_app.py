@@ -26,7 +26,6 @@ domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' +
 # FUNCTIONS:
 def similarities_table_streamlit(words_list, model):  
     '''Creates and prints the similarity table between the base compounds and the terms searched by the user.
-
     Args:
       words_list: the words selected by the user.
       model: the WOrd2Vec model, needed for the Gensim functions. 
@@ -54,7 +53,6 @@ def similarities_table_streamlit(words_list, model):
     
 def restrict_w2v(w2v, restricted_word_set, domain=False):
     '''Restrict the vocabulary of certain model, removing words according to an especific domain.
-
     Args:
       w2v: Word2Vec model.
       restricted_word_set: list of words of the domain.
@@ -229,7 +227,6 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
 
 def horizontal_bar(word, similarity, input_word=''):
     '''Build and print the horizontal bar plot for each word searched by the user.
-
     Args:
       word: vector of similar words calculated.
       similarity: vector of similarities, according to the vector of words.
@@ -352,7 +349,6 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
 def split_list(items_list, n):
     '''Divide a list into sublists of size n.
-
     Args:
       items_list: original list.
       n: number of sublists to be created.
@@ -375,11 +371,9 @@ def set_page_layout():
             .css-zbg2rx {
                 padding-top: 2rem !important;
             }
-
             .css-18e3th9 {
                 padding-top: 2rem !important;
             }
-
             footer {
                 visibility: hidden;
             }
@@ -399,7 +393,6 @@ def set_page_layout():
 
 def plot_data_config(user_input, model):
     '''Calculates the variables used for the scatter plot (2D or 3D) funcitons.
-
     Args:
       w2v: Word2Vec model.
       restricted_word_set: list of words of the domain.
@@ -414,8 +407,11 @@ def plot_data_config(user_input, model):
             sim_words = model.wv.most_similar(words, topn = top_n)
             sim_words = append_list(sim_words, words)
             result_word.extend(sim_words)
+
         except KeyError:
             st.error("The word {} is not present in model's vocabulary.".format(words))
+            st.session_state['user_input'].remove(words)
+
         except TypeError:
             pass      
     
@@ -433,7 +429,6 @@ def plot_data_config(user_input, model):
 
 def deep_search(words_session_state, new_word):
     '''Itertive serach for terms, adds the new term to the session_state variable and ikncrements the execution counter.
-
     Args:
       words_session_state: words saved in the session_state variable 'user_input'.
       new_word: new term to be added to the session_state variable.
@@ -553,7 +548,7 @@ if user_input == '':
     
 else:
     if 'user_input' not in st.session_state:
-        user_input = [x.strip().lower() for x in user_input.split(',')]
+        user_input = [x.strip().lower() for x in user_input.split(',') if len(x) > 1]
         st.session_state['user_input'] = user_input
 
     else:
@@ -653,10 +648,13 @@ if user_input != '':
     with form_section:
         form_title_div = st.container()
         with form_title_div:
-            st.write("You can go deep and search for one of the terms returned by your search. Click on the word that you want to add to the exploration - choose only one:")
+            st.write('You can go deep and search for one of the terms returned by your search. Click on the word that you want to add to the exploration - choose only one:')
+            st.write('The words are in descending order of similarity.')
         
         if (st.session_state['execution_counter'] > 0):
-            last_word_search = len(st.session_state['words_search'].split(',')) + st.session_state['execution_counter'] - 1
+            words_wrote = st.session_state['words_search'].split(',')
+            words_wrote = [w for w in words_wrote if w in model.wv.vocab]
+            last_word_search = len(words_wrote) + st.session_state['execution_counter'] - 1
             form_selection_div = st.container()
             with form_selection_div:
                 st.markdown('**{}**'.format(user_input[last_word_search]))
