@@ -25,6 +25,13 @@ domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' +
 
 # FUNCTIONS:
 def similarities_table_streamlit(words_list, model):  
+    '''Creates and prints the similarity table between the base compounds and the terms searched by the user.
+
+    Args:
+      words_list: the words selected by the user.
+      model: the WOrd2Vec model, needed for the Gensim functions. 
+    '''
+
     table = [['Word']]
     for w in base_compounds:
         if w in model.wv.vocab:
@@ -46,6 +53,14 @@ def similarities_table_streamlit(words_list, model):
     st.table(df)
     
 def restrict_w2v(w2v, restricted_word_set, domain=False):
+    '''Restrict the vocabulary of certain model, removing words according to an especific domain.
+
+    Args:
+      w2v: Word2Vec model.
+      restricted_word_set: list of words of the domain.
+      domain: boolean that informs how to remove the words (remove words that belong or not to the domain).
+    '''
+
     new_vectors = []
     new_vocab = {}
     new_index2entity = []
@@ -83,6 +98,8 @@ def restrict_w2v(w2v, restricted_word_set, domain=False):
     w2v.vectors_norm = np.array(new_vectors_norm)
     
 def wv_restrict_w2v(w2v, restricted_word_set, domain=False):
+    '''The same of above function but usin the ".wv" before the acceses to the model's properties.'''
+
     new_vectors = []
     new_vocab = {}
     new_index2entity = []
@@ -211,6 +228,14 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
         st.plotly_chart(plot_figure)
 
 def horizontal_bar(word, similarity, input_word=''):
+    '''Build and print the horizontal bar plot for each word searched by the user.
+
+    Args:
+      word: vector of similar words calculated.
+      similarity: vector of similarities, according to the vector of words.
+      input_word: word subject of the plot.
+    '''
+    
     similarity = [round(elem, 2) for elem in similarity]
     
     reduced_words = []
@@ -326,10 +351,18 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
     st.plotly_chart(plot_figure)
 
 def split_list(items_list, n):
+    '''Divide a list into sublists of size n.
+
+    Args:
+      items_list: original list.
+      n: number of sublists to be created.
+    '''
+
     k, m = divmod(len(items_list), n)
     return (items_list[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
     
 def set_page_layout():
+    '''Define some configs of the Streamlit App page, most of them only front-end settings.'''
     st.set_page_config(
         page_title="Embedding Viewer",
         page_icon="🖥️",
@@ -365,6 +398,14 @@ def set_page_layout():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 def plot_data_config(user_input, model):
+    '''Calculates the variables used for the scatter plot (2D or 3D) funcitons.
+
+    Args:
+      w2v: Word2Vec model.
+      restricted_word_set: list of words of the domain.
+      domain: boolean that informs how to remove the words (remove words that belong or not to the domain).
+    '''
+
     result_word = []
     sim_words = []
     
@@ -391,6 +432,13 @@ def plot_data_config(user_input, model):
     return result_word, sim_words, similar_word, similarity, labels, label_dict, color_map
 
 def deep_search(words_session_state, new_word):
+    '''Itertive serach for terms, adds the new term to the session_state variable and ikncrements the execution counter.
+
+    Args:
+      words_session_state: words saved in the session_state variable 'user_input'.
+      new_word: new term to be added to the session_state variable.
+    '''
+
     st.session_state['execution_counter'] += 1
     aux = words_session_state
     aux.append(new_word)
@@ -398,12 +446,15 @@ def deep_search(words_session_state, new_word):
     st.session_state['user_input'] = aux
 
 def clear_session_state():
+    '''Delete all variables saved in the session_state. This function is used when the user wnats to strat a new search from zero.'''
+
     for key in st.session_state.keys():
         del st.session_state[key]
 
 # MAIN PROGRAM:
 set_page_layout()
 
+# sidebar widgets:
 st.sidebar.header('Models exploration settings')
 uploaded_file = st.sidebar.file_uploader("Upload a new model:")
 if uploaded_file is not None:
@@ -476,7 +527,7 @@ dimension = st.sidebar.selectbox(
      "Select the display dimension",
      ('2D', '3D'))
 
-user_input = st.sidebar.text_input("Enter the words to be searched. For more than one word, separate it with a comma (,)", value='', key='words_search')
+user_input = st.sidebar.text_input("Enter the words to be searched. For more than one word, separate them with a comma (,)", value='', key='words_search')
 
 top_n = st.sidebar.slider('Select the neighborhood size',
     5, 20, (5), 5)
@@ -521,13 +572,13 @@ with header_container:
     st.header('Word Embedding Visualization Based on Cosine Similarity')
     with st.expander('How to use this app'):
         st.markdown('**Sidebar**')
-        st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation, since they are often outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
-        st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D). You can also search for specific words by typing it into the text field. For more than one word, separate it with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
-        st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider and enable or disable the labels of each point on the plot. If you want to restart your exploration, click on "Reset search" button and type the new word(s) in the text field.')
+        st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation since they are often outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
+        st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D). You can also search for specific words by typing them into the text field. For more than one word, separate it with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
+        st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider and enable or disable the labels of each point on the plot. If you want to restart your exploration, click on the "Reset search" button and type the new word(s) in the text field.')
 
         st.markdown('**Main window**')
-        st.markdown('_Hint: To see this window content better, you can minize the sidebar._')
-        st.markdown('The first dot plot shows the words similar to each input and their distribution in vectorial space. You can move the plot, crop an especific area or hide some points by clicking at the words in the right caption. Then, the table below the dot plot shows the cosine similarity and the rank (ordinal position) from the base compounds of this project - header of the table - and the words you chose to explore. Below the table, the app generates bar plots with the similar words for each term you explored. Also, you can search for word returned by your previous search, clicking on the button with the term. This way, you can explore the neighborhood of your original input and find out the context of them.')
+        st.markdown('_Hint: To see this window content better, you can minimize the sidebar._')
+        st.markdown('The first dot plot shows the words similar to each input and their distribution in vectorial space. You can move the plot, crop a specific area or hide some points by clicking on the words in the right caption. Then, the table below the dot plot shows the cosine similarity and the rank (ordinal position) from the base compounds of this project - header of the table - and the words you chose to explore. Below the table, the app generates bar plots with similar words for each term you explored. Also, you can search for words returned by your previous search, clicking on the button with the term. This way, you can explore the neighborhood of your original input and find out the context of them.')
 
 plot_container = st.empty()
 with plot_container:
@@ -594,8 +645,6 @@ if user_input != '':
                 
                 count = count + top_n
                 i = i + 1     
-    
-    
 
     form_section = st.container()
     with form_section:
