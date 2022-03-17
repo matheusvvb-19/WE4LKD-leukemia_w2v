@@ -1,4 +1,4 @@
-<div id="topo"></div>
+<div id="top"></div>
 
 <!-- PROJECT LOGO -->
 <br />
@@ -8,55 +8,51 @@
   <p align="center">
     Word Embeddings For Latent Knowledge Discovery
     <br />
-    <a href="https://share.streamlit.io/matheusvvb-19/we4lkd-leukemia_w2v/main"><strong>Visualizar Embeddings</strong></a>
     <br />
-    <br />
-    <a href="https://drive.google.com/drive/folders/1Fq5HkZx8DmWWAXnhkYSuX7r_GZjd6jGh?usp=sharing">Arquivos do Projeto</a>
+    <a href="https://drive.google.com/drive/folders/1Fq5HkZx8DmWWAXnhkYSuX7r_GZjd6jGh?usp=sharing">Google Drive Folder</a>
     ·
-    <a href="https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v/issues">Reportar Bug</a>
+    <a href="https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v/issues">Report Bug</a>
     ·
-    <a href="https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v/issues">Sugerir Funcionalidade</a>
+    <a href="https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v/issues">Request Feature</a>
   </p>
 </div>
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/matheusvvb-19/we4lkd-leukemia_w2v/main)
 
-
-<!-- SUMÁRIO -->
+<!-- CONTENTS -->
 <details>
-  <summary>Sumário</summary>
+  <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#sobre-o-projeto">Sobre o projeto</a>
+      <a href="#about">About</a>
       <ul>
-        <li><a href="#bibliotecas">Bibliotecas</a></li>
+        <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li>
-      <a href="#inicialização">Inicialização</a>
+      <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#pré-requisitos">Pré-requisitos</a></li>
-        <li><a href="#instalação">Instalação</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#uso">Uso</a></li>
-    <li><a href="#futuras-melhorias">Futuras Melhorias</a></li>
-    <li><a href="#contato">Contato</a></li>
-    <li><a href="#inspiração">Inspiração</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#references">References</a></li>
   </ol>
 </details>
 
 
-<!-- SOBRE -->
-## Sobre o projeto
+<!-- ABOUT -->
+## About
 
-Este projeto tem por objetivo estudar e analisar a possível existência de conhecimento latente em artigos médicos sobre Leucemia Mielóide Aguda (AML), um tipo de câncer agressivo e sem tratamentos muito eficazes. Para isso, são gerados modelos de representação distribuída Word2Vec a partir de prefácios de artigos disponíveis no [PubMed](https://pubmed.ncbi.nlm.nih.gov/).
+This project aims to study and analyze the possible existence of latent knowledge in medical articles about Acute Myeloid Leukemia (AML), an aggressive type of cancer without very effective treatments. For this, Word2Vec distributed representation models are generated from article prefaces available in [PubMed](https://pubmed.ncbi.nlm.nih.gov/) and through dimensionality reduction techniques their vectors are plotted and analyzed.
 
-_descrição mais detalhada em breve_
-
-<p align="right"><a href="#topo">⬆️</a></p>
+<p align="right"><a href="#top">⬆️</a></p>
 
 
-### Bibliotecas
+### Built With
 
 * [Gensim](https://radimrehurek.com/gensim/)
 * [NLTK](https://www.nltk.org/)
@@ -64,107 +60,111 @@ _descrição mais detalhada em breve_
 * [Plotly](https://plotly.com/)
 * [Scikit-learn](https://scikit-learn.org/stable/)
 * [Streamlit](https://streamlit.io/)
-* [TensorFlow](https://www.tensorflow.org/?hl=pt-br)
 
-<p align="right"><a href="#topo">⬆️</a></p>
+<p align="right"><a href="#top">⬆️</a></p>
 
 
-### Pré-requisitos
+### Prerequisites
 
-Para utilizar este projeto, você precisa ter o Pyhton instalado em sua máquina. Este projeto se utilizou da [versão 3.6 do Python](https://www.python.org/downloads/release/python-360/).
-* Baixe e instale o Python [aqui](https://www.python.org/downloads/).
+To use this project, you need to have Pyhton installed on your machine. This project used [Python version 3.6](https://www.python.org/downloads/release/python-360/).
+* Download and install Python [here](https://www.python.org/downloads/).
 
-Além disso, você também precisará do [Pip](https://pypi.org/project/pip/), gerenciador de pacotes Python para instalar os demais requerimentos do projeto.
+In addition, you will also need [Pip](https://pypi.org/project/pip/), the Python package manager to install the other requirements of the project.
 
+<p align="right"><a href="#top">⬆️</a></p>
 
 <!-- INICIALIZAÇÃO -->
-## Inicialização
+## Getting Started
 
-Para iniciar, crie um ambiente virtual Python, ative-o e instale os requerimentos do projeto:
+To get started, create a Python virtual environment, activate it and install the project requirements:
 ```sh
 python3 -m venv venv
 source venv/bin/activate
 pip3 install --ignore-installed -r requirements.txt
 ```
 
+### Installation
 
-### Instalação
+Clone the repository
+```sh
+git clone https://github.com/matheusvvb-19/WE4LKD-leukemia.git
+```
 
-1. Clone o repositório
-   ```sh
-   git clone https://github.com/matheusvvb-19/WE4LKD-leukemia.git
-   ```
-2. Crie o ambiente virtual Python e instale os pacotes necessários (veja a seção anterior)
-
-<p align="right"><a href="#topo">⬆️</a></p>
+<p align="right"><a href="#top">⬆️</a></p>
 
 
 
-<!-- USO -->
-## Uso
+<!-- USAGE -->
+## Usage
 
-Após fazer a inicialização e instalação, chegou a hora de executar o projeto:
-1. Caso queira, você pode trocar as frases de busca no arquivo `search_strings.txt`
-2. Execute o arquivo `crawler.py` ou baixe os resultados
+After initialization and installation, it is time to run the project:
+1. If you like, you can change the search phrases in the `search_strings.txt` file
+2. Run `crawler.py`
   ```sh
   mkdir results
   python3 crawler.py
   ```
-3. Execute o arquivo `merge_txt.py`
+3. Execute the script `merge_txt.py`, this will generate the _.txt_ files with all articles between periods
   ```sh
   mkdir results_aggregated
   python3 merge_txt.py
   ```
-4. Execute o arquivo `clean_text.py`
+4. Execute the script `clean_text.py`, which will clean the merged _.txt_ files
 ```sh
   python3 clean_text.py
 ```
-5. Treine os modelos Word2Vec
+5. Train the WOrd2Vec models
 ```sh
   cd word2vec
   python3 train.py
 ```
-6. Visualize e explore seus modelos de representação distribuída gerados, utilizando o [Visualizador de Embeddings](https://share.streamlit.io/matheusvvb-19/we4lkd-leukemia_w2v/main) construído com o Streamlit.<br> Caso o visualizador não esteja disponível, execute-o localmente em sua máquina com o comando:
+6. View and explore your generated distributed representation models using the [Embeddings Viewer](https://share.streamlit.io/matheusvvb-19/we4lkd-leukemia_w2v/main) built with Streamlit.<br> If the viewer is not available, run it locally on your machine with the command
 ```sh
   cd ..
   streamlit run streamlit_app.py
 ```
-7. Para gerar relatórios de análise de conhecimento latente, execute o comando:
+7. To generate latent knowledge analysis reports, run the command
 ```sh
   python3 analyze.py <palavras_comuns_eliminadas>
 ```
-O último argumnento da linha de comando indica a quantidade de palavras em inglês mais comuns - segundo [Beautiful Soup](https://norvig.com/ngrams/count_1w.txt) -  que se deseja remover do modelo no momento da visualização de vizinhança. O valor desse arguento pode ser nenhum (vazio), para quando não se deseja remover nenhuma palavra, ou um número inteiro. No Visualizador de Embeddings, as opções são 5, 10, 15 ou 20 mil palavras.
+The last argument of the command line indicates the domain constraint applied to the models. This constraint eliminates certain words from the vocabularies of the models, decreasing spurious words and making the analysis easier. The possible values are:
+* nci_cancer_drugs
+* fda_drugs
+* an integer representing the number of most common English words - according to [Beautiful Soup](https://norvig.com/ngrams/count_1w.txt) - that you want to remove from the model.
 
-<p align="right"><a href="#topo">⬆️</a></p>
+This argument can also be empty.
 
-
-
-<!-- FUTURAS MELHORIAS -->
-## Futuras Melhorias
-
-- [x] Manter o Visualizador de Embeddings online com o Streamlit
-- [x] Excluir palavras omuns na visualização das embeddings
-- [x] Gerar relatórios em .pdf, também com exclusão de palavras comuns
-- [x] Redução de palavras grandes nos gráficos
-- [ ] Uso de Named Entity Recognition para filtrar embeddings
-- [ ] Normalização de sinônimos a partir do PubChem
-
-<p align="right"><a href="#topo">⬆️</a></p>
+<p align="right"><a href="#top">⬆️</a></p>
 
 
-<!-- CONTATO -->
-## Contato
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] Deploy Embedding Viewer with Streamlit Cloud
+- [x] Exclude common words from the models
+- [x] Apply domain constraint
+- [x] Generate _.pdf_ reports automatically, also with the domain constraint
+- [x] Reduce long words of plotly bar plots in Embedding Viewer
+- [x] Iterative search on Embedding Viewer - analyze context
+- [ ] Using of Named Entity Recognition to filter words
+- [ ] Standardize synonyms of compounds automatically
+
+<p align="right"><a href="#top">⬆️</a></p>
+
+
+<!-- CONTACT -->
+## Contact
 
 Matheus Vargas Volpon Berto<br>
 matheusvvb@hotmail.com<br>
 [LinkedIn](https://www.linkedin.com/in/matheus-volpon/)
 
-<p align="right"><a href="#topo">⬆️</a></p>
+<p align="right"><a href="#top">⬆️</a></p>
 
 
-<!-- INSPIRAÇÃO -->
-## Inspiração
+<!-- REFERENCES -->
+## References
 
 * [Unsupervised word embeddings capture latent knowledge from materials science literature", Nature 571, 95–98 (2019)](https://github.com/materialsintelligence/mat2vec)
 
-<p align="right"><a href="#topo">⬆️</a></p>
+<p align="right"><a href="#top">⬆️</a></p>
