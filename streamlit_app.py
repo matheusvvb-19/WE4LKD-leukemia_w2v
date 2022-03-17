@@ -566,7 +566,8 @@ if reset_search:
     st.session_state['words_search'] = ''
     user_input = ''
 
-st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/64/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
+st.sidebar.header('GitHub Repository')
+st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
 
 header_container = st.container()
 with header_container:
