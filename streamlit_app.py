@@ -566,11 +566,12 @@ if reset_search:
     st.session_state['words_search'] = ''
     user_input = ''
 
+st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/64/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
+
 header_container = st.container()
 with header_container:
     st.title('Embedding Viewer')
     st.header('Word Embedding Visualization Based on Cosine Similarity')
-    st.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
     with st.expander('How to use this app'):
         st.markdown('**Sidebar**')
         st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation since they are often outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
