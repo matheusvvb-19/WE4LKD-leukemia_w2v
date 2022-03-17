@@ -1,7 +1,7 @@
 # based on https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
 
 # IMPORTS:
-import plotly, pickle, csv, re, string, webbrowser
+import plotly, pickle, csv, re, string
 import plotly.graph_objs as go
 import streamlit as st
 import pandas as pd
