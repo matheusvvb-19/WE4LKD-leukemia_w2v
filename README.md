@@ -113,7 +113,7 @@ After initialization and installation, it is time to run the project:
 ```sh
   python3 clean_text.py
 ```
-5. Train the WOrd2Vec models
+5. Train the Word2Vec models
 ```sh
   cd word2vec
   python3 train.py
@@ -146,7 +146,7 @@ This argument can also be empty.
 - [x] Generate _.pdf_ reports automatically, also with the domain constraint
 - [x] Reduce long words of plotly bar plots in Embedding Viewer
 - [x] Iterative search on Embedding Viewer - analyze context
-- [ ] Using of Named Entity Recognition to filter words
+- [ ] Use Named Entity Recognition to filter words
 - [ ] Standardize synonyms of compounds automatically
 
 <p align="right"><a href="#top">⬆️</a></p>
