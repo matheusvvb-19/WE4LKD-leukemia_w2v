@@ -15,7 +15,7 @@ from random import seed
 
 # GLOBAL VARIABLES:
 specific_domain = []
-base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
+base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # domains table:
 domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
@@ -28,7 +28,7 @@ def similarities_table_streamlit(words_list, model):
     '''Creates and prints the similarity table between the base compounds and the terms searched by the user.
     Args:
       words_list: the words selected by the user.
-      model: the WOrd2Vec model, needed for the Gensim functions. 
+      model: the Word2Vec model, needed for the Gensim functions. 
     '''
 
     table = [['Word']]
@@ -227,6 +227,7 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
 
 def horizontal_bar(word, similarity, input_word=''):
     '''Build and print the horizontal bar plot for each word searched by the user.
+    
     Args:
       word: vector of similar words calculated.
       similarity: vector of similarities, according to the vector of words.
@@ -349,6 +350,7 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
 def split_list(items_list, n):
     '''Divide a list into sublists of size n.
+
     Args:
       items_list: original list.
       n: number of sublists to be created.
@@ -359,6 +361,7 @@ def split_list(items_list, n):
     
 def set_page_layout():
     '''Define some configs of the Streamlit App page, most of them only front-end settings.'''
+
     st.set_page_config(
         page_title="Embedding Viewer",
         page_icon="🖥️",
@@ -393,6 +396,7 @@ def set_page_layout():
 
 def plot_data_config(user_input, model):
     '''Calculates the variables used for the scatter plot (2D or 3D) funcitons.
+
     Args:
       w2v: Word2Vec model.
       restricted_word_set: list of words of the domain.
@@ -402,18 +406,10 @@ def plot_data_config(user_input, model):
     result_word = []
     sim_words = []
     
-    for words in user_input:
-        try:
-            sim_words = model.wv.most_similar(words, topn = top_n)
-            sim_words = append_list(sim_words, words)
-            result_word.extend(sim_words)
-
-        except KeyError:
-            st.error("The word {} is not present in model's vocabulary.".format(words))
-            st.session_state['user_input'].remove(words)
-
-        except TypeError:
-            pass      
+    for word in user_input:
+        sim_words = model.wv.most_similar(word, topn = top_n)
+        sim_words = append_list(sim_words, word)
+        result_word.extend(sim_words)
     
     similar_word = [word[0] for word in result_word]
     similarity = [word[1] for word in result_word]
@@ -429,6 +425,7 @@ def plot_data_config(user_input, model):
 
 def deep_search(words_session_state, new_word):
     '''Itertive serach for terms, adds the new term to the session_state variable and ikncrements the execution counter.
+
     Args:
       words_session_state: words saved in the session_state variable 'user_input'.
       new_word: new term to be added to the session_state variable.
@@ -553,6 +550,11 @@ else:
 
     else:
         user_input = st.session_state['user_input']
+
+    for w in user_input:
+        if w not in model.wv.vocab:
+            user_input.remove(w)
+            st.error("The word {} is not present in model's vocabulary and will be ignored.".format(w))
     
     result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)
 
@@ -652,9 +654,7 @@ if user_input != '':
             st.write('The words are in descending order of similarity.')
         
         if (st.session_state['execution_counter'] > 0):
-            words_wrote = st.session_state['words_search'].split(',')
-            words_wrote = [w for w in words_wrote if w in model.wv.vocab]
-            last_word_search = len(words_wrote) + st.session_state['execution_counter'] - 1
+            last_word_search = len(st.session_state['user_input']) - 1
             form_selection_div = st.container()
             with form_selection_div:
                 st.markdown('**{}**'.format(user_input[last_word_search]))
