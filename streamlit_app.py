@@ -15,7 +15,7 @@ from random import seed
 
 # GLOBAL VARIABLES:
 specific_domain = []
-base_compounds = ['cytarabine', 'daunorubicin', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
+base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # domains table:
 domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
