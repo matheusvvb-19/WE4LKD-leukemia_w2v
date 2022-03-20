@@ -371,12 +371,10 @@ def set_page_layout():
     
     hide_streamlit_style = """
             <style>
-            .css-zbg2rx {
+            .css-zbg2rx, .css-sygy1k, .css-18e3th9 {
                 padding-top: 2rem !important;
             }
-            .css-18e3th9 {
-                padding-top: 2rem !important;
-            }
+            
             footer {
                 visibility: hidden;
             }
