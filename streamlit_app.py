@@ -16,13 +16,37 @@ from random import seed
 specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
-# domains table:
-domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
+# FUNCTIONS:
+@st.cache
+def read_fda_drugs_file():
+    words_list = []
+    with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
+        file_line = csv.reader(file_txt, delimiter='\t')
+        for e in file_line:
+            if len(e) == 8:
+                s = e[5]
+                s = re.sub('<[^>]+>', '', s)
+                s = re.sub('\\s+', ' ', s)
+                s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
+                s = re.sub('\d+\W+\d+', '', s)
+                s = s.lower()
+                s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
+                words_list.append(s)
+
+    words_list.pop(0)
+    words_list = list(dict.fromkeys(words_list))
+    
+    return words_list
+    
+@st.cache
+def read_domain_table():
+    domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
                    '1SgYG4gZuL3grEHHAZt49dAUw_jFAc4LADajFeGAf2-w' +
                    '/export?gid=0&format=csv',
                   )
-
-# FUNCTIONS:
+    
+    return domains_table
+    
 def similarities_table_streamlit(words_list, model):  
     '''Creates and prints the similarity table between the base compounds and the terms searched by the user.
     
@@ -393,7 +417,6 @@ def set_page_layout():
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-@st.cache
 def plot_data_config(user_input, model):
     '''Calculates the variables used for the scatter plot (2D or 3D) funcitons.
 
@@ -494,24 +517,12 @@ if __name__ == '__main__':
     ('general', 'NCI cancer drugs', 'FDA drugs'))
     if restrict_domain != 'general':
         if restrict_domain == 'NCI cancer drugs':
+            domains_table = read_domain_table()
             specific_domain = domains_table['name'].tolist()
             wv_restrict_w2v(model, set(specific_domain), True)
+            
         elif restrict_domain == 'FDA drugs':
-            with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
-                file_line = csv.reader(file_txt, delimiter='\t')
-                for e in file_line:
-                    if len(e) == 8:
-                        s = e[5]
-                        s = re.sub('<[^>]+>', '', s)
-                        s = re.sub('\\s+', ' ', s)
-                        s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
-                        s = re.sub('\d+\W+\d+', '', s)
-                        s = s.lower()
-                        s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
-                        specific_domain.append(s)
-
-            specific_domain.pop(0)
-            specific_domain = list(dict.fromkeys(specific_domain))
+            specific_domain = read_fda_drugs_file()
             wv_restrict_w2v(model, set(specific_domain), True)
     else:
         common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
