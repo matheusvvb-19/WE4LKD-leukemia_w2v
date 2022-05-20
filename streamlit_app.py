@@ -362,7 +362,6 @@ def split_list(items_list, n):
     k, m = divmod(len(items_list), n)
     return (items_list[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
     
-@st.cache
 def set_page_layout():
     '''Define some configs of the Streamlit App page, most of them only front-end settings.'''
 
@@ -396,6 +395,7 @@ def set_page_layout():
             """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+@st.cache
 def plot_data_config(user_input, model):
     '''Calculates the variables used for the scatter plot (2D or 3D) funcitons.
 
