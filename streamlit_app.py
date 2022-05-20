@@ -7,7 +7,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from get_n_common_words_english import get_most_common
-from clean_text import replace_synonyms
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from random import random
@@ -26,6 +25,7 @@ domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' +
 # FUNCTIONS:
 def similarities_table_streamlit(words_list, model):  
     '''Creates and prints the similarity table between the base compounds and the terms searched by the user.
+    
     Args:
       words_list: the words selected by the user.
       model: the Word2Vec model, needed for the Gensim functions. 
@@ -53,6 +53,7 @@ def similarities_table_streamlit(words_list, model):
     
 def restrict_w2v(w2v, restricted_word_set, domain=False):
     '''Restrict the vocabulary of certain model, removing words according to an especific domain.
+    
     Args:
       w2v: Word2Vec model.
       restricted_word_set: list of words of the domain.
@@ -144,7 +145,6 @@ def append_list(sim_words, words):
         
     return list_of_words
 
-@st.cache
 def display_scatterplot_3D(model, user_input=None, words=None, label=None, color_map=None, annotation='On',  dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
     if words == None:
         if sample > 0:
@@ -226,7 +226,6 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
         plot_figure.update_layout(scene=dict(xaxis_showspikes=False, yaxis_showspikes=False, zaxis_showspikes=False))
         st.plotly_chart(plot_figure)
 
-@st.cache
 def horizontal_bar(word, similarity, input_word=''):
     '''Build and print the horizontal bar plot for each word searched by the user.
     
@@ -268,7 +267,6 @@ def horizontal_bar(word, similarity, input_word=''):
     plot_figure = go.Figure(data = data, layout = layout)
     st.plotly_chart(plot_figure)
 
-@st.cache
 def display_scatterplot_2D(model, user_input=None, words=None, label=None, color_map=None, annotation='On', dim_red = 'TSNE', perplexity = 0, learning_rate = 0, iteration = 0, topn=0, sample=10):
     if words == None:
         if sample > 0:
@@ -445,6 +443,35 @@ def clear_session_state():
     for key in st.session_state.keys():
         del st.session_state[key]
 
+@st.cache
+def load_model(model_name, loaded=False):
+    if loaded:
+        model = pickle.load(model_name)
+    else:
+        if model_name == '1: 1900 - 1967':
+            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+        elif model_name == '2: 1900 - 1977':
+            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1977_clean.model', 'rb'))
+        elif model_name == '3: 1900 - 1999':
+            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1999_clean.model', 'rb'))
+        elif model_name == '4: 1900 - 2001':
+            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2001_clean.model', 'rb'))
+        elif model_name == '5: 1900 - 2009':
+            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2009_clean.model', 'rb'))
+        elif model_name == '6: 1900 - 2011':
+            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2011_clean.model', 'rb'))
+        elif model_name == '7: 1900 - 2013':
+            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2013_clean.model', 'rb'))
+        elif model_name == '8: 1900 - 2014':
+            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2014_clean.model', 'rb'))
+        elif model_name == '9: 1900 - 2016':
+            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2016_clean.model', 'rb'))
+        elif model_name == '10: 1900 - 2021':
+            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
+        
+    model.init_sims()
+    return model
+    
 # MAIN PROGRAM:
 if __name__ == '__main__':
     set_page_layout()
@@ -452,36 +479,16 @@ if __name__ == '__main__':
     # sidebar widgets:
     st.sidebar.header('Models exploration settings')
     uploaded_file = st.sidebar.file_uploader("Upload a new model:")
-    if uploaded_file is not None:
-        model = pickle.load(uploaded_file)
-        model.init_sims()
 
     loaded_model = st.sidebar.selectbox(
      'Or choose one of the preloaded models:',
      ('10: 1900 - 2021', '9: 1900 - 2016', '8: 1900 - 2014', '7: 1900 - 2013', '6: 1900 - 2011', '5: 1900 - 2009', '4: 1900 - 2001', '3: 1900 - 1999', '2: 1900 - 1977', '1: 1900 - 1967'))
 
-    if uploaded_file is None:
-        if loaded_model == '1: 1900 - 1967':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
-        elif loaded_model == '2: 1900 - 1977':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1977_clean.model', 'rb'))
-        elif loaded_model == '3: 1900 - 1999':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1999_clean.model', 'rb'))
-        elif loaded_model == '4: 1900 - 2001':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2001_clean.model', 'rb'))
-        elif loaded_model == '5: 1900 - 2009':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2009_clean.model', 'rb'))
-        elif loaded_model == '6: 1900 - 2011':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2011_clean.model', 'rb'))
-        elif loaded_model == '7: 1900 - 2013':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2013_clean.model', 'rb'))
-        elif loaded_model == '8: 1900 - 2014':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2014_clean.model', 'rb'))
-        elif loaded_model == '9: 1900 - 2016':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2016_clean.model', 'rb'))
-        elif loaded_model == '10: 1900 - 2021':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
-        model.init_sims()
+    if uploaded_file is not None:
+        model = load_model(uploaded_file, True)
+        
+    else:
+        model = load_model(loaded_model, False)
 
     restrict_domain = st.sidebar.selectbox("Restrict vocabulary domain:",
     ('general', 'NCI cancer drugs', 'FDA drugs'))
@@ -500,7 +507,6 @@ if __name__ == '__main__':
                         s = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
                         s = re.sub('\d+\W+\d+', '', s)
                         s = s.lower()
-                        s = replace_synonyms(s)
                         s = s.translate(str.maketrans('', '', string.punctuation.replace('-', '')))
                         specific_domain.append(s)
 
