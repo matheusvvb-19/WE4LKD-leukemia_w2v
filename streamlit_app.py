@@ -14,7 +14,7 @@ from random import seed
 
 # GLOBAL VARIABLES:
 specific_domain = []
-base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab ozogamicin', 'midostaurin', 'cpx-351', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
+base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozogamicin', 'midostaurin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # FUNCTIONS:
 @st.cache
