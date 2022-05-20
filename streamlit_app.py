@@ -466,7 +466,7 @@ def clear_session_state():
     for key in st.session_state.keys():
         del st.session_state[key]
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def load_model(model_name, loaded=False):
     if loaded:
         model = pickle.load(model_name)
