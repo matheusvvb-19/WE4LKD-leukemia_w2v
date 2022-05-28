@@ -9,14 +9,27 @@ import numpy as np
 from get_n_common_words_english import get_most_common
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
-from random import random
-from random import seed
+from random import random, seed
 
 # GLOBAL VARIABLES:
 specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozogamicin', 'midostaurin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # FUNCTIONS:
+@st.cache
+def create_entities_list():
+    url = 'https://drive.google.com/file/d/15mj9enV-q2GQrrskNRydaqQeCQ-ezx1-/view?usp=sharing'
+    path = 'https://drive.google.com/uc?export=download&id=' + url.split('/')[-2]
+    entities_table = pd.read_csv(path)
+    
+    list_diseases = df[df['entities'].str.contains('Oncological|Disease_Syndrome_Disorder|Symptom|Treatment|Cancer')]['word'].to_list()
+    list_drugs_chemicals = df[df['entities'].str.contains('Substance|Drug_Ingredient|Drug_BrandName|DrugChem')]['word'].to_list()
+    list_dna_rna = df[df['entities'].str.contains('DNA|Gene_or_gene_product|RNA')]['word'].to_list()
+    list_proteins = df[df['entities'].str.contains('Protein|Amino_acid')]['word'].to_list()
+    list_cellular = df[df['entities'].str.contains('Cell_type|Cell_line|Cell|Cellular_component|Tissue|Multi-tissue_structure')]['word'].to_list()
+    
+    return list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
+
 @st.cache
 def read_fda_drugs_file():
     words_list = []
@@ -526,11 +539,28 @@ if __name__ == '__main__':
             wv_restrict_w2v(model, set(specific_domain), True)
     else:
         st.sidebar.markdown('Filter vocabulary by entities:')
-        common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
-        ('None', '5000', '10000', '15000', '20000'))
-        if common_words_number != 'None':
-            common_words = get_most_common(int(common_words_number))
-            wv_restrict_w2v(model, set(common_words))
+        diseases = st.sidebar.checkbox('Diseases')
+        drugs_chemicals = st.sidebar.checkbox('Drugs/Chemicals')
+        dna_rna = st.sidebar.checkbox('DNA/RNA')
+        proteins = st.sidebar.checkbox('Proteins')
+        cellular = st.sidebar.checkbox('Cellular')
+        
+        if (diseases or drugs_chemicals or dna_rna or proteins or cellular):
+            list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular = create_entities_lists()
+            selected_entities = [diseases, drugs_chemicals, dna_rna, proteins, cellular]
+            
+            for list_name, selected in zip(list_diseases, selected_entities):
+                if (selected == True):
+                    specific_domain.extend(list_name)
+                    
+            wv_restrict_w2v(model, set(specific_domain), True)
+            
+        else:
+            common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
+            ('None', '5000', '10000', '15000', '20000'))
+            if common_words_number != 'None':
+                common_words = get_most_common(int(common_words_number))
+                wv_restrict_w2v(model, set(common_words))
 
     dim_red = st.sidebar.selectbox(
      'Select the dimensionality reduction method',
