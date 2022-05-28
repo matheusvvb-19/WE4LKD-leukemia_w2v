@@ -22,11 +22,11 @@ def create_entities_lists():
     path = 'https://drive.google.com/uc?export=download&id=' + url.split('/')[-2]
     entities_table = pd.read_csv(path)
     
-    list_diseases = df[df['entities'].str.contains('Oncological|Disease_Syndrome_Disorder|Symptom|Treatment|Cancer')]['word'].to_list()
-    list_drugs_chemicals = df[df['entities'].str.contains('Substance|Drug_Ingredient|Drug_BrandName|DrugChem')]['word'].to_list()
-    list_dna_rna = df[df['entities'].str.contains('DNA|Gene_or_gene_product|RNA')]['word'].to_list()
-    list_proteins = df[df['entities'].str.contains('Protein|Amino_acid')]['word'].to_list()
-    list_cellular = df[df['entities'].str.contains('Cell_type|Cell_line|Cell|Cellular_component|Tissue|Multi-tissue_structure')]['word'].to_list()
+    list_diseases = entities_table[entities_table['entities'].str.contains('Oncological|Disease_Syndrome_Disorder|Symptom|Treatment|Cancer')]['word'].to_list()
+    list_drugs_chemicals = entities_table[entities_table['entities'].str.contains('Substance|Drug_Ingredient|Drug_BrandName|DrugChem')]['word'].to_list()
+    list_dna_rna = entities_table[entities_table['entities'].str.contains('DNA|Gene_or_gene_product|RNA')]['word'].to_list()
+    list_proteins = entities_table[entities_table['entities'].str.contains('Protein|Amino_acid')]['word'].to_list()
+    list_cellular = entities_table[entities_table['entities'].str.contains('Cell_type|Cell_line|Cell|Cellular_component|Tissue|Multi-tissue_structure')]['word'].to_list()
     
     return list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
 
