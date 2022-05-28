@@ -28,6 +28,12 @@ def create_entities_lists():
     list_proteins = entities_table[entities_table['entities'].str.contains('protein|amino_acid')]['word'].to_list()
     list_cellular = entities_table[entities_table['entities'].str.contains('cell_type|cell_line|cell|cellular_component|tissue|multi-tissue_structure')]['word'].to_list()
     
+    st.markdown('diseases: {}'.format(len(list_diseases))
+    st.markdown('drugs/chemicals: {}'.format(len(list_drugs_chemicals))
+    st.markdown('dna/rna: {}'.format(len(list_dna_rna))
+    st.markdown('proteins: {}'.format(len(list_proteins))
+    st.markdown('cellular: {}'.format(len(list_cellular))
+    
     return list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
 
 @st.cache
