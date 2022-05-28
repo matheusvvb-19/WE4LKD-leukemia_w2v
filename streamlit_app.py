@@ -9,27 +9,14 @@ import numpy as np
 from get_n_common_words_english import get_most_common
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
-from random import random, seed
+from random import random
+from random import seed
 
 # GLOBAL VARIABLES:
 specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozogamicin', 'midostaurin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # FUNCTIONS:
-@st.cache
-def create_entities_lists():
-    url = 'https://drive.google.com/file/d/15mj9enV-q2GQrrskNRydaqQeCQ-ezx1-/view?usp=sharing'
-    path = 'https://drive.google.com/uc?id=' + url.split('/')[-2]
-    entities_table = pd.read_csv(path)
-    
-    list_diseases = entities_table[entities_table['entities'].str.contains('cncological|disease_syndrome_disorder|symptom|treatment|cancer')]['word'].to_list()
-    list_drugs_chemicals = entities_table[entities_table['entities'].str.contains('substance|drug_ingredient|drug_brandname|drugchem|drug')]['word'].to_list()
-    list_dna_rna = entities_table[entities_table['entities'].str.contains('dna|gene_or_gene_product|rna')]['word'].to_list()
-    list_proteins = entities_table[entities_table['entities'].str.contains('protein|amino_acid')]['word'].to_list()
-    list_cellular = entities_table[entities_table['entities'].str.contains('cell_type|cell_line|cell|cellular_component|tissue|multi-tissue_structure')]['word'].to_list()
-    
-    return list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
-
 @st.cache
 def read_fda_drugs_file():
     words_list = []
@@ -388,7 +375,6 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
 def split_list(items_list, n):
     '''Divide a list into sublists of size n.
-
     Args:
       items_list: original list.
       n: number of sublists to be created.
@@ -432,7 +418,6 @@ def set_page_layout():
 
 def plot_data_config(user_input, model):
     '''Calculates the variables used for the scatter plot (2D or 3D) funcitons.
-
     Args:
       w2v: Word2Vec model.
       restricted_word_set: list of words of the domain.
@@ -461,7 +446,6 @@ def plot_data_config(user_input, model):
 
 def deep_search(words_session_state, new_word):
     '''Itertive serach for terms, adds the new term to the session_state variable and ikncrements the execution counter.
-
     Args:
       words_session_state: words saved in the session_state variable 'user_input'.
       new_word: new term to be added to the session_state variable.
@@ -525,8 +509,6 @@ if __name__ == '__main__':
         
     else:
         model = load_model(loaded_model, False)
-        
-    st.markdown('tamanho do vocabulário: {}'.format(len(model.wv.vocab)))
 
     restrict_domain = st.sidebar.selectbox("Restrict vocabulary domain:",
     ('general', 'NCI cancer drugs', 'FDA drugs'))
@@ -540,35 +522,11 @@ if __name__ == '__main__':
             specific_domain = read_fda_drugs_file()
             wv_restrict_w2v(model, set(specific_domain), True)
     else:
-        st.sidebar.markdown('Filter vocabulary by entities:')
-        diseases = st.sidebar.checkbox('Diseases')
-        drugs_chemicals = st.sidebar.checkbox('Drugs/Chemicals')
-        dna_rna = st.sidebar.checkbox('DNA/RNA')
-        proteins = st.sidebar.checkbox('Proteins')
-        cellular = st.sidebar.checkbox('Cellular')
-        
-        if (diseases or drugs_chemicals or dna_rna or proteins or cellular):
-            list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular = create_entities_lists()
-            selected_entities = [diseases, drugs_chemicals, dna_rna, proteins, cellular]
-            
-            st.markdown('diseases: {}'.format(len(list_diseases)))
-            st.markdown('drugs/chemicals: {}'.format(len(list_drugs_chemicals)))
-            st.markdown('dna/rna: {}'.format(len(list_dna_rna)))
-            st.markdown('proteins: {}'.format(len(list_proteins)))
-            st.markdown('cellular: {}'.format(len(list_cellular)))
-            
-            for list_name, selected in zip(list_diseases, selected_entities):
-                if (selected == True):
-                    specific_domain.extend(list_name)
-                    
-            wv_restrict_w2v(model, set(specific_domain), True)
-            
-        else:
-            common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
-            ('None', '5000', '10000', '15000', '20000'))
-            if common_words_number != 'None':
-                common_words = get_most_common(int(common_words_number))
-                wv_restrict_w2v(model, set(common_words))
+        common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
+        ('None', '5000', '10000', '15000', '20000'))
+        if common_words_number != 'None':
+            common_words = get_most_common(int(common_words_number))
+            wv_restrict_w2v(model, set(common_words))
 
     dim_red = st.sidebar.selectbox(
      'Select the dimensionality reduction method',
