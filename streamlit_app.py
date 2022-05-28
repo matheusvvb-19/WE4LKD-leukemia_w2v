@@ -488,8 +488,7 @@ def load_model(model_name, loaded=False):
             model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2016_clean.model', 'rb'))
         elif model_name == '10: 1900 - 2021':
             model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
-        
-    model.init_sims()
+            
     return model
     
 # MAIN PROGRAM:
@@ -509,6 +508,8 @@ if __name__ == '__main__':
         
     else:
         model = load_model(loaded_model, False)
+    
+    model.init_sims()
 
     restrict_domain = st.sidebar.selectbox("Restrict vocabulary domain:",
     ('general', 'NCI cancer drugs', 'FDA drugs'))
