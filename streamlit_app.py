@@ -525,6 +525,8 @@ if __name__ == '__main__':
         
     else:
         model = load_model(loaded_model, False)
+        
+    st.markdown(len(model.wv.vocab))
 
     restrict_domain = st.sidebar.selectbox("Restrict vocabulary domain:",
     ('general', 'NCI cancer drugs', 'FDA drugs'))
