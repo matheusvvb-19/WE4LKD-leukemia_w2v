@@ -19,7 +19,7 @@ base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozoga
 @st.cache
 def create_entities_lists():
     url = 'https://drive.google.com/file/d/15mj9enV-q2GQrrskNRydaqQeCQ-ezx1-/view?usp=sharing'
-    path = 'https://drive.google.com/uc?export=download&id=' + url.split('/')[-2]
+    path = 'https://drive.google.com/uc?id=' + url.split('/')[-2]
     entities_table = pd.read_csv(path)
     
     list_diseases = entities_table[entities_table['entities'].str.contains('cncological|disease_syndrome_disorder|symptom|treatment|cancer')]['word'].to_list()
