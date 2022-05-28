@@ -581,7 +581,7 @@ if __name__ == '__main__':
                     
             st.markdown(specific_domain[0:15])
             st.markdown(len(specific_domain))
-            wv_restrict_w2v(model, set(specific_domain), True)
+            wv_restrict_w2v(model, specific_domain, True)
             
         else:
             common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
