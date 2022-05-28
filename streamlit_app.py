@@ -574,10 +574,13 @@ if __name__ == '__main__':
             st.markdown('proteins: {}'.format(len(list_proteins)))
             st.markdown('cellular: {}'.format(len(list_cellular)))
             
+            specific_domain = []
             for list_name, selected in zip(list_diseases, selected_entities):
                 if (selected == True):
                     specific_domain.extend(list_name)
                     
+            st.markdown(specific_domain[0:15])
+            st.markdown(len(specific_domain))
             wv_restrict_w2v(model, set(specific_domain), True)
             
         else:
