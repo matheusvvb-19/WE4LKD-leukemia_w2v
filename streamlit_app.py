@@ -525,6 +525,7 @@ if __name__ == '__main__':
             specific_domain = read_fda_drugs_file()
             wv_restrict_w2v(model, set(specific_domain), True)
     else:
+        st.sidebar.markdown('Filter vocabulary by entities:')
         common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
         ('None', '5000', '10000', '15000', '20000'))
         if common_words_number != 'None':
