@@ -17,7 +17,7 @@ base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozoga
 
 # FUNCTIONS:
 @st.cache
-def create_entities_list():
+def create_entities_lists():
     url = 'https://drive.google.com/file/d/15mj9enV-q2GQrrskNRydaqQeCQ-ezx1-/view?usp=sharing'
     path = 'https://drive.google.com/uc?export=download&id=' + url.split('/')[-2]
     entities_table = pd.read_csv(path)
