@@ -482,25 +482,25 @@ def load_model(model_name, loaded=False):
         model = pickle.load(model_name)
     else:
         if model_name == '1: 1900 - 1967':
-            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_1967.model', 'rb'))
         elif model_name == '2: 1900 - 1977':
-            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1977_clean.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_1977.model', 'rb'))
         elif model_name == '3: 1900 - 1999':
-            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1999_clean.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_1999.model', 'rb'))
         elif model_name == '4: 1900 - 2001':
-            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2001_clean.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_2001.model', 'rb'))
         elif model_name == '5: 1900 - 2009':
-            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2009_clean.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_2009.model', 'rb'))
         elif model_name == '6: 1900 - 2011':
-            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2011_clean.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_2011.model', 'rb'))
         elif model_name == '7: 1900 - 2013':
-            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2013_clean.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_2013.model', 'rb'))
         elif model_name == '8: 1900 - 2014':
-            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2014_clean.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_2014.model', 'rb'))
         elif model_name == '9: 1900 - 2016':
-            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2016_clean.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_2016.model', 'rb'))
         elif model_name == '10: 1900 - 2021':
-            model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_2021.model', 'rb'))
         
     model.init_sims()
     return model
@@ -522,25 +522,25 @@ if __name__ == '__main__':
 
     if uploaded_file is None:
         if loaded_model == '1: 1900 - 1967':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1967_clean.model', 'rb'))
+          model = pickle.load(open('./models_streamlit_app/model_1900_1967.model', 'rb'))
         elif loaded_model == '2: 1900 - 1977':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1977_clean.model', 'rb'))
+          model = pickle.load(open('./models_streamlit_app/model_1900_1977.model', 'rb'))
         elif loaded_model == '3: 1900 - 1999':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_1999_clean.model', 'rb'))
+          model = pickle.load(open('./models_streamlit_app/model_1900_1999.model', 'rb'))
         elif loaded_model == '4: 1900 - 2001':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2001_clean.model', 'rb'))
+          model = pickle.load(open('./models_streamlit_app/model_1900_2001.model', 'rb'))
         elif loaded_model == '5: 1900 - 2009':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2009_clean.model', 'rb'))
+          model = pickle.load(open('./models_streamlit_app/model_1900_2009.model', 'rb'))
         elif loaded_model == '6: 1900 - 2011':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2011_clean.model', 'rb'))
+          model = pickle.load(open('./models_streamlit_app/model_1900_2011.model', 'rb'))
         elif loaded_model == '7: 1900 - 2013':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2013_clean.model', 'rb'))
+          model = pickle.load(open('./models_streamlit_app/model_1900_2013.model', 'rb'))
         elif loaded_model == '8: 1900 - 2014':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2014_clean.model', 'rb'))
+          model = pickle.load(open('./models_streamlit_app/model_1900_2014.model', 'rb'))
         elif loaded_model == '9: 1900 - 2016':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2016_clean.model', 'rb'))
+          model = pickle.load(open('./models_streamlit_app/model_1900_2016.model', 'rb'))
         elif loaded_model == '10: 1900 - 2021':
-          model = pickle.load(open('./models_streamlit_app/model_results_file_1900_2021_clean.model', 'rb'))
+          model = pickle.load(open('./models_streamlit_app/model_1900_2021.model', 'rb'))
         model.init_sims()
         
     st.markdown('tamanho do vocabulário: {}'.format(len(model.wv.vocab)))
