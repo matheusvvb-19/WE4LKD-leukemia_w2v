@@ -29,7 +29,6 @@ def process_entity_list(entity_list):
     
     return entity_list
 
-@st.cache
 def create_entities_lists():
     url = 'https://drive.google.com/file/d/1Q-lA9xtZztUETz5zJrbdN0Fdpg96u2y7/view?usp=sharing'
     path = 'https://drive.google.com/uc?export=download&id=' + url.split('/')[-2]
@@ -598,7 +597,6 @@ if __name__ == '__main__':
                 if (selected == True):
                     specific_domain.extend(list_name)
                     
-            st.markdown(specific_domain[0:15])
             st.markdown(len(specific_domain))
             wv_restrict_w2v(model, specific_domain, True)
             
