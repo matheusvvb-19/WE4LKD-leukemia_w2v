@@ -16,7 +16,6 @@ specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozogamicin', 'midostaurin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # FUNCTIONS:
-@st.cache
 def process_entity_list(entity_list):
     for index, s in enumerate(entity_list):
         entity_list[index] = re.sub('<[^>]+>', '', s)
