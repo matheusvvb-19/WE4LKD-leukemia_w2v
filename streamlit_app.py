@@ -32,7 +32,7 @@ def process_entity_list(entity_list):
 def create_entities_lists():
     url = 'https://drive.google.com/file/d/1Q-lA9xtZztUETz5zJrbdN0Fdpg96u2y7/view?usp=sharing'
     path = 'https://drive.google.com/uc?export=download&id=' + url.split('/')[-2]
-    entities_table = pd.read_csv(path)
+    entities_table = pd.read_csv(path, header=0)
     
     list_diseases = entities_table[entities_table['entities'].str.contains('oncological|disease_syndrome_disorder|symptom|treatment|cancer')]['word'].to_list()
     list_drugs_chemicals = entities_table[entities_table['entities'].str.contains('substance|drug_ingredient|drug_brandname|drugchem|drug')]['word'].to_list()
