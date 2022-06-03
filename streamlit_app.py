@@ -36,7 +36,7 @@ def create_entities_lists():
     path = 'https://drive.google.com/uc?id=' + url.split('/')[-2]
     entities_table = pd.read_csv(path)
     
-    list_diseases = entities_table[entities_table['entities'].str.contains('cncological|disease_syndrome_disorder|symptom|treatment|cancer')]['word'].to_list()
+    list_diseases = entities_table[entities_table['entities'].str.contains('oncological|disease_syndrome_disorder|symptom|treatment|cancer')]['word'].to_list()
     list_drugs_chemicals = entities_table[entities_table['entities'].str.contains('substance|drug_ingredient|drug_brandname|drugchem|drug')]['word'].to_list()
     list_dna_rna = entities_table[entities_table['entities'].str.contains('dna|gene_or_gene_product|rna')]['word'].to_list()
     list_proteins = entities_table[entities_table['entities'].str.contains('protein|amino_acid')]['word'].to_list()
