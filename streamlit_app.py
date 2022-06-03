@@ -33,7 +33,7 @@ def process_entity_list(entity_list):
 @st.cache
 def create_entities_lists():
     url = 'https://drive.google.com/file/d/1Q-lA9xtZztUETz5zJrbdN0Fdpg96u2y7/view?usp=sharing'
-    path = 'https://drive.google.com/uc?id=' + url.split('/')[-2]
+    path = 'https://drive.google.com/uc?id=' + '1Q-lA9xtZztUETz5zJrbdN0Fdpg96u2y7'
     entities_table = pd.read_csv(path)
     
     list_diseases = entities_table[entities_table['entities'].str.contains('oncological|disease_syndrome_disorder|symptom|treatment|cancer')]['word'].to_list()
