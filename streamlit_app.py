@@ -17,8 +17,22 @@ base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozoga
 
 # FUNCTIONS:
 @st.cache
+def process_entity_list(entity_list):
+    for index, s in enumerate(entity_list):
+        entity_list[index] = re.sub('<[^>]+>', '', s)
+        entity_list[index] = re.sub('\\s+', ' ', s)
+        entity_list[index] = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
+        entity_list[index] = re.sub('\d+\W+\d+', '', s)
+        entity_list[index] = s.replace('/', ' ')
+
+    entity_list = [x.split(' ') for x in entity_list]
+    entity_list = [val for sublist in entity_list for val in sublist]
+    
+    return entity_list
+
+@st.cache
 def create_entities_lists():
-    url = 'https://drive.google.com/file/d/15mj9enV-q2GQrrskNRydaqQeCQ-ezx1-/view?usp=sharing'
+    url = 'https://drive.google.com/file/d/1Q-lA9xtZztUETz5zJrbdN0Fdpg96u2y7/view?usp=sharing'
     path = 'https://drive.google.com/uc?id=' + url.split('/')[-2]
     entities_table = pd.read_csv(path)
     
@@ -27,6 +41,12 @@ def create_entities_lists():
     list_dna_rna = entities_table[entities_table['entities'].str.contains('dna|gene_or_gene_product|rna')]['word'].to_list()
     list_proteins = entities_table[entities_table['entities'].str.contains('protein|amino_acid')]['word'].to_list()
     list_cellular = entities_table[entities_table['entities'].str.contains('cell_type|cell_line|cell|cellular_component|tissue|multi-tissue_structure')]['word'].to_list()
+    
+    list_diseases = process_entity_list(list_diseases)
+    list_drugs_chemicals = process_entity_list(list_drugs_chemicals)
+    list_dna_rna = process_entity_list(list_dna_rna)
+    list_proteins = process_entity_list(list_proteins)
+    list_cellular = process_entity_list(list_cellular)
     
     return list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
 
