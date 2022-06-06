@@ -596,6 +596,7 @@ if __name__ == '__main__':
         
         if (diseases or drugs_chemicals or dna_rna or proteins or cellular):
             list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular = create_entities_lists()
+            entities_list = [list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular]
             selected_entities = [diseases, drugs_chemicals, dna_rna, proteins, cellular]
             
             st.markdown('diseases: {}'.format(len(list_diseases)))
@@ -605,7 +606,7 @@ if __name__ == '__main__':
             st.markdown('cellular: {}'.format(len(list_cellular)))
             
             specific_domain = []
-            for list_name, selected in zip(list_diseases, selected_entities):
+            for list_name, selected in zip(entities_list, selected_entities):
                 if (selected == True):
                     specific_domain.extend(list_name)
                     
