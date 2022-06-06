@@ -29,23 +29,28 @@ def process_entity_list(entity_list):
     
     return entity_list
 
+@st.cache
 def create_entities_lists():
-    url = 'https://drive.google.com/file/d/1Q-lA9xtZztUETz5zJrbdN0Fdpg96u2y7/view?usp=sharing'
-    path = 'https://drive.google.com/uc?id=' + url.split('/')[-2]
-    entities_table = pd.read_csv(path, header=0)
+    df = pd.read_csv('./ner/filtered_ner_diseases.csv')
+    list_diseases = df['word'].to_list()
     
-    list_diseases = entities_table[entities_table['entities'].str.contains('oncological|disease_syndrome_disorder|symptom|treatment|cancer')]['word'].to_list()
-    list_drugs_chemicals = entities_table[entities_table['entities'].str.contains('substance|drug_ingredient|drug_brandname|drugchem|drug')]['word'].to_list()
-    list_dna_rna = entities_table[entities_table['entities'].str.contains('dna|gene_or_gene_product|rna')]['word'].to_list()
-    list_proteins = entities_table[entities_table['entities'].str.contains('protein|amino_acid')]['word'].to_list()
-    list_cellular = entities_table[entities_table['entities'].str.contains('cell_type|cell_line|cell|cellular_component|tissue|multi-tissue_structure')]['word'].to_list()
+    df = pd.read_csv('./ner/filtered_ner_drugs_chemicals.csv')
+    list_drugs_chemicals = df['word'].to_list()
     
-    st.dataframe(entities_table)
-    #list_diseases = process_entity_list(list_diseases)
-    #list_drugs_chemicals = process_entity_list(list_drugs_chemicals)
-    #list_dna_rna = process_entity_list(list_dna_rna)
-    #list_proteins = process_entity_list(list_proteins)
-    #list_cellular = process_entity_list(list_cellular)
+    df = pd.read_csv('./ner/filtered_ner_dna_rna.csv')
+    list_dna_rna = df['word'].to_list()
+    
+    df = pd.read_csv('./ner/filtered_ner_proteins.csv')
+    list_proteins = df['word'].to_list()
+    
+    df = pd.read_csv('./ner/filtered_ner_cellular.csv')
+    list_cellular = df['word'].to_list()
+    
+    list_diseases = process_entity_list(list_diseases)
+    list_drugs_chemicals = process_entity_list(list_drugs_chemicals)
+    list_dna_rna = process_entity_list(list_dna_rna)
+    list_proteins = process_entity_list(list_proteins)
+    list_cellular = process_entity_list(list_cellular)
     
     return list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
 
