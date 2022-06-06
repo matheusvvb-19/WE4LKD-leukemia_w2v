@@ -51,11 +51,11 @@ def create_entities_lists():
     list_cellular = df['word'].to_list()
     list_cellular = [str(x) for x in list_cellular]
     
-    list_diseases = process_entity_list(list_diseases)
-    list_drugs_chemicals = process_entity_list(list_drugs_chemicals)
-    list_dna_rna = process_entity_list(list_dna_rna)
-    list_proteins = process_entity_list(list_proteins)
-    list_cellular = process_entity_list(list_cellular)
+    #list_diseases = process_entity_list(list_diseases)
+    #list_drugs_chemicals = process_entity_list(list_drugs_chemicals)
+    #list_dna_rna = process_entity_list(list_dna_rna)
+    #list_proteins = process_entity_list(list_proteins)
+    #list_cellular = process_entity_list(list_cellular)
     
     return list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
 
