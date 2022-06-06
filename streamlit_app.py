@@ -18,10 +18,10 @@ base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozoga
 # FUNCTIONS:
 def process_entity_list(entity_list):
     for index, s in enumerate(entity_list):
-        entity_list[index] = re.sub('<[^>]+>', '', s)
-        entity_list[index] = re.sub('\\s+', ' ', s)
-        entity_list[index] = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
-        entity_list[index] = re.sub('\d+\W+\d+', '', s)
+        entity_list[index] = re.sub('<[^>]+>', '', str(s))
+        entity_list[index] = re.sub('\\s+', ' ', str(s))
+        entity_list[index] = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', str(s))
+        entity_list[index] = re.sub('\d+\W+\d+', '', str(s))
         entity_list[index] = s.replace('/', ' ')
 
     entity_list = [x.split(' ') for x in entity_list]
