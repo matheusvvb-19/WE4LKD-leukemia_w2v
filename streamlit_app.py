@@ -582,11 +582,12 @@ if __name__ == '__main__':
             wv_restrict_w2v(model, set(specific_domain), True)
     else:
         st.sidebar.markdown('Filter vocabulary by entities:')
-        diseases = st.sidebar.checkbox('Diseases')
-        drugs_chemicals = st.sidebar.checkbox('Drugs/Chemicals')
-        dna_rna = st.sidebar.checkbox('DNA/RNA')
-        proteins = st.sidebar.checkbox('Proteins')
         cellular = st.sidebar.checkbox('Cellular')
+        diseases = st.sidebar.checkbox('Diseases')
+        dna_rna = st.sidebar.checkbox('DNA/RNA')
+        drugs_chemicals = st.sidebar.checkbox('Drugs/Chemicals')
+        proteins = st.sidebar.checkbox('Proteins')
+        
         
         if (diseases or drugs_chemicals or dna_rna or proteins or cellular):
             list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular = create_entities_lists()
