@@ -16,7 +16,7 @@ specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozogamicin', 'midostaurin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # FUNCTIONS:
-def process_entity_list(entity_list):
+def process_entity_list(entity_list):   
     for index, s in enumerate(entity_list):
         entity_list[index] = re.sub('<[^>]+>', '', str(s))
         entity_list[index] = re.sub('\\s+', ' ', str(s))
@@ -33,18 +33,23 @@ def process_entity_list(entity_list):
 def create_entities_lists():
     df = pd.read_csv('./ner/filtered_ner_diseases.csv')
     list_diseases = df['word'].to_list()
+    list_diseases = [str(x) for x in list_diseases]
     
     df = pd.read_csv('./ner/filtered_ner_drugs_chemicals.csv')
     list_drugs_chemicals = df['word'].to_list()
+    list_drugs_chemicals = [str(x) for x in list_drugs_chemicals]
     
     df = pd.read_csv('./ner/filtered_ner_dna_rna.csv')
     list_dna_rna = df['word'].to_list()
+    list_dna_rna = [str(x) for x in list_dna_rna]
     
     df = pd.read_csv('./ner/filtered_ner_proteins.csv')
     list_proteins = df['word'].to_list()
+    list_proteins = [str(x) for x in list_proteins]
     
     df = pd.read_csv('./ner/filtered_ner_cellular.csv')
     list_cellular = df['word'].to_list()
+    list_cellular = [str(x) for x in list_cellular]
     
     list_diseases = process_entity_list(list_diseases)
     list_drugs_chemicals = process_entity_list(list_drugs_chemicals)
