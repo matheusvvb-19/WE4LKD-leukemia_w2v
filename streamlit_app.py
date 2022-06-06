@@ -31,23 +31,23 @@ def process_entity_list(entity_list):
 
 @st.cache
 def create_entities_lists():
-    df = pd.read_csv('./ner/filtered_ner_diseases.csv')
+    df = pd.read_csv('./ner/filtered_ner_diseases.csv', escapechar='\\')
     list_diseases = df['word'].to_list()
     list_diseases = [str(x) for x in list_diseases]
     
-    df = pd.read_csv('./ner/filtered_ner_drugs_chemicals.csv')
+    df = pd.read_csv('./ner/filtered_ner_drugs_chemicals.csv', escapechar='\\')
     list_drugs_chemicals = df['word'].to_list()
     list_drugs_chemicals = [str(x) for x in list_drugs_chemicals]
     
-    df = pd.read_csv('./ner/filtered_ner_dna_rna.csv')
+    df = pd.read_csv('./ner/filtered_ner_dna_rna.csv', escapechar='\\')
     list_dna_rna = df['word'].to_list()
     list_dna_rna = [str(x) for x in list_dna_rna]
     
-    df = pd.read_csv('./ner/filtered_ner_proteins.csv')
+    df = pd.read_csv('./ner/filtered_ner_proteins.csv', escapechar='\\')
     list_proteins = df['word'].to_list()
     list_proteins = [str(x) for x in list_proteins]
     
-    df = pd.read_csv('./ner/filtered_ner_cellular.csv')
+    df = pd.read_csv('./ner/filtered_ner_cellular.csv', escapechar='\\')
     list_cellular = df['word'].to_list()
     list_cellular = [str(x) for x in list_cellular]
     
