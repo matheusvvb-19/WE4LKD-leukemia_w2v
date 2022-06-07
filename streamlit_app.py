@@ -31,13 +31,12 @@ def list_from_txt(file_path):
 
 @st.cache
 def create_entities_lists():    
-    list_diseases = list_from_txt('./list_diseases.txt')
     list_drugs_chemicals = list_from_txt('./list_drugs_chemicals.txt')
     list_dna_rna = list_from_txt('./list_dna_rna.txt')
     list_proteins = list_from_txt('./list_proteins.txt')
     list_cellular = list_from_txt('./list_cellular.txt')
     
-    return list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
+    return list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
 
 @st.cache
 def read_fda_drugs_file():
