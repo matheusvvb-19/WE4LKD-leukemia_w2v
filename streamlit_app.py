@@ -31,10 +31,10 @@ def list_from_txt(file_path):
 
 @st.cache
 def create_entities_lists():    
-    list_drugs_chemicals = list_from_txt('./list_drugs_chemicals.txt')
-    list_dna_rna = list_from_txt('./list_dna_rna.txt')
-    list_proteins = list_from_txt('./list_proteins.txt')
-    list_cellular = list_from_txt('./list_cellular.txt')
+    list_drugs_chemicals = list_from_txt('./ner/list_drugs_chemicals.txt')
+    list_dna_rna = list_from_txt('./ner/list_dna_rna.txt')
+    list_proteins = list_from_txt('./ner/list_proteins.txt')
+    list_cellular = list_from_txt('./ner/list_cellular.txt')
     
     return list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
 
