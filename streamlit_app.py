@@ -550,11 +550,10 @@ if __name__ == '__main__':
         elif loaded_model == '10: 1900 - 2021':
           model = pickle.load(open('./models_streamlit_app/model_1900_2021.model', 'rb'))
         model.init_sims()
-        
-    st.markdown('tamanho do vocabulário: {}'.format(len(model.wv.vocab)))
 
     restrict_domain = st.sidebar.selectbox("Restrict vocabulary domain:",
     ('general', 'NCI cancer drugs', 'FDA drugs'))
+    
     if restrict_domain != 'general':
         if restrict_domain == 'NCI cancer drugs':
             domains_table = read_domain_table()
@@ -577,19 +576,12 @@ if __name__ == '__main__':
             entities_list = [list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular]
             selected_entities = [drugs_chemicals, dna_rna, proteins, cellular]
             
-            st.markdown('drugs/chemicals: {}'.format(len(list_drugs_chemicals)))
-            st.markdown('dna/rna: {}'.format(len(list_dna_rna)))
-            st.markdown('proteins: {}'.format(len(list_proteins)))
-            st.markdown('cellular: {}'.format(len(list_cellular)))
-            
             specific_domain = []
             for list_name, selected in zip(entities_list, selected_entities):
                 if (selected == True):
                     specific_domain.extend(list_name)
                     
-            st.markdown(len(specific_domain))
             wv_restrict_w2v(model, set(specific_domain), True)
-            st.markdown('novo vocabulário: {}'.format(len(model.wv.vocab)))
             
         else:
             common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
