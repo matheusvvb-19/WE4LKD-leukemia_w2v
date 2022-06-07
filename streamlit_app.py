@@ -31,11 +31,7 @@ def process_entity_list(entity_list):
     return entity_list
 
 @st.cache
-def create_entities_lists():
-    df = pd.read_csv('./ner/filtered_ner_diseases.csv', escapechar='\\')
-    list_diseases = df['word'].to_list()
-    list_diseases = [str(x) for x in list_diseases]
-    
+def create_entities_lists():    
     df = pd.read_csv('./ner/filtered_ner_drugs_chemicals.csv', escapechar='\\')
     list_drugs_chemicals = df['word'].to_list()
     list_drugs_chemicals = [str(x) for x in list_drugs_chemicals]
@@ -52,7 +48,6 @@ def create_entities_lists():
     list_cellular = df['word'].to_list()
     list_cellular = [str(x) for x in list_cellular]
     
-    list_diseases = process_entity_list(list_diseases)
     list_drugs_chemicals = process_entity_list(list_drugs_chemicals)
     list_dna_rna = process_entity_list(list_dna_rna)
     list_proteins = process_entity_list(list_proteins)
@@ -63,14 +58,13 @@ def create_entities_lists():
     english_words = english_words.decode('utf-8').replace('\r', ' ').replace('\n', '')
     english_words = english_words.split(' ')
     english_words = [x.strip() for x in english_words]
-    
-    list_diseases = [x for x in list_diseases if x not in english_words]
+
     list_drugs_chemicals = [x for x in list_drugs_chemicals if x not in english_words]
     list_dna_rna = [x for x in list_dna_rna if x not in english_words]
     list_proteins = [x for x in list_proteins if x not in english_words]
     list_cellular = [x for x in list_cellular if x not in english_words]
     
-    return list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
+    return list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
 
 @st.cache
 def read_fda_drugs_file():
@@ -601,18 +595,16 @@ if __name__ == '__main__':
     else:
         st.sidebar.markdown('Filter vocabulary by entities:')
         cellular = st.sidebar.checkbox('Cellular')
-        diseases = st.sidebar.checkbox('Diseases')
         dna_rna = st.sidebar.checkbox('DNA/RNA')
         drugs_chemicals = st.sidebar.checkbox('Drugs/Chemicals')
         proteins = st.sidebar.checkbox('Proteins')
         
         
-        if (diseases or drugs_chemicals or dna_rna or proteins or cellular):
-            list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular = create_entities_lists()
-            entities_list = [list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular]
-            selected_entities = [diseases, drugs_chemicals, dna_rna, proteins, cellular]
+        if (drugs_chemicals or dna_rna or proteins or cellular):
+            list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular = create_entities_lists()
+            entities_list = [list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular]
+            selected_entities = [drugs_chemicals, dna_rna, proteins, cellular]
             
-            st.markdown('diseases: {}'.format(len(list_diseases)))
             st.markdown('drugs/chemicals: {}'.format(len(list_drugs_chemicals)))
             st.markdown('dna/rna: {}'.format(len(list_dna_rna)))
             st.markdown('proteins: {}'.format(len(list_proteins)))
@@ -624,7 +616,8 @@ if __name__ == '__main__':
                     specific_domain.extend(list_name)
                     
             st.markdown(len(specific_domain))
-            wv_restrict_w2v(model, specific_domain, True)
+            wv_restrict_w2v(model, set(specific_domain), True)
+            st.markdown('novo vocabulário: {}'.format(len(model.wv.vocab)))
             
         else:
             common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
