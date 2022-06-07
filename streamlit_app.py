@@ -16,55 +16,28 @@ specific_domain = []
 base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozogamicin', 'midostaurin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
 
 # FUNCTIONS:
-def process_entity_list(entity_list):
-    entity_list = list(dict.fromkeys(entity_list))
-    for index, s in enumerate(entity_list):
-        entity_list[index] = re.sub('<[^>]+>', '', s)
-        entity_list[index] = re.sub('\\s+', ' ', s)
-        entity_list[index] = re.sub('([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '', s)
-        entity_list[index] = re.sub('\d+\W+\d+', '', s)
-        entity_list[index] = s.replace('/', ' ')
-
-    entity_list = [x.split(' ') for x in entity_list]
-    entity_list = [val for sublist in entity_list for val in sublist]
+def list_from_txt(file_path):
+    '''Creates a list of itens based on a .txt file, each line becomes an item.
     
-    return entity_list
+    Args: 
+      file_path: the path where the .txt file was created. 
+    '''
+    
+    strings_list = []
+    with open (file_path, 'rt', encoding='utf-8') as file:
+        for line in file:
+            strings_list.append(line.rstrip('\n'))
+    return strings_list
 
 @st.cache
 def create_entities_lists():    
-    df = pd.read_csv('./ner/filtered_ner_drugs_chemicals.csv', escapechar='\\')
-    list_drugs_chemicals = df['word'].to_list()
-    list_drugs_chemicals = [str(x) for x in list_drugs_chemicals]
+    list_diseases = list_from_txt('./list_diseases.txt')
+    list_drugs_chemicals = list_from_txt('./list_drugs_chemicals.txt')
+    list_dna_rna = list_from_txt('./list_dna_rna.txt')
+    list_proteins = list_from_txt('./list_proteins.txt')
+    list_cellular = list_from_txt('./list_cellular.txt')
     
-    df = pd.read_csv('./ner/filtered_ner_dna_rna.csv', escapechar='\\')
-    list_dna_rna = df['word'].to_list()
-    list_dna_rna = [str(x) for x in list_dna_rna]
-    
-    df = pd.read_csv('./ner/filtered_ner_proteins.csv', escapechar='\\')
-    list_proteins = df['word'].to_list()
-    list_proteins = [str(x) for x in list_proteins]
-    
-    df = pd.read_csv('./ner/filtered_ner_cellular.csv', escapechar='\\')
-    list_cellular = df['word'].to_list()
-    list_cellular = [str(x) for x in list_cellular]
-    
-    list_drugs_chemicals = process_entity_list(list_drugs_chemicals)
-    list_dna_rna = process_entity_list(list_dna_rna)
-    list_proteins = process_entity_list(list_proteins)
-    list_cellular = process_entity_list(list_cellular)
-    
-    archive = zipfile.ZipFile('english-words.zip', 'r')
-    english_words = archive.read('english-words.txt')
-    english_words = english_words.decode('utf-8').replace('\r', ' ').replace('\n', '')
-    english_words = english_words.split(' ')
-    english_words = [x.strip() for x in english_words]
-
-    list_drugs_chemicals = [x for x in list_drugs_chemicals if x not in english_words]
-    list_dna_rna = [x for x in list_dna_rna if x not in english_words]
-    list_proteins = [x for x in list_proteins if x not in english_words]
-    list_cellular = [x for x in list_cellular if x not in english_words]
-    
-    return list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
+    return list_diseases, list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
 
 @st.cache
 def read_fda_drugs_file():
