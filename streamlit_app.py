@@ -1,7 +1,7 @@
 # based on https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
 
 # IMPORTS:
-import plotly, pickle, csv, re, string
+import plotly, pickle, csv, re, string, zipfile
 import plotly.graph_objs as go
 import streamlit as st
 import pandas as pd
@@ -58,10 +58,11 @@ def create_entities_lists():
     list_proteins = process_entity_list(list_proteins)
     list_cellular = process_entity_list(list_cellular)
     
-    english_words = []
-    with open ('./english-words.txt', 'rt', encoding='utf-8') as file:
-        for line in file:
-            english_words.append(line.rstrip('\n'))
+    archive = zipfile.ZipFile('english-words.zip', 'r')
+    english_words = archive.read('english-words.txt')
+    english_words = english_words.decode('utf-8').replace('\r', ' ').replace('\n', '')
+    english_words = english_words.split(' ')
+    english_words = [x.strip() for x in english_words]
     
     list_diseases = [x for x in list_diseases if x not in english_words]
     list_drugs_chemicals = [x for x in list_drugs_chemicals if x not in english_words]
