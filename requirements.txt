@@ -27,7 +27,7 @@ Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 Markdown==3.3.4
 nltk==3.6.6
-numpy==1.22
+numpy==1.21.6
 packaging==20.9
 plotly==4.9.0
 protobuf==3.15.5
