@@ -604,7 +604,7 @@ if __name__ == '__main__':
         5, 20, (5), 5)
 
     annotation = st.sidebar.radio(
-         "Enable or disable dot plot labels",
+         "Dot plot labels",
          ('On', 'Off'))  
 
     if dim_red == 'TSNE':
