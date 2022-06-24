@@ -335,9 +335,9 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
                     x = two_dim[count:count+topn,0], 
                     y = two_dim[count:count+topn,1],  
                     text = words[count:count+topn] if annotation == 'On' else '',
+                    customdata = words,
                     hovertemplate =
-                      "<b>Word</b>: %{words[count:count+topn]}<br>"+
-                      "Related word: %{user_input[i]}",
+                      "<b>Word</b>: %{customdata}",
                     name = user_input[i],
                     textposition = "top center",
                     textfont_size = 20,
