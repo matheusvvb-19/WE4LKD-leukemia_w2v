@@ -214,6 +214,9 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
                         y = three_dim[count:count+topn,1],  
                         z = three_dim[count:count+topn,2],
                         text = words[count:count+topn] if annotation == 'On' else '',
+                        customdata = words,
+                        hovertemplate =
+                          "<b>Word</b>: %{customdata}",
                         name = user_input[i],
                         textposition = "top center",
                         textfont_size = 30,
