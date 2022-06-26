@@ -30,7 +30,9 @@ def list_from_txt(file_path):
     return strings_list
 
 @st.cache
-def create_entities_lists():    
+def create_entities_lists():
+    '''Creates the lists of possible entity filters by reading the words in the .txt files. Only executed once.'''
+    
     list_drugs_chemicals = list_from_txt('./ner/list_drugs_chemicals.txt')
     list_dna_rna = list_from_txt('./ner/list_dna_rna.txt')
     list_proteins = list_from_txt('./ner/list_proteins.txt')
@@ -254,8 +256,11 @@ def display_scatterplot_3D(model, user_input=None, words=None, label=None, color
             margin = {'l': 0, 'r': 0, 'b': 0, 't': 0},
             showlegend=True,
             legend=dict(
+            orientation='h',
+            yanchor='bottom',
+            xanchor='right',
             x=1,
-            y=0.5,
+            y=1.02,
             font=dict(
                 family="Courier New",
                 size=25,
