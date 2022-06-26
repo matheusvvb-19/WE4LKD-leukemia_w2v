@@ -677,7 +677,7 @@ if __name__ == '__main__':
         for w in user_input:
             if w not in model.wv.vocab:
                 user_input.remove(w)
-                st.warning("The word {} is not present in model's vocabulary and it will be ignored.\nIf you only searched for {}, reset the search and type a new word.".format(w, w))
+                st.warning("The word {} is not present in model's vocabulary and it will be ignored.<br>If you only searched for {}, reset the search and type a new word.".format(w, w))
 
         if len(user_input) > 0:
             result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
