@@ -381,6 +381,9 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
             font_size=20, 
             font_family="Courier New"),
         legend=dict(
+        orientation='h',
+        yanchor='bottom',
+        xanchor='right',
         x=1,
         y=0.5,
         font=dict(
