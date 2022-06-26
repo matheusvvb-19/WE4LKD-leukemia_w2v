@@ -677,7 +677,7 @@ if __name__ == '__main__':
         for w in user_input:
             if w not in model.wv.vocab:
                 user_input.remove(w)
-                st.error("The word {} is not present in model's vocabulary and will be ignored.".format(w))
+                st.error("The word {} is not present in model's vocabulary and it will be ignored.".format(w))
 
         if len(user_input) > 0:
             result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
@@ -687,7 +687,7 @@ if __name__ == '__main__':
                 else:
                     display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
-    if user_input != '' or len(user_input) > 0:
+    if len(user_input) > 0:
         if 'widget' not in st.session_state:
             st.session_state['widget'] = 0
 
