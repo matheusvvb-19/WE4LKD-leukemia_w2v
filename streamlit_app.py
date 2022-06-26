@@ -385,7 +385,7 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
         yanchor='bottom',
         xanchor='right',
         x=1,
-        y=0.5,
+        y=1.02,
         font=dict(
             family="Courier New",
             size=25,
