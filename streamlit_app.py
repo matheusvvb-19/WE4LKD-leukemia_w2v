@@ -680,7 +680,7 @@ if __name__ == '__main__':
         else:
             display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
-    if user_input != '':
+    if user_input != '' or len(user_input) > 0:
         if 'widget' not in st.session_state:
             st.session_state['widget'] = 0
 
