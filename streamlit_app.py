@@ -631,10 +631,40 @@ if __name__ == '__main__':
         learning_rate = 0
         iteration = 0    
 
+        
+    reset_search = st.sidebar.button("Reset search", key='clear_session_button', on_click=clear_session_state, help='Delete all previous search record and start a new one')
+    if reset_search:
+        st.session_state['words_search'] = ''
+        user_input = ''
+
+    st.sidebar.header('GitHub Repository')
+    st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
+    
+    header_container = st.container()
+    with header_container:
+        st.title('Embedding Viewer')
+        st.header('Word Embedding Visualization Based on Cosine Similarity')
+        with st.expander('How to use this app'):
+            st.markdown('**Sidebar**')
+            st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation since they are often outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
+            st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D). You can also search for specific words by typing them into the text field. For more than one word, separate it with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
+            st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider and enable or disable the labels of each point on the plot. If you want to restart your exploration, click on the "Reset search" button and type the new word(s) in the text field.')
+
+            st.markdown('**Main window**')
+            st.markdown('_Hint: To see this window content better, you can minimize the sidebar._')
+            st.markdown('The first dot plot shows the words similar to each input and their distribution in vectorial space. You can move the plot, crop a specific area or hide some points by clicking on the words in the right caption. Then, the table below the dot plot shows the cosine similarity and the rank (ordinal position) from the base compounds of this project - header of the table - and the words you chose to explore. Below the table, the app generates bar plots with similar words for each term you explored. Also, you can search for words returned by your previous search, clicking on the button with the term. This way, you can explore the neighborhood of your original input and find out the context of them.')
+    
+    plot_container = st.empty()
     if user_input == '':
         similar_word = None
         labels = None
         color_map = None
+        
+        with plot_container:
+            if dimension == '2D':
+                display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+            else:
+                display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
     else:
         if 'user_input' not in st.session_state:
@@ -649,37 +679,13 @@ if __name__ == '__main__':
                 user_input.remove(w)
                 st.error("The word {} is not present in model's vocabulary and will be ignored.".format(w))
 
-        result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)
-
-    reset_search = st.sidebar.button("Reset search", key='clear_session_button', on_click=clear_session_state, help='Delete all previous search record and start a new one')
-    if reset_search:
-        st.session_state['words_search'] = ''
-        user_input = ''
-
-    st.sidebar.header('GitHub Repository')
-    st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
-
-    header_container = st.container()
-    with header_container:
-        st.title('Embedding Viewer')
-        st.header('Word Embedding Visualization Based on Cosine Similarity')
-        with st.expander('How to use this app'):
-            st.markdown('**Sidebar**')
-            st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation since they are often outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
-            st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D). You can also search for specific words by typing them into the text field. For more than one word, separate it with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
-            st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider and enable or disable the labels of each point on the plot. If you want to restart your exploration, click on the "Reset search" button and type the new word(s) in the text field.')
-
-            st.markdown('**Main window**')
-            st.markdown('_Hint: To see this window content better, you can minimize the sidebar._')
-            st.markdown('The first dot plot shows the words similar to each input and their distribution in vectorial space. You can move the plot, crop a specific area or hide some points by clicking on the words in the right caption. Then, the table below the dot plot shows the cosine similarity and the rank (ordinal position) from the base compounds of this project - header of the table - and the words you chose to explore. Below the table, the app generates bar plots with similar words for each term you explored. Also, you can search for words returned by your previous search, clicking on the button with the term. This way, you can explore the neighborhood of your original input and find out the context of them.')
-
-    plot_container = st.empty()
-    if len(user_input) > 0:
-        with plot_container:
-            if dimension == '2D':
-                display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-            else:
-                display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+        if len(user_input) > 0:
+            result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
+            with plot_container:
+                if dimension == '2D':
+                    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+                else:
+                    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
     if user_input != '' or len(user_input) > 0:
         if 'widget' not in st.session_state:
