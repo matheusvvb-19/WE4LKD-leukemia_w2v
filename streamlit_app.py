@@ -430,7 +430,7 @@ def set_page_layout():
     
     hide_streamlit_style = """
             <style>
-            .css-zbg2rx, .css-sygy1k, .css-18e3th9 {
+            .css-zbg2rx, .css-sygy1k, .css-18e3th9, .css-1adrfps {
                 padding-top: 2rem !important;
             }
             
