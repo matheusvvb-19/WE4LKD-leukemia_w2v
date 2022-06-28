@@ -430,11 +430,7 @@ def set_page_layout():
      )
     
     hide_streamlit_style = """
-            <style>
-            .css-zbg2rx, .css-sygy1k, .css-18e3th9, .css-1adrfps {
-                padding-top: 2rem !important;
-            }
-            
+            <style>           
             footer {
                 visibility: hidden;
             }
@@ -683,7 +679,6 @@ if __name__ == '__main__':
         else:
             user_input = st.session_state['user_input']
 
-            
         matches = []
         for w in user_input:
             found = list(filter(lambda x: w in x, model.wv.vocab))
@@ -698,11 +693,11 @@ if __name__ == '__main__':
 
         if st.session_state['execution_counter'] == 0 and len(matches) > 0:
             st.markdown('There are more than one embedding that contains the word you typed. Choose the one that you want to use in your exploration.')
+            st.markdown(matches)
             for w in matches:
                 st.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
             
         else:
-            #user_input = st.session_state['user_input']
             if len(user_input) > 0:
                 result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
                 with plot_container:
