@@ -481,6 +481,7 @@ def plot_data_config(user_input, model):
 
 def deep_search(words_session_state, new_word):
     '''Itertive serach for terms, adds the new term to the session_state variable and ikncrements the execution counter.
+    
     Args:
       words_session_state: words saved in the session_state variable 'user_input'.
       new_word: new term to be added to the session_state variable.
@@ -668,24 +669,37 @@ if __name__ == '__main__':
 
     else:
         if 'user_input' not in st.session_state:
-            user_input = [x.strip().lower() for x in user_input.split(',') if len(x) > 1]
+            user_input = [x.strip().lower() for x in user_input.split(',') if len(x) >= 2]
             st.session_state['user_input'] = user_input
 
         else:
             user_input = st.session_state['user_input']
 
+            
+        matches = []
+        original_search_words = len(user_input)
         for w in user_input:
-            if w not in model.wv.vocab:
+            found = list(filter(lambda x: w in x, model.wv.vocab))
+            if len(found) > 0:
+                matches.extend(found)
+                
+            else:
                 user_input.remove(w)
                 st.warning("The word {} is not present in model's vocabulary and it will be ignored. If you only searched for {}, reset the search and type a new word.".format(w, w))
 
-        if len(user_input) > 0:
-            result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
-            with plot_container:
-                if dimension == '2D':
-                    display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-                else:
-                    display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+        if len(matches) != original_search_words:
+            st.markdown('There are more than one word embedding with the word you typed. Choose the one that you want to use in your exploration.')
+            for w in matches:
+                st.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
+            
+        else:
+            if len(user_input) > 0:
+                result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
+                with plot_container:
+                    if dimension == '2D':
+                        display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
+                    else:
+                        display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
     if len(user_input) > 0:
         if 'widget' not in st.session_state:
