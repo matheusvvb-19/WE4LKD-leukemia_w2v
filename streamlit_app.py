@@ -690,6 +690,7 @@ if __name__ == '__main__':
             if len(found) > 0:
                 if w not in found:
                     matches.extend(found)
+                    user_input.remove(w)
                 
             else:
                 user_input.remove(w)
@@ -701,7 +702,7 @@ if __name__ == '__main__':
                 st.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
             
         else:
-            user_input = st.session_state['user_input']
+            #user_input = st.session_state['user_input']
             if len(user_input) > 0:
                 result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
                 with plot_container:
