@@ -410,6 +410,7 @@ def display_scatterplot_2D(model, user_input=None, words=None, label=None, color
 
 def split_list(items_list, n):
     '''Divide a list into sublists of size n.
+    
     Args:
       items_list: original list.
       n: number of sublists to be created.
@@ -452,7 +453,8 @@ def set_page_layout():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 def plot_data_config(user_input, model):
-    '''Calculates the variables used for the scatter plot (2D or 3D) funcitons.
+    '''Calculates the variables used for the scatter plot (2D or 3D) functions.
+    
     Args:
       w2v: Word2Vec model.
       restricted_word_set: list of words of the domain.
@@ -702,87 +704,86 @@ if __name__ == '__main__':
                     else:
                         display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
-    if len(user_input) > 0:
-        if 'widget' not in st.session_state:
-            st.session_state['widget'] = 0
+            if 'widget' not in st.session_state:
+                st.session_state['widget'] = 0
 
-        if 'execution_counter' not in st.session_state:
-            st.session_state['execution_counter'] = 0
+            if 'execution_counter' not in st.session_state:
+                st.session_state['execution_counter'] = 0
 
-        seed(st.session_state['widget'])
+            seed(st.session_state['widget'])
 
-        table_section = st.container()
-        with table_section:
-            table_title_div = st.container()
-            with table_title_div:
-                st.header('Similarity between the search terms and the base compounds.')
-                st.markdown("Size of model's vocabulary: {}".format(len(model.wv.vocab)))
-                table_cells_div = st.empty()
-                with table_cells_div:
-                    similarities_table_streamlit(user_input, model)
+            table_section = st.container()
+            with table_section:
+                table_title_div = st.container()
+                with table_title_div:
+                    st.header('Similarity between the search terms and the base compounds.')
+                    st.markdown("Size of model's vocabulary: {}".format(len(model.wv.vocab)))
+                    table_cells_div = st.empty()
+                    with table_cells_div:
+                        similarities_table_streamlit(user_input, model)
 
-        subplots_section = st.container()
-        with subplots_section:
-            subplots_title_div = subplots_section.container()
-            with subplots_title_div:
-                st.header('{} most similar words for each input.'.format(top_n))
+            subplots_section = st.container()
+            with subplots_section:
+                subplots_title_div = subplots_section.container()
+                with subplots_title_div:
+                    st.header('{} most similar words for each input.'.format(top_n))
 
-            number_terms = len(user_input)
-            previous_number_terms = len(user_input)
-            count=0
-            i=0
-            options_list = list(split_list(similar_word[:-number_terms], number_terms))
+                number_terms = len(user_input)
+                previous_number_terms = len(user_input)
+                count=0
+                i=0
+                options_list = list(split_list(similar_word[:-number_terms], number_terms))
 
-            if number_terms % 2 == 0:
-                number_containers = int(number_terms/2)
-            else:
-                number_containers = int(number_terms/2) + 1
+                if number_terms % 2 == 0:
+                    number_containers = int(number_terms/2)
+                else:
+                    number_containers = int(number_terms/2) + 1
 
-            previous_number_containers = number_containers        
-            subplots_plots_div = subplots_section.container()
-            with subplots_plots_div:
-                for j in range(number_containers):
-                    subplots_plots_div_row = subplots_plots_div.container()
-                    col1, col2 = subplots_plots_div_row.columns(2)
-                    col1_plot = col1.empty()
-                    col2_plot = col2.empty()
+                previous_number_containers = number_containers        
+                subplots_plots_div = subplots_section.container()
+                with subplots_plots_div:
+                    for j in range(number_containers):
+                        subplots_plots_div_row = subplots_plots_div.container()
+                        col1, col2 = subplots_plots_div_row.columns(2)
+                        col1_plot = col1.empty()
+                        col2_plot = col2.empty()
 
-                    with col1_plot:
-                        horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
-
-                    i = i + 1
-                    count = count + top_n
-                    try:
-                        with col2_plot:
+                        with col1_plot:
                             horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
-                    except:
-                        pass
 
-                    count = count + top_n
-                    i = i + 1     
+                        i = i + 1
+                        count = count + top_n
+                        try:
+                            with col2_plot:
+                                horizontal_bar(similar_word[count:count+top_n], similarity[count:count+top_n], user_input[i])
+                        except:
+                            pass
 
-        form_section = st.container()
-        with form_section:
-            form_title_div = st.container()
-            with form_title_div:
-                st.write('You can go deep and search for one of the terms returned by your search. Click on the word that you want to add to the exploration - choose only one:')
-                st.write('The words are in descending order of similarity.')
+                        count = count + top_n
+                        i = i + 1     
 
-            if (st.session_state['execution_counter'] > 0):
-                last_word_search = len(st.session_state['user_input']) - 1
-                form_selection_div = st.container()
-                with form_selection_div:
-                    st.markdown('**{}**'.format(user_input[last_word_search]))
-                    for w in options_list[last_word_search]:
-                        st.session_state['widget'] += 1
-                        st.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
+            form_section = st.container()
+            with form_section:
+                form_title_div = st.container()
+                with form_title_div:
+                    st.write('You can go deep and search for one of the terms returned by your search. Click on the word that you want to add to the exploration - choose only one:')
+                    st.write('The words are in descending order of similarity.')
 
-            else:
-                form_selection_div = st.empty()
-                with form_selection_div:
-                    cols = form_selection_div.columns(number_terms)
-                    for k, col in enumerate(cols):
-                        col.markdown('**{}**'.format(user_input[k]))
-                        for w in options_list[k]:
+                if (st.session_state['execution_counter'] > 0):
+                    last_word_search = len(st.session_state['user_input']) - 1
+                    form_selection_div = st.container()
+                    with form_selection_div:
+                        st.markdown('**{}**'.format(user_input[last_word_search]))
+                        for w in options_list[last_word_search]:
                             st.session_state['widget'] += 1
-                            col.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
+                            st.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
+
+                else:
+                    form_selection_div = st.empty()
+                    with form_selection_div:
+                        cols = form_selection_div.columns(number_terms)
+                        for k, col in enumerate(cols):
+                            col.markdown('**{}**'.format(user_input[k]))
+                            for w in options_list[k]:
+                                st.session_state['widget'] += 1
+                                col.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
