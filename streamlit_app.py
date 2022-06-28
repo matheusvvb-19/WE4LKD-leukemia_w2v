@@ -699,10 +699,9 @@ if __name__ == '__main__':
             st.markdown('There are more than one embedding that contains the word you typed. Choose the one that you want to use in your exploration.')
             for w in matches:
                 st.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
-                
-            user_input = st.session_state['user_input']
             
         else:
+            user_input = st.session_state['user_input']
             if len(user_input) > 0:
                 result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
                 with plot_container:
