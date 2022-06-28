@@ -533,6 +533,12 @@ def load_model(model_name, loaded=False):
 # MAIN PROGRAM:
 if __name__ == '__main__':
     set_page_layout()
+    
+    if 'widget' not in st.session_state:
+                st.session_state['widget'] = 0
+
+    if 'execution_counter' not in st.session_state:
+        st.session_state['execution_counter'] = 0
 
     # sidebar widgets:
     st.sidebar.header('Models exploration settings')
@@ -703,12 +709,6 @@ if __name__ == '__main__':
                         display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
                     else:
                         display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
-
-            if 'widget' not in st.session_state:
-                st.session_state['widget'] = 0
-
-            if 'execution_counter' not in st.session_state:
-                st.session_state['execution_counter'] = 0
 
             seed(st.session_state['widget'])
 
