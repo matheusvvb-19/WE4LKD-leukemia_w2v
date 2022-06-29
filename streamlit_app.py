@@ -680,6 +680,7 @@ if __name__ == '__main__':
             user_input = st.session_state['user_input']
 
         matches = []
+        st.markdown(user_input)
         for w in user_input:
             found = list(filter(lambda x: w in x, model.wv.vocab))
             if len(found) > 0:
