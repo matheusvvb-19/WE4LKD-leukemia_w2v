@@ -680,10 +680,8 @@ if __name__ == '__main__':
             user_input = st.session_state['user_input']
 
         matches = []
-        st.markdown(user_input)
         for w in user_input:
             found = list(filter(lambda x: w in x, model.wv.vocab))
-            st.markdown(found)
             if len(found) > 0:
                 if w not in found:
                     matches.extend(found)
@@ -695,7 +693,6 @@ if __name__ == '__main__':
 
         if st.session_state['execution_counter'] == 0 and len(matches) > 0:
             st.markdown('There are more than one embedding that contains the word you typed. Choose the one that you want to use in your exploration.')
-            st.markdown(matches)
             for w in matches:
                 st.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
             
