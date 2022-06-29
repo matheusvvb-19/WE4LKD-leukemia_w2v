@@ -685,7 +685,7 @@ if __name__ == '__main__':
             if len(found) > 0:
                 if w not in found:
                     matches.extend(found)
-                    #user_input.remove(w)
+                    user_input.remove(w)
                 
             else:
                 user_input.remove(w)
