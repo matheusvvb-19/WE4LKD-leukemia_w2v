@@ -680,17 +680,17 @@ if __name__ == '__main__':
             user_input = st.session_state['user_input']
 
         if st.session_state['execution_counter'] == 0:
-            #st.markdown('user_input original:')
-            #st.markdown(user_input)
+            st.markdown('user_input original:')
+            st.markdown(user_input)
             matches = []
             words_to_remove = []
             for w in user_input:
-                #st.markdown('w: {}'.format(w))
+                st.markdown('w: {}'.format(w))
                 found = list(filter(lambda x: w in x, model.wv.vocab))
-                #st.markdown(found)
+                st.markdown(found)
                 if len(found) > 0:
                     if w not in found:
-                        #st.markdown('{} não está presente em found'.format(w))
+                        st.markdown('{} não está presente em found'.format(w))
                         matches.extend(found)
                         words_to_remove.append(w)
 
@@ -698,9 +698,9 @@ if __name__ == '__main__':
                     user_input.remove(w)
                     st.warning("The word {} is not present in model's vocabulary and it will be ignored. If you only searched for {}, reset the search and type a new word.".format(w, w))
 
-            #st.markdown('nova user_input')
-            #st.markdown(user_input)
             user_input = [x for x in user_input if x not in words_to_remove]
+            st.markdown('nova user_input')
+            st.markdown(user_input)
             
         if st.session_state['execution_counter'] == 0 and len(matches) > 0:
             st.markdown('There are more than one embedding that contains the word you typed. Choose the one that you want to use in your exploration.')
