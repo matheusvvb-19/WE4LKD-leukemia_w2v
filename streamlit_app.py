@@ -701,7 +701,6 @@ if __name__ == '__main__':
 
             # removendo de user_input as palavras que não foram encontradas (por inteiro) no vocabulário, mas apresentavam variações:
             user_input = [x for x in user_input if x not in words_to_remove]
-            st.markdown(user_input)
             st.session_state['user_input'] = user_input                 # atualizando o valor da variável no session_state
         
         # se essa não for a primeira execução, apenas recupera as palavras previamente buscadas salvas em session_state:
