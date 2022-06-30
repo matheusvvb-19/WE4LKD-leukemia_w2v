@@ -528,6 +528,7 @@ def load_model(model_name, loaded=False):
     
 # MAIN PROGRAM:
 if __name__ == '__main__':
+    vocabulary_restricted = False
     set_page_layout()
     
     if 'widget' not in st.session_state:
@@ -580,11 +581,13 @@ if __name__ == '__main__':
         if restrict_domain == 'NCI cancer drugs':
             domains_table = read_domain_table()
             specific_domain = domains_table['name'].tolist()
-            wv_restrict_w2v(model, set(specific_domain), True)
             
         elif restrict_domain == 'FDA drugs':
             specific_domain = read_fda_drugs_file()
-            wv_restrict_w2v(model, set(specific_domain), True)
+        
+        wv_restrict_w2v(model, set(specific_domain), True)
+        vocabulary_restricted = True
+        
     else:
         st.sidebar.markdown('Filter vocabulary by entities:')
         cellular = st.sidebar.checkbox('Cellular')
@@ -604,6 +607,7 @@ if __name__ == '__main__':
                     specific_domain.extend(list_name)
                     
             wv_restrict_w2v(model, set(specific_domain), True)
+            vocabulary_restricted = True
             
         else:
             common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
@@ -611,7 +615,8 @@ if __name__ == '__main__':
             if common_words_number != 'None':
                 common_words = get_most_common(int(common_words_number))
                 wv_restrict_w2v(model, set(common_words))
-
+                vocabulary_restricted = True        
+        
     dim_red = st.sidebar.selectbox(
      'Select the dimensionality reduction method',
      ('TSNE','PCA'))
@@ -714,6 +719,16 @@ if __name__ == '__main__':
             
         else:
             if len(user_input) > 0:
+                if vocabulary_restricted:
+                    words_to_remove = []
+                    for w in user_input:
+                        if w not in model.wv.vocab:
+                            words_to_remove.append(w)
+                            st.warning("The word {} is not present in model's vocabulary and it will be ignored. If you only searched for {}, reset the search and type a new word.".format(w, w))
+                    
+                    user_input = [x for x in user_input if x not in words_to_remove]
+                    st.session_state['user_input'] = user_input                 # atualizando o valor da variável no session_state
+            
                 result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
                 with plot_container:
                     if dimension == '2D':
