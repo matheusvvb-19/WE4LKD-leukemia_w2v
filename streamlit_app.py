@@ -692,7 +692,7 @@ if __name__ == '__main__':
                     if w not in found:
                         #st.markdown('{} não está presente em found'.format(w))
                         matches.extend(found)
-                        words_to_remove(w)
+                        words_to_remove.append(w)
 
                 else:
                     user_input.remove(w)
