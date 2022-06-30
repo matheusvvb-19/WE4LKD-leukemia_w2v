@@ -694,9 +694,9 @@ if __name__ == '__main__':
                         matches.extend(found)           # e as opções de palavras semelhantes são salvas na lista matches
                         words_to_remove.append(w)
 
-                # se nenhuma embedding conter como substring a palavra digitada pelo usuário, já se pode removê-la de user_input e avisar ao usuário:
+                # se nenhuma embedding conter como substring a palavra digitada pelo usuário, ela também é adicionada à lista de futuras palavras a serem eliminadas e um aviso ao usuário é feito:
                 else:
-                    user_input.remove(w)
+                    words_to_remove.append(w)
                     st.warning("The word {} is not present in model's vocabulary and it will be ignored. If you only searched for {}, reset the search and type a new word.".format(w, w))
 
             # removendo de user_input as palavras que não foram encontradas (por inteiro) no vocabulário, mas apresentavam variações:
