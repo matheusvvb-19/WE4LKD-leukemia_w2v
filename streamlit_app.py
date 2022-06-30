@@ -675,32 +675,35 @@ if __name__ == '__main__':
                 display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
     else:
+        # se o usuário digitar algo no campo de entrada de texto, cria-se a lista de palavras de busca:
         user_input = [x.strip().lower() for x in user_input.split(',') if len(x) >= 2]
 
+        # se essa execução for a primeira, é necessário buscar pelas palavras digitadas no vocabulário do modelo:
         if st.session_state['execution_counter'] == 0:
-            st.markdown('user_input original:')
-            st.markdown(user_input)
             matches = []
             words_to_remove = []
+            
+            # para cada uma das palavras digitadas, busca no vocbulário palavras que a contenham como substring:
             for w in user_input:
-                st.markdown('w: {}'.format(w))
                 found = list(filter(lambda x: w in x, model.wv.vocab))
-                st.markdown(found)
+                
+                # se houver ao menos uma embedding que tenha como substring o termo digitado pelo usuário:
                 if len(found) > 0:
+                    # se o termo completo não for encontrado, ele terá que posteriormente ser removido de user_input - pois ele não existe no vocabulário
                     if w not in found:
-                        st.markdown('{} não está presente em found'.format(w))
-                        matches.extend(found)
+                        matches.extend(found)           # e as opções de palavras semelhantes são salvas na lista matches
                         words_to_remove.append(w)
 
+                # se nenhuma embedding conter como substring a palavra digitada pelo usuário, já se pode removê-la de user_input e avisar ao usuário:
                 else:
                     user_input.remove(w)
                     st.warning("The word {} is not present in model's vocabulary and it will be ignored. If you only searched for {}, reset the search and type a new word.".format(w, w))
 
+            # removendo de user_input as palavras que não foram encontradas (por inteiro) no vocabulário, mas apresentavam variações:
             user_input = [x for x in user_input if x not in words_to_remove]
-            st.session_state['user_input'] = user_input
-            st.markdown('nova user_input')
-            st.markdown(user_input)
+            st.session_state['user_input'] = user_input                 # atualizando o valor da variável no session_state
         
+        # se essa não for a primeira execução, apenas recupera as palavras previamente buscadas salvas em session_state:
         else:
             user_input = st.session_state['user_input']
             
