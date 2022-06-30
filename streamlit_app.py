@@ -531,10 +531,13 @@ if __name__ == '__main__':
     set_page_layout()
     
     if 'widget' not in st.session_state:
-                st.session_state['widget'] = 0
+        st.session_state['widget'] = 0
 
     if 'execution_counter' not in st.session_state:
         st.session_state['execution_counter'] = 0
+        
+    if 'user_input' not in st.session_state:
+        st.session_state['user_input'] = []
 
     # sidebar widgets:
     st.sidebar.header('Models exploration settings')
@@ -672,12 +675,7 @@ if __name__ == '__main__':
                 display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
     else:
-        if 'user_input' not in st.session_state:
-            user_input = [x.strip().lower() for x in user_input.split(',') if len(x) >= 2]
-            st.session_state['user_input'] = user_input
-
-        else:
-            user_input = st.session_state['user_input']
+        user_input = [x.strip().lower() for x in user_input.split(',') if len(x) >= 2]
 
         if st.session_state['execution_counter'] == 0:
             st.markdown('user_input original:')
@@ -699,8 +697,12 @@ if __name__ == '__main__':
                     st.warning("The word {} is not present in model's vocabulary and it will be ignored. If you only searched for {}, reset the search and type a new word.".format(w, w))
 
             user_input = [x for x in user_input if x not in words_to_remove]
+            st.seassion_state['user_input'] = user_input
             st.markdown('nova user_input')
             st.markdown(user_input)
+        
+        else:
+            user_input = st.session_state['user_input']
             
         if st.session_state['execution_counter'] == 0 and len(matches) > 0:
             st.markdown('There are more than one embedding that contains the word you typed. Choose the one that you want to use in your exploration.')
