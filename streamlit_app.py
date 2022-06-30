@@ -697,7 +697,7 @@ if __name__ == '__main__':
                     st.warning("The word {} is not present in model's vocabulary and it will be ignored. If you only searched for {}, reset the search and type a new word.".format(w, w))
 
             user_input = [x for x in user_input if x not in words_to_remove]
-            st.seassion_state['user_input'] = user_input
+            st.session_state['user_input'] = user_input
             st.markdown('nova user_input')
             st.markdown(user_input)
         
