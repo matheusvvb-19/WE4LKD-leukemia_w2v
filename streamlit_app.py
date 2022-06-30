@@ -686,7 +686,7 @@ if __name__ == '__main__':
             st.markdown('found: {}'.format(found))
             if len(found) > 0:
                 if w not in found:
-                    st.markdown('{} não está presente em found'format(w))
+                    st.markdown('{} não está presente em found'.format(w))
                     matches.extend(found)
                     user_input.remove(w)
                 
