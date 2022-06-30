@@ -681,9 +681,12 @@ if __name__ == '__main__':
 
         matches = []
         for w in user_input:
+            st.markdown('w: {}'.format(w))
             found = list(filter(lambda x: w in x, model.wv.vocab))
+            st.markdown('found: {}'.format(found))
             if len(found) > 0:
                 if w not in found:
+                    st.markdown('{} não está presente em found'format(w))
                     matches.extend(found)
                     user_input.remove(w)
                 
