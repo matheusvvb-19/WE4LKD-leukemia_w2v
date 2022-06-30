@@ -679,6 +679,8 @@ if __name__ == '__main__':
         else:
             user_input = st.session_state['user_input']
 
+        st.markdown('user_input original:')
+        st.markdown(user_input)
         matches = []
         for w in user_input:
             st.markdown('w: {}'.format(w))
@@ -694,7 +696,9 @@ if __name__ == '__main__':
             else:
                 user_input.remove(w)
                 st.warning("The word {} is not present in model's vocabulary and it will be ignored. If you only searched for {}, reset the search and type a new word.".format(w, w))
-
+        
+        st.markdown('nova user_input')
+        st.markdown(user_input)
         if st.session_state['execution_counter'] == 0 and len(matches) > 0:
             st.markdown('There are more than one embedding that contains the word you typed. Choose the one that you want to use in your exploration.')
             for w in matches:
