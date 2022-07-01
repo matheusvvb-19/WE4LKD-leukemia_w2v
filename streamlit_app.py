@@ -702,7 +702,7 @@ if __name__ == '__main__':
                 # se nenhuma embedding conter como substring a palavra digitada pelo usuário, ela também é adicionada à lista de futuras palavras a serem eliminadas e um aviso ao usuário é feito:
                 else:
                     words_to_remove.append(w)
-                    st.warning("The word {} is not present in model's vocabulary and it will be ignored. If you only searched for {}, reset the search and type a new word.".format(w, w))
+                    st.warning("'{}' is out of the model's vocabulary. Try again using another keyword.".format(w))
 
             # removendo de user_input as palavras que não foram encontradas (por inteiro) no vocabulário, mas apresentavam variações:
             user_input = [x for x in user_input if x not in words_to_remove]
@@ -713,7 +713,7 @@ if __name__ == '__main__':
             user_input = st.session_state['user_input']
             
         if st.session_state['execution_counter'] == 0 and len(matches) > 0:
-            st.markdown('There are more than one embedding that contains the word you typed. Choose the one that you want to use in your exploration.')
+            st.markdown('The following word embeddings have the sub-word you typed. Please, select one to explore.')
             for w in matches:
                 st.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
             
@@ -724,7 +724,7 @@ if __name__ == '__main__':
                     for w in user_input:
                         if w not in model.wv.vocab:
                             words_to_remove.append(w)
-                            st.warning("The word {} is not present in model's vocabulary and it will be ignored. If you only searched for {}, reset the search and type a new word.".format(w, w))
+                            st.warning("'{}' is out of the model's vocabulary. Try again using another keyword.".format(w))
                     
                     user_input = [x for x in user_input if x not in words_to_remove]
                     st.session_state['user_input'] = user_input                 # atualizando o valor da variável no session_state
