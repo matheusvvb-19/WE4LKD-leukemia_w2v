@@ -513,7 +513,7 @@ if __name__ == '__main__':
     # sidebar widgets form:
     with st.sidebar.form('sidebar_form'):
         st.header('Models exploration settings')
-        uploaded_file = st.sidebar.file_uploader("Upload a new model:")
+        uploaded_file = st.file_uploader("Upload a new model:")
 
         loaded_model = st.selectbox(
          'Or choose one of the preloaded models:',
