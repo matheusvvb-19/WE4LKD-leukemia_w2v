@@ -42,42 +42,60 @@ if __name__ == '__main__':
     ids = []
 
     txt_filenames = []
-    for root, dirnames, filenames in os.walk('results'):
+    for root, dirnames, filenames in os.walk('./results'):
         for filename in fnmatch.filter(filenames, '*.txt'):
             txt_filenames.append(filename)
-
+    
+    txt_filenames = set(txt_filenames)
 
     for s in search_strings:
         print('searching for {}'.format(s))
 
         results = search('"' + s + '"')
         id_list = results['IdList']
-        len_id_list = len(id_list)
-        ids.extend(x for x in id_list if x not in ids)
+        
+        old_papers = len(ids)                                               # quantidade acumulativa de artigos salvos
+        ids.extend(id_list)
+        ids = list(dict.fromkeys(ids))                                      # extendendo lista de artigos salvos, com remoção de duplicatas
+        
+        # se nenhum artigo for retornado ou se todos os artigos encontrados pelo termo de busca atual já tiverem sido salvos, pula para o próximo termo de busca:
+        if len(ids) - old_papers == 0:
+            continue
+        
         papers = fetch_details(id_list)
-        print('{} papers found for {}'.format(len_id_list, s))
+        print('{} papers found for {}'.format(len(id_list), s))
+        print('{} papers are new ones'.format(len(ids) - old_papers))
+        
         s = s.lower().replace(' ', '_')
         Path('./results/{}'.format(s)).mkdir(parents=True, exist_ok=True)
-        counter = 0
+        
+        without_abstract_counter = 0
 
         for i, paper in enumerate(papers['PubmedArticle']):
             try:
                 article_title = paper['MedlineCitation']['Article']['ArticleTitle']
-                article_abstract = ' '.join(paper['MedlineCitation']['Article']['Abstract']['AbstractText'])
-
-                article_title = article_title.translate(str.maketrans('', '', string.punctuation))
-                article_title = article_title.lower().replace(' ', '_')
-
-                article_year = paper['MedlineCitation']['Article']['Journal']['JournalIssue']['PubDate']['Year']
+                
+                article_title_filename = article_title.translate(str.maketrans('', '', string.punctuation))
+                article_title_filename = article_title_filename.lower().replace(' ', '_')
+                
             except KeyError as e:
-                if 'ArticleTitle' in e.args or 'Abstract' in e.args:    # caso o artigo não tenha título ou resumo, pula ele e segue o loop para o próximo artigo
-                    counter += 1
+                if 'ArticleTitle' in e.args:
                     continue
-                elif 'Year' in e.args:          # caso o artigo não tenha a chave "Year" na data de publicação, pega os 4 primeiros caracteres da "MedlineDate"
+                    
+            try:                
+                article_abstract = ' '.join(paper['MedlineCitation']['Article']['Abstract']['AbstractText'])
+                article_year = paper['MedlineCitation']['Article']['Journal']['JournalIssue']['PubDate']['Year']
+                
+            except KeyError as e:
+                if 'Abstract' in e.args:        # caso o artigo não tenha prefácio, continua o processamento, pois o título já foi extraído
+                    without_abstract_counter += 1
+                    pass
+                
+                elif 'Year' in e.args:
                     article_year = paper['MedlineCitation']['Article']['Journal']['JournalIssue']['PubDate']['MedlineDate'][0:4]
 
 
-            filename = '{}_{}'.format(article_year, article_title)
+            filename = '{}_{}'.format(article_year, article_title_filename)
             if len(filename) > 150:
                 filename = filename[0:146]
 
@@ -85,13 +103,13 @@ if __name__ == '__main__':
             path_name = path_name.encode('ascii', 'ignore').decode('ascii')
 
             if path_name.split('/')[3] not in txt_filenames:
-                # depois de pegar o título, resumo e data (e pulando o loop, quando não é possível), escrever o arquivo
+                # depois de pegar o título, resumo e data (e pulando o loop, quando não é possível), escrever o arquivo:
                 with open(path_name, "a", encoding='utf-8') as myfile:
-                    myfile.write(article_abstract)
+                    myfile.write(article_title + ' ' + article_abstract)
                 txt_filenames.append(path_name.split('/')[3])
 
-        if counter > 0:
-            print('{} papers without title or abstract'.format(counter))
-            print('{} papers successfully read'.format(len_id_list - counter))
+        if without_abstract_counter > 0:
+            print('{} papers without abstract'.format(without_abstract_counter))
+            
         else:
             print('all papers successfully read')
