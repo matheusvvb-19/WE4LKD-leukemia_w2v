@@ -620,6 +620,13 @@ if __name__ == '__main__':
                 learning_rate = 0
                 iteration = 0    
 
+        else:
+            model = pickle.load(open('./models_streamlit_app/model_1900_2021.model', 'rb'))
+            dim_red
+            perplexity = 0
+            learning_rate = 0
+            iteration = 250
+
     reset_search = st.sidebar.button("Reset search", key='clear_session_button', on_click=clear_session_state, help='Delete all previous search record and start a new one')
     if reset_search:
         st.session_state['words_search'] = ''
