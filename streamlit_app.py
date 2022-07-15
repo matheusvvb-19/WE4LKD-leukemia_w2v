@@ -491,7 +491,7 @@ def deep_search(words_session_state, new_word):
     st.session_state['user_input'] = aux
 
 def clear_session_state():
-    '''Delete all variables saved in the session_state. This function is used when the user wnats to strat a new search from zero.'''
+    '''Delete all variables saved in the session_state. This function is used when the user wants to start a new search.'''
 
     for key in st.session_state.keys():
         del st.session_state[key]
@@ -510,112 +510,125 @@ if __name__ == '__main__':
     if 'user_input' not in st.session_state:
         st.session_state['user_input'] = []
 
-    # sidebar widgets:
-    st.sidebar.header('Models exploration settings')
-    uploaded_file = st.sidebar.file_uploader("Upload a new model:")
+    # sidebar widgets form:
+    with st.sidebar.form('sidebar_form'):
+        st.header('Models exploration settings')
+        uploaded_file = st.file_uploader("Upload a new model:")
 
-    loaded_model = st.sidebar.selectbox(
-     'Or choose one of the preloaded models:',
-     ('10: 1900 - 2021', '9: 1900 - 2016', '8: 1900 - 2014', '7: 1900 - 2013', '6: 1900 - 2011', '5: 1900 - 2009', '4: 1900 - 2001', '3: 1900 - 1999', '2: 1900 - 1977', '1: 1900 - 1967'))
+        loaded_model = st.selectbox(
+         'Or choose one of the preloaded models:',
+         ('10: 1900 - 2021', '9: 1900 - 2016', '8: 1900 - 2014', '7: 1900 - 2013', '6: 1900 - 2011', '5: 1900 - 2009', '4: 1900 - 2001', '3: 1900 - 1999', '2: 1900 - 1977', '1: 1900 - 1967'))
 
-    if uploaded_file is not None:
-        model = pickle.load(uploaded_file)
-        
-    else:
-        if loaded_model == '1: 1900 - 1967':
-            model = pickle.load(open('./models_streamlit_app/model_1900_1967.model', 'rb'))
-        elif loaded_model == '2: 1900 - 1977':
-            model = pickle.load(open('./models_streamlit_app/model_1900_1977.model', 'rb'))
-        elif loaded_model == '3: 1900 - 1999':
-            model = pickle.load(open('./models_streamlit_app/model_1900_1999.model', 'rb'))
-        elif loaded_model == '4: 1900 - 2001':
-            model = pickle.load(open('./models_streamlit_app/model_1900_2001.model', 'rb'))
-        elif loaded_model == '5: 1900 - 2009':
-            model = pickle.load(open('./models_streamlit_app/model_1900_2009.model', 'rb'))
-        elif loaded_model == '6: 1900 - 2011':
-            model = pickle.load(open('./models_streamlit_app/model_1900_2011.model', 'rb'))
-        elif loaded_model == '7: 1900 - 2013':
-            model = pickle.load(open('./models_streamlit_app/model_1900_2013.model', 'rb'))
-        elif loaded_model == '8: 1900 - 2014':
-            model = pickle.load(open('./models_streamlit_app/model_1900_2014.model', 'rb'))
-        elif loaded_model == '9: 1900 - 2016':
-            model = pickle.load(open('./models_streamlit_app/model_1900_2016.model', 'rb'))
-        elif loaded_model == '10: 1900 - 2021':
-            model = pickle.load(open('./models_streamlit_app/model_1900_2021.model', 'rb'))
-        
-    model.init_sims()
+        restrict_domain = st.selectbox("Restrict vocabulary domain:",
+        ('general', 'NCI cancer drugs', 'FDA drugs'))
 
-    restrict_domain = st.sidebar.selectbox("Restrict vocabulary domain:",
-    ('general', 'NCI cancer drugs', 'FDA drugs'))
-    
-    if restrict_domain != 'general':
-        if restrict_domain == 'NCI cancer drugs':
-            domains_table = read_domain_table()
-            specific_domain = domains_table['name'].tolist()
+        if restrict_domain == 'general':
+            st.markdown('Filter vocabulary by entities:')
+            cellular = st.checkbox('Cellular')
+            dna_rna = st.checkbox('DNA/RNA')
+            drugs_chemicals = st.checkbox('Drugs/Chemicals')
+            proteins = st.checkbox('Proteins')
+
+            if (drugs_chemicals == False and dna_rna == False and proteins == False and cellular == False):
+                common_words_number = st.selectbox('Select the number of the most common words to remove from the view',
+                ('None', '5000', '10000', '15000', '20000'))       
+
+        dim_red = st.selectbox(
+         'Select the dimensionality reduction method',
+         ('TSNE','PCA'))
+
+        dimension = st.selectbox(
+             "Select the display dimension",
+             ('2D', '3D'))
+
+        user_input = st.text_input("Enter the words to be searched. For more than one word, separate them with a comma (,)", value='', key='words_search')
+
+        top_n = st.slider('Select the neighborhood size',
+            5, 20, (5), 5)
+
+        annotation = st.radio(
+             "Dot plot labels",
+             ('On', 'Off'))  
             
-        elif restrict_domain == 'FDA drugs':
-            specific_domain = read_fda_drugs_file()
-        
-        wv_restrict_w2v(model, set(specific_domain), True)
-        vocabulary_restricted = True
-        
-    else:
-        st.sidebar.markdown('Filter vocabulary by entities:')
-        cellular = st.sidebar.checkbox('Cellular')
-        dna_rna = st.sidebar.checkbox('DNA/RNA')
-        drugs_chemicals = st.sidebar.checkbox('Drugs/Chemicals')
-        proteins = st.sidebar.checkbox('Proteins')
-        
-        
-        if (drugs_chemicals or dna_rna or proteins or cellular):
-            list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular = create_entities_lists()
-            entities_list = [list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular]
-            selected_entities = [drugs_chemicals, dna_rna, proteins, cellular]
-            
-            specific_domain = []
-            for list_name, selected in zip(entities_list, selected_entities):
-                if (selected == True):
-                    specific_domain.extend(list_name)
-                    
-            wv_restrict_w2v(model, set(specific_domain), True)
-            vocabulary_restricted = True
-            
+        submitted = st.form_submit_button('Apply settings')
+        if submitted or st.session_state['execution_counter'] != 0:
+            if uploaded_file is not None:
+                model = pickle.load(uploaded_file)
+
+            else:
+                if loaded_model == '1: 1900 - 1967':
+                    model = pickle.load(open('./models_streamlit_app/model_1900_1967.model', 'rb'))
+                elif loaded_model == '2: 1900 - 1977':
+                    model = pickle.load(open('./models_streamlit_app/model_1900_1977.model', 'rb'))
+                elif loaded_model == '3: 1900 - 1999':
+                    model = pickle.load(open('./models_streamlit_app/model_1900_1999.model', 'rb'))
+                elif loaded_model == '4: 1900 - 2001':
+                    model = pickle.load(open('./models_streamlit_app/model_1900_2001.model', 'rb'))
+                elif loaded_model == '5: 1900 - 2009':
+                    model = pickle.load(open('./models_streamlit_app/model_1900_2009.model', 'rb'))
+                elif loaded_model == '6: 1900 - 2011':
+                    model = pickle.load(open('./models_streamlit_app/model_1900_2011.model', 'rb'))
+                elif loaded_model == '7: 1900 - 2013':
+                    model = pickle.load(open('./models_streamlit_app/model_1900_2013.model', 'rb'))
+                elif loaded_model == '8: 1900 - 2014':
+                    model = pickle.load(open('./models_streamlit_app/model_1900_2014.model', 'rb'))
+                elif loaded_model == '9: 1900 - 2016':
+                    model = pickle.load(open('./models_streamlit_app/model_1900_2016.model', 'rb'))
+                elif loaded_model == '10: 1900 - 2021':
+                    model = pickle.load(open('./models_streamlit_app/model_1900_2021.model', 'rb'))
+
+            model.init_sims()
+
+            if restrict_domain != 'general':
+                if restrict_domain == 'NCI cancer drugs':
+                    domains_table = read_domain_table()
+                    specific_domain = domains_table['name'].tolist()
+
+                elif restrict_domain == 'FDA drugs':
+                    specific_domain = read_fda_drugs_file()
+
+                wv_restrict_w2v(model, set(specific_domain), True)
+                vocabulary_restricted = True
+
+            else:
+                if (drugs_chemicals or dna_rna or proteins or cellular):
+                    list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular = create_entities_lists()
+                    entities_list = [list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular]
+                    selected_entities = [drugs_chemicals, dna_rna, proteins, cellular]
+
+                    specific_domain = []
+                    for list_name, selected in zip(entities_list, selected_entities):
+                        if (selected == True):
+                            specific_domain.extend(list_name)
+
+                    wv_restrict_w2v(model, set(specific_domain), True)
+
+                else:
+                    if common_words_number != 'None':
+                        common_words = get_most_common(int(common_words_number))
+                        wv_restrict_w2v(model, set(common_words))
+
+                vocabulary_restricted = True   
+
+            if dim_red == 'TSNE':
+                perplexity = 0
+                learning_rate = 0.1
+                iteration = 250
+
+            else:
+                perplexity = 0
+                learning_rate = 0.1
+                iteration = 0    
+
         else:
-            common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
-            ('None', '5000', '10000', '15000', '20000'))
-            if common_words_number != 'None':
-                common_words = get_most_common(int(common_words_number))
-                wv_restrict_w2v(model, set(common_words))
-                vocabulary_restricted = True        
-        
-    dim_red = st.sidebar.selectbox(
-     'Select the dimensionality reduction method',
-     ('TSNE','PCA'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_2021.model', 'rb'))
+            dim_red = 'TSNE'
+            perplexity = 0
+            learning_rate = 0.1
+            iteration = 250
+            top_n = 5
+            annotation = 'On'
 
-    dimension = st.sidebar.selectbox(
-         "Select the display dimension",
-         ('2D', '3D'))
-
-    user_input = st.sidebar.text_input("Enter the words to be searched. For more than one word, separate them with a comma (,)", value='', key='words_search')
-
-    top_n = st.sidebar.slider('Select the neighborhood size',
-        5, 20, (5), 5)
-
-    annotation = st.sidebar.radio(
-         "Dot plot labels",
-         ('On', 'Off'))  
-
-    if dim_red == 'TSNE':
-        perplexity = 0
-        learning_rate = 0
-        iteration = 250
-
-    else:
-        perplexity = 0
-        learning_rate = 0
-        iteration = 0    
-
-        
     reset_search = st.sidebar.button("Reset search", key='clear_session_button', on_click=clear_session_state, help='Delete all previous search record and start a new one')
     if reset_search:
         st.session_state['words_search'] = ''
@@ -623,27 +636,28 @@ if __name__ == '__main__':
 
     st.sidebar.header('GitHub Repository')
     st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
-    
+
     header_container = st.container()
     with header_container:
         st.title('Embedding Viewer')
         st.header('Word Embedding Visualization Based on Cosine Similarity')
         with st.expander('How to use this app'):
             st.markdown('**Sidebar**')
-            st.markdown('First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation since they are often outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
-            st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D). You can also search for specific words by typing them into the text field. For more than one word, separate it with commas. Be careful, if you decide to remove too many common words, the word you are looking for may no longer be present in the model.')
-            st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider and enable or disable the labels of each point on the plot. If you want to restart your exploration, click on the "Reset search" button and type the new word(s) in the text field.')
+            st.markdown('Define the exploration settings in the sidebar. First, upload your word embedding model file with ".model" extension or choose one of the preloaded Word2Vec models. Then choose whether you want to restrict the terms in the model to a specific domain. If there is no domain restriction, you can choose how many common English words you want to remove from the visualization; removing these words can improve your investigation since they are often outside the medical context. However, be careful about removing common words or the domain restriction, they can drastically reduce the vocabulary of the model.')    
+            st.markdown('Then select the dimensionality reduction method. If you do not know what this means, leave the default value "TSNE". Below this option, set the number of dimensions to be plotted (2D or 3D). You can also search for specific words by typing them into the text field. For more than one word, separate it with commas. Be careful, if you decide to remove too many common words or restrct the vocabulary to a specific domain, the word you are looking for may no longer be present in the model.')
+            st.markdown('Finally, you can increase or decrease the neighborhood of the searched terms using the slider and enable or disable the labels of each point on the plot. After defining all the search parameters, click on "Apply settings".')
+            st.markdown('If you want to restart your exploration from another input word or change radically change the search parameters, click on the "Reset search" button.')
 
             st.markdown('**Main window**')
             st.markdown('_Hint: To see this window content better, you can minimize the sidebar._')
             st.markdown('The first dot plot shows the words similar to each input and their distribution in vectorial space. You can move the plot, crop a specific area or hide some points by clicking on the words in the right caption. Then, the table below the dot plot shows the cosine similarity and the rank (ordinal position) from the base compounds of this project - header of the table - and the words you chose to explore. Below the table, the app generates bar plots with similar words for each term you explored. Also, you can search for words returned by your previous search, clicking on the button with the term. This way, you can explore the neighborhood of your original input and find out the context of them.')
-    
+
     plot_container = st.empty()
     if user_input == '':
         similar_word = None
         labels = None
         color_map = None
-        
+
         with plot_container:
             if dimension == '2D':
                 display_scatterplot_2D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
@@ -658,11 +672,11 @@ if __name__ == '__main__':
         if st.session_state['execution_counter'] == 0:
             matches = []
             words_to_remove = []
-            
+
             # para cada uma das palavras digitadas, busca no vocbulário palavras que a contenham como substring:
             for w in user_input:
                 found = list(filter(lambda x: w in x, model.wv.vocab))
-                
+
                 # se houver ao menos uma embedding que tenha como substring o termo digitado pelo usuário:
                 if len(found) > 0:
                     # se o termo completo não for encontrado, ele terá que posteriormente ser removido de user_input - pois ele não existe no vocabulário
@@ -678,16 +692,16 @@ if __name__ == '__main__':
             # removendo de user_input as palavras que não foram encontradas (por inteiro) no vocabulário, mas apresentavam variações:
             user_input = [x for x in user_input if x not in words_to_remove]
             st.session_state['user_input'] = user_input                 # atualizando o valor da variável no session_state
-        
+
         # se essa não for a primeira execução, apenas recupera as palavras previamente buscadas salvas em session_state:
         else:
             user_input = st.session_state['user_input']
-            
+
         if st.session_state['execution_counter'] == 0 and len(matches) > 0:
             st.markdown('The following word embeddings have the sub-word you typed. Please, select one to explore.')
             for w in matches:
                 st.button(w, on_click=deep_search, args=(st.session_state['user_input'], w), key='{}@{}'.format(w, random()))
-            
+
         else:
             if len(user_input) > 0:
                 if vocabulary_restricted:
@@ -696,10 +710,10 @@ if __name__ == '__main__':
                         if w not in model.wv.vocab:
                             words_to_remove.append(w)
                             st.warning("'{}' is out of the model's vocabulary. Try again using another keyword.".format(w))
-                    
+
                     user_input = [x for x in user_input if x not in words_to_remove]
                     st.session_state['user_input'] = user_input                 # atualizando o valor da variável no session_state
-            
+
                 if len(user_input) > 0:
                     result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
                     with plot_container:
