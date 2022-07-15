@@ -95,7 +95,7 @@ def similarities_table_streamlit(words_list, model):
             table.append(row)
             
     df = pd.DataFrame(table)
-    st.dataframe(df)
+    st.table(df)
     
 def restrict_w2v(w2v, restricted_word_set, domain=False):
     '''Restrict the vocabulary of certain model, removing words according to an especific domain.
