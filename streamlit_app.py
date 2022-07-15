@@ -29,7 +29,7 @@ def list_from_txt(file_path):
             strings_list.append(line.rstrip('\n'))
     return strings_list
 
-@st.cache
+@st.cache(suppress_st_warning=True, max_entries=10, ttl=2400)
 def create_entities_lists():
     '''Creates the lists of possible entity filters by reading the words in the .txt files. Only executed once.'''
     
@@ -40,7 +40,7 @@ def create_entities_lists():
     
     return list_drugs_chemicals, list_dna_rna, list_proteins, list_cellular
 
-@st.cache
+@st.cache(suppress_st_warning=True, max_entries=10, ttl=2400)
 def read_fda_drugs_file():
     words_list = []
     with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
@@ -60,7 +60,7 @@ def read_fda_drugs_file():
     
     return words_list
     
-@st.cache
+@st.cache(suppress_st_warning=True, max_entries=10, ttl=2400)
 def read_domain_table():
     domains_table = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
                    '1SgYG4gZuL3grEHHAZt49dAUw_jFAc4LADajFeGAf2-w' +
