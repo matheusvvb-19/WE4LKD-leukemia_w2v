@@ -512,41 +512,41 @@ if __name__ == '__main__':
 
     # sidebar widgets form:
     with st.sidebar.form('sidebar_form'):
-        st.sidebar.header('Models exploration settings')
+        st.header('Models exploration settings')
         uploaded_file = st.sidebar.file_uploader("Upload a new model:")
 
-        loaded_model = st.sidebar.selectbox(
+        loaded_model = st.selectbox(
          'Or choose one of the preloaded models:',
          ('10: 1900 - 2021', '9: 1900 - 2016', '8: 1900 - 2014', '7: 1900 - 2013', '6: 1900 - 2011', '5: 1900 - 2009', '4: 1900 - 2001', '3: 1900 - 1999', '2: 1900 - 1977', '1: 1900 - 1967'))
 
-        restrict_domain = st.sidebar.selectbox("Restrict vocabulary domain:",
+        restrict_domain = st.selectbox("Restrict vocabulary domain:",
         ('general', 'NCI cancer drugs', 'FDA drugs'))
 
         if restrict_domain == 'general':
-            st.sidebar.markdown('Filter vocabulary by entities:')
-            cellular = st.sidebar.checkbox('Cellular')
-            dna_rna = st.sidebar.checkbox('DNA/RNA')
-            drugs_chemicals = st.sidebar.checkbox('Drugs/Chemicals')
-            proteins = st.sidebar.checkbox('Proteins')
+            st.markdown('Filter vocabulary by entities:')
+            cellular = st.checkbox('Cellular')
+            dna_rna = st.checkbox('DNA/RNA')
+            drugs_chemicals = st.checkbox('Drugs/Chemicals')
+            proteins = st.checkbox('Proteins')
 
             if (drugs_chemicals == False and dna_rna == False and proteins == False and cellular == False):
-                common_words_number = st.sidebar.selectbox('Select the number of the most common words to remove from the view',
+                common_words_number = st.selectbox('Select the number of the most common words to remove from the view',
                 ('None', '5000', '10000', '15000', '20000'))       
 
-        dim_red = st.sidebar.selectbox(
+        dim_red = st.selectbox(
          'Select the dimensionality reduction method',
          ('TSNE','PCA'))
 
-        dimension = st.sidebar.selectbox(
+        dimension = st.selectbox(
              "Select the display dimension",
              ('2D', '3D'))
 
-        user_input = st.sidebar.text_input("Enter the words to be searched. For more than one word, separate them with a comma (,)", value='', key='words_search')
+        user_input = st.text_input("Enter the words to be searched. For more than one word, separate them with a comma (,)", value='', key='words_search')
 
-        top_n = st.sidebar.slider('Select the neighborhood size',
+        top_n = st.slider('Select the neighborhood size',
             5, 20, (5), 5)
 
-        annotation = st.sidebar.radio(
+        annotation = st.radio(
              "Dot plot labels",
              ('On', 'Off'))  
             
