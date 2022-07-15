@@ -551,7 +551,7 @@ if __name__ == '__main__':
              ('On', 'Off'))  
             
         submitted = st.form_submit_button('Apply settings')
-        if submitted:
+        if submitted or st.session_state['execution_counter'] != 0:
             if uploaded_file is not None:
                 model = pickle.load(uploaded_file)
 
