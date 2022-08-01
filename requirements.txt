@@ -11,7 +11,7 @@ cached-property==1.5.2
 certifi==2020.12.5
 chardet==4.0.0
 click==7.1.2
-cython
+cython==0.28.5
 filelock==3.0.12
 fpdf==1.7.2
 fsspec==2021.6.1
@@ -27,7 +27,7 @@ Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 Markdown==3.3.4
 nltk==3.6.6
-numpy==1.21.6
+numpy==1.22
 packaging==20.9
 plotly==4.9.0
 protobuf==3.15.5
@@ -40,7 +40,7 @@ scikit-learn
 scipy==1.5.4
 six==1.15.0
 smart-open==4.2.0
-streamlit==1.10.0
+streamlit==1.11.0
 termcolor==1.1.0
 tokenizers==0.10.1
 torch==1.8.0
