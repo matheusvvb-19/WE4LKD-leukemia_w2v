@@ -506,7 +506,6 @@ def clear_session_state():
 # MAIN PROGRAM:
 if __name__ == '__main__':
     vocabulary_restricted = False
-    matched_synonyms_dict = read_matched_synonyms('./matched_synonyms.csv')
     set_page_layout()
     
     if 'widget' not in st.session_state:
@@ -673,7 +672,7 @@ if __name__ == '__main__':
 
         # se essa execução for a primeira, é necessário buscar pelas palavras digitadas no vocabulário do modelo:
         if st.session_state['execution_counter'] == 0:
-            matched_synonyms = read_matched_synonyms()      # pandas DataFrame com os termos que foram efetivamente substituídos por sinÇonimos durante o pré-processamento
+            matched_synonyms = read_matched_synonyms()      # pandas DataFrame com os termos que foram efetivamente substituídos por sinônimos durante o pré-processamento
 
             replaced_words = []
 
