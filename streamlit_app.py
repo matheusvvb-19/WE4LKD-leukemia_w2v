@@ -682,8 +682,9 @@ if __name__ == '__main__':
 
                 # palavra está presente no DataFrame - ou seja, foi substituída por um sinônimo durante a limpeza do texto:
                 if len(row.index) != 0:
+                    # se o synonym_title estiver presente no vocabulário do modelo, significa que a palavra foi efetivamente substituída e ESTAVA PRESENTE no modelo em questão:
                     if row['synonym_title'].values[0] in set(model.wv.vocab):
-                        st.warning("'{}' was replaced by {} during text preprocessing.".format(w, row['synonym_title'].values[0]))
+                        st.warning("'{}' was replaced by '{}' during text preprocessing.".format(w, row['synonym_title'].values[0]))
                         replaced_words.append((w, row['synonym_title'].values[0]))
 
             # percorrendo a lista de tuplas <termo_substituido, termo>, substutindo pelos sinônimos pré-processados:
