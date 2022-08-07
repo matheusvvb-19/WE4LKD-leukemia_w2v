@@ -616,7 +616,7 @@ if __name__ == '__main__':
                 iteration = 0    
 
         else:
-            model = pickle.load(open('./models_streamlit_app/model_1900_2021.model', 'rb'))
+            model = pickle.load(open('./models_streamlit_app/model_1900_2022.model', 'rb'))
             dim_red = 'TSNE'
             perplexity = 0
             learning_rate = 0.001
