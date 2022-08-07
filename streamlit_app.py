@@ -29,6 +29,13 @@ def list_from_txt(file_path):
             strings_list.append(line.rstrip('\n'))
     return strings_list
 
+@st.cache()
+def read_matched_synonyms():
+    df = pd.read_csv('./matched_synonyms.csv', sep=',', escapechar='\\')
+    df = df[df['synonym'].map(len) >= 3]
+
+    return df
+
 @st.cache(suppress_st_warning=True, max_entries=10, ttl=2400)
 def create_entities_lists():
     '''Creates the lists of possible entity filters by reading the words in the .txt files. Only executed once.'''
@@ -499,6 +506,7 @@ def clear_session_state():
 # MAIN PROGRAM:
 if __name__ == '__main__':
     vocabulary_restricted = False
+    matched_synonyms_dict = read_matched_synonyms('./matched_synonyms.csv')
     set_page_layout()
     
     if 'widget' not in st.session_state:
@@ -665,6 +673,23 @@ if __name__ == '__main__':
 
         # se essa execução for a primeira, é necessário buscar pelas palavras digitadas no vocabulário do modelo:
         if st.session_state['execution_counter'] == 0:
+            matched_synonyms = read_matched_synonyms()      # pandas DataFrame com os termos que foram efetivamente substituídos por sinÇonimos durante o pré-processamento
+
+            replaced_words = []
+
+            # para cada palavra de user_input, verificar se ela se encontra no DataFrame recém-lido:
+            for w in user_input:
+                row = matched_synonyms.loc[matched_synonyms['synonym'] == w]
+
+                # palavra buscada está presente no DataFrame - ou seja, foi substituída por um sinônimo durante a limpeza do texto:
+                if len(row.index) != 0:
+                    print("'{}' was replaced by {} during text preprocessing.".format(w, row['synonym_title'].values[0]))
+                    replaced_words.append((w, row['synonym_title'].values[0]))
+
+            # percorrendo a lista de tuplas <termo_substituido, termo>, substutindo pelos sinônimos pré-processados:
+            for pair in replaced_words:
+                user_input = list(map(lambda x: x.replace(pair[0], pair[1]), user_input))
+
             matches = []
             words_to_remove = []
 
