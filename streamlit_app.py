@@ -680,10 +680,11 @@ if __name__ == '__main__':
             for w in user_input:
                 row = matched_synonyms.loc[matched_synonyms['synonym'] == w]
 
-                # palavra buscada está presente no DataFrame - ou seja, foi substituída por um sinônimo durante a limpeza do texto:
+                # palavra está presente no DataFrame - ou seja, foi substituída por um sinônimo durante a limpeza do texto:
                 if len(row.index) != 0:
-                    print("'{}' was replaced by {} during text preprocessing.".format(w, row['synonym_title'].values[0]))
-                    replaced_words.append((w, row['synonym_title'].values[0]))
+                    if row['synonym_title'].values[0] in set(model.wv.vocab):
+                        st.warning("'{}' was replaced by {} during text preprocessing.".format(w, row['synonym_title'].values[0]))
+                        replaced_words.append((w, row['synonym_title'].values[0]))
 
             # percorrendo a lista de tuplas <termo_substituido, termo>, substutindo pelos sinônimos pré-processados:
             for pair in replaced_words:
