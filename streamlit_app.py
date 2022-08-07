@@ -516,7 +516,7 @@ if __name__ == '__main__':
 
         loaded_model = st.selectbox(
          'Choose one of the preloaded models:',
-         ('10: 1900 - 2021', '9: 1900 - 2016', '8: 1900 - 2014', '7: 1900 - 2013', '6: 1900 - 2011', '5: 1900 - 2009', '4: 1900 - 2001', '3: 1900 - 1999', '2: 1900 - 1977', '1: 1900 - 1967'))
+         ('10: 1900 - 2022', '9: 1900 - 2016', '8: 1900 - 2014', '7: 1900 - 2013', '6: 1900 - 2011', '5: 1900 - 2009', '4: 1900 - 2001', '3: 1900 - 1999', '2: 1900 - 1977', '1: 1900 - 1967'))
 
         restrict_domain = st.selectbox("Restrict vocabulary domain:",
         ('general', 'NCI cancer drugs', 'FDA drugs'))
@@ -569,8 +569,8 @@ if __name__ == '__main__':
                 model = pickle.load(open('./models_streamlit_app/model_1900_2014.model', 'rb'))
             elif loaded_model == '9: 1900 - 2016':
                 model = pickle.load(open('./models_streamlit_app/model_1900_2016.model', 'rb'))
-            elif loaded_model == '10: 1900 - 2021':
-                model = pickle.load(open('./models_streamlit_app/model_1900_2021.model', 'rb'))
+            elif loaded_model == '10: 1900 - 2022':
+                model = pickle.load(open('./models_streamlit_app/model_1900_2022.model', 'rb'))
 
             model.init_sims()
 
