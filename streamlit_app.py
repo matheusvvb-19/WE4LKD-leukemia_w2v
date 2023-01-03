@@ -40,4 +40,4 @@ def set_page_layout():
 if __name__ == '__main__':
     set_page_layout()
     
-    st.title(str='Word Embedding For Latent Knowledge Discovery AML', anchor='h1')
+    st.title(body='Word Embedding For Latent Knowledge Discovery AML', anchor='h1')
