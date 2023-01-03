@@ -38,7 +38,7 @@ def set_page_layout():
     
 # MAIN PROGRAM:
 if __name__ == '__main__':
-    set_page_layout()
+    #set_page_layout()
     
     st.sidebar.markdown("# Home")
     
