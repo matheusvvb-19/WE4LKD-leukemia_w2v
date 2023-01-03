@@ -11,7 +11,7 @@ def set_page_layout():
     '''Define some configs of the Streamlit App page, only front-end settings.'''
 
     st.set_page_config(
-        page_title="WE4LKD AML",
+        page_title="WE4LKD | Home",
         page_icon="🖥️",
         layout="wide",
         initial_sidebar_state="expanded",
@@ -39,5 +39,7 @@ def set_page_layout():
 # MAIN PROGRAM:
 if __name__ == '__main__':
     set_page_layout()
+    
+    st.sidebar.markdown("# Home")
     
     st.title('Word Embedding For Latent Knowledge Discovery AML')
