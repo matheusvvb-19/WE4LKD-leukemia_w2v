@@ -38,8 +38,6 @@ def set_page_layout():
     
 # MAIN PROGRAM:
 if __name__ == '__main__':
-    #set_page_layout()
-    
-    st.sidebar.markdown("# Home")
+    set_page_layout()
     
     st.title('Word Embedding For Latent Knowledge Discovery AML')
