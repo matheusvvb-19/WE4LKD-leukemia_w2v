@@ -18,6 +18,7 @@ from gensim.models import Word2Vec
 from pathlib import Path
 from os import listdir
 import pandas as pd
+import os
 
 if __name__ == '__main__':
     # pasta que contém o .csv de artigos pré-processados e nome desse arquivo:
