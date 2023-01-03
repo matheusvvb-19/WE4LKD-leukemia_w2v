@@ -38,7 +38,8 @@ if __name__ == '__main__':
     # supondo que o primeiro artigo coleto foi publicado em 1921, e que, depois deste, mais artigos foram publicados nos anos seguintes, temos:
     # [[1921], [1921, 1922], [1921, 1922, 1923], [1921, 1922, 1923, 1924], [1921, 1922, 1923, 1924, 1925], .......]
     ranges = [years[:i+1] for i in range(len(years))]
-
+    
+    os.makedirs('./models/', exist_ok=True)
     for r in ranges:
         print('training model from {} to {}'.format(r[0], r[-1]))
         abstracts = df[df.filename.isin(r)]['summary'].to_list()
@@ -49,4 +50,4 @@ if __name__ == '__main__':
         model = Word2Vec(abstracts, min_count=2, size=30, sg=1, alpha=0.01, iter=30, window=8)
 
         # save model
-        model.save('./model_{}_{}.model'.format(first_year, r[-1]))
+        model.save('./models/model_{}_{}.model'.format(first_year, r[-1]))
