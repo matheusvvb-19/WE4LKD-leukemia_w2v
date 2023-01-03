@@ -1,0 +1,1645 @@
+Arsenic(III) trioxide
+Arsenous oxide [ISO]
+Arsenox
+Trixenox
+Arsenious Acid Anhydride
+Oxyde Arsenieux
+Caswell No. 059
+Rcra waste number P012
+RCRA waste no. P012
+Trixonex
+CCRIS 5455
+HSDB 419
+EINECS 215-481-4
+UN1561
+EPA Pesticide Chemical Code 007001
+UN 1561
+AI3-01163
+UNII-S7V92P67HO
+S7V92P67HO
+DTXSID0020103
+NSC 92859
+NSC 759274
+Arsenic trioxide [UN1561]  [Poison]
+Z3621
+EC 215-481-4
+SR-01000944371
+SR-01000944371-1
+320-67-2
+Ladakamycin
+Mylosar
+5-azacitidine
+Azacitidinum
+Azacitidina
+NSC-102816
+NSC 102816
+U-18496
+4-Amino-1-beta-D-ribofuranosyl-s-triazin-2(1H)-one
+UNII-M801H13NRU
+4-Amino-1-beta-d-ribofuranosyl-1,3,5-triazin-2(1H)-one
+Antibiotic U 18496
+CHEBI:2038
+M801H13NRU
+4-amino-1-((2R,3R,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)tetrahydrofuran-2-yl)-1,3,5-triazin-2(1H)-one
+4-Amino-1-(beta-D-ribofuranosyl)-1,3,5-triazin-2(1H)-one
+MFCD00006539
+4-amino-1-[(2R,3R,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-1,3,5-triazin-2-one
+4-amino-1-[(2R,3R,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-1,2-dihydro-1,3,5-triazin-2-one
+WR-183027
+NCGC00090851-04
+DSSTox_CID_116
+U 18496
+DSSTox_RID_75378
+DSSTox_GSID_20116
+U-18,496
+CCRIS 60
+SMR000857239
+HSDB 6879
+SR-01000075662
+EINECS 206-280-2
+BRN 0620461
+Onureg
+4-Amino-1-beta-D-ribofuranosyl-1,3,5-traizin-2(1H)-one
+4-amino-1-[(2R,3R,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)tetrahydrofuran-2-yl]-1,3,5-triazin-2-one
+CAS-320-67-2
+Azacitidine (Vidaza)
+2-(beta-D-Ribofuranosyl)-4-amino-1,3,5-triazin-2-one
+U18496
+Spectrum_001262
+4-Amino-1-beta-D-ribofuranosyl-1,3,5-triazine-2(1H)-one
+Spectrum2_000786
+Spectrum3_001509
+Spectrum4_000922
+Spectrum5_001166
+MolMap_000062
+SCHEMBL3741
+CHEMBL1489
+Azacitidine (5-Azacytidine)
+Lopac0_000035
+BSPBio_003157
+KBioGR_001444
+KBioGR_002556
+KBioSS_001742
+KBioSS_002565
+MLS001333121
+MLS001333122
+MLS002153249
+MLS002548894
+DivK1c_000125
+SPECTRUM1502111
+SPBio_000892
+GTPL6796
+DTXSID9020116
+s-Triazin-2(1H)-one, 4-amino-1-beta-D-ribofuranosyl-
+BCBcMAP01_000083
+HMS500G07
+KBio1_000125
+KBio2_001742
+KBio2_002556
+KBio2_004310
+KBio2_005124
+KBio2_006878
+KBio2_007692
+KBio3_002657
+KBio3_003034
+NMUSYJAQQFHJEW-KVTDHHQDSA-
+cMAP_000082
+NINDS_000125
+HMS1921J22
+HMS2092D08
+HMS2231F15
+HMS3259D19
+HMS3260G11
+Pharmakon1600-01502111
+ZINC3861768
+5-Azacytidine, >=98% (HPLC)
+Tox21_111032
+Tox21_302985
+Tox21_500035
+BDBM50424715
+CCG-39046
+NSC758186
+Onureg (CC-486; oral azacitidine)
+AKOS015896938
+Tox21_111032_1
+AM83944
+CS-1287
+DB00928
+LP00035
+MCULE-8318770472
+NC00672
+NSC-758186
+NSC103-627
+4-amino-1-[(2R,3R,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-1,3,5-triaz
+IDI1_000125
+NCGC00090851-01
+NCGC00090851-02
+NCGC00090851-03
+NCGC00090851-05
+NCGC00090851-06
+NCGC00090851-07
+NCGC00090851-08
+NCGC00090851-10
+NCGC00090851-14
+NCGC00090851-22
+NCGC00178234-01
+NCGC00256541-01
+NCGC00260720-01
+AS-13697
+HY-10586
+SRI-10756_10
+SRI-10756_12
+WR183027
+DB-006955
+SL-000003
+EU-0100035
+D03021
+F10504
+J10124
+320A672
+A821115
+Q416451
+J-700085
+SR-01000075662-1
+SR-01000075662-3
+SR-01000075662-7
+BRD-K03406345-001-02-1
+BRD-K03406345-001-27-8
+Z1522566611
+4-Amino-1-(bet.-D-ribofuranosyl)-1,3,5-triazin-2(1H)-one
+4-Amino-1-beta-D-ribofuranosyl-1,3,5-tr iazin-2(1H)-one
+Azacitidine, United States Pharmacopeia (USP) Reference Standard
+4-Amino-1-(beta-D-ribofuranosyl)-1,3,5-triazin-2(1H)-one; Ladakamycin
+Azacitidine, Pharmaceutical Secondary Standard; Certified Reference Material
+1401238-97-8
+5-Azacytidine, Hybri-Max(TM), gamma-irradiated, lyophilized powder, BioXtra, suitable for hybridoma
+6-amino-3-[(2R,3R,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)tetrahydrofuran-2-yl]-1H-1,3,5-triazin-3-ium-2-one
+Daunomycin HCL
+RP 13057 hydrochloride
+Daunorubicin (Hydrochloride)
+UNII-UD984I04LZ
+Ondena
+C27H29NO10.HCl
+FI 6339 [as the base]
+Daunomycin, hydrochloride
+UD984I04LZ
+(8S,10S)-8-acetyl-10-(((2R,4S,5S,6S)-4-amino-5-hydroxy-6-methyltetrahydro-2H-pyran-2-yl)oxy)-6,8,11-trihydroxy-1-methoxy-7,8,9,10-tetrahydrotetracene-5,12-dione hydrochloride
+(8S-cis)-8-Acetyl-10-((3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranosyl)oxy)-7,8,9,10-tetrahydro-6,8,11-trihydroxy-1-methoxy-5,12-naphthacenedione hydrochloride
+Daunoblastina
+RP 13057 [as the base]
+Daunomycin chlorohydrate
+MLS000069508
+MFCD04974507
+RP 13057 [AS THE BASE)
+CCRIS 915
+NSC-82151
+MLS001336042
+RP-13057
+SMR000058559
+Daunorubicin HCl (Daunomycin HCl)
+AI3-44887
+SR-01000000033
+SR-05000001600
+Daunorubicin,(S)
+Daunorubicin hydrochloride(BICINS)
+(8S,10S)-8-acetyl-10-((2R,4S,5S,6S)-4-amino-5-hydroxy-6-methyltetrahydro-2H-pyran-2-yloxy)-6,8,11-trihydroxy-1-methoxy-7,8,9,10-tetrahydrotetracene-5,12-dione hydrochloride
+(8S,10S)-8-Acetyl-10-[[(2R,4S,5S,6S)-4-amino-5-hydroxy-6-methyltetrahydro-2H-pyran-2-yl]oxy]-6,8,11-trihydroxy-1-methoxy-7,8,9,10-tetrahydrotetracene-5,12-dione Hydrochloride
+SMR000768722
+(7S,9S)-9-acetyl-7-[(2R,4S,5S,6S)-4-amino-5-hydroxy-6-methyloxan-2-yl]oxy-6,9,11-trihydroxy-4-methoxy-8,10-dihydro-7H-tetracene-5,12-dione;hydrochloride
+Daunorubicin HCl- Bio-X
+SCHEMBL4444
+CAS-23541-50-6
+CHEMBL1563
+DSSTox_CID_13382
+DSSTox_RID_79068
+DSSTox_GSID_33382
+(1S,3S)-3-Acetyl-1,2,3,4,6,11-hexahydro-3,5,12-trihydroxy-10-methoxy-6,11-dioxo-1-naphthacenyl 3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranoside hydrochloride
+MLS002222263
+Daunorubicin (as hydrochloride)
+FI 6339 HYDROCHLORIDE
+FI-6339 HYDROCHLORIDE
+DTXSID0033382
+CHEBI:31456
+AOB5597
+(8S,10S)-8-Acetyl-10-[(3-amino-2,3,6-trideoxy-?-L-lyxo-hexopyransoyl)oxy]-7,8,9,10-tetrahydro-6,8,11-trihydroxy-1-methoxy-5,12-naphthacenedione hydrochloride
+EX-A2649
+Tox21_201159
+CCG-39942
+s3035
+AKOS015920259
+CS-1271
+KS-5149
+NCGC00024246-03
+NCGC00258711-01
+5,12-Naphthacenedione, 8-acetyl-10-((3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranosyl))oxy)-7,8,9,10-tetrahydro-6,8,11-trihydroxy-1-methoxy-, (8S-cis)-, hydrochloride
+5,12-Naphthacenedione, 8-acetyl-10-((3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranosyl)oxy)-7,8,9,10-tetrahydro-6,8,11-trhydroxy-1-methoxy-, hydrochloride, (8S,10S)-
+5,12-Naphthacenedione, 8-acetyl-10-((3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranosyl)oxy)-7,8,9,10-tetrahydro-6,8,11-trihydroxy-1-methoxy-, (8S-cis)-, hydrochloride
+BD164356
+HY-13062
+Daunorubicin hydrochloride, >=90% (HPLC)
+D01264
+WP900 hydrochloride, >=95% (HPLC), solid
+541D506
+A816764
+SR-01000000033-6
+SR-05000001600-3
+Q27291034
+Daunorubicin hydrochloride, meets USP testing specifications
+Daunorubicin Hydrochloride; RP 13057 Hydrochloride; Daunomycin
+Daunorubicin hydrochloride, European Pharmacopoeia (EP) Reference Standard
+Daunorubicin hydrochloride, United States Pharmacopeia (USP) Reference Standard
+(1S,3S)-3-acetyl-3,5,12-trihydroxy-10-methoxy-6,11-dioxo-1,2,3,4,6,11-hexahydrotetracen-1-yl 3-amino-2,3,6-trideoxy-a-L-lyxo-hexopyranoside hydrochloride
+(8S,10S)-8-acetyl-10-(((2R,4S,5S,6S)-4-amino-5-hydroxy-6-methyltetrahydro-2H-pyran-2-yl)oxy)-6,8,11-trihydroxy-1-methoxy-7,8,9,10-tetrahydrotetracene-5,12-dionehydrochloride
+5,12-Naphthacenedione, 8-acetyl-10-((3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranosyl)oxy)-7,8,9,10-tetrahydro-6,8,11-trihydroxy-1-methoxy-, hydrochloride, (8S,10S)-
+Daunorubicin hydrochloride;(8S,10S)-8-Acetyl-10-[[(2R,4S,5S,6S)-4-amino-5-hydroxy-6-methyltetrahydro-2H-pyran-2-yl]oxy]-6,8,11-trihydroxy-1-methoxy-7,8,9,10-tetrahydrotetracene-5,12-dione Hydrochloride
+Neosar
+Clafen
+Cyclostin
+Sendoxan
+Cyclophosphamidum
+Cytophosphane
+Claphene
+Endoxana
+Endoxanal
+Genoxal
+Endoxan-Asta
+Endoxan R
+Zyklophosphamid
+(RS)-Cyclophosphamide
+Enduxan
+Semdoxan
+Senduxan
+(+-)-Cyclophosphamide
+Cyclophosphamide anhydrous
+Cyclophosphanum
+Asta B 518
+NSC 26271
+Bis(2-chloroethyl)phosphoramide cyclic propanolamide ester
+Cycloblastin
+2H-1,3,2-Oxazaphosphorin-2-amine, N,N-bis(2-chloroethyl)tetrahydro-, 2-oxide
+NCI-C04900
+CHEBI:4027
+N,N-Bis(2-chloroethyl)-1,3,2-oxazaphosphinan-2-amine 2-oxide
+NSC-26271
+(-)-Cyclophosphamide
+UNII-6UXW23996M
+N,N-Bis(2-chloroethyl)tetrahydro-2H-1,3,2-oxazaphosphorin-2-amine 2-oxide
+NSC26271
+50-18-0 (anhydrous)
+2-[Bis(2-chloroethylamino)]-tetrahydro-2H-1,3,2-oxazaphosphorine-2-oxide
+2-(Bis(2-chloroethyl)amino)-2H-1,3,2-oxazaphosphorine 2-oxide
+6UXW23996M
+N,N-Bis(2-chloroethyl)-N',O-propylenephosphoric acid ester diamide
+N,N-Di(2-chloroethyl)-N,O-propylene-phosphoric acid ester diamide
+Ciclofosfamide
+2H-1,3,2-Oxazaphosphorin-2-amine, N,N-bis(2-chloroethyl)tetrahydro-,2-oxide
+Phosphorodiamidic acid, N,N-bis(2-chloroethyl)-N'-(3-hydroxypropyl)-, intramol. ester
+Lyophilized Cytoxan
+Cyclophosphamide-d4
+Ciclofosfamida
+N,N-bis(2-chloroethyl)-2-oxo-1,3,2$l^{5}-oxazaphosphinan-2-amine
+Cyclophosphamide (anhydrous)
+ASTA B518
+Occupation, cyclophosphamide exposure
+CCRIS 188
+4-Hydroxy-cyclophosphan-mamophosphatide
+Cyclophosphamide (anhydrous form)
+HSDB 3047
+NSC-756711
+SR-01000075737
+NCGC00015209-05
+EINECS 200-015-4
+Cyclophosphamide [USP:INN]
+2-(Bis(2-chloroethyl)amino)-2H-1,2-oxazaphosphorine 2-oxide
+2-[Bis(2-chloroethyl)amino]-2H-1,2-oxazaphosphorine 2-oxide
+AI3-26198
+(Bis(chloro-2-ethyl)amino)-2-tetrahydro-3,5,6-oxazaphosphorine-1,3,2-oxide-2 hydrate
+[Bis(chloro-2-ethyl)amino]-2-tetrahydro-3,5,6-oxazaphosphorine-1,3,2-oxide-2 hydrate
+173547-45-0
+CB-4564
+Cyclophosphamide-[d4]
+Spectrum_000858
+Anhydrous cyclophosphamide
+CHEMBL88
+Spectrum2_001146
+Spectrum3_000370
+Spectrum4_000304
+Spectrum5_000795
+Lopac-C-0768
+N,N-Bis(beta-chloroethyl)-N',O-propylenephosphoric acid ester diamide
+N,N-Bis(beta-chloroethyl)-N',O-trimethylenephosphoric acid ester diamide
+2-(Bis(2-chloroethyl)amino)tetrahydro-2H-1,3,2-oxazophosphorine 2-oxide
+SCHEMBL4346
+(.+/-.)-Cyclophosphamide
+Lopac0_000238
+BSPBio_002099
+KBioGR_000888
+KBioSS_001338
+DivK1c_000246
+SPBio_001071
+GTPL7154
+SCHEMBL4345553
+DTXSID5020364
+SCHEMBL10262910
+CMSMOCZEIVJLDB-UHFFFAOYSA-
+KBio1_000246
+KBio2_001338
+KBio2_003906
+KBio2_006474
+KBio3_001319
+CYCLOPHOSPAMIDE MONOHYDRATE
+WLN: T6MPOTJ BO BN2G2G
+NINDS_000246
+2-(bis(2-chloroethyl)amino)-1,3,2-oxazaphosphinane 2-oxide
+HMS2090A12
+HMS3260P17
+HMS3715J05
+Pharmakon1600-01500213
+AMY33449
+BCP02139
+Tox21_500238
+2-CHLORO-5-METHYLBENZANILIDE
+BDBM50237604
+N,N-bis(2-chloroethyl)-2-oxo-1,3,2lambda5-oxazaphosphinan-2-amine
+NSC273033
+NSC273034
+NSC756711
+STK177249
+2H-1,3,2-Oxazaphosphorine, 2-(bis(2-chloroethyl)amino)tetrahydro-, 2-oxide
+AKOS005410738
+CS-1425
+DB00531
+LP00238
+MCULE-5327530727
+NSC-273033
+NSC-273034
+SDCCGSBI-0050226.P004
+IDI1_000246
+N,3,2-oxazaphosphorin-2-amine-2-oxide
+NCGC00015209-01
+NCGC00015209-02
+NCGC00015209-03
+NCGC00015209-04
+NCGC00015209-06
+NCGC00015209-07
+NCGC00015209-08
+NCGC00015209-09
+NCGC00015209-12
+NCGC00015209-28
+NCGC00091741-02
+NCGC00091741-03
+NCGC00260923-01
+AS-73255
+BP-25411
+HY-17420
+NCI60_002097
+N,O-propylenephosphoric acid ester diamide
+SBI-0050226.P003
+DB-082057
+EU-0100238
+FT-0624276
+FT-0665387
+N,O-trimethylenephosphoric acid ester diamide
+EN300-74526
+C07888
+D07760
+AB00053446-09
+AB00053446-11
+AB00053446-12
+AB00053446_13
+AB00053446_14
+AB00053446_15
+005C978
+Q408524
+W-60377
+N,O-propylenephosphoric acid ester amide monohydrate
+SR-01000075737-1
+SR-01000075737-6
+W-105248
+BRD-A09722536-002-02-4
+2-[bis(2-chloroethyl)amino]-1,3,2??-oxazaphosphinan-2-one
+2-[bis(2-chloroethyl)amino]-1,3,2$l^{5}-oxazaphosphinan-2-one
+N,N-Bis(2-chloroethyl)-1,3,2-oxazaphosphinan-2-amine 2-oxide #
+2-(Di(2-chloroethyl)amino)-2-phospha(V)-tetrahydro-2H-1,3-oxazine-2-one
+2-[Bis(2-chloroethyl)amino]tetrahydro-1,3,2-oxazaphosphorin-2-oxide
+2H-1,2-Oxazaphosphorine, 2-[bis(2-chloroethyl)amino]tetrahydro-, 2-oxide
+2H-1,3,2-Oxazaphosphorine, 2-(bis(2-chloroethyl)amino)tetrahydro-,2-oxide
+N,N-Bis(.beta.-chloroethyl)-N',O-trimethylenephosphoric acid ester diamide
+N,N-Bis(2-chloroethyl)tetrahydro-2H-1,3,2-oxazaphosphorin-2-amine-2-oxide
+N,N-Bis-(.beta.-chloraethyl)-N',O-propylen-phosphorsaeure-ester-diamid
+(+/-)-2-[Bis(2-chloroethyl)amino]tetrahydro-2 H-1,3,2-oxazaphosphorine 2-oxide
+(R)-2-[Bis(2-chloroethyl)amino]tetrahydro-2H-1,3,2-oxazaphosphorin 2-oxide
+(S)-2-[Bis(2-chloroethyl)amino]tetrahydro-2H-1,3,2-oxazaphosphorine 2-oxide
+2H-1,2-Oxazaphosphorin-2-amine, N,N-bis(2-chloroethyl)tetrahydro-, 2-oxide
+2H-1,2-Oxazaphosphorin-2-amine, N,N-bis(2-chloroethyl)tetrahydro-, 2-oxide, (+)-
+2H-1,2-Oxazaphosphorin-2-amine, N,N-bis(2-chloroethyl)tetrahydro-, 2-oxide, (-)-
+2H-1,2-Oxazaphosphorine, 2-[bis(2-chloroethyl)amino]tetrahydro-, 2-oxide, monohydrate
+Phosphorodiamidic acid,N-bis(2-chloroethyl)-N'-(3-hydroxypropyl)-, intramol. ester
+Udicil
+Cytarabinum
+Cytosinearabinoside
+Spongocytidine
+beta-D-Arabinosylcytosine
+4-Amino-1-((2R,3S,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)tetrahydrofuran-2-yl)pyrimidin-2(1H)-one
+Arabitin
+Cytarabina
+Arafcyt
+Erpalfa
+Iretin
+1beta-D-Arabinosylcytosine
+4-Amino-1-beta-D-arabinofuranosyl-2(1H)-pyrimidinone
+Cytosine arabinose
+1beta-Arabinofuranasylcytosine
+Cytosine 1-beta-D-arabinofuranoside
+1beta-D-Arabinofuranosylcytosine
+1-beta-D-Arabinofaranosylcytosine
+Cytosine-beta-D-arabinofuranoside
+Depocyt (liposomal)
+1-Arabinofuranosylcytosine
+1-beta-D-Arabinosylcytosine
+UNII-04079A1RDZ
+MFCD00066487
+CHEMBL803
+4-Amino-1-arabinofuranosyl-2-oxo-1,2-dihydropyrimidin
+4-amino-1-[(2R,3S,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-1,2-dihydropyrimidin-2-one
+U 19920A
+Cytonal
+CHEBI:28680
+CHX 3311
+04079A1RDZ
+1-beta-D-arabinofuranosyl-cytosine
+U-19920
+CCRIS 913
+beta-Ara C
+4-amino-1-[(2R,3S,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]pyrimidin-2-one
+U-19,920
+Cytosine, 1-beta-D-arabinosyl-
+HSDB 3049
+NCGC00093356-03
+4-Amino-1-arabinofuranosyl-2-oxo-1,2-dihydropyrimidine
+DSSTox_CID_2877
+Cytosine, 1-beta-D-arabinofuranosyl-
+NSC 287459
+AC-1075
+DSSTox_RID_76771
+DSSTox_GSID_22877
+AI3-52329
+Cytosine arabinoside (VAN)
+2(1H)-Pyrimidinone, 4-amino-1-beta-D-arabinofuranosyl-
+beta-Arabinosylcytosine
+Beta-cytosine arabinoside
+Cytosine-beta-arabinoside
+cytarabine liposome
+cytarabine liposome injection
+2(1H)-Pyrimidinone, 4-amino-1-.beta.-D-arabinofuranosyl-
+Cytosine, beta-D-arabinoside
+CAS-147-94-4
+SMR000449317
+EINECS 205-705-9
+Cytartbine
+1-beta-arabinofuranosylcytosine
+SR-01000075773
+NSC287459
+NSC-287459
+1-.beta.-D-arabinofuranosyl-cytosine
+4-Amino-1-beta-D-arabinofuranosyl-2(1H)-pyrimidinon
+1-beta-D-Arabinofuranosylcytosine, Cytosine Arabinoside
+beta -arabinosylcytosine
+beta -cytosine arabinoside
+beta -D-arabinosylcytosine
+Cytosine-beta -arabinoside
+SCHEMBL3140
+1beta -D-Arabinosylcytosine
+BIDD:PXR0139
+Lopac0_000316
+MLS000758310
+MLS001066340
+MLS001424023
+1-beta-D-Arabinosyl-Cytosine
+BIDD:GT0371
+Cytosine, beta -D-arabinoside
+1beta -Arabinofuranasylcytosine
+GTPL4827
+1-ss-D-Arabinofuranosylcytosine
+DTXSID3022877
+SCHEMBL22591193
+SCHEMBL23152019
+1beta -D-Arabinofuranosylcytosine
+Cytosine, 1-beta -D-arabinosyl-
+1-beta -d-arabinofuranosylcytosine
+1-beta-D-arabinofuranosyl cytosine
+Cytosine-beta -D-arabinofuranoside
+HMS2051K19
+HMS2090A18
+HMS2230M16
+HMS3713N12
+BCP02876
+ZINC3795098
+Tox21_111203
+Tox21_301971
+BDBM50087289
+CCG-51297
+AKOS007930145
+AKOS015896896
+AM84428
+Cytosine, 1-beta -D-arabinofuranosyl-
+DB00987
+KS-5063
+MCULE-3945147956
+NC00070
+SDCCGSBI-0050304.P002
+NCGC00093356-04
+NCGC00093356-05
+NCGC00093356-06
+NCGC00093356-19
+NCGC00142483-02
+NCGC00255381-01
+BA164339
+HY-13605
+SRI-10828-19
+SRI-10828-20
+SRI-10828_24
+SL-000002
+SW197450-5
+C02961
+J10463
+1-BETA-D-ARABINOFURANOSYLCYTOSINE; ARA-C
+147C944
+A808710
+Q180983
+SR-01000721860
+J-520199
+J-700005
+J-700166
+SR-01000075773-3
+SR-01000075773-5
+SR-01000721860-6
+1-beta -D-Arabinofuranosyl-4-amino-2(1H)pyrimidinone
+2(1H)-Pyrimidinone, 4-amino-1- -D-arabinofuranosyl
+BRD-K33106058-001-07-7
+BRD-K33106058-003-20-6
+2(1H)-Pyrimidinone, 4-amino-1beta -D-arabinofuranosyl-
+Z1522566619
+2(1H)-Pyrimidinone, 4-amino-1-beta -D-arabinofuranosyl-
+Cytarabine, European Pharmacopoeia (EP) Reference Standard
+Cytarabine, United States Pharmacopeia (USP) Reference Standard
+Cytosine beta-D-arabinofuranoside, crystalline, >=90% (HPLC)
+Cytosine beta-D-arabinofuranoside, Vetec(TM) reagent grade, 90%
+Cytarabine, Pharmaceutical Secondary Standard; Certified Reference Material
+4-amino-1-[(2R,3S,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)tetrahydrofuran-2-yl]pyrimidin-2-one
+2030410-25-2
+UNII-TH2EV99S4Z
+TH2EV99S4Z
+PF-04449913 maleate
+1-((2R,4R)-2-(1H-benzo[d]imidazol-2-yl)-1-methylpiperidin-4-yl)-3-(4-cyanophenyl)urea maleate
+1-((2R,4R)-2-(1H-Benzimidazol-2-yl)-1-methylpiperidin-4-yl)-3-(4-cyanophenyl)ureamaleatesalt
+PF 04449913 maleate
+CHEMBL4297534
+SCHEMBL18171548
+PF-04449913 maleate salt, >=98% (HPLC)
+1-((2R,4R)-2-(1H-Benzimidazol-2-yl)-1-methylpiperidin-4-yl)-3-(4-cyanophenyl)urea maleate salt
+1-[(2R,4R)-2-(1H-benzimidazol-2-yl)-1-methylpiperidin-4-yl]-3-(4-cyanophenyl)urea;(Z)-but-2-enedioic acid
+Urea, N-((2R,4R)-2-(1H-benzimidazol-2-yl)-1-methyl-4-piperidinyl)-N'-(4-cyanophenyl)-, (2Z)-2-butenedioate (1:1)
+50-02-2
+Oradexon
+Prednisolone F
+Cortisumman
+Decaspray
+Auxiron
+Calonat
+Dexacort
+Dexason
+Fluormethylprednisolone
+Aeroseb-Dex
+Deltafluorene
+Mediamethasone
+Visumetazone
+Aphtasolon
+Decaderm
+Decasone
+Dectancyl
+Dekacort
+Dergramin
+Desadrene
+Desameton
+Dexacortal
+Dexacortin
+Dexadeltone
+Dexalona
+Dexapolcort
+Dextelan
+Dinormon
+Fortecortin
+Gammacorten
+Mymethasone
+Turbinaire
+Corsone
+Decalix
+Dexone
+Mexidex
+Dexa-Cortidelt
+Dexa-Cortisyl
+Dexa-Scheroson
+Prednisolon F
+Aeroseb-D
+SK-Dexamethasone
+Anaflogistico
+Decacortin
+Deseronil
+Dexafarma
+Dexaprol
+Dexinolon
+Dexinoral
+Loverine
+Luxazone
+Policort
+Spoloven
+Decagel
+Deronil
+Sunia Sol D
+Bisu DS
+Dexa Mamallet
+Hexadrol Elixir
+Dexa-sine
+Lokalison F
+Isopto-Dex
+Ocu-trol
+Dex-ide
+Hl-dex
+Dexamethasonum
+Dexone 4
+Fluorocort
+Decaject
+Decameth
+Fluormone
+Dexpak
+Pet Derm III
+Dexamethasone alcohol
+Hexadrol Tablets
+Dexamethasone Intensol
+Methylfluorprednisolone
+Desametasone [DCIT]
+Dexone 0.5
+Dexone 1.5
+Dexone 0.75
+Dexacidin
+Decadron Tablets, Elixir
+Azium (Veterinary)
+Posurdex
+MK 125
+C22H29FO5
+(3H)-Dexamethasone
+Azimycin (Veterinary)
+NSC 34521
+Naquasone (Veterinary)
+Tresaderm (Veterinary)
+16alpha-Methyl-9alpha-fluoro-1-dehydrocortisol
+16alpha-Methyl-9alpha-fluoroprednisolone
+(11beta,16alpha)-9-Fluoro-11,17,21-trihydroxy-16-methylpregna-1,4-diene-3,20-dione
+16-alpha-Methyl-9-alpha-fluoroprednisolone
+9-alpha-Fluoro-16-alpha-methylprednisolone
+UNII-7S5I7G3JQL
+1-Dehydro-16alpha-methyl-9alpha-fluorohydrocortisone
+delta1-9alpha-Fluoro-16alpha-methylcortisol
+Decacort
+16-alpha-Methyl-9-alpha-fluoro-1-dehydrocortisol
+16-alpha-Methyl-9-alpha-fluoro-delta1-hydrocortisone
+delta(sup 1)-9-alpha-Fluoro-16-alpha-methylcortisol
+9A-FLUORO-16BETA-METHYLPREDNISOLONE
+16alpha-Methyl-9alpha-fluoro-delta(sup 1)-hydrocortisone
+16-alpha-Methyl-9-alpha-fluoro-delta(sup 1)-hydrocortisone
+MFCD00064136
+Dexamethasone (DHAP)
+7S5I7G3JQL
+CHEBI:41879
+ISV-305
+[3H]-dexamethasone
+NSC-34521
+Decaject-L.A.
+23495-06-9
+Pregna-1,4-diene-3,20-dione, 9-fluoro-11,17,21-trihydroxy-16-methyl-, labeled with tritium, (11beta,16alpha)-
+Dexair
+16.alpha.-Methyl-9.alpha.-fluoroprednisolone
+9.alpha.-Fluoro-16.alpha.-methylprednisolone
+Dexacen-4
+(1R,2S,10S,11S,13R,14R,15S,17S)-1-fluoro-14,17-dihydroxy-14-(2-hydroxyacetyl)-2,13,15-trimethyltetracyclo[8.7.0.0^{2,7}.0^{11,15}]heptadeca-3,6-dien-5-one
+(8S,9R,10S,11S,13S,14S,16R,17R)-9-fluoro-11,17-dihydroxy-17-(2-hydroxyacetyl)-10,13,16-trimethyl-6,7,8,11,12,14,15,16-octahydrocyclopenta[a]phenanthren-3-one
+(8S,9R,10S,11S,13S,14S,16R,17R)-9-fluoro-11,17-dihydroxy-17-(2-hydroxyacetyl)-10,13,16-trimethyl-6,7,8,9,10,11,12,13,14,15,16,17-dodecahydro-3H-cyclopenta[a]phenanthren-3-one
+16.alpha.-Methyl-9.alpha.-fluoro-1-dehydrocortisol
+1-Dehydro-16.alpha.-methyl-9.alpha.-fluorohydrocortisone
+Osurdex
+Dexamethasone Base
+(8S,9R,10S,11S,13S,14S,16R,17R)-9-Fluoro-11,17-dihydroxy-17-(2-hydroxyacetyl)-10,13,16-trimethyl-6,7,8,9,10,11,12,13,14,15,16,17-dodecahydro-3H-cyclopenta[a]ph
+SMR000857119
+DXM [Steroid]
+CCRIS 7067
+HSDB 3053
+dexamethasone (tetramethyl-rhodamine conjugated )
+EINECS 200-003-9
+Solurex
+.delta.(sup 1)-9-.alpha.-Fluoro-16-.alpha.-methylcortisol
+16.alpha.-Methyl-9.alpha.-fluoro-.delta.(sup1)-hydrocortisone
+Dexycu
+Diodex
+DexaSite
+NSC34521
+AI3-50934
+.gamma.corten
+Apo-dexamethasone
+Prednisolone, 9alpha-fluoro-16alpha-methyl-
+Dexasone 4mg
+Zema-Pak
+PHL-dexamethasone
+PMS-dexamethasone
+[3H]dexamethasone
+Dexamethasone-omega
+NCGC00091019-08
+Dexasone 0.5mg
+Dexamethasone [USP:INN:BAN:JAN]
+Dexasone 0.75mg
+Sandoz Dexamethasone
+Pregna-1,4-diene-3,20-dione, 9-fluoro-11,17,21-trihydroxy-16-methyl-, (11beta,16alpha)-
+Dexamethasone, topical
+Maxidex Ont 0.1%
+Maxidex Sus 0.1%
+dexamethasone-17-acetate
+DSSTox_CID_384
+Spectrum5_002019
+MolMap_000018
+9-Fluoro-11beta,17,21-trihydroxy-16alpha-methylpregna-1,4-diene-3,20-dione
+SCHEMBL3774
+16-alpha-Methyl-9-alpha-fluoro-1,4-pregnadiene-11-beta,17-alpha,21-triol-3,20-dione
+16-alpha-Methyl-9-alpha-fluoro-11-beta,17-alpha,21-trihydroxypregna-1,4-diene-3,20-dione
+4-alpha-Fluoro-16-alpha-methyl-11-beta,17,21-trihydroxypregna-1,4-diene-3,20-dione
+9-alpha-Fluoro-16-alpha-methyl-1,4-pregnadiene-11-beta,17-alpha,21-triol-3,20-dione
+DSSTox_RID_75557
+BIDD:PXR0060
+DSSTox_GSID_20384
+BSPBio_000995
+MLS001055412
+MLS001332507
+MLS001332508
+BIDD:ER0494
+sustained-release dexamethasone
+CHEMBL384467
+GTPL2768
+GTPL3447
+SGCUT00126
+9-Fluoro-16-methylprednisolone
+Ak Dex Oph Otic Soln 0.1%
+DTXSID3020384
+BDBM18207
+1p93
+HMS1792A17
+HMS1990A17
+HMS2089N13
+HMS2235F08
+HMS3039L11
+HMS3259N11
+HMS3403A17
+Dexamethasone  Cyclodextrin complex
+AMY28815
+to_000038
+ZINC3875332
+Tox21_200122
+Dexamethasone, >=97.0% (HPLC)
+IBI-10090
+Dexamethasone 1.0 mg/ml in Methanol
+PMS Dexamethasone Elixir 0.5mg/5ml
+AKOS005259009
+AKOS015895509
+Decadron phosphate, Decdan, Dexacort,
+CCG-264887
+CS-1505
+DB01234
+KS-1451
+MCULE-4773827191
+NC00645
+CAS-50-02-2
+Pregna-1,4-diene-3,20-dione, 9-fluoro-11beta,17,21-trihydroxy-16alpha-methyl-
+SMP1_000092
+Dexamethasone, >=98% (HPLC), powder
+NCGC00091019-01
+NCGC00091019-02
+NCGC00091019-03
+NCGC00091019-04
+NCGC00091019-05
+NCGC00091019-06
+NCGC00091019-07
+NCGC00091019-23
+NCGC00257676-01
+(11beta,16alpha)-9-Fluoro-11,17,21-trihydroxy-16-methylpregna-1,4-diene-3,20-dione labeled with tritium
+9alpha-fluoro-16alpha-methyl-Prednisolone
+AC-11056
+HY-14648
+NCI60_003067
+SMR001227192
+16alpha -Methyl-9alpha -fluoroprednisolone
+9alpha -Fluoro-16alpha -methylprednisolone
+Dexamethasone, tested according to Ph.Eur.
+EN300-52607
+Dexamethasone, meets USP testing specifications
+J10029
+Prednisolone, 9alpha -fluoro-16alpha -methyl-
+9.alpha.-Fluoro-16.alpha.-methyl-1,20-dione
+AB00918428-05
+AB00918428-08
+AB00918428-09
+AB00918428_10
+064D136
+16alpha -Methyl-9alpha -fluoro-1-dehydrocortisol
+Dexamethasone, VETRANAL(TM), analytical standard
+Q422252
+Neomycin and polymyxin b sulphates and dexamethasone
+Q-200939
+BRD-K38775274-001-02-3
+BRD-K38775274-001-06-4
+1-Dehydro-16alpha -methyl-9alpha -fluorohydrocortisone
+Dexamethasone, British Pharmacopoeia (BP) Assay Standard
+Z802671480
+Dexamethasone, European Pharmacopoeia (EP) Reference Standard
+WLN: L E5 B666 OV KU MUTJ A1 BF CQ E1 FV1Q FQ G1
+Dexamethasone, powder, BioReagent, suitable for cell culture, >=97%
+Dexamethasone, United States Pharmacopeia (USP) Reference Standard
+16-.alpha.-Methyl-9-.alpha.-fluoro-1,17-.alpha.,21-triol-3,20-dione
+Pregna-1,20-dione, 9-fluoro-11.beta.,17,21-trihydroxy-16.alpha.-methyl-
+9-Fluoro-11.beta.,21-trihydroxy-16.alpha.-methylpregna-1,4-diene-3,20-dione
+9-fluoro-16alpha-methyl-11beta,17,21-trihydroxypregna-1,4-diene-3,20-dione
+9.alpha.-Fluoro-11.beta.-17.alpha.- 21-trihydroxy-16.alpha.-methylpregna-1,20-dione
+9alpha-Fluoro-16alpha-methyl-11beta,17alpha,21-trihydroxy-1,4-pregnadiene-3,20-dione
+Dexamethasone for peak identification, European Pharmacopoeia (EP) Reference Standard
+Dexamethasone for system suitability, European Pharmacopoeia (EP) Reference Standard
+Dexamethasone solution, 1.0 mg/mL in methanol, ampule of 1 mL, certified reference material
+Dexamethasone, Pharmaceutical Secondary Standard; Certified Reference Material
+Dexamethasone, powder, gamma-irradiated, BioXtra, suitable for cell culture, >=80% (HPLC)
+Pregna-1,20-dione, 9-fluoro-11,17,21-trihydroxy-16-methyl-, (11.beta.,16.alpha.)-
+(11alpha,14beta,16alpha,17alpha)-9-fluoro-11,17,21-trihydroxy-16-methylpregna-1,4-diene-3,20-dione
+(1R,2S,10S,11S,13R,14R,15S,17S)-1-fluoro-14,17-dihydroxy-14-(2-hydroxyacetyl)-2,13,15-trimethyltetracyclo[8.7.0.0;{2,7}.0;{11,15}]heptadeca-3,6-dien-5-one
+1050677-47-8
+9.alpha.-Fluoro-16.alpha.-methyl-11.beta.,21.beta.-trihydroxy-pregna-1,4-diene-3,20-dione
+1650550-25-6
+Enasidenib mesilate
+UNII-UF6PC17XAV
+Enasidenib methanesulfonate
+Enasidenib (mesylate)
+UF6PC17XAV
+2-Methyl-1-[4-(6-trifluoromethyl-pyridin-2-yl)-6-(2-trifluoromethyl-pyridin-4-ylamino)-[1,3,5]triazin-2-ylamino]-propan-2-ol mesylate
+methanesulfonic acid;2-methyl-1-[[4-[6-(trifluoromethyl)pyridin-2-yl]-6-[[2-(trifluoromethyl)pyridin-4-yl]amino]-1,3,5-triazin-2-yl]amino]propan-2-ol
+CHEMBL3989931
+SCHEMBL16448052
+BCP26166
+EX-A1972
+HY-18690A
+s4929
+Enasidenib mesylate; AG-221 mesylate
+CS-7541
+2-Propanol, 2-methyl-1-((4-(6-(trifluoromethyl)-2-pyridinyl)-6-((2-(trifluoromethyl)-4-pyridinyl)amino)-1,3,5-triazin-2-yl)amino)-, methanesulfonate (1:1)
+AC-31319
+Q27291054
+Gilteritinib hemifumarate
+ASP-2215 hemifumarate
+UNII-5RZZ0Z1GJT
+1254053-84-3
+5RZZ0Z1GJT
+2-Pyrazinecarboxamide, 6-ethyl-3-((3-methoxy-4-(4-(4-methyl-1-piperazinyl)-1-piperidinyl)phenyl)amino)-5-((tetrahydro-2H-pyran-4-yl)amino)-, (2E)-2-butenedioate (2:1)
+2-Pyrazinecarboxamide, 6-ethyl-3-[[3-methoxy-4-[4-(4-methyl-1-piperazinyl)-1-piperidinyl]phenyl]amino]-5-[(tetrahydro-2H-pyran-4-yl)amino]-, (2E)-2-butenedioate (2:1)
+6-ethyl-3-((3-methoxy-4-(4-(4-methylpiperazin-1-yl)piperidin-1-yl)phenyl)amino)-5-((tetrahydro-2H-pyran-4-yl)amino)pyrazine-2-carboxamide hemifumarate
+ASP2215 hemifumarate
+(E)-but-2-enedioic acid;6-ethyl-3-[3-methoxy-4-[4-(4-methylpiperazin-1-yl)piperidin-1-yl]anilino]-5-(oxan-4-ylamino)pyrazine-2-carboxamide
+CHEMBL3301603
+SCHEMBL21819929
+Q27262795
+idarubicin hydrochloride
+Idarubicin Hcl
+57852-57-0
+Idamycin
+Zavedos
+Idarubicin (hydrochloride)
+UNII-5VV3MDU5IE
+5VV3MDU5IE
+Idarubicinhydrochloride
+CPD000466355
+IMI-30
+4-Demethoxydaunorubicin hydrochloride
+MLS001401448
+DSSTox_CID_27775
+DSSTox_RID_82550
+DSSTox_GSID_47797
+SMR000466355
+Idamycin PFS
+CAS-57852-57-0
+NSC 256439
+NSC-256439
+NCGC00093976-03
+SR-01000075934
+EINECS 260-990-7
+Idarubicin hydrochlorid
+SCHEMBL4838
+C26H27NO9.HCl
+MLS000759470
+CHEMBL1200976
+DTXSID0047797
+CHEBI:31686
+KUC110342C
+EX-A1148
+Tox21_111236
+MFCD00866457
+MFCD00897212
+AKOS025402118
+Tox21_111236_1
+AC-5255
+CCG-100886
+CS-1061
+NC00136
+Daunomycin, 4-demethoxy-, hydrochloride
+NCGC00093976-08
+(1S,3S)-3-Acetyl-1,2,3,4,6,11-hexahydro-3,5,12-trihydroxy-6,11-dioxo-1-naphthacenyl 3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranoside, hydrochloride
+AS-75944
+HY-17381
+KSC-230-185-1
+D01747
+852I570
+Q-101407
+SR-01000075934-5
+4-demethoxydaunorubicin (NSC256439, 4-DMDR) HCl
+Q27262943
+(7S,9S)-9-acetyl-7-(((2R,4S,5S,6S)-4-amino-5-hydroxy-6-methyltetrahydro-2H-pyran-2-yl)oxy)-6,9,11-trihydroxy-7,8,9,10-tetrahydrotetracene-5,12-dione hydrochloride
+(7S,9S)-9-acetyl-7-(((2R,4S,5S,6S)-4-amino-5-hydroxy-6-methyltetrahydro-2H-pyran-2-yl)oxy)-6,9,11-trihydroxy-7,8,9,10-tetrahydrotetracene-5,12-dionehydrochloride
+(7S,9S)-9-acetyl-7-((2R,4S,5S,6S)-4-amino-5-hydroxy-6-methyltetrahydro-2H-pyran-2-yloxy)-6,9,11-trihydroxy-7,8,9,10-tetrahydrotetracene-5,12-dione hydrochloride
+(7S-cis)-9-Acetyl-7-((3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranosyl)oxy)-7,8,9,10-tetrahydro-6,9,11-trihydroxynaphthacene-5,12-dione hydrochloride
+(7S-cis)-9-Acetyl-7-[(3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranosyl)oxy]-7,8,9,10-tetrahydro-6,9,11-trihydroxy-5,12-naphthacenedione
+5,12-Naphthacenedione, 9-acetyl-7-((3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranosyl)oxy)-7,8,9,10-tetrahydro-6,9,11-trihydroxyhydrochloride, (7S-cis)-
+1448347-49-6
+Tibsovo
+UNII-Q2PCN8MAM6
+Q2PCN8MAM6
+(2S)-N-[(1S)-1-(2-chlorophenyl)-2-[(3,3-difluorocyclobutyl)amino]-2-oxoethyl]-1-(4-cyanopyridin-2-yl)-N-(5-fluoropyridin-3-yl)-5-oxopyrrolidine-2-carboxamide
+(S)-N-((S)-1-(2-chlorophenyl)-2-((3,3-difluorocyclobutyl)amino)-2-oxoethyl)-1-(4-cyanopyridin-2-yl)-N-(5-fluoropyridin-3-yl)-5-oxopyrrolidine-2-carboxamide
+ivosidenibum
+(2S)-N-{(1S)-1-(2-chlorophenyl)-2-[(3,3-difluorocyclobutyl)amino]-2-oxoethyl}-1-(4-cyanopyridin-2-yl)-N-(5-fluoropyridin-3-yl)-5-oxopyrrolidine-2-carboxamide
+Ivosidenib [WHO-DD]
+GTPL9217
+CHEMBL3989958
+SCHEMBL15122512
+EX-A992
+CHEBI:145430
+BDBM363689
+AMY38924
+MFCD29036964
+NSC789102
+s8206
+ZINC205136523
+CCG-270141
+CS-5122
+DB14568
+NSC-789102
+NCGC00476170-04
+NCGC00476170-06
+(S)-N-((S)-1-(2-chlorophenyl)-2-(3,3-difluorocyclobutylamino)-2-oxoethyl)-1-(4-cyanopyridin-2-yl)-N-
+AC-32624
+AS-35058
+HY-18767
+A14386
+A900315
+Q27895417
+(2S)-1-(4-Cyano-2-pyridinyl)-5-oxo-L-prolyl-2-(2-chloroPh)-N-(3,3-difluorocyclobutyl)-N2-(5-fluoro-3-pyridinyl)-glycinamide
+(S)-N-((S)-1-(2-chlorophenyl)-2-((3,3-difluorocyclobutyl)amino)-2-oxoethyl)-1-(4-cyanopyridin-2-yl)-N-(5-fluoropyridin-3-yl)-5-oxopyrrolidine-2-carboxamide;AG-120
+(S)-N-((S)-1-(2-chlorophenyl)-2-(3,3-difluorocyclobutylamino)-2-oxoethyl)-1-(4-cyanopyridin-2-yl)-N-(5-fluoropyridin-3-yl)-5-oxopyrrolidine-2-carboxamide
+Glycinamide, 1-(4-cyano-2-pyridinyl)-5-oxo-L-prolyl-2-(2-chlorophenyl)-N-(3,3-difluorocyclobutyl)-N2-(5-fluoro-3-pyridinyl)-, (2S)-
+N-{(1S)-1-(2-chlorophenyl)-2-[(3,3-difluorocyclobutyl)amino]-2-oxoethyl}-1-(4-cyanopyridin-2-yl)-N-(5-fluoropyridin-3-yl)-5-oxo-L-prolinamide
+120685-11-2
+4'-N-Benzoylstaurosporine
+Benzoylstaurosporine
+CGP-41251
+PKC 412
+UNII-ID912S5VON
+N-Benzoylstaurosporine
+ID912S5VON
+CHEMBL608533
+CHEBI:63452
+N-[(5S,6R,7R,9R)-6-methoxy-5-methyl-14-oxo-6,7,8,9,15,16-hexahydro-5H,14H-5,9-epoxy-4b,9a,15-triazadibenzo[b,h]cyclonona[1,2,3,4-jkl]cyclopenta[e]-as-indacen-7-yl]-N-methylbenzamide
+NSC-656576
+Midostaurin(PKC412)
+4-N-benzoylstaurosporine
+NVP-PKC412
+GTPL5702
+SCHEMBL8295379
+HMS3229K17
+EX-A1741
+BDBM50326053
+CGP-41521
+MFCD00871372
+NSC800791
+s8064
+AKOS024457372
+ZINC100013130
+CCG-101288
+CS-3331
+DB06595
+NSC-800791
+NCGC00241102-01
+NCGC00241102-02
+NCGC00241102-05
+NCGC00484987-03
+AC-31929
+Benzamide, N-(2,3,9,10,11,12-hexahydro-9-methoxy-8-methyl-1-oxo-8,12-epoxy-1H,8H-2,7b,12a-triazadibenzo(a,g)cyclonona(cde)trinden-10-yl)-N-methyl-, (8alpha,9beta,10beta,12alpha)-
+HY-10230
+N-((9S,10R,11R,13R)-10-methoxy-9-methyl-1-oxo-2,3,10,11,12,13-hexahydro-9,13-epoxy-1H,9H-diindolo(1,2,3-gh:3',2',1'-lm)pyrrolo(3,4-j)(1,7)benzodiazonin-11-yl)-N-methylbenzamide
+C71714
+D05029
+J-004379
+Q6842945
+BRD-K13646352-001-01-2
+[9S-(9?,10?,11?,13?)]-N-(2,3,10,11,12,13-Hexahydro-10-methoxy-9-methyl-1-oxo-9,13-epoxy-1H,9H-diindolo[1,2,3-gh:3',2',1'-lm]pyrrolo[3,4-j][1,7]benzodiazonin-11-yl)-N-methylbenzamide
+Benzamide, N-((9S,10R,11R,13R)-2,3,9,10,11,12-hexahydro-10-methoxy-9-methyl-1-oxo-9,13-epoxy-1H,9H-diindolo(1,2,3-gh:3',2',1'-lm)pyrrolo(3,4-j)(1,7)benzodiazonin-11-yl)-N-methyl-
+N-[(2S,3R,4R,6R)-3-methoxy-2-methyl-16-oxo-29-oxa-1,7,17-triazaoctacyclo[12.12.2.1^{2,6}.0^{7,28}.0^{8,13}.0^{15,19}.0^{20,27}.0^{21,26}]nonacosa-8,10,12,14(28),15(19),20(27),21,23,25-nonaen-4-yl]-N-methylbenzamide
+N-[(2S,3R,4R,6R)-3-methoxy-2-methyl-16-oxo-29-oxa-1,7,17-triazaoctacyclo[12.12.2.12,6.07,28.08,13.015,19.020,27.021,26]nonacosa-8,10,12,14,19,21,23,25,27-nonaen-4-yl]-N-methylbenzamide
+Mitoxantrone hydrochloride
+Mitoxantrone 2HCl
+Mitoxantrone (dihydrochloride)
+MITOXANTHRONE HYDROCHLORIDE
+CL-232315
+UNII-U6USW86RD0
+1,4-Dihydroxy-5,8-bis((2-((2-hydroxyethyl)amino)ethyl)amino)anthracene-9,10-dione dihydrochloride
+NSC-301739
+U6USW86RD0
+CHEBI:50727
+1,4-dihydroxy-5,8-bis-[2-(2-hydroxyethylamino)ethylamino]anthraquinone 2hcl
+MFCD00242943
+70476-82-3 (HCl)
+DSSTox_CID_25173
+DSSTox_RID_80722
+DSSTox_GSID_45173
+Bisantrone
+1,4-Dihydroxy-5,8-bis[[2-[(2-hydroxyethyl)amino]ethyl]amino]-9,10-anthracenedione dihydrochloride
+CCRIS 2592
+HSDB 6543
+NCGC00015693-02
+EINECS 274-619-1
+CAS-70476-82-3
+NSC 301739
+Onkotrone
+Ralenova
+Eslep
+C22H30Cl2N4O6
+CL 232315
+Mitoxantron HCl
+SR-01000076001
+mitoxanthrone hcl
+Mitoxantrone Dihcl
+1,4-dihydroxy-5,8-bis({2-[(2-hydroxyethyl)amino]ethyl}amino)anthracene-9,10-dione dihydrochloride
+Prestwick_571
+1,4-dihydroxy-5,8-bis[2-(2-hydroxyethylamino)ethylamino]anthracene-9,10-dione hydrochloride
+SCHEMBL3928
+1,4-Dihydroxy-5,8-bis((2-((2-hydroxyethyl)amino)ethyl)amino)anthraquinone dihydrochloride
+SPECTRUM1503278
+MITOXANTRONEHYDROCHLORIDE
+CHEMBL1417019
+DTXSID0045173
+HMS1569M11
+HMS1922O21
+BCP23424
+dhaq dihydrochloride 65271-80-9
+Tox21_110197
+Tox21_500779
+CCG-39938
+HY-13502A
+s2485
+AKOS015895228
+Tox21_110197_1
+AC-1591
+BCP9000932
+LP00779
+1,4-Dihydroxy-5,8-bis-[2-(2-hydroxyethylamino)ethylamino]anthraquinone dihydrochloride
+NCGC00015693-09
+NCGC00094116-01
+NCGC00094116-02
+NCGC00094116-03
+NCGC00094116-04
+NCGC00261464-01
+9,10-Anthracenedione, 1,4-dihydroxy-5,8-bis((2-((2-hydroxyethyl)amino)ethyl)amino)-, dihydrochloride
+AS-13162
+BCP0726000265
+DB-055419
+EU-0100779
+SW196745-5
+Mitoxantrone dihydrochloride, >=97% (HPLC)
+D02166
+271M809
+SR-01000076001-1
+SR-01000076001-8
+W-104553
+Q27122209
+Z2569867923
+Mitoxantrone dihydrochloride pound>>Mitozantrone dihydrochloride
+Mitoxantrone hydrochloride, European Pharmacopoeia (EP) Reference Standard
+1,4-dihydroxy-5,8-bis-[[2-(2-hydroxyethylamino)ethyl]amino]-anthraquinone dihydrochloride
+1,4-Dihydroxy-5,8-bis-[2-(2-hydroxy-ethylamino)-ethylamino]-anthraquinone dihydrochloride
+1,4-dihydroxy-5,8-bis-[2-(2-hydroxyethylamino)ethylamino]anthraquinonedihydrochloride
+1,4-dihydroxy-5,8-bis[[2-(2-hydroxyethylamino)ethyl]amino]anthraquinone dihydrochloride
+Mitoxantrone hydrochloride, United States Pharmacopeia (USP) Reference Standard
+1,4-dihydroxy-5,8-bis({2-[(2-hydroxyethyl)amino]ethyl}amino)-9,10-dihydroanthracene-9,10-dione dihydrochloride
+1,4-dihydroxy-5,8-bis(2-(2-hydroxyethylamino)ethylamino)anthracene-9,10-dione dihydrochloride
+53-03-2
+Deltasone
+Orasone
+Decortisyl
+Rectodelt
+Sterapred
+Supercortil
+Paracort
+1,2-Dehydrocortisone
+Liquid Pred
+Deltacortisone
+Deltacortone
+Ancortone
+Colisone
+Decortancyl
+Deltison
+Encortone
+Prednilonga
+Servisone
+Lodotra
+Prednicen-M
+Delta-Dome
+Di-Adreson
+Bicortone
+Cortidelt
+Dekortin
+Diadreson
+Enkorton
+Hostacortin
+Lisacort
+Panafcort
+Prednisonum
+Prednizon
+Zenadrid
+Adasone
+Juvason
+Nurison
+Winpred
+Wojtab
+Delta-Cortelan
+In-Sone
+17,21-Dihydroxypregna-1,4-diene-3,11,20-trione
+Cartancyl
+Deltisona
+Prednisone Intensol
+SK-Prednisone
+Prednisona
+1,4-Pregnadiene-17alpha,21-diol-3,11,20-trione
+Deltisone
+Pregna-1,4-diene-3,11,20-trione, 17,21-dihydroxy-
+Zenadrid (veterinary)
+Fernisone
+prednisone anhydrous
+NCI-C04897
+UNII-VB0R961HZT
+Prednisone tablets
+1-Dehydrocortisone
+3en3hg4wsw
+NSC 10023
+NSC-10023
+U 6020
+Prednidib
+CHEBI:8382
+delta-Cortisone
+Zenadrid [veterinary]
+Apo-Prednisone
+Novoprednisone
+Dellacort
+Econosone
+Incocortyl
+Parmenison
+Predeltin
+Prednicorm
+Prednicort
+Prednicot
+Prednitone
+Prednovister
+Retrocortine
+Dacorten
+Fiasone
+MFCD00003608
+Pehacort
+Presone
+delta cortelan
+Nisona
+Dellacort A
+VB0R961HZT
+Me-Korti
+Origen Prednisone
+(8S,9S,10R,13S,14S,17R)-17-hydroxy-17-(2-hydroxyacetyl)-10,13-dimethyl-6,7,8,9,12,14,15,16-octahydrocyclopenta[a]phenanthrene-3,11-dione
+.delta.-Cortisone
+.delta.1-Cortisone
+delta-1-Cortisone
+NCGC00090766-01
+.delta.1-Dehydrocortisone
+DSSTox_CID_1185
+Meticorten (Veterinary)
+delta(sup 1)-Cortisone
+delta-1-Dehydrocortisone
+DSSTox_RID_75997
+DSSTox_GSID_21185
+delta(sup 1)-Dehydrocortisone
+Lodtra
+(8S,9S,10R,13S,14S,17R)-17-Hydroxy-17-(2-hydroxyacetyl)-10,13-dimethyl-7,8,9,10,12,13,14,15,16,17-decahydro-3H-cyclopenta[a]phenanthrene-3,11(6H)-dione
+SMR000718760
+SMR001227202
+Delta E.
+CCRIS 2646
+HSDB 3168
+MLS002638114
+EINECS 200-160-3
+Prednisone [USP:INN:BAN]
+1,4-Pregnadiene-17-alpha,21-diol-3,11,20-trione
+AI3-52939
+.delta.sone
+.delta.-Cortone
+.delta.-Cortelan
+CAS-53-03-2
+Deltadehydrocortisone
+Prednisone(Adasone)
+Prestwick_405
+.delta. E
+.delta.-E
+Prednisone (Adasone)
+Prednisone, >=98%
+Prestwick0_000077
+Prestwick1_000077
+Prestwick2_000077
+Prestwick3_000077
+.delta.(sup1)-Cortisone
+modified-release prednisone
+CHEMBL635
+SCHEMBL3288
+BSPBio_000293
+MLS001061265
+MLS001304073
+MLS001335907
+MLS001335908
+MLS002154191
+MLS002207083
+MLS002548880
+SPBio_002214
+BPBio1_000323
+GTPL7096
+MEGxm0_000443
+17alpha,21-Dihydroxy-1,4-pregnadiene-3,11,20-trione
+DTXSID4021185
+ACon0_000082
+ACon1_000297
+HMS1568O15
+HMS2090J13
+HMS2095O15
+HMS2231I24
+HMS3039K07
+HMS3259I09
+HMS3712O15
+HMS3884C04
+1,21-diol-3,11,20-trione
+BCP09049
+HY-B0214
+NSC10023
+Pregna-1,4-diene-3,11,20-trione monohydrate, 17,21-dihydroxy-
+ZINC3875357
+Tox21_111014
+Tox21_201564
+Tox21_300196
+BDBM50550126
+LMST02030180
+AKOS005267096
+AKOS007930684
+Tox21_111014_1
+CCG-220077
+DB00635
+MCULE-2603291254
+NC00475
+NCGC00090766-02
+NCGC00090766-03
+NCGC00090766-04
+NCGC00090766-05
+NCGC00090766-07
+NCGC00254096-01
+NCGC00259113-01
+Prednisone, tested according to Ph.Eur.
+AC-11112
+AS-11685
+NCI60_000008
+Pregna-1,11,20-trione, 17,21-hydroxy-
+EN300-52605
+Pregna-1,11,20-trione, 17,21-dihydroxy-
+C07370
+J10219
+003P608
+1,4-Pregnadiene-17?,21-diol-3,11,20-trione
+Q424972
+SR-01000837536
+SR-01000837536-3
+BRD-K85883481-001-04-2
+BRD-K85883481-001-08-3
+BRD-K85883481-001-25-7
+17alpha,21-dihydroxypregna-1,4-diene-3,11,20-trione
+WLN: L E5 B666 CV OV AHTTT&J A1 E1 FV1Q FQ
+Prednisone, British Pharmacopoeia (BP) Reference Standard
+Prednisone, European Pharmacopoeia (EP) Reference Standard
+Prednisone, United States Pharmacopeia (USP) Reference Standard
+Prednisone, Pharmaceutical Secondary Standard; Certified Reference Material
+Prednisone for peak identification, European Pharmacopoeia (EP) Reference Standard
+Prednisone, pharmaceutical secondary standard; traceable to USP, PhEur and BP
+(8S,10R,13S,17R)-17-Hydroxy-17-(2-hydroxy-acetyl)-10,13-dimethyl-7,8,9,10,12,13,14,15,16,17-decahydro-6H-cyclopenta[a]phenanthrene-3,11-dione
+Prednisone solution, 100 mug/mL in acetonitrile, ampule of 1 mL, certified reference material
+6-Thioguanine
+154-42-7
+Tioguanin
+Lanvis
+2-Amino 6MP
+2-Aminopurin-6-thiol
+2-Aminopurine-6-thiol
+2-Aminopurine-6(1H)-thione
+Wellcome U3B
+6-Mercapto-2-aminopurine
+2-Amino-9H-purine-6-thiol
+2-Amino-6-merkaptopurin
+Tioguaninum
+Guanine, thio-
+Tioguanina
+6H-Purine-6-thione, 2-amino-1,7-dihydro-
+2-Amino-1,7-dihydro-6H-purine-6-thione
+BW 5071
+Purine-6-thiol, 2-amino-
+Purine-6(1H)-thione, 2-amino-
+NSC-752
+Thioguanine Anhydrous
+Thioguanine Hemihydrate
+C5H5N5S
+NSC 752
+2-Amino-1,7-dihydro-6H-purin-6-thion
+UNII-WIX31ZPX66
+Thioguanine, anhydrous
+9H-Purine-6-thiol, 2-amino-
+2-amino-1,9-dihydropurine-6-thione
+CHEMBL727
+WIX31ZPX66
+CHEBI:9555
+NSC752
+Thioguanine2-Amino-6-purinethiol
+2-Thioguanine
+2-amino-1,7-dihydropurine-6-thione
+MFCD00233553
+NCGC00094792-01
+DSSTox_CID_3652
+2-Amino-6-MP
+DSSTox_RID_77129
+DSSTox_GSID_23652
+Guanine, thio- (VAN)
+6-Tioguanine
+CAS-154-42-7
+SMR000857244
+CCRIS 8997
+NSC-76504
+HSDB 2504
+SR-05000002077
+EINECS 205-827-2
+Thioquanine
+AI3-26078
+6-thioguano-sine
+6-TG/Thioguanine
+Tioguanine hemihydrate
+1H-Purine-6-thiol, 2-amino- (9CI)
+Spectrum_000235
+2-amino-3,7-dihydro-6H-purine-6-thione
+Spectrum2_000695
+Spectrum3_000577
+Spectrum4_000926
+Spectrum5_001455
+2-Amino-6-mercapto-purin
+6-Thioguanine, >=98%
+SCHEMBL3701
+SCHEMBL5898
+NCIOpen2_004153
+BSPBio_001994
+KBioGR_001452
+KBioGR_002476
+KBioSS_000715
+KBioSS_002483
+MLS001333131
+MLS001333132
+MLS006010896
+DivK1c_000428
+SPECTRUM1500573
+6H-Purine-6-thione, 2-amino-3,7-dihydro- (9CI)
+SPBio_000849
+154-42-7|6-Thioguanine
+2-amino-6-mercapto-9H-purine
+GTPL6845
+DTXSID6023652
+HMS501F10
+KBio1_000428
+KBio2_000715
+KBio2_002476
+KBio2_003283
+KBio2_005044
+KBio2_005851
+KBio2_007612
+KBio3_001494
+KBio3_002954
+cMAP_000061
+NINDS_000428
+BCPE000001
+HMS1921E09
+HMS2092M11
+HMS2235F05
+HMS3865G13
+Pharmakon1600-01500573
+ALBB-023493
+BCP27718
+ZINC6382803
+Tox21_111035
+Tox21_113184
+Tox21_202401
+Tox21_300275
+BDBM50200099
+CCG-39890
+NSC757348
+s1774
+AKOS003389499
+AKOS015901298
+Tox21_111035_1
+2-Amino-1,7-dihydro-purine-6-thione
+2-Amino-1,9-dihydro-purine-6-thione
+AC-8421
+BCP9000197
+CCG-213953
+CCG-266338
+CS-1497
+DB00352
+MCULE-5787306636
+NSC-757348
+PS-5007
+WLN: T56 BNM FYM INJ FUS HZ
+IDI1_000428
+SMP2_000326
+NCGC00094792-02
+NCGC00094792-03
+NCGC00094792-05
+NCGC00094792-06
+NCGC00094792-17
+NCGC00188976-01
+NCGC00188976-02
+NCGC00254082-01
+NCGC00259950-01
+NCGC00263442-01
+NCGC00263442-02
+NCGC00263442-05
+153981-51-2
+153981-52-3
+154034-61-4
+154034-62-5
+AC-23020
+BT166463
+HY-13765
+NCI60_041643
+SMR004701808
+SBI-0051533.P003
+FT-0611217
+T0212
+Y7662
+2-Amino-1,7-dihydro-6H-purine-6-thione #
+C07648
+D08603
+J10163
+T71841
+AB00174074_06
+AB00918694_06
+AB01273926-01
+AB01273926-02
+AB01273926_03
+154T427
+A809532
+Q385347
+SR-05000002077-1
+SR-05000002077-5
+W-108030
+W-205813
+Z2768769146
+6-Thioguanine;6-TG;2-Amino-6-mercaptopurine;2-Amino-6-purinethiol
+Thioguanine, United States Pharmacopeia (USP) Reference Standard
+Thioguanine;6-TG; 2-Amino-6-mercaptopurine; 2-Amino-6-purinethiol
+6-Thioguanine, Hybri-Max(TM), 50 x, gamma-irradiated, lyophilized powder, BioXtra, suitable for hybridoma
+Vincrisul
+Kyocristine
+Leurocristine sulfate
+Onkovin
+NSC 67574
+Lilly 37231
+NSC67574
+NSC-67574
+Leurocristine, sulfate (1:1) (salt)
+Alkaloid extracted from Vinca rosea Linn
+CHEBI:79401
+1217704-93-2
+MLS002702994
+Vincristini sulfas
+Leurocristine, sulfate
+Vincristine sulfate liposome
+SCHEMBL3710
+Leurocristine sulfate (1:1)
+CHEMBL501867
+DTXSID8044331
+LILLY-37231
+HMS3414L13
+HMS3678L11
+MFCD08706469
+AKOS015895862
+D02197
+068V782
+A936684
+methyl (3aR,3a1R,4R,5S,5aR,10bR)-4-acetoxy-3a-ethyl-9-((3S,5S,7S,9S)-5-ethyl-5-hydroxy-9-(methoxycarbonyl)-1,4,5,6,7,8,9,10-octahydro-2H-3,7-methano[1]azacycloundecino[5,4-b]indol-9-yl)-6-formyl-5-hydroxy-8-methoxy-3a,3a1,4,5,5a,6,11,12-octahydro-1H-indolizino[8,1-cd]carbazole-5-carboxylate sulfate
+1257044-40-8
+Venclexta
+ABT 199
+Venetoclax (ABT199)
+UNII-N54AIC43PW
+GDC 0199
+RG7601
+Venetoclax; Abt-199
+4-[4-[[2-(4-chlorophenyl)-4,4-dimethylcyclohexen-1-yl]methyl]piperazin-1-yl]-N-[3-nitro-4-(oxan-4-ylmethylamino)phenyl]sulfonyl-2-(1H-pyrrolo[2,3-b]pyridin-5-yloxy)benzamide
+Venetoclax (ABT-199)
+RG-7601
+N54AIC43PW
+ABT-199 (GDC-0199)
+2-(1H-Pyrrolo[2,3-b]pyridin-5-yloxy)-4-(4-((2-(4-chlorophenyl)-4,4-dimethylcyclohex-1-enyl)methyl)piperazin-1-yl)-N-(3-nitro-4-((tetrahydro-2H-pyran-4-yl)methy
+4-[4-[[2-(4-Chlorophenyl)-4,4-dimethyl-1-cyclohexen-1-yl]methyl]-1-piperazinyl]-N-[[3-nitro-4-[[(tetrahydro-2H-pyran-4-yl)methyl]amino]phenyl]sulfonyl]-2-(1H-pyrrolo[2,3-b]pyridin-5-yloxy)-benzamide
+venclyxto
+BDBM189459
+4-(4-((2-(4-chlorophenyl)-4,4-dimethylcyclohex-1-en-1-yl)methyl)piperazin-1-yl)-N-((3-nitro-4-((tetrahydro-2H-pyran-4-ylmethyl)amino)phenyl)sulfonyl)-2-(1H-pyrrolo(2,3-b)pyridin-5-yloxy)benzamide
+4-(4-{[2-(4-chlorophenyl)-4,4-dimethylcyclohex-1-en-1-yl]methyl}piperazin-1-yl)-N-({3-nitro-4-[(oxan-4-ylmethyl)amino]benzene}sulfonyl)-2-{1H-pyrrolo[2,3-b]pyridin-5-yloxy}benzamide
+4-(4-{[2-(4-chlorophenyl)-4,4-dimethylcyclohex-1-en-1-yl]methyl}piperazin-1-yl)-n-({3-nitro-4-[(tetrahydro-2h-pyran-4-ylmethyl)amino]phenyl}sulfonyl)-2-(1h-pyrrolo[2,3-b]pyridin-5-yloxy)benzamide
+4-{4-[(4'-chloro-5,5-dimethyl[3,4,5,6-tetrahydro[1,1'-biphenyl]]-2-yl)methyl]piperazin-1-yl}-N-(3-nitro-4-{[(oxan-4-yl)methyl]amino}benzene-1-sulfonyl)-2-[(1H-pyrrolo[2,3-b]pyridin-5-yl)oxy]benzamide
+benzamide, 4-(4-((2-(4-chlorophenyl)-4,4-dimethyl-1-cyclohexen-1-yl)methyl)-1-piperazinyl)-n-((3-nitro-4-(((tetrahydro-2h-pyran-4-yl)methyl)amino)phenyl)sulfonyl)-2-(1h-pyrrolo(2,3-b)pyridin-5-yloxy)-
+Benzamide, 4-[4-[[2-(4-chlorophenyl)-4,4-dimethyl-1-cyclohexen-1-yl]methyl]-1-piperazinyl]-N-[[3-nitro-4-[[(tetrahydro-2H-pyran-4-yl)methyl]amino]phenyl]sulfonyl]-2-(1H-pyrrolo[2,3-b]pyridin-5-yloxy)-
+Venetoclax(ABT-199)
+C45H50ClN7O7S
+MLS006010298
+SCHEMBL523816
+AMY343
+GTPL8318
+CHEMBL3137309
+SCHEMBL19236295
+BDBM60828
+AOB5080
+DTXSID30154863
+EX-A168
+CHEBI:133021
+HMS3653J06
+HMS3745E07
+BCP06811
+BDBM50162774
+MFCD23160052
+NSC766270
+AKOS025289539
+ZINC150338755
+CCG-270543
+CS-1155
+DB11581
+KS-1470
+NSC-766270
+SB16499
+NCGC00345789-01
+NCGC00345789-05
+NCGC00345789-10
+NCGC00345789-11
+AC-28754
+DA-35360
+HY-15531
+SMR004701366
+FT-0699586
+S8048
+SW219672-1
+X3609
+J3.516.625D
+A850921
+J-005269
+Q23671272
+2-((1H-Pyrrolo[2,3-b]pyridin-5-yl)oxy)-4-(4-((4'-chloro-5,5-dimethyl-3,4,5,6-tetrahydro-[1,1'-biphenyl]-2-yl)methyl)piperazin-1-yl)-N-((3-nitro-4-(((tetrahydro-2H-pyran-4-yl)methyl)amino)phenyl)sulfonyl)benzamide
+4-[4-[[2-(4-Chlorophenyl)-4,4-dimethyl-1-cyclohexen-1-yl]methyl]-1-piperazinyl]-N-[[3-nitro-4-[[(tetrahydro-2H-pyran-4-yl)methyl]amino]phenyl]sulfonyl]-2-(1H-pyrrolo[2,3-b]pyridin-5-yloxy)benzamide
+4-[4-[[2-(4-chlorophenyl)-4,4-dimethyl-cyclohexen-1-yl]methyl]piperazin-1-yl]-N-[3-nitro-4-(tetrahydropyran-4-ylmethylamino)phenyl]sulfonyl-2-(1H-pyrrolo[2,3-b]pyridin-5-yloxy)benzamide
+4-{4-[(4'-chloro-5,5-dimethyl[3,4,5,6-tetrahydro[1,1'-biphenyl]]-2-yl)methyl]piperazin-1-yl}-N-[(3-nitro-4-{[(oxan-4-yl
+ABT-199|||GDC 0199|||4-[4-[[2-(4-Chlorophenyl)-4,4-dimethylcyclohexen-1-yl]methyl]piperazin-1-yl]-N-[3-nitro-4-(oxan-4-ylmethylamino)phenyl]sulfonyl-2-(1H-pyrrolo[2,3-b]pyridin-5-yloxy)benzamide
+1256639-86-7
+(7S,9S)-9-acetyl-7-[(2R,4S,5S,6S)-4-amino-5-hydroxy-6-methyloxan-2-yl]oxy-6,9,11-trihydroxy-4-methoxy-8,10-dihydro-7H-tetracene-5,12-dione;4-amino-1-[(2R,3S,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]pyrimidin-2-one
+Vyxeos liposomal
+CPX 351
+Cytarabine / daunorubicin
+Daunorubicin / cytarabine
+SCHEMBL3959238
+Cytarabine mixture with daunorubicin
+Daunorubicin mixture with cytarabine
+Daunorubicin and cytarabine liposomal injection
+5,12-Naphthacenedione, 8-acetyl-10-((3-amino-2,3,6-trideoxy-alpha-L-lyxo-hexopyranosyl)oxy)-7,8,9,10-tetrahydro-6,8,11-trihydroxy-1-methoxy-, (8S,10S)-, mixt. with 4-amino-1-beta-D-arabinofuranosyl-2(1H)-pyrimidinone
+Gemtuzumab-Ozogamicin
+CMA676
+CMA 676
+Gemtuzumab Ozogamicin
+D000079982
