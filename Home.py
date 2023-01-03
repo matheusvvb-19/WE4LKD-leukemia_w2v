@@ -41,3 +41,19 @@ if __name__ == '__main__':
     set_page_layout()
     
     st.title('Word Embedding For Latent Knowledge Discovery AML')
+    
+    st.header('1. Introduction')
+    st.text('lalala')
+    
+    st.header('2. Approaches')
+    st.subheader('2.1 Word2Vec')
+    st.text('lalala')
+    
+    st.subheader('2.2 BERT-based')
+    st.text('lalala')
+    
+    st.header('3. About this web app')
+    st.text('lalala')
+    
+    st.header('References')
+    st.text('[1] Vahe Tshitoyan et al. “Unsupervised word embeddings capture latent knowledge frommaterials science literature”. Nature571 (2019), pp. 95–98')
