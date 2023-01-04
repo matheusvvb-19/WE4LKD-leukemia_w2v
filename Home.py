@@ -61,5 +61,4 @@ if __name__ == '__main__':
     
     st.markdown('This project is fully funded by the Fundação de Amparo à Pesquisa do Estado de São Paulo (FAPESP, Brazil), under identification code 2021/13054-8.')
     st.text('Undergraduate scholarship student: Matheus Vargas Volpon Berto.\nProfessor and supervisor: Dr. Tiago Almeida.\nEducational institution: Federal University of São Carlos (UFSCar) - Sorocaba campus.')
-    st.markdown("In addition, part of the project\
-    was developed in partnership with the Computer Science Department of the University of Sheffield (UK), under the supervision of Dr. Carolina Scarton, identification code 2022/07236-9.")
+    st.markdown("In addition, part of the project was developed in partnership with the Computer Science Department of the University of Sheffield (UK), under the supervision of Dr. Carolina Scarton, identification code 2022/07236-9.")
