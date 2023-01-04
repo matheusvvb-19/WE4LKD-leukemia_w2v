@@ -40,6 +40,9 @@ def set_page_layout():
 if __name__ == '__main__':
     set_page_layout()
     
+    st.sidebar.header('GitHub Repository')
+    st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
+    
     st.title('Word Embedding For Latent Knowledge Discovery AML')
     
     st.header('1. Introduction')
@@ -48,17 +51,20 @@ if __name__ == '__main__':
     
     st.header('2. Approaches')
     st.subheader('2.1 Word2Vec')
-    st.markdown('lalala')
+    st.markdown('In our first approach, we followed the strategy used by Tshitoyan *et al*. [1] and used Word2Vec models with the Skip-Gram architecture. The vocab p')
     
     st.subheader('2.2 BERT-based')
     st.markdown('lalala')
     
     st.header('3. About this web app')
-    st.markdown('lalala')
+    st.markdown('This web app contains the models trained during the project and making it possible to users to explore the embeddings, more information about how to use each tool are detailed on the respective page.')
+    st.markdown('In the Word2Vec page, you can search for words and visualize the nearest tokens in the vector space.')
+    st.markdown('In the BERT page, you can find similar sentences from our dataset according to a input sentence.')
     
     st.header('References')
     st.markdown('[1] Vahe Tshitoyan et al. “Unsupervised word embeddings capture latent knowledge frommaterials science literature”. Nature571 (2019), pp. 95–98')
     
+    st.header('Funding')
     st.markdown('This project is fully funded by the Fundação de Amparo à Pesquisa do Estado de São Paulo (FAPESP, Brazil), under identification code 2021/13054-8.')
     st.markdown('Undergraduate scholarship student: Matheus Vargas Volpon Berto.')
     st.markdown('Professor and supervisor: Dr. Tiago Almeida.')
