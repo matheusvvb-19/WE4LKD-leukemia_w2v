@@ -510,7 +510,7 @@ base_compounds = get_target_compounds()
 # MAIN PROGRAM:
 if __name__ == '__main__':
     vocabulary_restricted = False
-    set_page_layout()
+    #set_page_layout()
     
     if 'widget' not in st.session_state:
         st.session_state['widget'] = 0
