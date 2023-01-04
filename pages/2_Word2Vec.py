@@ -510,7 +510,25 @@ base_compounds = get_target_compounds()
 # MAIN PROGRAM:
 if __name__ == '__main__':
     vocabulary_restricted = False
-    #set_page_layout()
+    
+    hide_streamlit_style = """
+            <style>           
+            footer {
+                visibility: hidden;
+            }
+            
+            footer:after {
+                content:'Developed by Matheus Vargas Volpon Berto.'; 
+                visibility: visible;
+                display: block;
+                position: relative;
+                padding: 5px;
+                top: 2px;
+                color: black;
+            }
+            </style>
+            """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     
     if 'widget' not in st.session_state:
         st.session_state['widget'] = 0
