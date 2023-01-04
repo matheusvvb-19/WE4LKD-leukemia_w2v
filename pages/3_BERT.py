@@ -14,7 +14,17 @@ def get_sentences_dataset():
         "The person box was packed with jelly many dozens of months later.",
         "Standing on one's head at job interviews forms a lasting impression.",
         "It took him a month to finish the meal.",
-        "He found a leprechaun in his walnut shell."
+        "He found a leprechaun in his walnut shell.",
+        "Considering he's played football for only two years, he does it well.",
+        "I like either tea or milk.",
+        "They're losing the match. Nevertheless we're watching it.",
+        "I was tired, so (that's why) I went to bed.",
+        "I like football although I'm often on the road.",
+        "What other sports do you practise besides football?",
+        "I don't know how to play Squash.",
+        "I like football, especially when my team wins.",
+        "I don't like coffee. – Neither do I.",
+        "I go to discos in order to meet friends.",
     ]
     
     return sentences
@@ -29,6 +39,8 @@ def flat_list(composed_list):
 if __name__ == '__main__':
     if 'execution_counter' not in st.session_state:
         st.session_state['execution_counter'] = 0
+        
+    sentences = get_sentences_dataset()
         
     hide_streamlit_style = """
             <style>           
@@ -68,11 +80,13 @@ if __name__ == '__main__':
         top_n = st.slider('Select the neighborhood size',
             5, 20, (5), 5)
         
-        input_sentence = st.text_input(label='Input sentence', max_chars=200, help='Type the sentence that you want to compare to the others.')
+        input_sentence = st.text_input(label='Input sentence', max_chars=128, help='Type the sentence that you want to compare to the others.')
         
         submitted = st.form_submit_button('Apply settings')
         if submitted or st.session_state['execution_counter'] != 0:
             st.session_state['execution_counter'] += 1
+            
+            sentences.insert(0, input_sentence)
             
             tokenizer = AutoTokenizer.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext')
             model = AutoModel.from_pretrained('matheusvolpon/WE4LKD_AML_distilbert_1921_{}'.format(loaded_model[-4:]))
