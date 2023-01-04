@@ -34,7 +34,7 @@ if __name__ == '__main__':
         top_n = st.slider('Select the neighborhood size',
             5, 20, (5), 5)
         
-        st.sidebar.text_input(label='Input sentence', max_chars=200, help='Type the sentence that you want to compare to the others.', placeholder='An improved complete remission rate in AML has been noted since cytarabine and anthracyclines were introduced into clinical practice.')
+        input_sentence = st.text_input(label='Input sentence', max_chars=200, help='Type the sentence that you want to compare to the others.', placeholder='An improved complete remission rate in AML has been noted since cytarabine and anthracyclines were introduced into clinical practice.')
         
         submitted = st.form_submit_button('Apply settings')
         
