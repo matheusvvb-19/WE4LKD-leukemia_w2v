@@ -123,7 +123,20 @@ if __name__ == '__main__':
 
         # calculate
         similarities = flat_list(cosine_similarity([mean_pooled[0]], mean_pooled[1:]).tolist())
-        st.markdown(similarities)
+        
+    data = {
+        'sentence': [],
+        'similarity': [],
+    }
+    
+    for s, si in zip(sentences[1:], similarities):
+        data['sentence'].append(s)
+        data['similarity'].append(si)
+    
+    df_similar_sentences = pd.DataFrame(data).sort_values(by=['similarity'], ascending=False)
+    df_similar_sentences = df_similar_sentences.head(top_n)
+    st.table(df_similar_sentences)
+    #st.markdown(similarities)
         
     st.sidebar.header('GitHub Repository')
     st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
