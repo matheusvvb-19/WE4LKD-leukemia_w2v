@@ -1,17 +1,12 @@
-# based on https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
-
 # IMPORTS:
 import streamlit as st
-
-# GLOBAL VARIABLES:
-
 
 # FUNCTIONS:
 def set_page_layout():
     '''Define some configs of the Streamlit App page, only front-end settings.'''
 
     st.set_page_config(
-        page_title="WE4LKD | Home",
+        page_title="WE4LKD AML",
         page_icon="🖥️",
         layout="wide",
         initial_sidebar_state="expanded",
