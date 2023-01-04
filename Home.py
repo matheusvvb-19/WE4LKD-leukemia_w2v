@@ -24,7 +24,7 @@ def set_page_layout():
             }
             
             footer:after {
-                content:'Developed by Matheus Volpon.'; 
+                content:'Developed by Matheus Vargas Volpon Berto.'; 
                 visibility: visible;
                 display: block;
                 position: relative;
