@@ -49,19 +49,19 @@ if __name__ == '__main__':
     st.markdown('In our first approach, we followed the strategy used by Tshitoyan *et al*. [1] and used Word2Vec models with the Skip-Gram architecture. The vocab p')
     
     st.subheader('2.2 BERT-based')
-    st.markdown('lalala')
+    st.markdown('We also trained BERT-based models from scratch using the same corpus of biomedical articles. To compute unique embeddings for the words, we applied a mean pooling strategy using the [Flair NLP](https://github.com/flairNLP/flair) framework.')
     
     st.header('3. About this web app')
-    st.markdown('This web app contains the models trained during the project and making it possible to users to explore the embeddings, more information about how to use each tool are detailed on the respective page.')
-    st.markdown('In the Word2Vec page, you can search for words and visualize the nearest tokens in the vector space.')
-    st.markdown('In the BERT page, you can find similar sentences from our dataset according to a input sentence.')
+    st.markdown('This web app contains the models trained during the project and making it possible to users to explore the embeddings, more information about how to use each tool are detailed on the respective page - which can be accessed trough the left sidebar.')
+    st.markdown("In the Word2Vec page, you can search for words in the models' vocab and visualize the nearest tokens in the vector space.")
+    st.markdown('In the BERT page, you can find similar sentences from our dataset according to an input sentence.')
     
     st.header('References')
     st.markdown('[1] Vahe Tshitoyan et al. “Unsupervised word embeddings capture latent knowledge frommaterials science literature”. Nature571 (2019), pp. 95–98')
     
     st.header('Funding')
-    st.markdown('This project is fully funded by the Fundação de Amparo à Pesquisa do Estado de São Paulo (FAPESP, Brazil), under identification code 2021/13054-8.')
+    st.markdown('This project is fully funded by the Fundação de Amparo à Pesquisa do Estado de São Paulo (FAPESP, Brazil), identification codes 2021/13054-8 and 2022/07236-9.')
     st.markdown('Undergraduate scholarship student: Matheus Vargas Volpon Berto.')
     st.markdown('Professor and supervisor: Dr. Tiago Almeida.')
     st.markdown('Educational institution: Federal University of São Carlos (UFSCar) - Sorocaba campus.')
-    st.markdown("In addition, part of the project was developed in partnership with the Computer Science Department of the University of Sheffield (UK), under the supervision of Dr. Carolina Scarton, identification code 2022/07236-9.")
+    st.markdown("In addition, part of the project was developed in partnership with the Computer Science Department of the University of Sheffield (UK), under the supervision of Dr. Carolina Scarton.")
