@@ -38,3 +38,13 @@ if __name__ == '__main__':
         
     st.sidebar.header('GitHub Repository')
     st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
+    
+    st.title('Sentence Viewer')
+        st.header('Sentence Embedding Visualization Based on Cosine Similarity')
+        with st.expander('How to use this app'):
+            st.markdown('**Sidebar**')
+            st.markdown('lalala')
+
+            st.markdown('**Main window**')
+            st.markdown('_Hint: To see this window content better, you can minimize the sidebar._')
+            st.markdown('lalala')
