@@ -27,6 +27,9 @@ def flat_list(composed_list):
 
 # MAIN PROGRAM:
 if __name__ == '__main__':
+    if 'execution_counter' not in st.session_state:
+        st.session_state['execution_counter'] = 0
+        
     hide_streamlit_style = """
             <style>           
             footer {
@@ -69,6 +72,8 @@ if __name__ == '__main__':
         
         submitted = st.form_submit_button('Apply settings')
         if submitted or st.session_state['execution_counter'] != 0:
+            st.session_state['execution_counter'] += 1
+            
             tokenizer = AutoTokenizer.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext')
             model = AutoModel.from_pretrained('matheusvolpon/WE4LKD_AML_distilbert_1921_{}'.format(loaded_model[-4:]))
             
