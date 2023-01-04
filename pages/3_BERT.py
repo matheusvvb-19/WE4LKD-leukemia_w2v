@@ -49,4 +49,4 @@ if __name__ == '__main__':
         st.markdown('_Hint: To see this window content better, you can minimize the sidebar._')
         st.markdown('lalala')
         
-    st.text_input(max_chars=200, help='Type the sentence that you want to compare to the others.', placeholder='An improved complete remission rate in AML has been noted since cytarabine and anthracyclines were introduced into clinical practice.')
+    st.text_input(label='Input sentence', max_chars=200, help='Type the sentence that you want to compare to the others.', placeholder='An improved complete remission rate in AML has been noted since cytarabine and anthracyclines were introduced into clinical practice.')
