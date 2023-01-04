@@ -7,7 +7,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 # GLOBAL VARIABLES:
 
 # FUNCTIONS:
-@st.cache(allow_output_mutation=True)
 def get_sentences_dataset():
     sentences = [
         "The fish dreamed of escaping the fishbowl and into the toilet where he saw his friend go.",
