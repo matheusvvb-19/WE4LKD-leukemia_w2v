@@ -83,6 +83,19 @@ if __name__ == '__main__':
         input_sentence = st.text_input(label='Input sentence', max_chars=128, help='Type the sentence that you want to compare to the others.')
         
         submitted = st.form_submit_button('Apply settings')
+    
+    st.sidebar.header('GitHub Repository')
+    st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
+        
+    st.title('Sentence Viewer')
+    st.header('Sentence Embedding Visualization Based on Cosine Similarity')
+    with st.expander('How to use this app'):
+        st.markdown('**Sidebar**')
+        st.markdown('lalala')
+
+        st.markdown('**Main window**')
+        st.markdown('_Hint: To see this window content better, you can minimize the sidebar._')
+        st.markdown('lalala')
         
     if submitted or st.session_state['execution_counter'] != 0:
         st.session_state['execution_counter'] += 1
@@ -138,16 +151,3 @@ if __name__ == '__main__':
         df_similar_sentences = df_similar_sentences.head(top_n)
         st.table(df_similar_sentences)
         #st.markdown(similarities)
-        
-    st.sidebar.header('GitHub Repository')
-    st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
-    
-    st.title('Sentence Viewer')
-    st.header('Sentence Embedding Visualization Based on Cosine Similarity')
-    with st.expander('How to use this app'):
-        st.markdown('**Sidebar**')
-        st.markdown('lalala')
-
-        st.markdown('**Main window**')
-        st.markdown('_Hint: To see this window content better, you can minimize the sidebar._')
-        st.markdown('lalala')
