@@ -34,5 +34,7 @@ if __name__ == '__main__':
         top_n = st.slider('Select the neighborhood size',
             5, 20, (5), 5)
         
+        submitted = st.form_submit_button('Apply settings')
+        
     st.sidebar.header('GitHub Repository')
     st.sidebar.markdown("[![Foo](https://cdn-icons-png.flaticon.com/32/25/25231.png)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v)")
