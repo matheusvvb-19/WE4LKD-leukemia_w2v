@@ -11,11 +11,11 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from random import random, seed
 
-# GLOBAL VARIABLES:
-specific_domain = []
-base_compounds = ['cytarabine', 'daunorubicin', 'azacitidine', 'gemtuzumab-ozogamicin', 'midostaurin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib']
-
 # FUNCTIONS:
+@st.cache()
+def get_target_compounds():
+    return ['cytarabine', 'daunorubicin', 'azacitidine', 'midostaurin', 'gemtuzumab-ozogamicin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib', 'arsenictrioxide', 'cyclophosphamide', 'dexamethasone', 'idarubicin', 'mitoxantrone', 'pemigatinib', 'prednisone', 'rituximab', 'thioguanine', 'vincristine']
+
 def list_from_txt(file_path):
     '''Creates a list of itens based on a .txt file, each line becomes an item.
     
@@ -429,7 +429,7 @@ def set_page_layout():
     '''Define some configs of the Streamlit App page, only front-end settings.'''
 
     st.set_page_config(
-        page_title="Embedding Viewer",
+        page_title="WE4LKD | Word2Vec",
         page_icon="🖥️",
         layout="wide",
         initial_sidebar_state="expanded",
@@ -442,7 +442,7 @@ def set_page_layout():
             }
             
             footer:after {
-                content:'Developed by Matheus Volpon, WE4LKD Team.'; 
+                content:'Developed by Matheus Vargas Volpon Berto.'; 
                 visibility: visible;
                 display: block;
                 position: relative;
@@ -502,6 +502,10 @@ def clear_session_state():
 
     for key in st.session_state.keys():
         del st.session_state[key]
+        
+# GLOBAL VARIABLES:
+specific_domain = []
+base_compounds = get_target_compounds()
     
 # MAIN PROGRAM:
 if __name__ == '__main__':
