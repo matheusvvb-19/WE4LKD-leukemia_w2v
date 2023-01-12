@@ -725,7 +725,7 @@ if __name__ == '__main__':
 
         else:
             #model = pickle.load(open('./models_streamlit_app/model_1921_2022.model', 'rb'))
-            model = Word2Vec.load('./models_streamlit_app/model_1921_2022.model')
+            model = Word2Vec.load('./models_streamlit_app/model_1921_2022.model', mmap='r')
             dim_red = 'TSNE'
             perplexity = 5
             learning_rate = 0.001
