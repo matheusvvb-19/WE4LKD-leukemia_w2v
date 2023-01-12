@@ -1,7 +1,7 @@
 # based on https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
 
 # IMPORTS:
-import plotly, pickle, csv, re, string, zipfile
+import plotly, pickle, csv, re, string, zipfile, gdown, os
 import plotly.graph_objs as go
 import streamlit as st
 import pandas as pd
@@ -10,8 +10,49 @@ from get_n_common_words_english import get_most_common
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from random import random, seed
+from collections import OrderedDict
 
 # FUNCTIONS:
+@st.cache():
+def download_w2v_models():
+    dictionary_of_files = {
+        '19: 1921 - 2022': ['https://drive.google.com/file/d/1izHlD2j5V7tIQ8TEmc3qyp-_9cLGQNNU/view?usp=sharing', 'https://drive.google.com/file/d/1Kv-7_EYUc-RAsEXYZUFP_iuTkeIcTEht/view?usp=sharing', 'https://drive.google.com/file/d/1M_9dZa1fIYiOo296OSJexAM74HnqZaMb/view?usp=sharing'],
+        '18: 1921 - 2018': 'https://drive.google.com/file/d/1dWasQHwzNZelz4Kjxno_Xbb6eHYO58VB/view?usp=sharing',
+        '17: 1921 - 2014': 'https://drive.google.com/file/d/16JCH139NZsFH4Rd5cmnyHCqz0dbNlAXz/view?usp=sharing',
+        '16: 1921 - 2013': 'https://drive.google.com/file/d/1kSjA5LbWKqzcdM0nZpmJhpFSEc_v0OYo/view?usp=sharing',
+        '15: 1921 - 2011': 'https://drive.google.com/file/d/1HUYb_FiCgOncLn75h-8kciY2B79dd6Ko/view?usp=sharing',
+        '14: 1921 - 2009': 'https://drive.google.com/file/d/1Pr39aSMOsJUeJunFVqa_nAv1FBoCWkAH/view?usp=sharing',
+        '13: 1921 - 2001': 'https://drive.google.com/file/d/1wxy6lslVtxhOhY1Lr5BR3CZpo7007ekA/view?usp=sharing',
+        '12: 1921 - 1999': 'https://drive.google.com/file/d/1hZjlZroZLLnmAZAJSCTfiirs5Vx890zc/view?usp=sharing',
+        '11: 1921 - 1998': 'https://drive.google.com/file/d/1G2nS6Bt__j3xcPtCu_y8G4O1IDma7Bdk/view?usp=sharing',
+        '10: 1921 - 1995': 'https://drive.google.com/file/d/1wC8CSHVrvXAcSjfzwBfs4VqS81Mp3d5s/view?usp=sharing',
+        '09: 1921 - 1983': 'https://drive.google.com/file/d/1VffGYoLMTgjmM8Ye_TanlN8zqikQ1P15/view?usp=sharing',
+        '08: 1921 - 1982': 'https://drive.google.com/file/d/13SkRCZmhzAxarNA9zD-fMPqfX-tvVK3d/view?usp=sharing',
+        '07: 1921 - 1977': 'https://drive.google.com/file/d/1ElQz0JlrCZslaLiEvSjeAl5nEU4-ErC7/view?usp=sharing',
+        '06: 1921 - 1976': 'https://drive.google.com/file/d/1u5lHlU3VHSNmfeyt0BNNt2gOZ5icfmik/view?usp=sharing',
+        '05: 1921 - 1974': 'https://drive.google.com/file/d/1r4lQKhr4hkFRP0uioB9Sn9dyI5-sE4ZT/view?usp=sharing',
+        '04: 1921 - 1971': 'https://drive.google.com/file/d/1aIv-qGoVaNNSb6H9A5ukfKKdY6RwNofh/view?usp=sharing',
+        '03: 1921 - 1969': 'https://drive.google.com/file/d/1HIgfbJwcX22oaZm1zJNBxZTpW_YdujdH/view?usp=sharing',
+        '02: 1921 - 1967': 'https://drive.google.com/file/d/1XEzPlJmMFHsxLvfm0r9mU85E31jTBKY_/view?usp=sharing',
+        '01: 1921 - 1963': 'https://drive.google.com/file/d/1BNNRdCMl98pOFxIvg7szHj1SlClUy1no/view?usp=sharing',
+    }
+
+    os.makedirs('./models_streamlit_app/', exist_ok=True)
+    for k, v in dictionary_of_files.items():
+        if isinstance(v, str):
+            gdown.download(v, './models_streamlit_app/model_1921_{}.model'.format(v[-4:]), quiet=False, fuzzy=True)
+        
+        else:
+            for index, u in dictionary_of_files[k]:
+                if index == 0:
+                    gdown.download(u, './models_streamlit_app/model_1921_{}.model'.format(v[-4:]), quiet=False, fuzzy=True)
+                
+                elif index == 1:
+                    gdown.download(u, './models_streamlit_app/model_1921_{}.model.trainables.syn1neg.npy'.format(v[-4:]), quiet=False, fuzzy=True)
+                    
+                else:
+                    gdown.download(u, './models_streamlit_app/model_1921_{}.model.wv.vectors.npy'.format(v[-4:]), quiet=False, fuzzy=True)
+    
 @st.cache()
 def get_target_compounds():
     return ['cytarabine', 'daunorubicin', 'azacitidine', 'midostaurin', 'gemtuzumab-ozogamicin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib', 'arsenictrioxide', 'cyclophosphamide', 'dexamethasone', 'idarubicin', 'mitoxantrone', 'pemigatinib', 'prednisone', 'rituximab', 'thioguanine', 'vincristine']
@@ -509,6 +550,7 @@ base_compounds = get_target_compounds()
     
 # MAIN PROGRAM:
 if __name__ == '__main__':
+    download_w2v_models()
     vocabulary_restricted = False
     
     hide_streamlit_style = """
@@ -545,7 +587,25 @@ if __name__ == '__main__':
 
         loaded_model = st.selectbox(
          'Choose one of the preloaded models:',
-         ('10: 1900 - 2022', '9: 1900 - 2016', '8: 1900 - 2014', '7: 1900 - 2013', '6: 1900 - 2011', '5: 1900 - 2009', '4: 1900 - 2001', '3: 1900 - 1999', '2: 1900 - 1977', '1: 1900 - 1967'))
+         ('19: 1921 - 2022',
+          '18: 1921 - 2018',
+          '17: 1921 - 2014',
+          '16: 1921 - 2013',
+          '15: 1921 - 2011',
+          '14: 1921 - 2009',
+          '13: 1921 - 2001',
+          '12: 1921 - 1999',
+          '11: 1921 - 1998',
+          '10: 1921 - 1995',
+          '09: 1921 - 1983',
+          '08: 1921 - 1982',
+          '07: 1921 - 1977',
+          '06: 1921 - 1976',
+          '05: 1921 - 1974',
+          '04: 1921 - 1971',
+          '03: 1921 - 1969',
+          '02: 1921 - 1967',
+          '01: 1921 - 1963'))
 
         restrict_domain = st.selectbox("Restrict vocabulary domain:",
         ('general', 'NCI cancer drugs', 'FDA drugs'))
@@ -580,25 +640,43 @@ if __name__ == '__main__':
             
         submitted = st.form_submit_button('Apply settings')
         if submitted or st.session_state['execution_counter'] != 0:
-            if loaded_model == '1: 1900 - 1967':
+            if loaded_model == '01: 1921 - 1963':
+                model = pickle.load(open('./models_streamlit_app/model_1900_1963.model', 'rb'))
+            elif loaded_model == '02: 1921 - 1967':
                 model = pickle.load(open('./models_streamlit_app/model_1900_1967.model', 'rb'))
-            elif loaded_model == '2: 1900 - 1977':
+            elif loaded_model == '03: 1921 - 1969':
+                model = pickle.load(open('./models_streamlit_app/model_1900_1969.model', 'rb'))
+            elif loaded_model == '04: 1921 - 1971':
+                model = pickle.load(open('./models_streamlit_app/model_1900_1971.model', 'rb'))
+            elif loaded_model == '05: 1921 - 1974':
+                model = pickle.load(open('./models_streamlit_app/model_1900_1974.model', 'rb'))
+            elif loaded_model == '06: 1921 - 1976':
+                model = pickle.load(open('./models_streamlit_app/model_1900_1976.model', 'rb'))
+            elif loaded_model == '07: 1921 - 1977':
                 model = pickle.load(open('./models_streamlit_app/model_1900_1977.model', 'rb'))
-            elif loaded_model == '3: 1900 - 1999':
+            elif loaded_model == '08: 1921 - 1982':
+                model = pickle.load(open('./models_streamlit_app/model_1900_1982.model', 'rb'))
+            elif loaded_model == '09: 1921 - 1983':
+                model = pickle.load(open('./models_streamlit_app/model_1900_1983.model', 'rb'))
+            elif loaded_model == '10: 1921 - 1995':
+                model = pickle.load(open('./models_streamlit_app/model_1900_1995.model', 'rb'))
+            elif loaded_model == '11: 1921 - 1998':
+                model = pickle.load(open('./models_streamlit_app/model_1900_1998.model', 'rb'))
+            elif loaded_model == '12: 1921 - 1999':
                 model = pickle.load(open('./models_streamlit_app/model_1900_1999.model', 'rb'))
-            elif loaded_model == '4: 1900 - 2001':
+            elif loaded_model == '13: 1921 - 2001':
                 model = pickle.load(open('./models_streamlit_app/model_1900_2001.model', 'rb'))
-            elif loaded_model == '5: 1900 - 2009':
+            elif loaded_model == '14: 1921 - 2009':
                 model = pickle.load(open('./models_streamlit_app/model_1900_2009.model', 'rb'))
-            elif loaded_model == '6: 1900 - 2011':
+            elif loaded_model == '15: 1921 - 2011':
                 model = pickle.load(open('./models_streamlit_app/model_1900_2011.model', 'rb'))
-            elif loaded_model == '7: 1900 - 2013':
+            elif loaded_model == '16: 1921 - 2013':
                 model = pickle.load(open('./models_streamlit_app/model_1900_2013.model', 'rb'))
-            elif loaded_model == '8: 1900 - 2014':
+            elif loaded_model == '17: 1921 - 2014':
                 model = pickle.load(open('./models_streamlit_app/model_1900_2014.model', 'rb'))
-            elif loaded_model == '9: 1900 - 2016':
-                model = pickle.load(open('./models_streamlit_app/model_1900_2016.model', 'rb'))
-            elif loaded_model == '10: 1900 - 2022':
+            elif loaded_model == '18: 1921 - 2018':
+                model = pickle.load(open('./models_streamlit_app/model_1900_2018.model', 'rb'))
+            elif loaded_model == '19: 1921 - 2022':
                 model = pickle.load(open('./models_streamlit_app/model_1900_2022.model', 'rb'))
 
             model.init_sims()
