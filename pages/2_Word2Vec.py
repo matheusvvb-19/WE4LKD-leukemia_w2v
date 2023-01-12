@@ -642,43 +642,44 @@ if __name__ == '__main__':
         submitted = st.form_submit_button('Apply settings')
         if submitted or st.session_state['execution_counter'] != 0:
             if loaded_model == '01: 1921 - 1963':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1963.model', 'rb'))
+                #model = pickle.load(open('./models_streamlit_app/model_1921_1963.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1963.model', mmap='r')
             elif loaded_model == '02: 1921 - 1967':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1967.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1967.model', mmap='r')
             elif loaded_model == '03: 1921 - 1969':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1969.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1969.model', mmap='r')
             elif loaded_model == '04: 1921 - 1971':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1971.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1971.model', mmap='r')
             elif loaded_model == '05: 1921 - 1974':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1974.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1974.model', mmap='r')
             elif loaded_model == '06: 1921 - 1976':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1976.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1976.model', mmap='r')
             elif loaded_model == '07: 1921 - 1977':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1977.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1977.model', mmap='r')
             elif loaded_model == '08: 1921 - 1982':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1982.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1982.model', mmap='r')
             elif loaded_model == '09: 1921 - 1983':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1983.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1983.model', mmap='r')
             elif loaded_model == '10: 1921 - 1995':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1995.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1995.model', mmap='r')
             elif loaded_model == '11: 1921 - 1998':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1998.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1998.model', mmap='r')
             elif loaded_model == '12: 1921 - 1999':
-                model = pickle.load(open('./models_streamlit_app/model_1921_1999.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_1999.model', mmap='r')
             elif loaded_model == '13: 1921 - 2001':
-                model = pickle.load(open('./models_streamlit_app/model_1921_2001.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_2001.model', mmap='r')
             elif loaded_model == '14: 1921 - 2009':
-                model = pickle.load(open('./models_streamlit_app/model_1921_2009.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_2009.model', mmap='r')
             elif loaded_model == '15: 1921 - 2011':
-                model = pickle.load(open('./models_streamlit_app/model_1921_2011.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_2011.model', mmap='r')
             elif loaded_model == '16: 1921 - 2013':
-                model = pickle.load(open('./models_streamlit_app/model_1921_2013.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_2013.model', mmap='r')
             elif loaded_model == '17: 1921 - 2014':
-                model = pickle.load(open('./models_streamlit_app/model_1921_2014.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_2014.model', mmap='r')
             elif loaded_model == '18: 1921 - 2018':
-                model = pickle.load(open('./models_streamlit_app/model_1921_2018.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_2018.model', mmap='r')
             elif loaded_model == '19: 1921 - 2022':
-                model = pickle.load(open('./models_streamlit_app/model_1921_2022.model', 'rb'))
+                model = Word2Vec.load('./models_streamlit_app/model_1921_2022.model', mmap='r')
 
             #model.init_sims()
 
