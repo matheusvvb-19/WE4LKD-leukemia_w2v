@@ -13,7 +13,7 @@ from random import random, seed
 from collections import OrderedDict
 
 # FUNCTIONS:
-@st.cache():
+@st.cache()
 def download_w2v_models():
     dictionary_of_files = {
         '19: 1921 - 2022': ['https://drive.google.com/file/d/1izHlD2j5V7tIQ8TEmc3qyp-_9cLGQNNU/view?usp=sharing', 'https://drive.google.com/file/d/1Kv-7_EYUc-RAsEXYZUFP_iuTkeIcTEht/view?usp=sharing', 'https://drive.google.com/file/d/1M_9dZa1fIYiOo296OSJexAM74HnqZaMb/view?usp=sharing'],
