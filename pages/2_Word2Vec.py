@@ -635,19 +635,19 @@ if __name__ == '__main__':
                 vocabulary_restricted = True   
 
             if dim_red == 'TSNE':
-                perplexity = 0
+                perplexity = 5
                 learning_rate = 0.001
                 iteration = 250
 
             else:
-                perplexity = 0
+                perplexity = 5
                 learning_rate = 0.001
                 iteration = 0    
 
         else:
             model = pickle.load(open('./models_streamlit_app/model_1900_2022.model', 'rb'))
             dim_red = 'TSNE'
-            perplexity = 0
+            perplexity = 5
             learning_rate = 0.001
             iteration = 250
             top_n = 5
