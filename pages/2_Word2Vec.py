@@ -43,7 +43,7 @@ def download_w2v_models():
             gdown.download(v, './models_streamlit_app/model_1921_{}.model'.format(v[-4:]), quiet=False, fuzzy=True)
         
         else:
-            for index, u in dictionary_of_files[k]:
+            for index, u in enumerate(v):
                 if index == 0:
                     gdown.download(u, './models_streamlit_app/model_1921_{}.model'.format(v[-4:]), quiet=False, fuzzy=True)
                 
