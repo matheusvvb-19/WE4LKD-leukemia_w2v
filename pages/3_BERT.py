@@ -66,16 +66,25 @@ if __name__ == '__main__':
         
         loaded_model = st.selectbox(
          'Choose one of the preloaded models:',
-         ('10: 1921 - 2022', 
-          '9: 1921 - 2016',
-          '8: 1921 - 2014',
-          '7: 1921 - 2013',
-          '6: 1921 - 2011',
-          '5: 1921 - 2009',
-          '4: 1921 - 2001',
-          '3: 1921 - 1999',
-          '2: 1921 - 1977',
-          '1: 1921 - 1967'))
+         ('19: 1921 - 2022',
+          '18: 1921 - 2018',
+          '17: 1921 - 2014',
+          '16: 1921 - 2013',
+          '15: 1921 - 2011',
+          '14: 1921 - 2009',
+          '13: 1921 - 2001',
+          '12: 1921 - 1999',
+          '11: 1921 - 1998',
+          '10: 1921 - 1995',
+          '09: 1921 - 1983',
+          '08: 1921 - 1982',
+          '07: 1921 - 1977',
+          '06: 1921 - 1976',
+          '05: 1921 - 1974',
+          '04: 1921 - 1971',
+          '03: 1921 - 1969',
+          '02: 1921 - 1967',
+          '01: 1921 - 1963'))
         
         top_n = st.slider('Select the neighborhood size',
             5, 20, (5), 5)
@@ -150,4 +159,3 @@ if __name__ == '__main__':
         df_similar_sentences = pd.DataFrame(data).sort_values(by=['similarity'], ascending=False)
         df_similar_sentences = df_similar_sentences.head(top_n)
         st.table(df_similar_sentences)
-        #st.markdown(similarities)
