@@ -680,7 +680,7 @@ if __name__ == '__main__':
             elif loaded_model == '19: 1921 - 2022':
                 model = pickle.load(open('./models_streamlit_app/model_1921_2022.model', 'rb'))
 
-            model.init_sims()
+            #model.init_sims()
 
             if restrict_domain != 'general':
                 if restrict_domain == 'NCI cancer drugs':
