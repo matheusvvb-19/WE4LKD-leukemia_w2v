@@ -40,18 +40,18 @@ def download_w2v_models():
     os.makedirs('./models_streamlit_app/', exist_ok=True)
     for k, v in dictionary_of_files.items():
         if isinstance(v, str):
-            gdown.download(v, './models_streamlit_app/model_1921_{}.model'.format(v[-4:]), quiet=False, fuzzy=True)
+            gdown.download(v, './models_streamlit_app/model_1921_{}.model'.format(k[-4:]), quiet=False, fuzzy=True)
         
         else:
             for index, u in enumerate(v):
                 if index == 0:
-                    gdown.download(u, './models_streamlit_app/model_1921_{}.model'.format(v[-4:]), quiet=False, fuzzy=True)
+                    gdown.download(u, './models_streamlit_app/model_1921_{}.model'.format(k[-4:]), quiet=False, fuzzy=True)
                 
                 elif index == 1:
-                    gdown.download(u, './models_streamlit_app/model_1921_{}.model.trainables.syn1neg.npy'.format(v[-4:]), quiet=False, fuzzy=True)
+                    gdown.download(u, './models_streamlit_app/model_1921_{}.model.trainables.syn1neg.npy'.format(k[-4:]), quiet=False, fuzzy=True)
                     
                 else:
-                    gdown.download(u, './models_streamlit_app/model_1921_{}.model.wv.vectors.npy'.format(v[-4:]), quiet=False, fuzzy=True)
+                    gdown.download(u, './models_streamlit_app/model_1921_{}.model.wv.vectors.npy'.format(k[-4:]), quiet=False, fuzzy=True)
     
 @st.cache()
 def get_target_compounds():
