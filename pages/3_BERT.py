@@ -100,7 +100,7 @@ if __name__ == '__main__':
     st.header('Sentence Embedding Visualization Based on Cosine Similarity')
     with st.expander('How to use this app'):
         st.markdown('**Sidebar**')
-        st.markdown('lalala')
+        st.markdown('Select the BERT-based model that you want to explore. Then, define the number of most similar sentences from the dataset that you want to compare to your input sentence. Finally, type your input sentence in the text box and click on "Apply settings"')
 
         st.markdown('**Main window**')
         st.markdown('_Hint: To see this window content better, you can minimize the sidebar._')
