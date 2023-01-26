@@ -17,7 +17,7 @@
   </p>
 </div>
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/matheusvvb-19/we4lkd-leukemia_w2v/main)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://matheusvvb-19-we4lkd-leukemia-w2v-home-tb0783.streamlit.app/)
 
 <!-- CONTENTS -->
 <details>
