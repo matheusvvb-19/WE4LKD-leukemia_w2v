@@ -10,21 +10,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 # FUNCTIONS:
 def get_sentences_dataset():
     sentences = [
-        "The fish dreamed of escaping the fishbowl and into the toilet where he saw his friend go.",
-        "The person box was packed with jelly many dozens of months later.",
-        "Standing on one's head at job interviews forms a lasting impression.",
-        "It took him a month to finish the meal.",
-        "He found a leprechaun in his walnut shell.",
+        "There were no deaths directly attributable to cyclophosphamide and no patients developed hemorrhagic cystitis or malignancy..",
+        "High-dose cytarabine (HiDAC) and intermediate-dose cytarabine (IDAC) have been introduced as effective and safe consolidation chemotherapy in AML, with relatively low rates of life-threatening infections despite the high total dose of the cytostatic drug.",
+        "We demonstrate that high CD14 expression is highly significantly associated with high cellular cytarabine and Dau resistance in univariate as well as multivariate analyses.",
+        "Thus, our study suggests that arsenictrioxide not only inhibits the expression of MYC, PCNA, and MCM7 but also leads to cell cycle arrest and apoptosis in KG-1a cells.",
+        "While arsenictrioxide (arsenictrioxide) is an infamous carcinogen, it is also an effective chemotherapeutic agent for AML and some solid tumors.",
         "Considering he's played football for only two years, he does it well.",
-        "I like either tea or milk.",
-        "They're losing the match. Nevertheless we're watching it.",
-        "I was tired, so (that's why) I went to bed.",
-        "I like football although I'm often on the road.",
-        "What other sports do you practise besides football?",
-        "I don't know how to play Squash.",
-        "I like football, especially when my team wins.",
-        "I don't like coffee. – Neither do I.",
-        "I go to discos in order to meet friends.",
+        "Dexamethasone, but not mifepristone, increased expression of delivered proteins such as GFP that are important for early identification of infected cells.",
     ]
     
     return sentences
