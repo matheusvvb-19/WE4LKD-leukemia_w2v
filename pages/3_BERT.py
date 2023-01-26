@@ -99,6 +99,9 @@ if __name__ == '__main__':
         st.markdown('lalala')
         
     if submitted or st.session_state['execution_counter'] != 0:
+        st.markdown('Input')
+        st.markdown(input_sentence)
+        
         st.session_state['execution_counter'] += 1
 
         sentences.insert(0, input_sentence)
@@ -150,4 +153,6 @@ if __name__ == '__main__':
 
         df_similar_sentences = pd.DataFrame(data).sort_values(by=['similarity'], ascending=False)
         df_similar_sentences = df_similar_sentences.head(top_n)
+        
+        st.markdown('Top {} similar sentences to the input'.format(top_n))
         st.table(df_similar_sentences)
