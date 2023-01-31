@@ -12,7 +12,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 def get_sentences_dataset():
     df = pd.read_csv('https://docs.google.com/spreadsheets/d/' + '1H2VrUZXJLJR42RNUqMbIMFEobobPS1n4j5Xh2AbKhpA' + '/export?gid=0&format=csv', sep=',', escapechar='\\')
     
-    return df['sentences'].to_list()
+    return df
 
 def flat_list(composed_list):
     if any(isinstance(x, list) for x in composed_list):
