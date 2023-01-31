@@ -9,7 +9,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # FUNCTIONS:
 def get_sentences_dataset(year):
-    df = pd.read_csv('sentences_dataset.csv', sep='|')
+    df = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
+                   '1r2pd73pRjl9JNx9DbNYT72xMht-7yUz5xjmA3Xe0lIE' +
+                   '/export?gid=0&format=csv',
+                  )
+    #df = pd.read_csv('sentences_dataset.csv', sep='|')
     df = df[(df["filename"].values <= year)]
     
     return df['sentences'].to_list()
