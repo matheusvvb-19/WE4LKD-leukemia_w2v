@@ -97,7 +97,7 @@ if __name__ == '__main__':
         
         st.session_state['execution_counter'] += 1
 
-        aux_df = sentences_df[sentences_df["filename"].values <= int(loaded_model[-4:])]
+        aux_df = sentences_df[(sentences_df["filename"].values <= int(loaded_model[-4:]))]
         sentences = aux_df['sentences'].to_list()
         sentences.insert(0, input_sentence)
 
