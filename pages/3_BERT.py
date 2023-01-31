@@ -8,10 +8,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 # GLOBAL VARIABLES:
 
 # FUNCTIONS:
-def get_sentences_dataset(year):
+@st.cache()
+def get_sentences_dataset():
     df = pd.read_csv('https://docs.google.com/spreadsheets/d/' + '1H2VrUZXJLJR42RNUqMbIMFEobobPS1n4j5Xh2AbKhpA' + '/export?gid=0&format=csv', sep=',', escapechar='\\')
-    #df = pd.read_csv('sentences_dataset.csv', sep='|')
-    df = df[(df["filename"].values <= year)]
     
     return df['sentences'].to_list()
 
@@ -25,6 +24,8 @@ def flat_list(composed_list):
 if __name__ == '__main__':
     if 'execution_counter' not in st.session_state:
         st.session_state['execution_counter'] = 0
+        
+    sentences_df = get_sentences_dataset()
         
     hide_streamlit_style = """
             <style>           
@@ -96,7 +97,8 @@ if __name__ == '__main__':
         
         st.session_state['execution_counter'] += 1
 
-        sentences = get_sentences_dataset(int(loaded_model[-4:]))
+        aux_df = sentences_df[(sentences_df["filename"].values <= int(loaded_model[-4:])]
+        sentences = aux_df['sentences'].to_list()
         sentences.insert(0, input_sentence)
 
         tokenizer = AutoTokenizer.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext')
