@@ -8,18 +8,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 # GLOBAL VARIABLES:
 
 # FUNCTIONS:
-def get_sentences_dataset():
-    sentences = [
-        "There were no deaths directly attributable to cyclophosphamide and no patients developed hemorrhagic cystitis or malignancy..",
-        "High-dose cytarabine (HiDAC) and intermediate-dose cytarabine (IDAC) have been introduced as effective and safe consolidation chemotherapy in AML, with relatively low rates of life-threatening infections despite the high total dose of the cytostatic drug.",
-        "We demonstrate that high CD14 expression is highly significantly associated with high cellular cytarabine and Dau resistance in univariate as well as multivariate analyses.",
-        "Thus, our study suggests that arsenictrioxide not only inhibits the expression of MYC, PCNA, and MCM7 but also leads to cell cycle arrest and apoptosis in KG-1a cells.",
-        "While arsenictrioxide (arsenictrioxide) is an infamous carcinogen, it is also an effective chemotherapeutic agent for AML and some solid tumors.",
-        "Considering he's played football for only two years, he does it well.",
-        "Dexamethasone, but not mifepristone, increased expression of delivered proteins such as GFP that are important for early identification of infected cells.",
-    ]
+def get_sentences_dataset(year):
+    df = pd.read_csv('../sentences_dataset.csv', sep='|')
+    df = df[(df["filename"].values <= year)]
     
-    return sentences
+    return df['sentences'].to_list()
 
 def flat_list(composed_list):
     if any(isinstance(x, list) for x in composed_list):
@@ -31,8 +24,6 @@ def flat_list(composed_list):
 if __name__ == '__main__':
     if 'execution_counter' not in st.session_state:
         st.session_state['execution_counter'] = 0
-        
-    sentences = get_sentences_dataset()
         
     hide_streamlit_style = """
             <style>           
@@ -104,6 +95,7 @@ if __name__ == '__main__':
         
         st.session_state['execution_counter'] += 1
 
+        sentences = get_sentences_dataset(loaded_model[-4:])
         sentences.insert(0, input_sentence)
 
         tokenizer = AutoTokenizer.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext')
