@@ -95,7 +95,7 @@ if __name__ == '__main__':
         
         st.session_state['execution_counter'] += 1
 
-        sentences = get_sentences_dataset(loaded_model[-4:])
+        sentences = get_sentences_dataset(int(loaded_model[-4:]))
         sentences.insert(0, input_sentence)
 
         tokenizer = AutoTokenizer.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext')
