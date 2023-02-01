@@ -2966,7 +2966,7 @@ if __name__ == '__main__':
             data['sentence'].append(s)
             data['similarity'].append(si)
 
-        df_similar_sentences = pd.DataFrame(data).sort_values(by=['similarity'], ascending=False, inplace=True, ignore_index=True)
+        df_similar_sentences = pd.DataFrame(data).sort_values(by=['similarity'], ascending=False, ignore_index=True)
         df_similar_sentences = df_similar_sentences.head(top_n)
         
         st.markdown('**Top {} similar sentences to the input**'.format(top_n))
