@@ -10,7 +10,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # FUNCTIONS:
 @st.cache()
 def get_sentences_dataset():
-    df = pd.read_csv('https://docs.google.com/spreadsheets/d/' + '1yRmZgp-dlnS94iY7HWQMoy-lz97iAxBcBube-a_9DC4' + '/export?gid=0&format=csv', sep=',', escapechar='\\')
+    df = pd.read_csv('https://docs.google.com/spreadsheets/d/' + '1A-O505D_vkOprtWKMyQ1hIgNlaLwwBZnIZukiiVTncQ' + '/export?gid=0&format=csv', sep=',', escapechar='\\')
     
     return df
 
