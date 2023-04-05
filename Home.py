@@ -46,7 +46,7 @@ if __name__ == '__main__':
     
     st.header('2. Approaches')
     st.subheader('2.1 Word2Vec')
-    st.markdown('In our first approach, we followed the strategy used by Tshitoyan *et al*. [1] and used Word2Vec models with the Skip-Gram architecture. The vocab p')
+    st.markdown('In our first approach, we followed the strategy used by Tshitoyan *et al*. [1] and used Word2Vec models with the Skip-Gram architecture.')
     
     st.subheader('2.2 BERT-based')
     st.markdown('We also trained BERT-based models from scratch using the same corpus of biomedical articles. To compute unique embeddings for the words, we applied a mean pooling strategy using the [Flair NLP](https://github.com/flairNLP/flair) framework.')
