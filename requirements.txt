@@ -42,7 +42,7 @@ scikit-learn
 scipy==1.5.4
 six==1.15.0
 smart-open
-streamlit==1.20.0
+streamlit==1.15.0
 termcolor==1.1.0
 tokenizers==0.10.1
 torch==1.8.0
