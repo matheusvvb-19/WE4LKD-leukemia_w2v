@@ -227,7 +227,6 @@ if __name__ == '__main__':
 
         st.markdown('**Main window**')
         st.markdown('_Hint: To see this window content better, you can minimize the sidebar._')
-        st.markdown('lalala')
         
     if submitted or st.session_state['execution_counter'] != 0:
         st.markdown('**Input**')
