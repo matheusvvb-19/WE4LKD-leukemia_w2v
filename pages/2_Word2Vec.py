@@ -146,50 +146,30 @@ def similarities_table_streamlit(words_list, model):
     df = pd.DataFrame(table)
     st.table(df)
     
-def restrict_w2v(w2v, restricted_word_set, domain=False):
-    '''Restrict the vocabulary of certain model, removing words according to an especific domain.
-    
-    Args:
-      w2v: Word2Vec model.
-      restricted_word_set: list of words of the domain.
-      domain: boolean that informs how to remove the words (remove words that belong or not to the domain).
-    '''
+def restrict_w2v_model_vocab(model, restricted_word_set, domain=False):
+    """ Restrict the vocabulary of a Word2Vec model by eliminating tokens from it.
 
-    new_vectors = []
-    new_vocab = {}
-    new_index2entity = []
-    new_vectors_norm = []
+    Args:
+        model: the loaded Word2Vec model;
+        restricted_word_set: a set of words to be eliminated or to be the only ones present in the model vocabulary;
+        domain: indicates when the words in restricted_word_set should be elimnated from the vocab (False) or when they should be the only tokens in the vocab (True).
+    """
 
     if domain == False:
-      for i in range(len(w2v.vocab)):
-          word = w2v.index2entity[i]
-          vec = w2v.vectors[i]
-          vocab = w2v.vocab[word]
-          vec_norm = w2v.vectors_norm[i]
-          if word not in restricted_word_set:
-              vocab.index = len(new_index2entity)
-              new_index2entity.append(word)
-              new_vocab[word] = vocab
-              new_vectors.append(vec)
-              new_vectors_norm.append(vec_norm)
+        words_to_keep = set(model.wv.vocab.keys()) - set(restricted_word_set)
+    
     else:
-      for i in range(len(w2v.vocab)):
-          word = w2v.index2entity[i]
-          vec = w2v.vectors[i]
-          vocab = w2v.vocab[word]
-          vec_norm = w2v.vectors_norm[i]
-          if word in restricted_word_set:
-              vocab.index = len(new_index2entity)
-              new_index2entity.append(word)
-              new_vocab[word] = vocab
-              new_vectors.append(vec)
-              new_vectors_norm.append(vec_norm)
+        words_to_keep = set(restricted_word_set)
 
-    w2v.vocab = new_vocab
-    w2v.vectors = np.array(new_vectors)
-    w2v.index2entity = np.array(new_index2entity)
-    w2v.index2word = np.array(new_index2entity)
-    w2v.vectors_norm = np.array(new_vectors_norm)
+    # cria um novo dicionário que mapeia as palavras remanescentes para seus objetos de vocabulário correspondentes
+    new_vocab = {word: model.wv.vocab[word] for word in words_to_keep}
+
+    # define o novo vocabulário do modelo para o dicionário criado no passo 3
+    model.wv.vocab = new_vocab
+
+    # redefine a matriz de embedding para refletir as palavras remanescentes
+    model.wv.vectors = model.wv.vectors[[model.wv.vocab[word].index for word in words_to_keep]]
+    model.wv.index2word = list(words_to_keep)
     
 def wv_restrict_w2v(w2v, restricted_word_set, domain=False):
     '''The same of above function but usin the ".wv" before the acceses to the model's properties.'''
@@ -691,7 +671,7 @@ if __name__ == '__main__':
                 elif restrict_domain == 'FDA drugs':
                     specific_domain = read_fda_drugs_file()
 
-                wv_restrict_w2v(model, set(specific_domain), True)
+                restrict_w2v_model_vocab(model, set(specific_domain), True)
                 vocabulary_restricted = True
 
             else:
@@ -705,12 +685,12 @@ if __name__ == '__main__':
                         if (selected == True):
                             specific_domain.extend(list_name)
 
-                    wv_restrict_w2v(model, set(specific_domain), True)
+                    restrict_w2v_model_vocab(model, set(specific_domain), True)
 
                 else:
                     if common_words_number != 'None':
                         common_words = get_most_common(int(common_words_number))
-                        wv_restrict_w2v(model, set(common_words))
+                        restrict_w2v_model_vocab(model, set(common_words))
 
                 vocabulary_restricted = True   
 
