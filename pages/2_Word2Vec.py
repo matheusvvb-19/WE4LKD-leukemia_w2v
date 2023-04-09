@@ -162,20 +162,22 @@ def restrict_w2v_model_vocab(model, restricted_word_set, domain=False):
         words_to_keep = set(restricted_word_set)
 
     # cria um novo dicionário que mapeia as palavras remanescentes para seus objetos de vocabulário correspondentes
-    # new_vocab = {word: model.wv.vocab[word] for word in words_to_keep}
     new_vocab = {}
     for word in words_to_keep:
         try:
-            new_vocab.update({word: model.wv.vocab[word]})
-        
-        except:
-            continue
+            new_vocab[word] = model.wv.vocab[word]
 
-    # define o novo vocabulário do modelo para o dicionário criado no passo 3
+        except KeyError:
+            continue
+        
+        # cria um novo objeto Vocab para a palavra e atualiza o índice
+        new_vocab[word].index = len(new_vocab) - 1
+
+    # define o novo vocabulário do modelo para o dicionário criado no passo anterior
     model.wv.vocab = new_vocab
 
     # redefine a matriz de embedding para refletir as palavras remanescentes
-    model.wv.vectors = model.wv.vectors[[model.wv.vocab[word].index for word in list(new_vocab.keys())]]
+    model.wv.vectors = model.wv.vectors[[model.wv.vocab[word].index for word in new_vocab.keys()]]
     model.wv.index2word = list(new_vocab.keys())
     
 def wv_restrict_w2v(w2v, restricted_word_set, domain=False):
