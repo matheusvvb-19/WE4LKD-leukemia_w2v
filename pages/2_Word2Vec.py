@@ -175,7 +175,7 @@ def restrict_w2v_model_vocab(model, restricted_word_set, domain=False):
     model.wv.vocab = new_vocab
 
     # redefine a matriz de embedding para refletir as palavras remanescentes
-    model.wv.vectors = model.wv.vectors[[model.wv.vocab[word].index for word in words_to_keep]]
+    model.wv.vectors = model.wv.vectors[[model.wv.vocab[word].index for word in list(new_vocab.keys())]]
     model.wv.index2word = list(words_to_keep)
     
 def wv_restrict_w2v(w2v, restricted_word_set, domain=False):
