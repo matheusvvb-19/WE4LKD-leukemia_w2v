@@ -11,13 +11,13 @@
 
 import os, torch, sys, shutil
 
-from pyspark.sql import functions as F
-from pyspark.sql import types as T
-from pyspark.context import SparkContext
-from pyspark.sql.session import SparkSession
+#from pyspark.sql import functions as F
+#from pyspark.sql import types as T
+#from pyspark.context import SparkContext
+#from pyspark.sql.session import SparkSession
 
 from gensim import models
-from gensim.models import Word2Vec
+from gensim.models import Word2Vec, FastText
 
 import numpy as np
 
@@ -25,7 +25,7 @@ from scipy.special import softmax
 
 import pandas as pd
 
-from transformers import AutoTokenizer, AutoModelForMaskedLM
+#from transformers import AutoTokenizer, AutoModelForMaskedLM
 
 #sys.path.append('./pubchem/')
 #from clean_summaries import ss, get_csv_in_folder, read_csv_table_files, to_csv, get_target_compounds
@@ -233,10 +233,10 @@ if __name__ == '__main__':
     print('Starting')
 
     # CONSTANTS:
-    VALIDATION_TYPE = 'w2v'            # possible values must be: 'bert' or 'w2v'
+    VALIDATION_TYPE = 'ft'            # possible values must be: 'bert' or 'w2v'
     BERT_MODELS_PATH = './bert/distilbert/'
-    W2V_MODELS_COMB2_PATH = './word2vec/models_yoy_combination2/'
     W2V_MODELS_COMB15_PATH = './word2vec/models_yoy_combination15/'
+    FT_MODELS_COMB16_PATH = '/fastdata/ac4mvvb/fasttext/models_yoy_combination16/'
     FIRST_OCCURRENCE_OF_EACH_COMPOUND = {
         'arsenictrioxide': 1976,
         'azacitidine': 1969,
@@ -272,34 +272,39 @@ if __name__ == '__main__':
     
     # if the validation is for Word2Vec models, somen constants must pointer to specific Word2Vec files:
     elif VALIDATION_TYPE == 'w2v':
-        MODELS_COMB2 = sorted([f.path for f in os.scandir(W2V_MODELS_COMB2_PATH) if f.name.endswith('.model')])
         MODELS_COMB15 = sorted([f.path for f in os.scandir(W2V_MODELS_COMB15_PATH) if f.name.endswith('.model')])
-
         os.makedirs('./validation/per_compound/w2v/', exist_ok=True)
 
         dictionary_for_all_compounds = {}
         for c in get_target_compounds():
-            dictionary_for_all_compounds.update({
-                '{}_comb2'.format(c): {
-                    'year': [],
-                    'dot_product_result': [],
-                    'dot_product_result_absolute': [],
-                    'softmax': [],
-                    'normalized_dot_product_abolsute': [],
-                    'standartized_dot_product_absolute': [],
-                    'softmax_normalization': [],
-                    'softmax_standartization': [],
-                    }
-                }
-            )  
-
             dictionary_for_all_compounds.update({
                 '{}_comb15'.format(c): {
                     'year': [],
                     'dot_product_result': [],
                     'dot_product_result_absolute': [],
                     'softmax': [],
-                    'normalized_dot_product_abolsute': [],
+                    'normalized_dot_product_absolute': [],
+                    'standartized_dot_product_absolute': [],
+                    'softmax_normalization': [],
+                    'softmax_standartization': [],
+                    }
+                }
+            ) 
+    
+    # if the validation is for FastText models, somen constants must pointer to specific FastText files:
+    elif VALIDATION_TYPE == 'ft':
+        MODELS_COMB16 = sorted([f.path for f in os.scandir(FT_MODELS_COMB16_PATH) if f.name.endswith('.model')])
+        os.makedirs('/fastdata/ac4mvvb/validation/per_compound/ft/', exist_ok=True)
+
+        dictionary_for_all_compounds = {}
+        for c in get_target_compounds():
+            dictionary_for_all_compounds.update({
+                '{}_comb16'.format(c): {
+                    'year': [],
+                    'dot_product_result': [],
+                    'dot_product_result_absolute': [],
+                    'softmax': [],
+                    'normalized_dot_product_absolute': [],
                     'standartized_dot_product_absolute': [],
                     'softmax_normalization': [],
                     'softmax_standartization': [],
@@ -391,35 +396,53 @@ if __name__ == '__main__':
                 elif VALIDATION_TYPE == 'w2v':
                     # loading Word2Vec model from file:
                     print('Loading Word2Vec model')
-                    model_comb2 = Word2Vec.load([x for x in MODELS_COMB2 if str(y) in x][0])
                     model_comb15 = Word2Vec.load([x for x in MODELS_COMB15 if str(y) in x][0])
 
                     # accessing the word embedding of AML:
-                    print("Acessing the word embedding of 'AML'")
                     try:
-                        AML_we_comb2 = model_comb2.wv['aml']
                         AML_we_comb15 = model_comb15.wv['aml']
+                        print("Acessing the word embedding of 'AML'")
                     
                     except:
+                        print('AML is not in the vocabulary')
                         continue
 
                     # acessing the output embedding of each of the compounds present in the papers published until year y:
                     for compound in compounds_present_in_the_papers:
                         # METHOD 1: Direct Access to the token in the model's vocab
                         print('Acessing the output embedding of {}'.format(compound))
-                        compound_we_comb2 = get_w2v_output_embedding(compound, model_comb2, method='da')
                         compound_we_comb15 = get_w2v_output_embedding(compound, model_comb15, method='da')
 
-                        dot_product_comb2 = np.dot(compound_we_comb2, AML_we_comb2).item()
                         dot_product_comb15 = np.dot(compound_we_comb15, AML_we_comb15).item()
-
-                        dictionary_for_all_compounds['{}_comb2'.format(compound)]['year'].append(y)
-                        dictionary_for_all_compounds['{}_comb2'.format(compound)]['dot_product_result'].append(dot_product_comb2)
-                        dictionary_for_all_compounds['{}_comb2'.format(compound)]['dot_product_result_absolute'].append(abs(dot_product_comb2))
 
                         dictionary_for_all_compounds['{}_comb15'.format(compound)]['year'].append(y)
                         dictionary_for_all_compounds['{}_comb15'.format(compound)]['dot_product_result'].append(dot_product_comb15)
                         dictionary_for_all_compounds['{}_comb15'.format(compound)]['dot_product_result_absolute'].append(abs(dot_product_comb15))
+
+                elif VALIDATION_TYPE == 'ft':
+                    # loading FastText model from file:
+                    print('Loading FastText model')
+                    model_comb16 = FastText.load([x for x in MODELS_COMB16 if str(y) in x][0])
+
+                    # accessing the word embedding of AML:
+                    try:
+                        AML_we_comb16 = model_comb16.wv['aml']
+                        print("Acessing the word embedding of 'AML'")
+                    
+                    except:
+                        print('AML is not in the vocabulary')
+                        continue
+
+                    # acessing the output embedding of each of the compounds present in the papers published until year y:
+                    for compound in compounds_present_in_the_papers:
+                        print('Acessing the output embedding of {}'.format(compound))
+                        compound_we_comb16 = get_w2v_output_embedding(compound, model_comb16, method='da')
+
+                        dot_product_comb16 = np.dot(compound_we_comb16, AML_we_comb16).item()
+
+                        dictionary_for_all_compounds['{}_comb16'.format(compound)]['year'].append(y)
+                        dictionary_for_all_compounds['{}_comb16'.format(compound)]['dot_product_result'].append(dot_product_comb16)
+                        dictionary_for_all_compounds['{}_comb16'.format(compound)]['dot_product_result_absolute'].append(abs(dot_product_comb16))
 
             else:
                 print('There are no papers published until {} that contains any of the target compounds'.format(y))
@@ -431,7 +454,7 @@ if __name__ == '__main__':
     if VALIDATION_TYPE == 'w2v':
         print('Generating historical record for each compound')
         for c in get_target_compounds():
-            for comb in ['comb2', 'comb15']:
+            for comb in ['comb15']:
                 key = '{}_{}'.format(c, comb)
 
                 # Softmax:
@@ -450,5 +473,27 @@ if __name__ == '__main__':
 
                 print('Writing file {}.csv'.format(key))                
                 pd.DataFrame.from_dict(data=dictionary_for_all_compounds[key]).to_csv('./validation/per_compound/w2v/{}.csv'.format(key), columns=['year', 'dot_product_result', 'dot_product_result_absolute', 'softmax', 'normalized_dot_product_absolute', 'standartized_dot_product_absolute', 'softmax_normalization', 'softmax_standartization'], index=False)
-                
+    
+    elif VALIDATION_TYPE == 'ft':
+        print('Generating historical record for each compound')
+        for c in get_target_compounds():
+            key = '{}_comb16'.format(c)
+
+            # Softmax:
+            dictionary_for_all_compounds[key]['softmax'] = softmax(dictionary_for_all_compounds[key]['dot_product_result_absolute'])
+
+            # Normalization:
+            maximum = np.max(dictionary_for_all_compounds[key]['dot_product_result_absolute'])
+            dictionary_for_all_compounds[key]['normalized_dot_product_absolute'] = [x/maximum for x in dictionary_for_all_compounds[key]['dot_product_result_absolute']]
+            dictionary_for_all_compounds[key]['softmax_normalization'] = softmax(dictionary_for_all_compounds[key]['normalized_dot_product_absolute'])
+            
+            # Standartization:
+            mean = np.mean(dictionary_for_all_compounds[key]['dot_product_result_absolute'])
+            standart_deviation = np.std(dictionary_for_all_compounds[key]['dot_product_result_absolute'])
+            dictionary_for_all_compounds[key]['standartized_dot_product_absolute'] = [(x - mean)/standart_deviation for x in dictionary_for_all_compounds[key]['dot_product_result_absolute']]
+            dictionary_for_all_compounds[key]['softmax_standartization'] = softmax(dictionary_for_all_compounds[key]['standartized_dot_product_absolute'])
+
+            print('Writing file {}.csv'.format(key))                
+            pd.DataFrame.from_dict(data=dictionary_for_all_compounds[key]).to_csv('/fastdata/ac4mvvb/validation/per_compound/ft/{}.csv'.format(key), columns=['year', 'dot_product_result', 'dot_product_result_absolute', 'softmax', 'normalized_dot_product_absolute', 'standartized_dot_product_absolute', 'softmax_normalization', 'softmax_standartization'], index=False)
+            
     print('END!')
