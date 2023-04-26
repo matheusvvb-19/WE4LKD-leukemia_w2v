@@ -1,3 +1,10 @@
+##################################################
+## Groups together each singular abstract text file into one single file.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
 
 # IMPORTS:
 from pathlib import Path
@@ -7,7 +14,7 @@ import os
 if __name__ == '__main__':
     filenames = [str(x) for x in Path('./results/').glob('**/*.txt')]
     initial_year = 1900
-    years = [1968, 1978, 2000, 2002, 2010, 2012, 2014, 2015, 2017, 2023]
+    years = [2023]
     os.makedirs(os.path.dirname('./results_aggregated'), exist_ok=True)
 
     for y in years:
