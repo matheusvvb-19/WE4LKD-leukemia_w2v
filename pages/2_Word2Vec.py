@@ -1,4 +1,11 @@
-# based on https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
+##################################################
+## Displays the Word2Vec page of the Streamlit web application developed.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+## Based on: https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
+##################################################
 
 # IMPORTS:
 import plotly, pickle, csv, re, string, zipfile, gdown, os
@@ -16,6 +23,8 @@ from gensim.models import Word2Vec
 # FUNCTIONS:
 @st.cache()
 def download_w2v_models():
+    """ Download the Word2Vec models storaged in a Google Drive folder."""
+    
     dictionary_of_files = {
         '19: 1921 - 2022': ['https://drive.google.com/file/d/1fDWrwJ4PS0lnc95QQeBywZC09i9KaNvT/view?usp=share_link', 'https://drive.google.com/file/d/1bQRCRVX5K932109stGYDI2PGwge41g0T/view?usp=share_link', 'https://drive.google.com/file/d/1ogFGN030de_ky8oKzag5rZzEgKF6tKxa/view?usp=share_link'],
         '18: 1921 - 2018': ['https://drive.google.com/file/d/1UJXIq8DJfWZFtG_AOvxzKvYc2GPlvh6d/view?usp=share_link', 'https://drive.google.com/file/d/1F2cyIeA1U3-lBYME8Hnhoebh__8mTrbz/view?usp=share_link', 'https://drive.google.com/file/d/12clt2pHHs6mFyOMWcxsHfkg63mo8yeVy/view?usp=share_link'],
@@ -91,6 +100,12 @@ def create_entities_lists():
 
 @st.cache(suppress_st_warning=True, max_entries=10, ttl=2400)
 def read_fda_drugs_file():
+    """ Reads the FDA drugs file and return the drugs' names in a list.
+    
+    Returns:
+        a list containing the drugs' names.
+    """
+    
     words_list = []
     with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
         file_line = csv.reader(file_txt, delimiter='\t')
@@ -179,45 +194,6 @@ def restrict_w2v_model_vocab(model, restricted_word_set, domain=False):
     # redefine a matriz de embedding para refletir as palavras remanescentes
     model.wv.vectors = model.wv.vectors[[model.wv.vocab[word].index for word in new_vocab.keys()]]
     model.wv.index2word = list(new_vocab.keys())
-    
-def wv_restrict_w2v(w2v, restricted_word_set, domain=False):
-    '''The same of above function but usin the ".wv" before the acceses to the model's properties.'''
-
-    new_vectors = []
-    new_vocab = {}
-    new_index2entity = []
-    new_vectors_norm = []
-
-    if domain == False:
-      for i in range(len(w2v.wv.vocab)):
-          word = w2v.wv.index2entity[i]
-          vec = w2v.wv.vectors[i]
-          vocab = w2v.wv.vocab[word]
-          vec_norm = w2v.wv.vectors_norm[i]
-          if word not in restricted_word_set:
-              vocab.index = len(new_index2entity)
-              new_index2entity.append(word)
-              new_vocab[word] = vocab
-              new_vectors.append(vec)
-              new_vectors_norm.append(vec_norm)
-    else:
-      for i in range(len(w2v.wv.vocab)):
-          word = w2v.wv.index2entity[i]
-          vec = w2v.wv.vectors[i]
-          vocab = w2v.wv.vocab[word]
-          vec_norm = w2v.wv.vectors_norm[i]
-          if word in restricted_word_set:
-              vocab.index = len(new_index2entity)
-              new_index2entity.append(word)
-              new_vocab[word] = vocab
-              new_vectors.append(vec)
-              new_vectors_norm.append(vec_norm)
-
-    w2v.wv.vocab = new_vocab
-    w2v.wv.vectors = np.array(new_vectors)
-    w2v.wv.index2entity = np.array(new_index2entity)
-    w2v.wv.index2word = np.array(new_index2entity)
-    w2v.wv.vectors_norm = np.array(new_vectors_norm)
 
 def append_list(sim_words, words):
     list_of_words = []
@@ -631,7 +607,6 @@ if __name__ == '__main__':
         submitted = st.form_submit_button('Apply settings')
         if submitted or st.session_state['execution_counter'] != 0:
             if loaded_model == '01: 1921 - 1963':
-                #model = pickle.load(open('./models_streamlit_app/model_1921_1963.model', 'rb'))
                 model = Word2Vec.load('./models_streamlit_app/model_1921_1963.model', mmap='r')
             elif loaded_model == '02: 1921 - 1967':
                 model = Word2Vec.load('./models_streamlit_app/model_1921_1967.model', mmap='r')
@@ -714,7 +689,6 @@ if __name__ == '__main__':
                 iteration = 0    
 
         else:
-            #model = pickle.load(open('./models_streamlit_app/model_1921_2022.model', 'rb'))
             model = Word2Vec.load('./models_streamlit_app/model_1921_2022.model', mmap='r')
             dim_red = 'TSNE'
             perplexity = 5
@@ -759,54 +733,45 @@ if __name__ == '__main__':
                 display_scatterplot_3D(model, user_input, similar_word, labels, color_map, annotation, dim_red, perplexity, learning_rate, iteration, top_n)
 
     else:
-        # se o usuário digitar algo no campo de entrada de texto, cria-se a lista de palavras de busca:
+        # if the user types something inside the text input box, the list of words to be searched is created:
         user_input = [x.strip().lower() for x in user_input.split(',') if len(x) >= 2]
 
-        # se essa execução for a primeira, é necessário buscar pelas palavras digitadas no vocabulário do modelo:
+        # if this execution is the first one, it is necessary to search for the typed words in the model's vocabulary:
         if st.session_state['execution_counter'] == 0:
-            matched_synonyms = read_matched_synonyms()      # pandas DataFrame com os termos que foram efetivamente substituídos por sinônimos durante o pré-processamento
+            matched_synonyms = read_matched_synonyms()      
 
             replaced_words = []
 
-            # para cada palavra de user_input, verificar se ela se encontra no DataFrame recém-lido:
             for w in user_input:
                 row = matched_synonyms.loc[matched_synonyms['synonym'] == w]
 
-                # palavra está presente no DataFrame - ou seja, foi substituída por um sinônimo durante a limpeza do texto:
                 if len(row.index) != 0:
-                    # se o synonym_title estiver presente no vocabulário do modelo, significa que a palavra foi efetivamente substituída e ESTAVA PRESENTE no modelo em questão:
                     if row['synonym_title'].values[0] in set(model.wv.vocab):
                         st.warning("'{}' was replaced by '{}' during text preprocessing.".format(w, row['synonym_title'].values[0]))
                         replaced_words.append((w, row['synonym_title'].values[0]))
 
-            # percorrendo a lista de tuplas <termo_substituido, termo>, substutindo pelos sinônimos pré-processados:
             for pair in replaced_words:
                 user_input = list(map(lambda x: x.replace(pair[0], pair[1]), user_input))
 
             matches = []
             words_to_remove = []
 
-            # para cada uma das palavras digitadas, busca no vocbulário palavras que a contenham como substring:
+            # sor each typed word, also searches in the model's vocabulary it subwords:
             for w in user_input:
                 found = list(filter(lambda x: w in x, model.wv.vocab))
 
-                # se houver ao menos uma embedding que tenha como substring o termo digitado pelo usuário:
                 if len(found) > 0:
-                    # se o termo completo não for encontrado, ele terá que posteriormente ser removido de user_input - pois ele não existe no vocabulário
                     if w not in found:
-                        matches.extend(found)           # e as opções de palavras semelhantes são salvas na lista matches
+                        matches.extend(found)
                         words_to_remove.append(w)
 
-                # se nenhuma embedding conter como substring a palavra digitada pelo usuário, ela também é adicionada à lista de futuras palavras a serem eliminadas e um aviso ao usuário é feito:
                 else:
                     words_to_remove.append(w)
                     st.warning("'{}' is out of the model's vocabulary. Try again using another keyword.".format(w))
 
-            # removendo de user_input as palavras que não foram encontradas (por inteiro) no vocabulário, mas apresentavam variações:
             user_input = [x for x in user_input if x not in words_to_remove]
-            st.session_state['user_input'] = user_input                 # atualizando o valor da variável no session_state
+            st.session_state['user_input'] = user_input         
 
-        # se essa não for a primeira execução, apenas recupera as palavras previamente buscadas salvas em session_state:
         else:
             user_input = st.session_state['user_input']
 
@@ -825,7 +790,7 @@ if __name__ == '__main__':
                             st.warning("'{}' is out of the model's vocabulary. Try again using another keyword.".format(w))
 
                     user_input = [x for x in user_input if x not in words_to_remove]
-                    st.session_state['user_input'] = user_input                 # atualizando o valor da variável no session_state
+                    st.session_state['user_input'] = user_input                 
 
                 if len(user_input) > 0:
                     result_word, sim_words, similar_word, similarity, labels, label_dict, color_map = plot_data_config(user_input, model)   
