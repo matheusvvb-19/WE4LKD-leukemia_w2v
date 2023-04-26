@@ -1,5 +1,5 @@
 ##################################################
-## Displays the Word2Vec page of the Streamlit web application developed.
+## Displays the Word2Vec page of the developed Streamlit web application.
 ##################################################
 ## Author: {name}
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
@@ -107,7 +107,7 @@ def read_fda_drugs_file():
     """
     
     words_list = []
-    with open('fda_drugs.txt', newline = '') as file_txt:                                                                                          
+    with open('../data/fda_drugs.txt', newline = '') as file_txt:                                                                                          
         file_line = csv.reader(file_txt, delimiter='\t')
         for e in file_line:
             if len(e) == 8:
