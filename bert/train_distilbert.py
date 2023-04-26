@@ -17,6 +17,15 @@ from datasets import load_dataset, Features, Value
 from pathlib import Path
 
 def tokenize(element):
+    """ Tokenizes a text transforming it into a sequence of input ids to be processed by the Transformers neural network.
+    
+    Args:
+        element: a Hugging Face Dataset object.
+        
+    Returns:
+        the tokenized text in the form of input ids sequences of size 'context_legnth'.
+    """
+    
     outputs = tokenizer(
         element["summary"],
         truncation=True,
