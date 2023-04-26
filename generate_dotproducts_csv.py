@@ -243,7 +243,7 @@ if __name__ == '__main__':
     # if the validation is for FastText models, somen constants must pointer to specific FastText files:
     elif VALIDATION_TYPE == 'ft':
         MODELS_COMB16 = sorted([f.path for f in os.scandir(FT_MODELS_COMB16_PATH) if f.name.endswith('.model')])
-        os.makedirs('/fastdata/ac4mvvb/validation/per_compound/ft/', exist_ok=True)
+        os.makedirs('./validation/per_compound/ft/', exist_ok=True)
 
         dictionary_for_all_compounds = {}
         for c in get_target_compounds():
@@ -443,6 +443,6 @@ if __name__ == '__main__':
             dictionary_for_all_compounds[key]['softmax_standartization'] = softmax(dictionary_for_all_compounds[key]['standartized_dot_product_absolute'])
 
             print('Writing file {}.csv'.format(key))                
-            pd.DataFrame.from_dict(data=dictionary_for_all_compounds[key]).to_csv('/fastdata/ac4mvvb/validation/per_compound/ft/{}.csv'.format(key), columns=['year', 'dot_product_result', 'dot_product_result_absolute', 'softmax', 'normalized_dot_product_absolute', 'standartized_dot_product_absolute', 'softmax_normalization', 'softmax_standartization'], index=False)
+            pd.DataFrame.from_dict(data=dictionary_for_all_compounds[key]).to_csv('./validation/per_compound/ft/{}.csv'.format(key), columns=['year', 'dot_product_result', 'dot_product_result_absolute', 'softmax', 'normalized_dot_product_absolute', 'standartized_dot_product_absolute', 'softmax_normalization', 'softmax_standartization'], index=False)
             
     print('END!')
