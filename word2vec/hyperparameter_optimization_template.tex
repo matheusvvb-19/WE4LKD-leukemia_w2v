@@ -1,0 +1,88 @@
+\documentclass[10pt,letterpaper]{article}
+
+% Language and encoding:
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+% Sets page size and margins:
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages:
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{authblk}
+\usepackage{pgfplots}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\usepackage[hidelinks]{hyperref}
+
+% Title
+\title{
+		%\vspace{-1in} 	
+		\usefont{OT1}{bch}{b}{n}
+		\normalfont \normalsize \textsc{Discovering latent knowledge in medical papers on Acute Myeloid Leukemia\\ FAPESP project 2021/13054-8} \\ [10pt]
+		\huge \VAR{title} Hyperparameter Optimization \\
+}
+
+\author[1]{Matheus Vargas Volon Berto}
+
+\affil[1]{\small{Department of Computer Science, Federal University of São Carlos}}
+
+\begin{document}
+\maketitle
+\selectlanguage{english}
+
+\section{Settings}
+\begin{table}[ht]
+    \centering
+    \caption{Fixed hyperparameters values.}
+    \label{fixed_hyperparameters}
+    \begin{tabular}[t]{lcc}
+        \hline
+        Hyperparameter & Value\\
+        \hline
+        hierarchical softmax & 0 \\
+        iter & 15 \\
+        min count & 5 \\
+        sg & 1 \\
+        sorted vocab & True \\
+	window & 5 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\VAR{model_names_filepaths_df}
+
+\VAR{hyperparameter_optimization_df}
+
+The "Default" model was trained using the original hyperparameters defined in implementation of the model by Gensim package.\footnote{Word2Vec: \url{https://radimrehurek.com/gensim/models/word2vec.html\#gensim.models.word2vec.Word2Vec} or FastText: \url{https://radimrehurek.com/gensim_3.8.3/models/fasttext.html\#gensim.models.fasttext.FastText}}
+
+\section{Performance}
+\begin{table}[ht]
+\centering
+\caption{Amount of analogies per type.}
+\label{analogies_amount}
+\begin{tabular}{llr}
+ & Analogies & Amount \\
+0 & All & \VAR{number_analogies_all} \\
+1 & AML & \VAR{number_analogies_AML} \\
+2 & Grammar & \VAR{number_analogies_general} \\
+2 & Biomedical & \VAR{number_analogies_biomedical} \\
+\end{tabular}
+\end{table}
+
+\BLOCK{for table in performance_dfs}
+	\VAR{table}
+\BLOCK{endfor}
+
+\BLOCK{for plot, caption in performance_plots_and_captions}
+	\begin{figure}[ht]
+	\centering
+	\VAR{plot}
+	\caption{\VAR{caption}}
+	\end{figure}
+\BLOCK{endfor}
+
+\end{document}
