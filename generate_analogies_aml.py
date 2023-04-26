@@ -1,16 +1,24 @@
+##################################################
+## Generates a txt file containing the word-pair analogies about AML.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
+
+# IMPORTS:
 import pandas as pd
 import operator
+sys.path.append('./pubchem/')
+from clean_summaries import get_target_compounds
 
-def get_target_compounds():
-    return sorted(['cytarabine', 'daunorubicin', 'azacitidine', 'midostaurin', 'gemtuzumab-ozogamicin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib', 'arsenictrioxide', 'cyclophosphamide', 'dexamethasone', 'idarubicin', 'mitoxantrone', 'pemigatinib', 'prednisone', 'rituximab', 'thioguanine', 'vincristine'])
-
+# FUNCTIONS:
 def get_AML_mutated_genes():
     return sorted(['idh1', 'runx1', 'tp53', 'ptpn11', 'kit', 'u2af1', 'smc1a', 'stag2', 'phf6', 'brinp3', 'rad21', 'plce1', 'ezh2', 'calr', 'dclk1', 'pkd1l2', 'cadm2', 'csf3r', 'ctnna2', 'epha3', 'lpa', 'srsf2', 'trpc1', 'rif1'])
 
 def get_target_compounds_side_effects(remove_common_effects):
     """ Returns a Python dictionary containing the target compounds and their related main side effects.
-        The side effects were mannualy selected from http://www.bccancer.bc.ca/health-professionals/clinical-resources/cancer-drug-manual/drug-index#
-    """
+        The side effects were mannualy selected from http://www.bccancer.bc.ca/health-professionals/clinical-resources/cancer-drug-manual/drug-index#"""
 
     dictionary = {
         'cytarabine': ['anemia', 'leukopenia', 'neutropenia', 'thrombocytopenia', 'rash', 'nausea', 'vomiting', 'infection', 'sepsis', 'neurotoxicity'],
@@ -65,7 +73,9 @@ def get_target_compounds_side_effects(remove_common_effects):
         return dictionary 
 
 def get_words_frequency():
-    df = pd.read_csv('/data/ac4mvvb/WE4LKD-leukemia_w2v/pubchem/results_pandas.csv', escapechar='\\')
+    """ Creates and returns a Python dictionary containing the frequency of the words in corpus, sorted in decrescent order."""
+    
+    df = pd.read_csv('/data/doubleblind/doubleblind/pubchem/results_pandas.csv', escapechar='\\')
     abstracts = df['summary'].to_list()
     abstracts = [x.split() for x in abstracts]
 
@@ -86,6 +96,15 @@ def get_words_frequency():
     return dict(sorted(words_frequency.items(), key=operator.itemgetter(1), reverse=True))
 
 def generate_analogies(percentage=0.25, frequency_threshold=300):
+    """ Generates a list of analogies considering the 'percentage' most common side effects and only tokens that occurs more than 'frequency_threshold' times in the corpus.
+    
+    Args:
+        percentage: percentage of most common side effects to be eliminated from the analogies;
+        frequency_threshold: eleiminates analogies that contains words with less than this determined number of occurrences in corpus.
+    
+    Returns: a list of analogies with the format 'word1' 'word2' 'word3' 'word4'
+    """
+    
     words_frequency = get_words_frequency()
     analogies = []
 
@@ -109,8 +128,9 @@ def generate_analogies(percentage=0.25, frequency_threshold=300):
     
     return analogies
 
+# MAIN PROGRAM:
 if __name__ == '__main__':
-    with open('./analogies_aml.txt', 'w') as f:
+    with open('./data/analogies_aml.txt', 'w') as f:
         for c in get_target_compounds():
             f.write('anthracycline cancer {} aml\n'.format(c))
             f.write('anthracycline malignancies {} aml\n'.format(c))
