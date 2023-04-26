@@ -1,21 +1,19 @@
-####################################################
+##################################################
+## Trains incremental Distilbert language models from a preprocessed corpus in a csv file.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+## Based on: https://huggingface.co/course/chapter7/6?fw=tf
+##################################################
 
-# Este script realiza o treinamento dos modelos Distilbert "from scratch" a partir dos prefácios dos artigos.
-# Os modelos são gerados ano a ano (de forma incremental), da mesma forma que os modelos Word2Vec.
-
-####################################################
-# based on: https://huggingface.co/course/chapter7/6?fw=tf
-
+import os
+from os import listdir
 from transformers import AutoTokenizer
 from transformers import DataCollatorForLanguageModeling
 from transformers import Trainer, TrainingArguments
 from transformers import DistilBertConfig, DistilBertForMaskedLM
-
 from datasets import load_dataset, Features, Value
-
-import os
-from os import listdir
-
 from pathlib import Path
 
 def tokenize(element):
@@ -35,6 +33,16 @@ def tokenize(element):
     return {"input_ids": input_batch}
 
 def find_csv_filenames(path_to_dir, suffix=".csv"):
+    """ Finds files with a determined suffix inside a folder.
+    
+    Args:
+        parth_to_dir: path to the directory where the files will be searched;
+        suffix: the suffix od the file(s) to be retrieved.
+    
+    Returns:
+        a list containing all the files inside the folder that contains the wanted suffix.
+    """
+    
     filenames = listdir(path_to_dir)
     return [filename for filename in filenames if filename.endswith(suffix)]
 
@@ -42,48 +50,50 @@ context_length = 150
 tokenizer = AutoTokenizer.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext')
 
 if __name__ == '__main__':
-    # variáveis
+    # CONSTANT(s):
     CLEANED_DOCUMENTS_PATH = './results/'
     TRAINED_MODELS_PATH = './distilbert/'
+    
+    # variable(s):
     csv_files = find_csv_filenames(CLEANED_DOCUMENTS_PATH)
-
     assert len(csv_files) == 1
     Path(TRAINED_MODELS_PATH).mkdir(exist_ok=True)
 
-
-    # realizando a leitura do arquivo .csv proveniente da limpeza/pré-processamento do texto:
+    # reading the csv file containg the preprocessed text into a Hugging Face Dataset element:
     features = Features({'summary': Value('string'), 'filename': Value('string'), 'id': Value('int32')})
     dataset = load_dataset('csv', data_files=CLEANED_DOCUMENTS_PATH + csv_files[0], delimiter='|', escapechar='\\', encoding='utf-8', column_names=['summary', 'filename', 'id'], header=0, features=features)
     
-    # calculando os intervalos/janelas de tempo que cada modelo irá abrangir:
-    # supondo que o primeiro artigo coleto foi publicado em 1921, e que, depois deste, mais artigos foram publicados nos anos seguintes, temos ranges igual a:
+    # computing timespan :
+    # assuming that the first collected article was published in 1921, and that more articles were published after this one in the following years, we have ranges equal to:
     # [[1921], [1921, 1922], [1921, 1922, 1923], [1921, 1922, 1923, 1924], [1921, 1922, 1923, 1924, 1925], .......]
     years = sorted(dataset['train'].unique('filename'))
     ranges = [years[:i+1] for i in range(len(years))]
     ranges = ranges[-21:]
 
+    # using a data collator for Maked Language Model (MLM):
     data_collator = DataCollatorForLanguageModeling(
         tokenizer=tokenizer, mlm=True
     )
 
-    # dados do modelo a ser treinado:
+    # retrieving Distilbert configurations to be applied in the Maked Language Models trained:
     configuration = DistilBertConfig()
     model = DistilBertForMaskedLM(configuration)
 
+    # trainig each incremental model:
     for r in ranges:
         print(r)
-        # definindo pasta para escrita/armazenamento do modelo:
+        
         target_folder = TRAINED_MODELS_PATH + 'distilbert_model_{}_{}/'.format(r[0], r[-1])
 
-        # filtrando dataset original, selecionando apenas os artigos dentro da janela de tempo que está sendo processada:
+        # auxiliar dataset containing only the abstracts published befor or on the actual timespan:
         aux_dataset = dataset['train'].filter(lambda x: x['filename'] in r)
 
-        # fazendo a tokenização do dataset auxiliar:
+        # tokenizing text:
         tk_dataset = aux_dataset.map(
             tokenize, batched=True, remove_columns=aux_dataset.column_names
         )
 
-        # argumentos de treinamento:
+        # training arguments:
         training_args = TrainingArguments(
             output_dir=target_folder,
             overwrite_output_dir=True,
