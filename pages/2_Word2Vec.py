@@ -82,7 +82,7 @@ def list_from_txt(file_path):
 
 @st.cache()
 def read_matched_synonyms():
-    df = pd.read_csv('./matched_synonyms.csv', sep=',', escapechar='\\')
+    df = pd.read_csv('../data/matched_synonyms.csv', sep=',', escapechar='\\')
     df = df[df['synonym'].map(len) >= 3]
 
     return df
