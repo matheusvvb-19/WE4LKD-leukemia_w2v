@@ -9,7 +9,6 @@
     Word Embeddings For Latent Knowledge Discovery
     <br />
     <br />
-    <a href="https://drive.google.com/drive/folders/1Fq5HkZx8DmWWAXnhkYSuX7r_GZjd6jGh?usp=sharing">Google Drive Folder</a>
     ·
     <a href="https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v/issues">Report Bug</a>
     ·
@@ -17,7 +16,7 @@
   </p>
 </div>
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://embedding-viewer.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](doubleblind)
 
 <!-- CONTENTS -->
 <details>
@@ -47,7 +46,7 @@
 <!-- ABOUT -->
 ## About
 
-This project aims to study and analyze the possible existence of latent knowledge in medical articles about Acute Myeloid Leukemia (AML), an aggressive type of cancer without very effective treatments. For this, Word2Vec distributed representation models are generated from article prefaces available in [PubMed](https://pubmed.ncbi.nlm.nih.gov/) and through dimensionality reduction techniques their vectors are plotted and analyzed.
+This project aims to study and analyze the possible existence of latent knowledge in medical articles about Acute Myeloid Leukemia (AML), an aggressive type of cancer without very effective treatments. For this, Word2Vec and FastText distributed representation models are generated from article prefaces available in [PubMed](https://pubmed.ncbi.nlm.nih.gov/) and their vectors are analyzed trough vector operations with keywords.
 
 <p align="right"><a href="#top">⬆️</a></p>
 
@@ -92,8 +91,6 @@ git clone https://github.com/matheusvvb-19/WE4LKD-leukemia.git
 
 <p align="right"><a href="#top">⬆️</a></p>
 
-
-
 <!-- USAGE -->
 ## Usage
 
@@ -109,11 +106,11 @@ After initialization and installation, it is time to run the project:
   mkdir results_aggregated
   python3 merge_txt.py
   ```
-4. Execute the script `clean_text.py`, which will clean the merged _.txt_ files
+4. Execute the script `clean_summaries.py`, which will clean the merged _.txt_ files into a PySPark DataFrame
 ```sh
   python3 clean_text.py
 ```
-5. Train the Word2Vec models
+5. Train the Word2Vec and FastText models, run the script twice (doing the appropriate change in code)
 ```sh
   cd word2vec
   python3 train.py
@@ -125,39 +122,17 @@ After initialization and installation, it is time to run the project:
 ```
 7. To generate latent knowledge analysis reports, run the command
 ```sh
-  python3 analyze.py <palavras_comuns_eliminadas>
+  python3 latent_knowledge_report.py
 ```
-The last argument of the command line indicates the domain constraint applied to the models. This constraint eliminates certain words from the vocabularies of the models, decreasing spurious words and making the analysis easier. The possible values are:
-* nci_cancer_drugs
-* fda_drugs
-* an integer representing the number of most common English words - according to [Beautiful Soup](https://norvig.com/ngrams/count_1w.txt) - that you want to remove from the model.
-
-This argument can also be empty.
 
 <p align="right"><a href="#top">⬆️</a></p>
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Deploy Embedding Viewer with Streamlit Cloud
-- [x] Exclude common words from the models
-- [x] Apply domain constraint
-- [x] Generate _.pdf_ reports automatically, also with the domain constraint
-- [x] Reduce long words of plotly bar plots in Embedding Viewer
-- [x] Iterative search on Embedding Viewer - analyze context
-- [ ] Use Named Entity Recognition to filter words
-- [ ] Standardize synonyms of compounds automatically
-
-<p align="right"><a href="#top">⬆️</a></p>
-
 
 <!-- CONTACT -->
 ## Contact
 
-Matheus Vargas Volpon Berto<br>
-matheusvvb@hotmail.com<br>
-[LinkedIn](https://www.linkedin.com/in/matheus-volpon/)
+doubleblind<br>
+doubleblind<br>
+[LinkedIn](doubleblind)
 
 <p align="right"><a href="#top">⬆️</a></p>
 
@@ -165,6 +140,6 @@ matheusvvb@hotmail.com<br>
 <!-- REFERENCES -->
 ## References
 
-* [Unsupervised word embeddings capture latent knowledge from materials science literature", Nature 571, 95–98 (2019)](https://github.com/materialsintelligence/mat2vec)
+* [Unsupervised word embeddings capture latent knowledge from materials science literature, Nature 571, 95–98 (2019)](https://github.com/materialsintelligence/mat2vec)
 
 <p align="right"><a href="#top">⬆️</a></p>
