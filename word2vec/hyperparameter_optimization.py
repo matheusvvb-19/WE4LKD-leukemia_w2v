@@ -1,18 +1,24 @@
-import os, jinja2
+##################################################
+## Performs the hyperparameter optimization for Word2Vec and FastText models.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
 
+# IMPORTS:
+import os, jinja2
 from gensim import models
 from gensim.models import Word2Vec, FastText
-
 from jinja2 import Template
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
 from datetime import date
-
 import tikzplotlib
 from tikzplotlib import get_tikz_code
 
+# FUNCTIONS:
 def list_from_txt(file_path):
     '''Creates a list of itens based on a .txt file, each line becomes an item.
     
@@ -27,6 +33,19 @@ def list_from_txt(file_path):
     return strings_list
 
 def score_func(model, analogies_aml, number_of_analogies_aml, analogies_general, number_of_analogies_general, analogies_biomedical, number_of_analogies_biomedical, topn):
+    """ Computes the performance of the model in each analogies categories.
+    
+    Args:
+        model: Word2Vec or FastText model object,
+        analogies_aml:  list of AML analogies,
+        number_of_analogies_aml: int,
+        analogies_general: list of general Grammar analogies,
+        number_of_analogies_general: int,
+        analogies_biomedical: list of Biomedical analogies,
+        number_of_analogies_biomedical: int,
+        topn: number of topn closest words to be retrieved during the cosine similarity search.
+    """
+    
     number_of_analogies_all = number_of_analogies_aml + number_of_analogies_general + number_of_analogies_biomedical
 
     number_of_correct_analogies_all = 0
@@ -82,9 +101,18 @@ def contains(string, unwanted_words):
     return False
 
 def get_valid_analogies(model):
-    analogies_aml = list_from_txt('../analogies_aml.txt')
-    analogies_general = list_from_txt('../analogies_general.txt')
-    analogies_biomedical = list_from_txt('../analogies_biomedical.txt')
+    """ Reads the analogies text files and eleiminated the ones that can be analzed by the model - e.g., if the analogy contains a word that is not present in the model's vocabulary.
+    
+    Args:
+        model: the Word2Vec or FastText model object.
+        
+    Returns:
+        lists of analogies that can be analyzed by the model, one list for each of the analogies' categories.
+    """
+    
+    analogies_aml = list_from_txt('../data/analogies_aml.txt')
+    analogies_general = list_from_txt('../data/analogies_general.txt')
+    analogies_biomedical = list_from_txt('../data/analogies_biomedical.txt')
 
     analogie_words_present_in_model_vocab = set()
     remove_analogies_with_the_words = []
@@ -147,10 +175,7 @@ def get_valid_analogies(model):
     analogies_aml = list(dict.fromkeys(analogies_aml))
     analogies_general = list(dict.fromkeys(analogies_general))
     analogies_biomedical = list(dict.fromkeys(analogies_biomedical))
-
-    print(len(analogies_aml))
-    print(len(analogies_general))
-    print(len(analogies_biomedical))
+    
     return analogies_aml, analogies_general, analogies_biomedical
 
 def get_performance_bar_plot_from_df(df, topn_values, colors):
@@ -208,7 +233,7 @@ if __name__ == '__main__':
     # loading template from .tex file:
     template = latex_jinja_env.get_template('./hyperparameter_optimization_template.tex')
     
-    # constants:
+    # CONSTANT(S):
     TESTING_DEFAULT_MODEL = True
     ANALYZING_FASTTEXT_MODELS = True
     if ANALYZING_FASTTEXT_MODELS:
