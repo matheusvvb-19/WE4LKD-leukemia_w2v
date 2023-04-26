@@ -36,13 +36,12 @@ if __name__ == '__main__':
     # leitura do arquivo .csv em um DataFrame:
     print('Reading DataFrame of papers')
     df = pd.read_csv('/data/ac4mvvb/WE4LKD-leukemia_w2v/pubchem/results_pandas.csv', escapechar='\\')
-
-    # todos os anos de publicação (sem repetição) presentes no arquivo .csv:
+    
     years = sorted(df.filename.unique().tolist())
     first_year = years[0]
 
-    # intervalos ou "janelas" de tempo, a partir do primeiro artigo publicado, até o último. Exemplo:
-    # supondo que o primeiro artigo coleto foi publicado em 1921, e que, depois deste, mais artigos foram publicados nos anos seguintes, temos:
+    # computing timespan :
+    # assuming that the first collected article was published in 1921, and that more articles were published after this one in the following years, we have ranges equal to:
     # [[1921], [1921, 1922], [1921, 1922, 1923], [1921, 1922, 1923, 1924], [1921, 1922, 1923, 1924, 1925], .......]
     ranges = [years[:i+1] for i in range(len(years))]
 
