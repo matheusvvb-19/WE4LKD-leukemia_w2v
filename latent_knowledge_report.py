@@ -1,23 +1,28 @@
+##################################################
+## Generates a LaTex file containing the historical plots of each compound, for each embeddings approach, and each algebric operation applied on data (normalization, standartization, softmax).
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
+
+# IMPORTS:
 import os, jinja2, re, math
 import pandas as pd
 import numpy as np
-
 from gensim import models
 from gensim.models import Word2Vec, FastText
-
 from matplotlib import pyplot as plt
-
 from jinja2 import Template
 from datetime import date
-
 import tikzplotlib
 from tikzplotlib import get_tikz_code
-
 from itertools import repeat
+sys.path.append('./pubchem/')
+from clean_summaries import get_target_compounds
+from generates_dotproducts_csv import get_w2v_output_embedding
 
-def get_target_compounds():
-    return sorted(['cytarabine', 'daunorubicin', 'azacitidine', 'midostaurin', 'gemtuzumab-ozogamicin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib', 'arsenictrioxide', 'cyclophosphamide', 'dexamethasone', 'idarubicin', 'mitoxantrone', 'pemigatinib', 'prednisone', 'rituximab', 'thioguanine', 'vincristine'])
-
+# FUNCTIONS:
 def get_dot_products_plot_BERT(folder_path, column='dot_product_result_absolute'):
     """Plots a historical record for the selected compounds.
     
@@ -33,7 +38,7 @@ def get_dot_products_plot_BERT(folder_path, column='dot_product_result_absolute'
             softmax_normalization
             softmax_standartization
     """
-    #plt.style.use('default')
+    
     compounds = get_target_compounds()
     latent_knowledge_compounds = []
     indexes_to_put_marker = []
@@ -164,41 +169,7 @@ def get_dot_products_plot_BERT(folder_path, column='dot_product_result_absolute'
     latex_string = re.sub('steelblue31119181', 'steelblue31119180', latex_string)
     return latex_string
 
-def get_w2v_output_embedding(word, model, method):
-    if method == 'da':
-        index_of_word_in_vocab = 0
-
-        try:
-            index_of_word_in_vocab = list(model.wv.vocab).index(word)
-        except:
-            words = [x for x in list(model.wv.vocab) if word in x]
-            if len(words) > 0:
-                index_of_word_in_vocab = list(model.wv.vocab).index(words[0])
-                
-        return model.wv.vectors[index_of_word_in_vocab]
-
-    elif method == 'avg':
-        tokens_contaning_the_word = [x for x in list(model.wv.vocab) if word in x]
-
-        if len(tokens_contaning_the_word) == 1:
-            return model.wv.vectors[list(model.wv.vocab).index(tokens_contaning_the_word[0])]
-        
-        else:
-            indexes_of_tokens_contaning_the_word = []
-            for w in tokens_contaning_the_word:
-                indexes_of_tokens_contaning_the_word.append(list(model.wv.vocab).index(w))
-
-            print(len(tokens_contaning_the_word))
-            print(len(indexes_of_tokens_contaning_the_word))
-
-            output_embeddings = []
-            for idx in indexes_of_tokens_contaning_the_word:
-                output_embeddings.append(model.wv.vectors[idx])
-            
-            print(len(output_embeddings))
-            print(type(output_embeddings[0]))
-            return np.mean(np.stack([output_embeddings]).reshape((len(output_embeddings), output_embeddings[0].shape[0])), axis=0)
-
+# MAIN PROGRAM:
 if __name__ == '__main__':
     pd.options.mode.chained_assignment = None
     print('Starting')
@@ -246,11 +217,11 @@ if __name__ == '__main__':
         'vincristine': '1964',
     }
     
-    DOT_PRODUCTS_PER_COMPOUND_BERT_FIRST_SUBWORD = [x.path for x in os.scandir('/data/ac4mvvb/WE4LKD-leukemia_w2v/validation/per_compound/bert/') if x.name.endswith('first.csv')]
-    DOT_PRODUCTS_PER_COMPOUND_BERT_LAST_SUBWORD = [x.path for x in os.scandir('/data/ac4mvvb/WE4LKD-leukemia_w2v/validation/per_compound/bert/') if x.name.endswith('last.csv')]
-    DOT_PRODUCTS_PER_COMPOUND_BERT_MEAN_SUBWORD = [x.path for x in os.scandir('/data/ac4mvvb/WE4LKD-leukemia_w2v/validation/per_compound/bert/') if x.name.endswith('mean.csv')]
-    DOT_PRODUCTS_PER_COMPOUND_W2V_COMB15 = [x.path for x in os.scandir('/data/ac4mvvb/WE4LKD-leukemia_w2v/validation/per_compound/w2v/') if x.name.endswith('_comb15.csv')]
-    DOT_PRODUCTS_PER_COMPOUND_FT_COMB16 = [x.path for x in os.scandir('/fastdata/ac4mvvb/validation/per_compound/ft/') if x.name.endswith('_comb16.csv')]
+    DOT_PRODUCTS_PER_COMPOUND_BERT_FIRST_SUBWORD = [x.path for x in os.scandir('./validation/per_compound/bert/') if x.name.endswith('first.csv')]
+    DOT_PRODUCTS_PER_COMPOUND_BERT_LAST_SUBWORD = [x.path for x in os.scandir('./validation/per_compound/bert/') if x.name.endswith('last.csv')]
+    DOT_PRODUCTS_PER_COMPOUND_BERT_MEAN_SUBWORD = [x.path for x in os.scandir('./validation/per_compound/bert/') if x.name.endswith('mean.csv')]
+    DOT_PRODUCTS_PER_COMPOUND_W2V_COMB15 = [x.path for x in os.scandir('./validation/per_compound/w2v/') if x.name.endswith('_comb15.csv')]
+    DOT_PRODUCTS_PER_COMPOUND_FT_COMB16 = [x.path for x in os.scandir('./validation/per_compound/ft/') if x.name.endswith('_comb16.csv')]
 
     # BERT MODELS:
     print('Generating plots for BERT-based models, first subword method')
