@@ -1,8 +1,18 @@
+##################################################
+## Collect abstracts from the PubMed search engine.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
+
+# IMPORTS:
 from Bio import Entrez
 import json, string, re, os, fnmatch
 from pathlib import Path
 import pubchempy as pcp
 
+# FUNCTIONS:
 def list_from_txt(file_path):
     '''Creates a list of itens based on a .txt file, each line becomes an item.
     
@@ -17,8 +27,8 @@ def list_from_txt(file_path):
     return strings_list
 
 def search(query):
-    final_query = '{} AND English[Language]'.format(query)      # especificando que os artigos devem ser apenas em inglês
-    Entrez.email = 'matheus.berto@estudante.ufscar.br'          # change here
+    final_query = '{} AND English[Language]'.format(query)      
+    Entrez.email = 'your_email@hotmail.com'         
     handle = Entrez.esearch(db='pubmed', 
                             sort='relevance', 
                             retmax='999999',
@@ -29,7 +39,7 @@ def search(query):
 
 def fetch_details(id_list):
     ids = ','.join(id_list)
-    Entrez.email = 'priscila.portela.c@gmail.com'
+    Entrez.email = 'your_email@hotmail.com'
     handle = Entrez.efetch(db='pubmed',
                            retmode='xml',
                            id=ids)
@@ -76,7 +86,7 @@ def extend_search():
     extended = [x for x in extended if len(x) >= 3]
     extended = list(dict.fromkeys(extended))     
 
-    useless_strings = list_from_txt('./bad_search_strings.txt')
+    useless_strings = list_from_txt('./data/bad_search_strings.txt')
     for w in useless_strings:
         try:
             extended.remove(w)
@@ -97,19 +107,23 @@ def extend_search():
 # MAIN PROGRAM:
 if __name__ == '__main__':
     destination_path = './results/'
-    Path('./ids.txt').touch(exist_ok=True)
+    Path('./data/ids.txt').touch(exist_ok=True)
     Path(destination_path).mkdir(parents=True, exist_ok=True)
 
-    search_strings = list_from_txt('./search_strings.txt')
+    search_strings = list_from_txt('./data/search_strings.txt')
     papers_counter = 0
 
     synonyms = extend_search()
     search_strings.extend(synonyms)
 
     ids = set()
-    old_papers = list_from_txt('./ids.txt')
-    if len(old_papers) > 0:
-        ids = set(old_papers)
+    try:
+        old_papers = list_from_txt('./data/ids.txt')
+        if len(old_papers) > 0:
+            ids = set(old_papers)
+            
+    except:
+        pass
 
     for s in search_strings[100:]:
         s = s.encode('ascii', 'ignore').decode('ascii')
@@ -120,7 +134,6 @@ if __name__ == '__main__':
         id_list = results['IdList']
         id_list = [x for x in id_list if x not in ids]
         
-        # se após a eliminação de IDs já coletados não sobrar nenhum ID em id_list, pula para o próximo termo de busca:
         papers_retrieved = len(id_list)
         if papers_retrieved == 0:
             print('No new papers found\n')
@@ -156,7 +169,7 @@ if __name__ == '__main__':
                         article_year = paper['MedlineCitation']['Article']['Journal']['JournalIssue']['PubDate']['Year']
                         
                     except KeyError as e:
-                        if 'Abstract' in e.args:        # caso o artigo não tenha prefácio, continua o processamento, pois o título já foi extraído
+                        if 'Abstract' in e.args:        
                             article_abstract = ''
                             pass
                         
@@ -172,13 +185,12 @@ if __name__ == '__main__':
                         path_name = destination_path + s + '/{}.txt'.format(filename)
                         path_name = path_name.encode('ascii', 'ignore').decode('ascii')
 
-                        # depois de pegar o título, resumo e data (e pulando o loop, quando não é possível), escrever o arquivo:
                         with open(path_name, "a", encoding='utf-8') as myfile:
                             myfile.write(article_title + ' ' + article_abstract)
                         
                         papers_counter += 1
 
-            with open('./ids.txt', 'a+', encoding='utf-8') as f:
+            with open('./data/ids.txt', 'a+', encoding='utf-8') as f:
                 for id in id_list:
                     f.write('\n' + str(id))
         
