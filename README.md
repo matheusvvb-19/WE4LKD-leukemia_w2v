@@ -106,23 +106,23 @@ After initialization and installation, it is time to run the project:
   mkdir results_aggregated
   python3 merge_txt.py
   ```
-4. Execute the script `clean_summaries.py`, which will clean the merged _.txt_ files into a PySPark DataFrame
+4. Download [this file](https://ftp.ncbi.nlm.nih.gov/pubchem/Compound/Extras/CID-Title.gz) and [this file](https://ftp.ncbi.nlm.nih.gov/pubchem/Compound/Extras/CID-Synonym-filtered.gz), put both inside ./pubchem/ folder and excute `titles_and_synonyms.py`
 ```sh
-  python3 clean_text.py
+  python3 titles_and_synonyms.py
 ```
-5. Train the Word2Vec and FastText models, run the script twice (doing the appropriate change in code)
+5. Execute the script `clean_summaries.py`, which will clean the merged _.txt_ files into a PySPark DataFrame
+```sh
+  python3 clean_summaries.py
+```
+6. Train the Word2Vec and FastText models, run the script twice (doing the appropriate change in code)
 ```sh
   cd word2vec
   python3 train.py
 ```
-6. View and explore your generated distributed representation models using the [Embeddings Viewer](https://share.streamlit.io/matheusvvb-19/we4lkd-leukemia_w2v/main) built with Streamlit.<br> If the viewer is not available, run it locally on your machine with the command
+7. To generate csv files containing the correlation (dot product) between compounds and "AML", execute
 ```sh
   cd ..
-  streamlit run streamlit_app.py
-```
-7. To generate latent knowledge analysis reports, run the command
-```sh
-  python3 latent_knowledge_report.py
+  python3 generate_dotproducts_csv.py
 ```
 
 <p align="right"><a href="#top">⬆️</a></p>
