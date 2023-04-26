@@ -1,11 +1,18 @@
+##################################################
+## Displays the BERT-based page of the develop Streamlit web application.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+## Based on: https://towardsdatascience.com/bert-for-measuring-text-similarity-eec91c6bf9e1
+##################################################
+
 # IMPORTS:
 import streamlit as st
 import pandas as pd
 from transformers import AutoTokenizer, AutoModel
 import torch
 from sklearn.metrics.pairwise import cosine_similarity
-
-# GLOBAL VARIABLES:
 
 # FUNCTIONS:
 @st.cache()
