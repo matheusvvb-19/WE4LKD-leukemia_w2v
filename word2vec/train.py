@@ -1,24 +1,14 @@
-#######################################################
-"""
-    Esse script realiza a geração dos modelos Word2Vec a partir dos prefácios dos artigos
-    já pré-processados/limpos/normalizados, presentes na pasta definida pela constante 
-    CLEANED_DOCUMENTS_PATH.
+##################################################
+## Trains Word2Vec or FastText models from cmbinations of hyperparameters.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
 
-    Os modelos sao treinados de forma incremental, por exemplo:
-        Modelo 1: contempla artigos publicados entre 1900 e 1901;
-        Modelo 2: contempla artigos publicados entre 1900 e 1902;
-        Modelo 3: contempla artigos publicados entre 1900 e 1903;
-        .
-        .
-        .
-"""
-#######################################################
-
-import os, re, sys, shutil, itertools
+import os, re, sys, shutil, itertools, gensim
 import pandas as pd
 import numpy as np
-
-import gensim
 from gensim.utils import RULE_KEEP, RULE_DEFAULT
 from gensim.models import Word2Vec, FastText
 from pathlib import Path
@@ -40,6 +30,7 @@ def list_from_txt(file_path):
 def clear_folder(dirpath):
     """ Clears all files from a folder, without deleting the folder.
 
+    Args:
         dirpath: the path of the folder.    
     """
 
@@ -63,7 +54,7 @@ def keep_target_compounds(word, countm, min_count):
 if __name__ == '__main__':
     print('Starting script')
 
-    # CONSTANTS:
+    # CONSTANT(S):
     TRAINING_FASTTETX_MODELS = True
     models_already_trained = []
     if TRAINING_FASTTETX_MODELS:
