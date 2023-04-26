@@ -16,7 +16,7 @@ if __name__ == '__main__':
     MODELS = sorted([f.path for f in os.scandir('./distilbert/') if f.is_dir()])
     
     # variable(s):
-    model_name_template = 'matheusvolpon/WE4LKD_AML_distilbert_1921_'
+    model_name_template = 'doubleblind'
 
     for m in MODELS:
         model = DistilBertForMaskedLM.from_pretrained(m, local_files_only=True)
