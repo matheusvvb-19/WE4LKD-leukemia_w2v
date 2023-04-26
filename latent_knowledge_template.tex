@@ -1,0 +1,186 @@
+\documentclass[10pt,letterpaper]{article}
+
+% Language and encoding:
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+% Sets page size and margins:
+\usepackage[a2paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages:
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{authblk}
+\usepackage{pgfplots}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows,plotmarks}
+\pgfplotsset{compat=newest}
+\usepackage[hidelinks]{hyperref}
+
+% Title
+\title{
+		%\vspace{-1in} 	
+		\usefont{OT1}{bch}{b}{n}
+		\normalfont \normalsize \textsc{Discovering latent knowledge in medical papers on Acute Myeloid Leukemia\\ FAPESP project 2021/13054-8} \\ [10pt]
+		\huge Latent Knowledge Report \\
+}
+
+\author[1]{Matheus Vargas Volon Berto}
+
+\affil[1]{\small{Department of Computer Science, Federal University of São Carlos}}
+
+\begin{document}
+\maketitle
+\selectlanguage{english}
+
+\thispagestyle{empty}
+\listoffigures
+\newpage
+
+% BERT-BASED MODELS, FIRST SUBWORD:
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_first_subword_dot_product_result_absolute}
+    \caption{Dot product result absolute over the years (BERT-based model, first subword token embedding).}
+    \label{fig:dp_absolute_first_subword}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_first_subword_softmax}
+    \caption{Softmax over the years (BERT-based model, first subword token embedding).}
+    \label{fig:softmax_first_subword}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_first_subword_softmax_normalization}
+    \caption{Normalized softmax over the years (BERT-based model, first subword token embedding).}
+    \label{fig:softmax_normalization_first_subword}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_first_subword_softmax_standartization}
+    \caption{Standartized softmax over the years (BERT-based model, first subword token embedding).}
+    \label{fig:softmax_standartization_first_subword}
+\end{figure}
+
+% BERT-BASED MODELS, LAST SUBWORD:
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_last_subword_dot_product_result_absolute}
+    \caption{Dot product result absolute over the years (BERT-based model, last subword token embedding).}
+    \label{fig:dp_absolute_last_subword}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_last_subword_softmax}
+    \caption{Softmax over the years (BERT-based model, last subword token embedding).}
+    \label{fig:softmax_last_subword}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_last_subword_softmax_normalization}
+    \caption{Normalized softmax over the years (BERT-based model, last subword token embedding).}
+    \label{fig:softmax_normalization_last_subword}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_last_subword_softmax_standartization}
+    \caption{Standartized softmax over the years (BERT-based model, last subword token embedding).}
+    \label{fig:softmax_standartization_last_subword}
+\end{figure}
+
+% BERT-BASED MODELS, MEAN SUBWORD:
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_mean_subword_dot_product_result_absolute}
+    \caption{Dot product result absolute over the years (BERT-based model, mean subword token embedding).}
+    \label{fig:dp_absolute_mean_subword}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_mean_subword_softmax}
+    \caption{Softmax over the years (BERT-based model, mean subword token embedding).}
+    \label{fig:softmax_mean_subword}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_mean_subword_softmax_normalization}
+    \caption{Normalized softmax over the years (BERT-based model, mean subword token embedding).}
+    \label{fig:softmax_normalization_mean_subword}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_mean_subword_softmax_standartization}
+    \caption{Standartized softmax over the years (BERT-based model, mean subword token embedding).}
+    \label{fig:softmax_standartization_mean_subword}
+\end{figure}
+
+% WORD2VEC MODELS, COMBINATION 15:
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_comb15_dot_product_result_absolute}
+    \caption{Dot product result absolute over the years (Word2Vec model, combination 15 {200, 0.025, 15}).}
+    \label{fig:dp_absolute_w2v_comb15}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_comb15_softmax}
+    \caption{Softmax over the years (Word2Vec model, combination 15 {200, 0.025, 15}).}
+    \label{fig:softmax_w2v_comb15}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_comb15_softmax_normalization}
+    \caption{Normalized softmax over the years (Word2Vec model, combination 15 {200, 0.025, 15}).}
+    \label{fig:softmax_normalization_w2v_comb15}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_comb15_softmax_standartization}
+    \caption{Standartized softmax over the years (Word2Vec model, combination 15 {200, 0.025, 15}).}
+    \label{fig:softmax_standartization_w2v_comb15}
+\end{figure}
+
+%FASTTEXT MODELS, COMBINATION 16:
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_comb16_dot_product_result_absolute}
+    \caption{Dot product result absolute over the years (FastText model, combination 16 {300, 0.0025, 5}).}
+    \label{fig:dp_absolute_ft_comb16}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_comb16_softmax}
+    \caption{Softmax over the years (FastText model, combination 16 {300, 0.0025, 5}).}
+    \label{fig:softmax_ft_comb16}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_comb16_softmax_normalization}
+    \caption{Normalized softmax over the years (FastText model, combination 16 {300, 0.0025, 5}).}
+    \label{fig:softmax_normalization_ft_comb16}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \VAR{plot_comb16_softmax_standartization}
+    \caption{Standartized softmax over the years (FastText model, combination 16 {300, 0.0025, 5}).}
+    \label{fig:softmax_standartization_ft_comb16}
+\end{figure}
+
+\end{document}
