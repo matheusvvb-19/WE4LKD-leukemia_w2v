@@ -1,52 +1,31 @@
-######################################################
-""" Script de limpeza do texto.
-    O pré-processamento aplicado pode variar de acordo com o tipo de modelo (Word2Vec ou BERT) a ser treinado.
-    Processamento aplicado em ambos os casos:
-        - remoção de URLs, tags e espaços duplicados;
-        - substituição de sinônimos de AMl para "aml";
-        - substituição de alguns termos e caracteres pela sua forma correta (fix_typos_dict);
-        - (opcional) normalização de sinônimos PubChem
-    
-    Processamento exclusivo aplicado a cada tipo de modelo:
-        i) Word2Vec:
-            - lowercase;
-            - remoção de pontuações;
-            - remoção de qualquer símbolos ou unidade de medida;
-            - remoção de tokens compostos apenas por dígitos;
-            - remoção de tokens com de apenas 1 caractere;
-            - remoção de stopwords e outras palavras comuns do inglês;
-            
-        ii) BERT:
-            - remoção de símbolos especiais, incluindo não printáveis;
-"""
-######################################################
+##################################################
+## Preprocess text for BERT-based or Word2Vec/FastText models.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
 
+# IMPORTS:
 import pyspark.sql.types as T
 import pyspark.sql.functions as F
 from pyspark.sql.functions import udf
 from pyspark.sql.window import Window
 from pyspark.context import SparkContext
 from pyspark.sql.session import SparkSession
-
-import nltk
-from nltk.stem import WordNetLemmatizer
-from nltk.corpus import wordnet 
-from nltk.tokenize import word_tokenize
-
+import nltk, os
 from pathlib import Path
 from functools import reduce
 
-import os
-
 def ss():
-    """Creates a PySpark Session and returns it"""
+    """Creates a PySpark Session and returns it."""
 
     sc = SparkContext.getOrCreate()
     return SparkSession(sc)
 
 def read_summary_files(summaries_path):
     """Reads .txt files and converts each of them into a Spark Dataframe. Returns the union of these DataFrames.
-
+    
     Args:
         summaries_path: path to the folder where the .txt files are located.
     """
@@ -88,7 +67,7 @@ def read_summary_files(summaries_path):
     return reduce(lambda df1, df2: df1.union(df2), dfs)
 
 def get_target_compounds():
-    return ['cytarabine', 'daunorubicin', 'azacitidine', 'midostaurin', 'gemtuzumab-ozogamicin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib', 'arsenictrioxide', 'cyclophosphamide', 'dexamethasone', 'idarubicin', 'mitoxantrone', 'pemigatinib', 'prednisone', 'rituximab', 'thioguanine', 'vincristine']
+    return sorted(['cytarabine', 'daunorubicin', 'azacitidine', 'midostaurin', 'gemtuzumab-ozogamicin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib', 'arsenictrioxide', 'cyclophosphamide', 'dexamethasone', 'idarubicin', 'mitoxantrone', 'pemigatinib', 'prednisone', 'rituximab', 'thioguanine', 'vincristine'])
 
 def read_ner_csv(folder_path):
     return ss()\
@@ -105,7 +84,7 @@ def read_ner_csv(folder_path):
 def get_csv_in_folder(file_path):
     """Search for a .csv file in a given path. It must find just one .csv file - this constraint is tested with assert command.
     This is an auxiliar function used during reading .csv PySpark DataFrames.
-
+    
     Args:
         file_path: path to the folder containg the .csv file.
     """
@@ -137,7 +116,7 @@ def read_parquet_table_files(file_path):
 
 def summary_column_preprocessing(column, bert_model=False):
     """Executes intial preprocessing in a PySpark text column. It removes some unwanted regex from the text.
-
+    
     Args:
         column: the name of the column to be processed.
     """
@@ -169,7 +148,7 @@ def summary_column_preprocessing(column, bert_model=False):
     column = F.regexp_replace(column, r'([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?', '')
 
     if bert_model == False:
-        column = F.regexp_replace(column, r'[;:\(\)\[\]\{\}.,"!#$&\'*?@\\\^`|~]', '') # essa regex identifica ponto, vírgula, dois pontos....devemos retirar?
+        column = F.regexp_replace(column, r'[;:\(\)\[\]\{\}.,"!#$&\'*?@\\\^`|~]', '')
 
     column = F.regexp_replace(column, r'\s+', ' ')
     column = F.regexp_replace(column, r'(?i)(leukaemia)', 'leukemia')
@@ -194,7 +173,7 @@ def summary_column_preprocessing(column, bert_model=False):
     column = F.regexp_replace(column, r" arabinocytidine 5' phosphate|arabinofuranosylcytosine 5'-triphosphate|Ara-CTP", " cytarabine5phosphate")
     column = F.regexp_replace(column, r"(?i)(1-beta-D|1-β-d|1β-d|1 beta-D)-Arabinofuranosylcytosine 5'-triphosphate", "cytarabine5phosphate")
     column = F.regexp_replace(column, r'(?i)( cytosine arabinoside | \[Ara-C\] )', ' cytarabine ')
-    column = F.regexp_replace(column, r'(?i)( cytosine arabinoside.)', ' cytarabine.')
+    column = F.regexp_replace(column, r'(?i)( cytosine arabinoside\.)', ' cytarabine.')
     column = F.regexp_replace(column, r'(?i)( cytosine arabinoside,)', ' cytarabine,')
     column = F.regexp_replace(column, r'(?i)( cytosine arabinoside:)', ' cytarabine:')
     column = F.regexp_replace(column, r'(?i)(\(cytosine arabinoside\))', '(cytarabine)')
@@ -562,7 +541,6 @@ def words_preprocessing(df, column='word', bert_model=False):
         
 def to_csv(df, target_folder, num_files=1, sep=','):
     """Saves a PySpark Dataframe into .csv file.
-
     Args:
         df: object of the DataFrame;
         target_folder: path where the .csv is going to be saved;
@@ -578,51 +556,8 @@ def to_csv(df, target_folder, num_files=1, sep=','):
         .format('csv')\
         .save(target_folder)
 
-def get_wordnet_pos(treebank_tag):
-    """Returns WORDNET POS compliance to WORDNET lemmatization (ADJ, VERB, NOUN, ADV)"""
-
-    if treebank_tag.startswith('J'):
-            return 'a'
-    elif treebank_tag.startswith('V'):
-            return 'v'
-    elif treebank_tag.startswith('N'):
-            return 'n'
-    elif treebank_tag.startswith('R'):
-            return 'r'
-    else:
-    # As default pos in lemmatization is Noun
-        return 'n'
-
-def lemmatize1(data):
-    """Lemmatizes words
-    
-        Args:
-        data: a list of words.
-    """
-    
-    lmtzr = WordNetLemmatizer()
-    tagged_words = nltk.pos_tag(data)
-    word_list = []
-    for word in tagged_words:
-        lemma = lmtzr.lemmatize(word[0], get_wordnet_pos(word[1]))
-        word_list.append(lemma)
-
-    return word_list
-
-def tokenize(data):
-    """Toeknizes a sentence
-    
-        Args:
-        data: a sentence (string).
-    """
-    if data is None:
-        return ['']
-    
-    else:
-        return word_tokenize(data)
-
-def get_validation_keywords():
-    return ['cancer', 'effect', 'patient', 'response', 'treatment', 'study', 'leukemia', 'aml']
+def get_analogies_keywords():
+    return ['tumor', 'malignancies', 'mutation', 'anthracycline', 'cancer', 'leukemia', 'aml']
 
 def remove_last_digit(data):
     """Removes the last character of a string a sentence
@@ -653,17 +588,14 @@ if __name__ == '__main__':
     nltk.download('punkt', quiet=True)
     nltk.download('averaged_perceptron_tagger', quiet=True)
     nltk.download('omw-1.4', quiet=True)
+    nltk.download('stopwords', quiet=True)
 
     # constantes:
-    KEYWORDS = get_validation_keywords()
-    SUMMARIES_FOLDER = '/home/matheus/WE4LKD-leukemia_w2v/results_aggregated/'
     MATCHED_SYNONYMS_PATH = '/home/matheus/WE4LKD-leukemia_w2v/pubchem/matched_synonyms/'
-    CLEANED_PAPERS_PATH = '/home/matheus/WE4LKD-leukemia_w2v/pubchem/results/'
+    CLEANED_PAPERS_PATH = '/data/ac4mvvb/WE4LKD-leukemia_w2v/pubchem/results/'
     SYNONYM_ENTITES = [x.lower() for x in ['Drug', 'Clinical_Drug', 'Pharmacologic_Substance']]
-    PREPROCESS_FOR_BERT = True
+    PREPROCESS_FOR_BERT = False
     REPLACE_SYNONYMS = True
-
-    print('SUMMARIES PATH:', SUMMARIES_FOLDER)
 
     # criando sessão do PySpark:
     ss()
@@ -671,12 +603,6 @@ if __name__ == '__main__':
     # janelas de agregação, definem critérios para agupamento de linhas do Spark Dataframe:
     w1 = Window.partitionBy(F.col('summary')).orderBy(F.col('filename'))
     w2 = Window.partitionBy(F.col('filename'), F.col('id')).orderBy(F.col('pos'))
-
-    # User Defined Function (UDF), usada na lematização do texto para modelos Word2Vec:
-    lemmatizationUDF = udf(lambda z: lemmatize1(z), T.ArrayType(T.StringType(), False))
-
-    # User Defined Function (UDF), usada na tokenização do texto para modelos BERT-based:
-    nltkTokenizationUDF = udf(lambda z: tokenize(z), T.ArrayType(T.StringType(), False))
 
     # User Defined Function (UDF), usada na normalização de sinônimos para modelos BERT-based:
     removeDigitUDF = udf(lambda z: remove_last_digit(z), T.StringType())
@@ -707,17 +633,17 @@ if __name__ == '__main__':
 
     # se for ser realizada a normalização de sinônimos de compostos/drogas, é necessário criar seus Dataframes (incluindo o Dataframe de NER):
     if REPLACE_SYNONYMS:
-        synonyms = read_csv_table_files('/home/matheus/WE4LKD-leukemia_w2v/pubchem/synonyms/')
+        synonyms = read_csv_table_files('/data/ac4mvvb/WE4LKD-leukemia_w2v/pubchem/synonyms/')
         synonyms = synonyms\
                     .filter(F.col('cid') != "122172881")\
                     .filter(F.col('cid') != "11104792")
 
-        titles = read_csv_table_files('/home/matheus/title_table.csv')
+        titles = read_csv_table_files('/data/ac4mvvb/WE4LKD-leukemia_w2v/pubchem/titles.csv', sep='|')
         titles = titles\
                 .filter(F.col('cid') != "122172881")\
                 .filter(F.col('cid') != "11104792")
 
-        ner_df = read_csv_table_files('/home/matheus/WE4LKD-leukemia_w2v/ner/')\
+        ner_df = read_csv_table_files('/data/ac4mvvb/WE4LKD-leukemia_w2v/ner/')\
                 .where(F.col('entity').isin(SYNONYM_ENTITES))
 
         print('ner_df:')
@@ -737,16 +663,8 @@ if __name__ == '__main__':
         # se a normalização de sinônimos for ser realizada para futuro treinamento de modelos Word2vec, o Dataframe de sinônimos deve ser unido (join) ao Dataframe de palavras comuns do inglês,
         # pois elas serão removidas do texto:
         else:
-            english_words = ss()\
-                        .read\
-                        .text('/home/matheus/WE4LKD-leukemia_w2v/pubchem/english-words.txt')\
-                        .withColumnRenamed('value', 'english_word')\
-                        .where(~F.col('english_word').isin(KEYWORDS))\
-                        .withColumn('treated_english_word', summary_column_preprocessing(F.col('english_word'), bert_model=PREPROCESS_FOR_BERT))
-
             synonyms = synonyms\
                     .withColumn('synonym', F.regexp_replace(F.lower(F.col('synonym')), r'\s+', ''))\
-                    .join(english_words, F.col('treated_english_word') == summary_column_preprocessing(F.col('synonym'), bert_model=PREPROCESS_FOR_BERT), 'left_anti')\
                     .groupby('synonym')\
                     .agg(F.min('cid').alias('cid'))\
                     .join(titles, 'cid')\
@@ -773,13 +691,11 @@ if __name__ == '__main__':
     #       "summary" é o próprio texto (título e/ou prefácio do artigo) limpo/processado.
     #####################################################################
 
-    cleaned_documents = read_summary_files(SUMMARIES_FOLDER)\
-                        .withColumn('_frank', F.row_number().over(w1))\
-                        .groupby('summary')\
-                        .agg(
-                            F.min(F.col('filename')).alias('filename'),
-                            F.min(F.when(F.col('_frank') == F.lit(1), F.col('id'))).alias('id')
-                        )\
+    cleaned_documents = read_csv_table_files('../bert/results/', sep='|')
+    print('Abstracts originais:')
+    cleaned_documents.show(truncate=False)
+
+    cleaned_documents = cleaned_documents\
                         .withColumn('summary', summary_column_preprocessing(F.col('summary'), bert_model=PREPROCESS_FOR_BERT))\
                         .select('id', 'filename', F.posexplode(F.split(F.col('summary'), ' ')).alias('pos', 'word'))
 
@@ -804,21 +720,12 @@ if __name__ == '__main__':
     # esse novo Dataframe - com os tokens - será utilizado para união (join) com o dataframe de sinônimos
     #####################################################################
     
-    if PREPROCESS_FOR_BERT:
-        df = cleaned_documents\
-            .select(
-                'id',
-                'filename', 
-                F.posexplode(F.split(F.col('summary'), ' ')).alias('pos', 'word')
-            )
-    
-    else:
-        df = cleaned_documents\
-            .select(
-                'id',
-                'filename', 
-                F.posexplode(lemmatizationUDF(F.split(F.col('summary'), ' '))).alias('pos', 'word')
-            )
+    df = cleaned_documents\
+        .select(
+            'id',
+            'filename', 
+            F.posexplode(F.split(F.col('summary'), ' ')).alias('pos', 'word')
+        )
 
     print('Após primeiro posexplode:')
     df.show(truncate=False)
@@ -890,7 +797,7 @@ if __name__ == '__main__':
                 F.concat_ws(' ', F.max(F.col('summary'))).alias('summary')
             )
 
-    print('Final - após possível lemmatização e normalização de sinônimos:')
+    print('Final - após possível normalização de sinônimos:')
     df = df.withColumn('id', F.monotonically_increasing_id())
     df.show(n=60, truncate=False)
 
