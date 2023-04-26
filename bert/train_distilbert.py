@@ -77,7 +77,6 @@ if __name__ == '__main__':
     # [[1921], [1921, 1922], [1921, 1922, 1923], [1921, 1922, 1923, 1924], [1921, 1922, 1923, 1924, 1925], .......]
     years = sorted(dataset['train'].unique('filename'))
     ranges = [years[:i+1] for i in range(len(years))]
-    ranges = ranges[-21:]
 
     # using a data collator for Maked Language Model (MLM):
     data_collator = DataCollatorForLanguageModeling(
