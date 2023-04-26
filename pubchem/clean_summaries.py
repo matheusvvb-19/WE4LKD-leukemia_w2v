@@ -633,12 +633,12 @@ if __name__ == '__main__':
 
     # se for ser realizada a normalização de sinônimos de compostos/drogas, é necessário criar seus Dataframes (incluindo o Dataframe de NER):
     if REPLACE_SYNONYMS:
-        synonyms = read_csv_table_files('./synonyms/')
+        synonyms = read_csv_table_files('./synonyms/', sep='|')
         synonyms = synonyms\
                     .filter(F.col('cid') != "122172881")\
                     .filter(F.col('cid') != "11104792")
 
-        titles = read_csv_table_files('./titles.csv', sep='|')
+        titles = read_csv_table_files('./titles/', sep='|')
         titles = titles\
                 .filter(F.col('cid') != "122172881")\
                 .filter(F.col('cid') != "11104792")
