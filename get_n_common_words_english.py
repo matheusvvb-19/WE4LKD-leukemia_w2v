@@ -1,8 +1,17 @@
+##################################################
+## Retrieves a list of the N most common English words.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
+
+# IMPORTS:
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
+# FUNCTIONS:
 def get_most_common(n=10000):
-    
     #from https://norvig.com/ngrams/
     url = "https://norvig.com/ngrams/count_1w.txt"
     html = urlopen(url).read()
@@ -14,7 +23,6 @@ def get_most_common(n=10000):
 
     # get text
     text = soup.get_text()
-    
     
     # break into lines and remove leading and trailing space on each
     lines = (line.strip() for line in text.splitlines())
