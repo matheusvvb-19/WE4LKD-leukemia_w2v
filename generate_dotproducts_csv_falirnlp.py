@@ -1,71 +1,30 @@
-######################################################################
-"""Script de validação do projeto:
-    1) buscar nos artigos (texto) prefácios que contenham os compostos utilizados para tratamento de AML
-    e que NÃO contenham a palara "AML";
-    2) listar os compostos obtidos a partir da busca anterior e calcular o dot product de suas embeddings com a embedding de "AML". 
-    Ordenar a lista de compostos a partir do resultado do dot product de forma decrescente, salvo-os em um arquivo csv.
-"""
-######################################################################
+##################################################
+## Generates the csv files containing the dt prodcuts results between compounds and 'AML', using the FalirNLP framework (BERT-based models).
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
 
-
+# IMPORTS:
 import os, nltk, torch, sys, shutil
 from nltk.tokenize import sent_tokenize
-
 from pyspark.sql import functions as F
 from pyspark.sql import types as T
 from pyspark.context import SparkContext
 from pyspark.sql.session import SparkSession
-
 from gensim import models
 from gensim.models import Word2Vec
-
 from flair.embeddings import TransformerWordEmbeddings
 from flair.data import Sentence
-
 import numpy as np
-
 from scipy.special import softmax
-
 import pandas as pd
-
 from transformers import AutoTokenizer, AutoModel
+sys.path.append('./pubchem/')
+from clean_summaries import ss, get_csv_in_folder, read_csv_table_files, to_csv, get_target_compounds
 
-#sys.path.append('./pubchem/')
-#from clean_summaries import ss, get_csv_in_folder, read_csv_table_files, to_csv, get_target_compounds
-
-def ss():
-    """Creates a PySpark Session and returns it"""
-
-    sc = SparkContext.getOrCreate()
-    return SparkSession(sc)
-
-def get_csv_in_folder(file_path):
-    """Search for a .csv file in a given path. It must find just one .csv file - this constraint is tested with assert command.
-    This is an auxiliar function used during reading .csv PySpark DataFrames.
-    Args:
-        file_path: path to the folder containg the .csv file.
-    """
-
-    files = os.listdir(file_path)
-    files = filter(lambda x: x[-3:] == 'csv', files)
-    files = list(files)
-
-    assert len(files) == 1, files
-
-    return os.path.join(file_path, files[0])
-
-def read_csv_table_files(file_path, sep=','):
-    full_path = file_path
-
-    if file_path[-3:] != 'csv':
-        file_path = get_csv_in_folder(file_path)
-
-    return ss()\
-        .read\
-        .option('header', 'true')\
-        .option('sep', sep)\
-        .csv(full_path)
-
+# FUNCTIONS:
 def flat_list(composed_list):
     if any(isinstance(x, list) for x in composed_list):
         composed_list = [item for sublist in composed_list for item in sublist]
@@ -75,27 +34,7 @@ def flat_list(composed_list):
 def split_paragraph_to_sentence(text):
     return sent_tokenize(text)
 
-def to_csv(df, target_folder, num_files=1, sep=','):
-    """Saves a PySpark Dataframe into .csv file.
-    Args:
-        df: object of the DataFrame;
-        target_folder: path where the .csv is going to be saved;
-        num_files: number of .csv files to be created, default is 1.
-    """
-
-    return df\
-        .coalesce(num_files)\
-        .write\
-        .mode('overwrite')\
-        .option('header', 'true')\
-        .option('sep', sep)\
-        .format('csv')\
-        .save(target_folder)
-
-def get_target_compounds():
-    return sorted(['cytarabine', 'daunorubicin', 'azacitidine', 'midostaurin', 'gemtuzumab-ozogamicin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib', 'arsenictrioxide', 'cyclophosphamide', 'dexamethasone', 'idarubicin', 'mitoxantrone', 'pemigatinib', 'prednisone', 'rituximab', 'thioguanine', 'vincristine'])
-
-def clear_hugging_face_cache_folder(dirpath='../../../home/ac4mvvb/.cache/huggingface/hub/'):
+def clear_hugging_face_cache_folder(dirpath='/home/doubleblind/.cache/huggingface/hub/'):
     """ Clears the Hugging Face cache folder, to prevent memory error.
         dirpath: the path of the folder.    
     """
@@ -174,8 +113,9 @@ def tensors_to_df(filename):
             F.col('dot_product_result') > 0, F.col('dot_product_result')).otherwise(-1 * F.col('dot_product_result'))
         )
 
-    to_csv(df, target_folder='./validation/bert_old/word_embeddings_test_{}/'.format(filename[-7:-3]))
+    to_csv(df, target_folder='./validation/bert/word_embeddings_{}/'.format(filename[-7:-3]))
 
+# MAIN PROGRAM:
 if __name__ == '__main__':
     # User Defined Function to split the prefaces ('summary' column) into sentences, without loosing track of the 'ID' and 'filename' (year of publication) columns:
     convertUDF = F.udf(lambda z: split_paragraph_to_sentence(z), T.ArrayType(T.StringType(), False))
@@ -184,13 +124,13 @@ if __name__ == '__main__':
     nltk.download('punkt', quiet=True)
 
     # CONSTANTS:
-    VALIDATION_TYPE = 'bert'            # possible values must be: 'bert' or 'w2v'
+    VALIDATION_TYPE = 'bert'            # possible values must be: 'bert'
     BERT_MODELS_PATH = './bert/distilbert/'
 
     # if the validation is for BERT-based models, some constants must pointer to specific BERT files and the cache folder must be enough memory:
     if VALIDATION_TYPE == 'bert':
         CLENED_PAPERS_PATH = './bert/results/'
-        VALIDATION_FOLDER = './validation/bert_old/'
+        VALIDATION_FOLDER = './validation/bert/'
         tokenizer = AutoTokenizer.from_pretrained("microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext")
         clear_hugging_face_cache_folder()
         os.makedirs(VALIDATION_FOLDER, exist_ok=True) 
@@ -225,7 +165,7 @@ if __name__ == '__main__':
     for index_y, y in enumerate(years):
         print('\nCurrent year of analysis: {}'.format(y))
         
-        if y >= 2011:
+        if y >= 1963:
             print("There are at least one paper published until {} that cotains the word 'AML'".format(y))
 
             # step (1): selecting the papers published until y
@@ -268,12 +208,10 @@ if __name__ == '__main__':
                     print('\nLoading BERT-based model')
 
                     # cleaning again the cache folder, because it its occupped each time a BERT-based model is loaded from Hugging Face:
-                    clear_hugging_face_cache_folder()
-
-                    model = AutoModel.from_pretrained('matheusvolpon/WE4LKD_AML_distilbert_1921_{}'.format(y))                    
+                    clear_hugging_face_cache_folder()                
                     
                     # FlairNLP framework to extract contextualized word embeddings:
-                    embedding = TransformerWordEmbeddings(model='matheusvolpon/WE4LKD_AML_distilbert_1921_{}'.format(y), subtoken_pooling='mean', layers='-1,-2,-3,-4')
+                    embedding = TransformerWordEmbeddings(model='doubleblind{}'.format(y), subtoken_pooling='mean', layers='-1,-2,-3,-4')
 
                     print('Computing the word embedding for the compounds present in the papers')
                     # for each candidate compound, select the sentences that contains it (save into a list) and compute the average of the word embedding for that compound in all contexts which it appears:
@@ -341,8 +279,8 @@ if __name__ == '__main__':
                         candidate_compounds_dict['compound'].append('AML')
                         candidate_compounds_dict['word_embedding'].append(decontextualized_word_embedding)
 
-                        torch.save(candidate_compounds_dict, VALIDATION_FOLDER + 'word_embeddings_test_{}.pt'.format(y))
-                        tensors_to_df(filename=VALIDATION_FOLDER + 'word_embeddings_test_{}.pt'.format(y))
+                        torch.save(candidate_compounds_dict, VALIDATION_FOLDER + 'word_embeddings_{}.pt'.format(y))
+                        tensors_to_df(filename=VALIDATION_FOLDER + 'word_embeddings_{}.pt'.format(y))
 
             else:
                 print('There are no papers published until {} that contains any of the target compounds'.format(y))
@@ -351,9 +289,7 @@ if __name__ == '__main__':
             print("There are no papers published until {} that contains the word 'AML', mandatory for the validation process".format(y))
             continue
     
-
-    os.makedirs('./validation/per_compound_old/', exist_ok=True)
-    os.makedirs('./validation/per_compound_old/bert/', exist_ok=True)
+    os.makedirs('./validation/per_compound/bert_flairnlp/', exist_ok=True)
 
     if VALIDATION_TYPE == 'bert':
         BERT_EMBEDDINGS = sorted([f.path for f in os.scandir(VALIDATION_FOLDER) if f.is_file() and f.name.endswith('.pt')])
@@ -412,6 +348,6 @@ if __name__ == '__main__':
             compound_dict['softmax_standartization'] = softmax(compound_dict['standartized_dot_product_absolute'])
 
             print('writing compound csv file: {}'.format(c))
-            pd.DataFrame.from_dict(data=compound_dict).to_csv('./validation/per_compound/bert/{}_test2.csv'.format(c), columns=['year', 'dot_product_result', 'dot_product_result_absolute', 'normalized_dot_product_absolute', 'standartized_dot_product_absolute', 'softmax_normalization', 'softmax_standartization'], index=False)
+            pd.DataFrame.from_dict(data=compound_dict).to_csv('./validation/per_compound/bert_flairnlp/{}.csv'.format(c), columns=['year', 'dot_product_result', 'dot_product_result_absolute', 'normalized_dot_product_absolute', 'standartized_dot_product_absolute', 'softmax_normalization', 'softmax_standartization'], index=False)
     
     print('END!')
