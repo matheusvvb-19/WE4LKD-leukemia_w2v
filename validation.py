@@ -1,93 +1,31 @@
-######################################################################
-"""Script de validação do projeto:
-    1) buscar nos artigos (texto) prefácios que contenham os compostos utilizados para tratamento de AML
-    e que NÃO contenham a palara "AML";
+##################################################
+## Generates the csv files containig the dot product between compounds' embeddings and 'AML'.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
 
-    2) listar os compostos obtidos a partir da busca anterior e calcular o dot product de suas embeddings com a embedding de "AML". 
-    Ordenar a lista de compostos a partir do resultado do dot product de forma decrescente, salvo-os em um arquivo csv.
-"""
-######################################################################
-
-
+# IMPORTS:
 import os, torch, sys, shutil
-
-#from pyspark.sql import functions as F
-#from pyspark.sql import types as T
-#from pyspark.context import SparkContext
-#from pyspark.sql.session import SparkSession
-
+from pyspark.sql import functions as F
+from pyspark.sql import types as T
+from pyspark.context import SparkContext
+from pyspark.sql.session import SparkSession
 from gensim import models
 from gensim.models import Word2Vec, FastText
-
 import numpy as np
-
 from scipy.special import softmax
-
 import pandas as pd
+from transformers import AutoTokenizer, AutoModelForMaskedLM
 
-#from transformers import AutoTokenizer, AutoModelForMaskedLM
+sys.path.append('./pubchem/')
+from clean_summaries import ss, get_csv_in_folder, read_csv_table_files, to_csv, get_target_compounds
 
-#sys.path.append('./pubchem/')
-#from clean_summaries import ss, get_csv_in_folder, read_csv_table_files, to_csv, get_target_compounds
-
-def ss():
-    """Creates a PySpark Session and returns it"""
-
-    sc = SparkContext.getOrCreate()
-    return SparkSession(sc)
-
-def get_csv_in_folder(file_path):
-    """Search for a .csv file in a given path. It must find just one .csv file - this constraint is tested with assert command.
-    This is an auxiliar function used during reading .csv PySpark DataFrames.
-
-    Args:
-        file_path: path to the folder containg the .csv file.
-    """
-
-    files = os.listdir(file_path)
-    files = filter(lambda x: x[-3:] == 'csv', files)
-    files = list(files)
-
-    assert len(files) == 1, files
-
-    return os.path.join(file_path, files[0])
-
-def read_csv_table_files(file_path, sep=','):
-    full_path = file_path
-
-    if file_path[-3:] != 'csv':
-        file_path = get_csv_in_folder(file_path)
-
-    return ss()\
-        .read\
-        .option('header', 'true')\
-        .option('sep', sep)\
-        .csv(full_path)
-
-def to_csv(df, target_folder, num_files=1, sep=','):
-    """Saves a PySpark Dataframe into .csv file.
-
-    Args:
-        df: object of the DataFrame;
-        target_folder: path where the .csv is going to be saved;
-        num_files: number of .csv files to be created, default is 1.
-    """
-
-    return df\
-        .coalesce(num_files)\
-        .write\
-        .mode('overwrite')\
-        .option('header', 'true')\
-        .option('sep', sep)\
-        .format('csv')\
-        .save(target_folder)
-
-def get_target_compounds():
-    return sorted(['cytarabine', 'daunorubicin', 'azacitidine', 'midostaurin', 'gemtuzumab-ozogamicin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib', 'arsenictrioxide', 'cyclophosphamide', 'dexamethasone', 'idarubicin', 'mitoxantrone', 'pemigatinib', 'prednisone', 'rituximab', 'thioguanine', 'vincristine'])
-
-def clear_hugging_face_cache_folder(dirpath='../../../home/ac4mvvb/.cache/huggingface/hub/'):
+def clear_hugging_face_cache_folder(dirpath='/home/ac4mvvb/.cache/huggingface/hub/'):
     """ Clears the Hugging Face cache folder, to prevent memory error.
 
+    Args:
         dirpath: the path of the folder.    
     """
 
@@ -195,6 +133,16 @@ def generate_compound_historical_record(compound):
         pd.DataFrame.from_dict(data=compound_dict).to_csv('./validation/per_compound/bert/{}_{}.csv'.format(compound, method), columns=['year', 'dot_product_result', 'dot_product_result_absolute', 'softmax', 'normalized_dot_product_absolute', 'standartized_dot_product_absolute', 'softmax_normalization', 'softmax_standartization'], index=False)
 
 def get_w2v_output_embedding(word, model, method):
+    """ Returns the output embedding of a given word from Word2Vec or FastText model.
+    
+    Args:
+        word: the token in model's vocabulary that you want the output embedding;
+        meodel: Word2Vec or FastText model object;
+        method: how to access the output embedding:
+            'da': direct access to the token (i.e., model.wv[word]) if it exists in the vocabulary;
+            'avg': compute the average of all words in vocabulary that contains word as a substring.
+    """
+    
     if method == 'da':
         index_of_word_in_vocab = 0
 
@@ -229,11 +177,12 @@ def get_w2v_output_embedding(word, model, method):
             print(type(output_embeddings[0]))
             return np.mean(np.stack([output_embeddings]).reshape((len(output_embeddings), output_embeddings[0].shape[0])), axis=0)
 
+# MAIN PROGRAM:
 if __name__ == '__main__':
     print('Starting')
 
     # CONSTANTS:
-    VALIDATION_TYPE = 'ft'            # possible values must be: 'bert' or 'w2v'
+    VALIDATION_TYPE = 'ft'            # possible values must be: 'bert', 'w2v', or 'ft'
     BERT_MODELS_PATH = './bert/distilbert/'
     W2V_MODELS_COMB15_PATH = './word2vec/models_yoy_combination15/'
     FT_MODELS_COMB16_PATH = '/fastdata/ac4mvvb/fasttext/models_yoy_combination16/'
