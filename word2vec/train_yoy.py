@@ -1,22 +1,13 @@
-#######################################################
-"""
-    Esse script realiza a geração dos modelos Word2Vec a partir dos prefácios dos artigos
-    já pré-processados/limpos/normalizados, presentes na pasta definida pela constante 
-    CLEANED_DOCUMENTS_PATH.
+##################################################
+## Trains incremental Word2Vec or FastText language models from the selected hyperparameter combination.
+##################################################
+## Author: {name}
+## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
+## Email: {contact_email}
+##################################################
 
-    Os modelos sao treinados de forma incremental, por exemplo:
-        Modelo 1: contempla artigos publicados entre 1900 e 1901;
-        Modelo 2: contempla artigos publicados entre 1900 e 1902;
-        Modelo 3: contempla artigos publicados entre 1900 e 1903;
-        .
-        .
-        .
-"""
-#######################################################
-
-import os, re, sys, shutil, itertools
-
-import gensim
+# IMPORTS:
+import os, re, sys, shutil, itertools, gensim
 from gensim.utils import RULE_KEEP, RULE_DEFAULT
 from gensim.models import Word2Vec, FastText
 from pathlib import Path
@@ -24,42 +15,9 @@ from os import listdir
 import pandas as pd
 import numpy as np
 
-def list_from_txt(file_path):
-    '''Creates a list of itens based on a .txt file, each line becomes an item.
-    
-    Args: 
-      file_path: the path where the .txt file was created. 
-    '''
-    
-    strings_list = []
-    with open (file_path, 'rt', encoding='utf-8') as file:
-        for line in file:
-            strings_list.append(line.rstrip('\n'))
-    return strings_list
+from train import list_from_txt, keep_target_compounds
 
-def clear_folder(dirpath):
-    """ Clears all files from a folder, without deleting the folder.
-
-        dirpath: the path of the folder.    
-    """
-
-    for filename in os.listdir(dirpath):
-        filepath = os.path.join(dirpath, filename)
-        try:
-            shutil.rmtree(filepath)
-        except OSError:
-            os.remove(filepath)
-
-def get_target_compounds():
-    return sorted(['cytarabine', 'daunorubicin', 'azacitidine', 'midostaurin', 'gemtuzumab-ozogamicin', 'vyxeos', 'ivosidenib', 'venetoclax', 'enasidenib', 'gilteritinib', 'glasdegib', 'arsenictrioxide', 'cyclophosphamide', 'dexamethasone', 'idarubicin', 'mitoxantrone', 'pemigatinib', 'prednisone', 'rituximab', 'thioguanine', 'vincristine'])
-
-def keep_target_compounds(word, countm, min_count):
-    if word in get_target_compounds() + ['aml']:
-        return gensim.utils.RULE_KEEP
-
-    else:
-        return gensim.utils.RULE_DEFAULT
-
+# MAIN PROGRAM:
 if __name__ == '__main__':
     print('Starting script')
 
@@ -73,7 +31,6 @@ if __name__ == '__main__':
     
     else:
         os.makedirs('../fasttext/models_yoy_combination16/', exist_ok=True)
-
         parameters_combination = [[300, 0.0025, 5]]
 
     # leitura do arquivo .csv em um DataFrame:
@@ -88,8 +45,6 @@ if __name__ == '__main__':
     # supondo que o primeiro artigo coleto foi publicado em 1921, e que, depois deste, mais artigos foram publicados nos anos seguintes, temos:
     # [[1921], [1921, 1922], [1921, 1922, 1923], [1921, 1922, 1923, 1924], [1921, 1922, 1923, 1924, 1925], .......]
     ranges = [years[:i+1] for i in range(len(years))]
-    ranges = [x for x in ranges if 1980 in x]
-    ranges = [x for x in ranges if x[-1] == 1980]
 
     for r in ranges:
         print('training model from {} to {}'.format(r[0], r[-1]))
