@@ -591,8 +591,8 @@ if __name__ == '__main__':
     nltk.download('stopwords', quiet=True)
 
     # constantes:
-    MATCHED_SYNONYMS_PATH = '/home/matheus/WE4LKD-leukemia_w2v/pubchem/matched_synonyms/'
-    CLEANED_PAPERS_PATH = '/data/ac4mvvb/WE4LKD-leukemia_w2v/pubchem/results/'
+    MATCHED_SYNONYMS_PATH = './matched_synonyms/'
+    CLEANED_PAPERS_PATH = './results/'
     SYNONYM_ENTITES = [x.lower() for x in ['Drug', 'Clinical_Drug', 'Pharmacologic_Substance']]
     PREPROCESS_FOR_BERT = False
     REPLACE_SYNONYMS = True
@@ -612,7 +612,7 @@ if __name__ == '__main__':
 
     if PREPROCESS_FOR_BERT:
         print('Preprocessing text for BERT-based models')
-        CLEANED_PAPERS_PATH = '/home/matheus/WE4LKD-leukemia_w2v/bert/results/'
+        CLEANED_PAPERS_PATH = '../bert/results/'
 
     else:
         print('Preprocessing text for Word2Vec models')
@@ -633,17 +633,17 @@ if __name__ == '__main__':
 
     # se for ser realizada a normalização de sinônimos de compostos/drogas, é necessário criar seus Dataframes (incluindo o Dataframe de NER):
     if REPLACE_SYNONYMS:
-        synonyms = read_csv_table_files('/data/ac4mvvb/WE4LKD-leukemia_w2v/pubchem/synonyms/')
+        synonyms = read_csv_table_files('./synonyms/')
         synonyms = synonyms\
                     .filter(F.col('cid') != "122172881")\
                     .filter(F.col('cid') != "11104792")
 
-        titles = read_csv_table_files('/data/ac4mvvb/WE4LKD-leukemia_w2v/pubchem/titles.csv', sep='|')
+        titles = read_csv_table_files('./titles.csv', sep='|')
         titles = titles\
                 .filter(F.col('cid') != "122172881")\
                 .filter(F.col('cid') != "11104792")
 
-        ner_df = read_csv_table_files('/data/ac4mvvb/WE4LKD-leukemia_w2v/ner/')\
+        ner_df = read_csv_table_files('../ner/')\
                 .where(F.col('entity').isin(SYNONYM_ENTITES))
 
         print('ner_df:')
