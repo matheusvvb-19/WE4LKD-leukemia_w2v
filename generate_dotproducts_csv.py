@@ -1,9 +1,9 @@
 ##################################################
 ## Generates the csv files containig the dot product between compounds' embeddings and 'AML'.
 ##################################################
-## Author: {name}
+## Author: Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email: matheusvvb@hotmail.com
 ##################################################
 
 # IMPORTS:
