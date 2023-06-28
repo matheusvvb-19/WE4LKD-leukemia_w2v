@@ -1,9 +1,9 @@
 ##################################################
 ## Uploads trained Distilbert language models to Hugging Face Models Hub.
 ##################################################
-## Author: {name}
+## Author: Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email: matheusvvb@hotmail.com
 ## Based on: https://huggingface.co/docs/transformers/model_sharing#use-the-pushtohub-function
 ##################################################
 
