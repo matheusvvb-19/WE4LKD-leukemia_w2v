@@ -26,13 +26,14 @@ Our models were able to identify and suggest testing of some of the currently kn
 ## Table of Contents
 
 - [Contributing](#contributing)
+- [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-    - [Local](#local)
-    - [Containers](#containers)
-  - [Installation Documentation](#installation-documentation)
+  - [Usage](#usage)
+  - [Streamlit web app](#streamlit-web-app)
 - [Acknowledgements](#acknowledgements)
 - [Contact](#contact)
+- [References](#references)
 
 ## Contributing
 
@@ -40,52 +41,27 @@ We encourage you to contribute to our project! Please check out the
 [Issued](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v/issues)
 page.
 
+## Built With
+
+* [Gensim](https://radimrehurek.com/gensim/)
+* [NLTK](https://www.nltk.org/)
+* [Numpy](https://numpy.org/)
+* [Plotly](https://plotly.com/)
+* [Scikit-learn](https://scikit-learn.org/stable/)
+* [Streamlit](https://streamlit.io/)
+
 ## Getting Started
 
-This section provides a high-level quick start guide. If you're looking for a
-more thorough installation guide (for example
-[with macOS](https://developers.forem.com/getting-started/installation/mac),
-you'll want to refer to our complete
-[Developer Documentation](https://developers.forem.com/).
-
-We run on a [Rails](https://rubyonrails.org/) backend, and we are currently
-transitioning to a [Preact](https://preactjs.com/)-first frontend.
-
-A more complete overview of our stack is available in
-[our docs](https://developers.forem.com/technical-overview/stack).
-
-To **launch Forem in Gitpod**, navigate to
-[https://gitpod.io/#https://github.com/{your_github_username}/forem](https://gitpod.io/#https://github.com/{your_github_username}/forem).
+This section provides a high-level quick start guide.
 
 ### Prerequisites
 
-#### Local
+To use this project, you need to have Pyhton installed on your machine. This project used [Python version 3.6](https://www.python.org/downloads/release/python-360/).<br>
+In addition, you will also need [Pip](https://pypi.org/project/pip/), the Python package manager to install the other requirements of the project.
 
-- [Ruby](https://www.ruby-lang.org/en/): we recommend using
-  [rbenv](https://github.com/rbenv/rbenv) to install the Ruby version listed on
-  the badge.
-- [Yarn](https://yarnpkg.com/) 1.x: please refer to their
-  [installation guide](https://classic.yarnpkg.com/en/docs/install).
-- [PostgreSQL](https://www.postgresql.org/) 11 or higher.
-- [ImageMagick](https://imagemagick.org/): please refer to ImageMagick's
-  [installation instructions](https://imagemagick.org/script/download.php).
-- [Redis](https://redis.io/) 4 or higher.
+### Usage
 
-#### Containers
-
-**Linux**
-
-- [Podman](https://github.com/containers/libpod) 1.9.2 or higher
-- [Podman Compose](https://github.com/containers/podman-compose) 0.1.5 or higher
-
-**OS X**
-
-- [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)
-
-### Installation Documentation
-
-Please see our installation guides, such as the
-[one for macOS](https://developers.forem.com/getting-started/installation/mac).
+### Streamlit web app
 
 ## Acknowledgements
 
@@ -112,5 +88,9 @@ Please do not exitate to contact us by any of the links below.
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"/>
   </a>
 </div>
+
+## References
+
+* [Unsupervised word embeddings capture latent knowledge from materials science literature", Nature 571, 95–98 (2019)](https://github.com/materialsintelligence/mat2vec)
 
 [⬆ Back to Top](#Table-of-contents)
