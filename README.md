@@ -93,8 +93,13 @@ This work was supported by the Fundação de Amparo à Pesquisa do Estado de Sã
 
 ## Contact
 
-Please do not exitate to contact Matheus by any of the links below.
+Please do not exitate to contact us by any of the links below.
 <div>
+  <p>
+    Matheus Vargas Volpon Berto,<br>
+    Computer Science B.Sc. student, Federal University of São Carlos (UFSCar), Sorocaba, Brazil.
+  </p>
+  
   <a rel="nofollow noreferrer" href="https://www.linkedin.com/in/matheus-volpon/">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
   </a>
