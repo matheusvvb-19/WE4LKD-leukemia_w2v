@@ -1,9 +1,9 @@
 ##################################################
 ## Displays the BERT-based page of the develop Streamlit web application.
 ##################################################
-## Author: {name}
+## Author: Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email: matheusvvb@hotmail.com
 ## Based on: https://towardsdatascience.com/bert-for-measuring-text-similarity-eec91c6bf9e1
 ##################################################
 
