@@ -1,9 +1,9 @@
 ##################################################
 ## Displays the Word2Vec page of the developed Streamlit web application.
 ##################################################
-## Author: {name}
+## Author: Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email: matheusvvb@hotmail.com
 ## Based on: https://towardsdatascience.com/visualizing-word-embedding-with-pca-and-t-sne-961a692509f5
 ##################################################
 
