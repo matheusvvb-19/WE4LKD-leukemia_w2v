@@ -122,6 +122,19 @@ This work was supported by the Fundação de Amparo à Pesquisa do Estado de Sã
 
 ## Contact
 
-Please do not exitate to contact Matheus by any of the social media links below or send an e-mail to matheusvvb@hotmail.com.
+Please do not exitate to contact Matheus by any of the links below.
+<div>
+  <a rel="nofollow noreferrer" href="https://www.linkedin.com/in/matheus-volpon/">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
+  </a>
+
+  <a rel="nofollow noreferrer" href="mailto:matheusvvb@hotmail.com">
+    <img src="https://img.shields.io/badge/Microsoft_Outlook-0078D4?style=for-the-badge&logo=microsoft-outlook&logoColor=white"/>
+  </a>
+
+  <a rel="nofollow noreferrer" href="https://github.com/matheusvvb-19">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"/>
+  </a>
+</div>
 
 [⬆ Back to Top](#Table-of-contents)
