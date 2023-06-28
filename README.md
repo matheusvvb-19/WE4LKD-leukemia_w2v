@@ -7,11 +7,11 @@
 
 ## Who are we?
 
-WE4LKD is a research group consisting of undergraduate, master's, doctoral, and postdoctoral students with a strong focus on Artificial Intelligence (AI) and Natural Language Processing (NLP). Our primary objective is to study, analyze, explore, and propose effective real-world NLP applications. Through the use of word embeddings, we aim to uncover hidden knowledge and patterns in textual data to extract valuable insights and improve various applications in different fields.
+WE4LKD is a brazilian research group consisting of undergraduate, master's, doctoral, and postdoctoral students with a strong focus on Artificial Intelligence (AI) and Natural Language Processing (NLP). Our primary objective is to study, analyze, explore, and propose effective real-world NLP applications. Through the use of word embeddings, we aim to uncover hidden knowledge and patterns in textual data to extract valuable insights and improve various applications in different fields.
 
 <div align="center">
   <br>
-  <h2>Accelerating Discoveries in Medicine using Distributed Vector Representations of Words</h2>
+  <h2>Accelerating Discoveries in Medicine using Distributed Vector Representations of Words</h2><br>
   <strong>Berto, Matheus V. V.; De Freitas, Breno L.; Scarton, Carolina E.; Neto, João A. M.; Almeida, Tiago A.</strong>
 </div>
 
@@ -31,9 +31,6 @@ Our models were able to identify and suggest testing of some of the currently kn
     - [Local](#local)
     - [Containers](#containers)
   - [Installation Documentation](#installation-documentation)
-- [Developer Documentation](#developer-documentation)
-- [Core team](#core-team)
-- [Vulnerability disclosure](#vulnerability-disclosure)
 - [Acknowledgements](#acknowledgements)
 - [Contact](#contact)
 
@@ -89,32 +86,6 @@ To **launch Forem in Gitpod**, navigate to
 
 Please see our installation guides, such as the
 [one for macOS](https://developers.forem.com/getting-started/installation/mac).
-
-## Developer Documentation
-
-[Check out our dedicated docs page for more technical documentation](https://developers.forem.com).
-
-## Core team
-
-- [@benhalpern](https://dev.to/ben)
-- [@jessleenyc](https://dev.to/jess)
-- [@peterkimfrank](https://dev.to/peter)
-- [@maestromac](https://dev.to/maestromac)
-- [@lightalloy](https://dev.to/lightalloy)
-- [@ridhwana](https://dev.to/ridhwana)
-- [@rt4914](https://dev.to/rt4914)
-- [@jaw6](https://dev.to/jaw6)
-- [@lboogie2004](https://dev.to/lboogie2004)
-- [@klardotsh](https://dev.to/klardotsh)
-- [@filleduchaos](https://dev.to/filleduchaos)
-- [@dukegreene](https://dev.to/dukegreene)
-
-## Vulnerability disclosure
-
-Forem is the open source software which powers [DEV](https://dev.to).
-
-We welcome security research on DEV under the terms of our
-[vulnerability disclosure policy](https://dev.to/security).
 
 ## Acknowledgements
 
