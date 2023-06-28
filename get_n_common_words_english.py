@@ -1,9 +1,9 @@
 ##################################################
 ## Retrieves a list of the N most common English words.
 ##################################################
-## Author: {name}
+## Author: Priscila Portela Costa, Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email:matheusvvb@hotmail.com
 ##################################################
 
 # IMPORTS:
