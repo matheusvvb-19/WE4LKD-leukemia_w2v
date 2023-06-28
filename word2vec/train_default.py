@@ -1,9 +1,9 @@
 ##################################################
 ## Trains the default Word2Vec model with the entire corpus, used during the hyperparameter optimization.
 ##################################################
-## Author: {name}
+## Author: Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email: matheusvvb@hotmail.com
 ##################################################
 
 # IMPORTS:
