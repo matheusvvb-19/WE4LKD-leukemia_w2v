@@ -1,9 +1,9 @@
 ##################################################
 ## Generates a txt file containing the word-pair analogies about AML.
 ##################################################
-## Author: {name}
+## Author: Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email: matheusvvb@hotmail.com
 ##################################################
 
 # IMPORTS:
