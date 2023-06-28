@@ -11,8 +11,8 @@ WE4LKD is a brazilian research group consisting of undergraduate, master's, doct
 
 <div align="center">
   <br>
-  <h2>Accelerating Discoveries in Medicine using Distributed Vector Representations of Words</h2><br>
-  <strong>Berto, Matheus V. V.; De Freitas, Breno L.; Scarton, Carolina E.; Neto, João A. M.; Almeida, Tiago A.</strong>
+  <h2>Accelerating Discoveries in Medicine using Distributed Vector Representations of Words</h2>
+  <strong>Berto, Matheus V. V.; De Freitas, Breno L.; Scarton, Carolina E.; Neto, João A. M.; Almeida, Tiago A.</strong><br>
 </div>
 
 This study aims to extend a recently proposed strategy by combining different unsupervised models to accelerate discoveries in medicine. Distributed vector representations of words were trained on a large corpus of medical papers related to Acute Myeloid Leukemia (AML), a highly malignant form of cancer, and show that established therapies could be developed years before their first proposal. The results open new avenues toward faster medical discoveries through more effective drug and gene testing, enabling better treatments to promote a healthier, prolonged life for patients.
