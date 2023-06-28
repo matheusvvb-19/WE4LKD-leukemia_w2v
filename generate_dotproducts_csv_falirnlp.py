@@ -1,9 +1,9 @@
 ##################################################
 ## Generates the csv files containing the dt prodcuts results between compounds and 'AML', using the FalirNLP framework (BERT-based models).
 ##################################################
-## Author: {name}
+## Author: Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email: matheusvvb@hotmail.com
 ##################################################
 
 # IMPORTS:
