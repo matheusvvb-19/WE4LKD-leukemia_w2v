@@ -1,9 +1,9 @@
 ##################################################
 ## Trains Word2Vec or FastText models from cmbinations of hyperparameters.
 ##################################################
-## Author: {name}
+## Author: Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email: matheusvvb@hotmail.com
 ##################################################
 
 import os, re, sys, shutil, itertools, gensim
