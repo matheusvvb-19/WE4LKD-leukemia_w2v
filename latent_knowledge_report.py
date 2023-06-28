@@ -1,9 +1,9 @@
 ##################################################
 ## Generates a LaTex file containing the historical plots of each compound, for each embeddings approach, and each algebric operation applied on data (normalization, standartization, softmax).
 ##################################################
-## Author: {name}
+## Author: Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email: matheusvvb@hotmail.com
 ##################################################
 
 # IMPORTS:
