@@ -1,9 +1,9 @@
 ##################################################
 ## Trains incremental Distilbert language models from a preprocessed corpus in a csv file.
 ##################################################
-## Author: {name}
+## Author: Matheus Vargas Volpon Berto
 ## Copyright: Copyright 2022, Discovering Latent Knowledge in medical paper on Acute Myeloid Leukemia
-## Email: {contact_email}
+## Email: matheusvvb@hotmail.com
 ## Based on: https://huggingface.co/course/chapter7/6?fw=tf
 ##################################################
 
