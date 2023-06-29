@@ -56,12 +56,55 @@ This section provides a high-level quick start guide.
 
 ### Prerequisites
 
-To use this project, you need to have Pyhton installed on your machine. This project used [Python version 3.6](https://www.python.org/downloads/release/python-360/).<br>
-In addition, you will also need [Pip](https://pypi.org/project/pip/), the Python package manager to install the other requirements of the project.
+To use this project, you need to have Pyhton installed on your machine. This project used [Python version 3.6](https://www.python.org/downloads/release/python-360/). In addition, you will also need [Pip](https://pypi.org/project/pip/), the Python package manager to install the other requirements of the project.
+
+Clone the repository
+```sh
+git clone https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v.git
+cd WE4LKD-leukemia_w2v/
+```
+
+Setup a Python virtual environment
+```sh
+# create venv
+python3 -m venv venv
+# activate venv
+source venv/bin/activate
+# install requirements
+pip3 install --ignore-installed -r requirements.txt
+```
 
 ### Usage
 
+1. If you like, you can change the search phrases in the `/data/search_strings.txt` file
+2. Run `crawler.py`
+  ```sh
+  mkdir results
+  python3 crawler.py
+  ```
+or download and decompress [this file]() and place it into `/pubchem/results/`
+
+3. Execute the script `merge_txt.py`, this will generate the _.txt_ files with all articles between periods
+  ```sh
+  mkdir results_aggregated
+  python3 merge_txt.py
+  ```
+4. Execute the script `clean_text.py`, which will clean the merged _.txt_ files
+```sh
+  python3 clean_text.py
+```
+5. Train the Word2Vec and FastText incremental models
+```sh
+  cd word2vec
+  python3 train.py
+```
+
 ### Streamlit web app
+
+To complement this project, we developed two web applications using the Streamlit Python package. The Embeddings Viewer allows users to explore the vector space of our Word2Vec models by searching for specific tokens and analyzing their neighborhood, applying filters to refine the results if necessary. The Latent Knowledge Explorer follows the <finish>.
+
+[![Embedding Viewer](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://embedding-viewer.streamlit.app)
+[![Latent Knowledge Explorer](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v/)
 
 ## Acknowledgements
 
