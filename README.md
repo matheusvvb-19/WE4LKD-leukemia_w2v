@@ -133,6 +133,6 @@ Please do not exitate to contact us by any of the links below.
 
 ## References
 
-* [Unsupervised word embeddings capture latent knowledge from materials science literature", Nature 571, 95–98 (2019)](https://github.com/materialsintelligence/mat2vec)
+* ["Unsupervised word embeddings capture latent knowledge from materials science literature", Nature 571, 95–98 (2019)](https://github.com/materialsintelligence/mat2vec)
 
 [⬆ Back to Top](#Table-of-contents)
