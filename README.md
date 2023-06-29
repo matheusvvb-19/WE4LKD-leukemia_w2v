@@ -101,10 +101,9 @@ or download and decompress [this file]() and place it into `/pubchem/results/`
 
 ### Streamlit web app
 
-To complement this project, we developed two web applications using the Streamlit Python package. The Embeddings Viewer allows users to explore the vector space of our Word2Vec models by searching for specific tokens and analyzing their neighborhood, applying filters to refine the results if necessary. The Latent Knowledge Explorer follows the <finish>.
+To complement this project, we developed two web applications using the Streamlit Python package. The Embeddings Viewer allows users to explore the vector space of our Word2Vec models by searching for specific tokens and analyzing their neighborhood, applying filters to refine the results if necessary.
 
 [![Embedding Viewer](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://embedding-viewer.streamlit.app)
-[![Latent Knowledge Explorer](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://github.com/matheusvvb-19/WE4LKD-leukemia_w2v/)
 
 ## Acknowledgements
 
