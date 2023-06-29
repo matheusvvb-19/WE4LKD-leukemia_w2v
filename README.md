@@ -82,21 +82,21 @@ pip3 install --ignore-installed -r requirements.txt
   mkdir results
   python3 crawler.py
   ```
-or download and decompress [this file]() and place it into `/pubchem/results/`
+or download, decompress, and place [this file](https://drive.google.com/file/d/1TY9AKbXYUNHKF6QYHGyJjB4SOypuhNkA/view?usp=sharing) into `/pubchem/`. If you do this, skip to step 5.
 
 3. Execute the script `merge_txt.py`, this will generate the _.txt_ files with all articles between periods
   ```sh
   mkdir results_aggregated
   python3 merge_txt.py
   ```
-4. Execute the script `clean_text.py`, which will clean the merged _.txt_ files
+4. Execute the script `/pubchem/clean_summaries.py`, which will clean the merged _.txt_ files
 ```sh
-  python3 clean_text.py
+  python3 clean_summaries.py
 ```
-5. Train the Word2Vec and FastText incremental models
+5. Train the Word2Vec or FastText incremental models
 ```sh
   cd word2vec
-  python3 train.py
+  python3 train_yoy.py
 ```
 
 ### Streamlit web app
