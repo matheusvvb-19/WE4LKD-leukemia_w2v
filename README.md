@@ -19,13 +19,13 @@ This study aims to extend a recently proposed strategy by combining different un
 
 Starting from 1963 - the first explicit occurrence of AML in our corpus - we generated yearly prediction rankings for a set of 21 target compounds. We then calculated the percentage of these predicted AML treatments later reported in the literature, considering only the compounds in the top-3 predictions (orange curve) or not (blue curve). Using only the top-3 predictions would accelerate the percentage discovery of treatments up to 2.3x five years after the first predictions compared to random testing drugs.
 
-<div>
-  <img src=/data/w2v_percentage_reported_top3_and_all.jpg>
+<div align="center">
+  <img src="/data/w2v_percentage_reported_top3_and_all.jpg" width="60%">
 </div>
 
 Finally, our models were able to identify and suggest testing of some of the currently known compounds used to treat AML up to 11 years before they were explicitly mentioned in the literature, as illustrated below. The remainder of this repository describes the evolution of the project.
 
-<div>
+<div align="center">
   <img src=/data/final_results.png>
 </div>
 
