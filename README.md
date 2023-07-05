@@ -107,7 +107,7 @@ To complement this project, we developed two web applications using the Streamli
 
 ## Acknowledgements
 
-This work was supported by the Fundação de Amparo à Pesquisa do Estado de São Paulo (FAPESP) [grant numbers 2021/13054-8 and 2022/07236-9]. The authors are grateful to Priscila Portela Costa for the initial conceptualization of this project and for conducting the preliminary literature review. We also thank the Computer Science Department from the University of Sheffield for recieving Matheus on his research internship for this project.
+This work was supported by the Brazilian agencies FAPESP (grant  2021/13054-8), Capes, and CPNq. The authors thank Priscila Portela Costa for helping conceptualize this project. We also thank the Computer Science Department from the University of Sheffield for recieving Matheus on his research internship for this project.
 
 ## Contact
 
